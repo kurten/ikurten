@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>mysql主从配置 - ikurten.com</title>
+  <meta name="author" content="kurten">
+
+  
+  <meta name="description" content="mysql由于其cluster没有很好得解决方案，所以没有被广泛的使用。使用最广的还是mysql的主从备份，从而读写分离。mysql 5.5版本的主从replication性能还是相当不错的，下面是配置方法（昨天刚在两台测试服务器中尝试，记录一下）。参考官方手册。 1、安装mysql（此处省略N字 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://ikurten.com/blog/2011/08/02/mysql%E4%B8%BB%E4%BB%8E%E9%85%8D%E7%BD%AE/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="ikurten.com" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">ikurten.com</a></h1>
+  
+    <h2>85后码农.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ikurten.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about/">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Mysql主从配置</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-02T00:37:49+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>mysql由于其cluster没有很好得解决方案，所以没有被广泛的使用。使用最广的还是mysql的主从备份，从而读写分离。mysql 5.5版本的主从replication性能还是相当不错的，下面是配置方法（昨天刚在两台测试服务器中尝试，记录一下）。参考<a href="http://dev.mysql.com/doc/refman/5.0/en/replication-howto.html">官方手册</a>。</p>
+
+<p>1、安装mysql（此处省略N字。。。）</p>
+
+<p>2、因为我配的是服务器，所以我使用了mysql-large.cnf文件作为/etc/my.cnf。</p>
+
+<p>3、在my.cnf中([mysqld] 下面)</p>
+
+<pre>[mysqld]
+log-bin=mysql-bin
+server-id=1</pre>
+
+
+<p>当然如果你要使用innodb事务支持，那就的加上这两个参数配置 innodb_flush_log_at_trx_commit=1 和 sync_binlog=1。同时确保skip-networking没有启用，否则所有slave都无法连接master<code>。</code></p>
+
+<p>重启mysql。</p>
+
+<p>4、配置slave，重复 2。</p>
+
+<p>5、在my.cnf中([mysqld] 下面)</p>
+
+<pre>[mysqld]
+server-id=2  #如果有多台slave，那么每台得id都必须唯一</pre>
+
+
+<p>重启mysql。</p>
+
+<p>6、在master中新建用于replication的用户</p>
+
+<pre>mysql> CREATE USER 'repl'@'%.mydomain.com' IDENTIFIED BY 'slavepass';
+mysql> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%.mydomain.com';</pre>
+
+
+<p>7、在slave中执行</p>
+
+<pre>mysql> CHANGE MASTER TO
+    ->     MASTER_HOST='master_host_name',
+    ->     MASTER_USER='replication_user_name',
+    ->     MASTER_PASSWORD='replication_password',
+    ->     MASTER_LOG_FILE='recorded_log_file_name',
+    ->     MASTER_LOG_POS=recorded_log_position;</pre>
+
+
+<pre>change master to master_host='192.168.1.194', master_user='admin',
+master_password='000000', master_log_file='mysql-bin.000001',
+master_log_pos=268;</pre>
+
+
+<p>再执行 start slave;
+查看一下slave的状态：show slave status\G;
+如果Slave_IO_Running 和 Slave_SQL_Running 两列的值都为 &ldquo;Yes&rdquo;，之后，你在master中新建数据库神马的操作，就会自动同步至slave中了。</p>
+
+<p>mysql修改密码，如果采用sql方式更新user表，需要使用 flush privileges; 命令启用新密码。</p>
+
+<p>创建用户</p>
+
+<pre>create user 'username'@'localhost' IDENTIFIED BY 'password';</pre>
+
+
+<p>设置用户权限</p>
+
+<pre>GRANT ALL PRIVILEGES ON *.* TO kkk@"%" IDENTIFIED BY '000000' WITH
+GRANT OPTION;</pre>
+
+
+<p>移除权限</p>
+
+<pre>revoke all on openfire.* from username@'localhost';</pre>
+
+
+<p>添加字段</p>
+
+<pre>alter table test add column ttt varchar(12);</pre>
+
+
+<p>修改字段名称</p>
+
+<pre>alter table test change ttt newttt varchar(12);</pre>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kurten</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-02T00:37:49+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mysql技术/'>mysql技术</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://ikurten.com/blog/2011/08/02/mysql%E4%B8%BB%E4%BB%8E%E9%85%8D%E7%BD%AE/" data-via="" data-counturl="http://ikurten.com/blog/2011/08/02/mysql%E4%B8%BB%E4%BB%8E%E9%85%8D%E7%BD%AE/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/07/29/%E5%85%B3%E4%BA%8E%E7%99%8C%E7%97%87/" title="Previous Post: 关于癌症">&laquo; 关于癌症</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/08/03/%E6%B5%8B%E8%AF%95ifttt/" title="Next Post: 测试ifttt">测试ifttt &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/25/hello-world/">你好，世界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/13/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">碎碎念</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/14/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%28%E4%BA%8C%29/">redis源码学习记录(二)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/22/%E4%B9%9D%E6%9C%88%E6%9D%82%E5%BF%B5/">九月杂念</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">redis源码学习记录</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - kurten -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

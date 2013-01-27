@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>哎，人生；哎，产品 - ikurten.com</title>
+  <meta name="author" content="kurten">
+
+  
+  <meta name="description" content="前段时间由于项目上面的业务变更，导致memcacheq这个消息队列使用有点捉襟见肘。由于其对于消息体大小有限制，而且最大不能超过60K，就萌生了自己写一个消息队列的想法。总是掌握在自己手中，能应对现有的业务需要的东西用着才爽啊。本来计划是有空就改写的，但是由于产品上面一而再再而三的修改功能、 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://ikurten.com/blog/2011/11/13/%E5%93%8E%EF%BC%8C%E4%BA%BA%E7%94%9F%EF%BC%9B%E5%93%8E%EF%BC%8C%E4%BA%A7%E5%93%81/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="ikurten.com" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">ikurten.com</a></h1>
+  
+    <h2>85后码农.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ikurten.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about/">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">哎，人生；哎，产品</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-13T02:55:44+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>前段时间由于项目上面的业务变更，导致memcacheq这个消息队列使用有点捉襟见肘。由于其对于消息体大小有限制，而且最大不能超过60K，就萌生了自己写一个消息队列的想法。总是掌握在自己手中，能应对现有的业务需要的东西用着才爽啊。本来计划是有空就改写的，但是由于产品上面一而再再而三的修改功能、修改方向，最坑爹的事情是没有功能定义的情况下得去照搬别的产品的功能。悲剧ing。于是这个计划一直没有实施。</p>
+
+<p>哎，技术架构方案的选择真得是件麻烦的事情，得遇见今后一段时间的业务变更与增长，又要考虑现有资源。这样做出合理的，可以实现的方案。我们那架构师也辛苦，总得和老板设计的产品做pk。心力交瘁啊。有时候想想，也迷茫，咱这是做了啥东西？用来干啥？对自己也没多大帮助啊？更坑爹的事情是，把外包那套管理项目的方式折腾过来，每天都是下班时过来给你折腾点东西，杯具ing。产品设计上面没有明确的功能性设计，只是笼统的说，我要这个功能，其他你可以去参考别人怎么做的。你妹啊！</p>
+
+<p>一个ui图，再加个说明，给你，你去设计接口吧。好吧，设计完接口又说，你这样不行，客户端没法调用的，两个接口，怎么可以这样子用，客户端调用很麻烦的，你如果做客户端，你怎么去弄？哎，坑爹啊！</p>
+
+<p>神马浮云啊，没做过产品经理的，把项目管理那套东西搬过来，好吧，你行的。我算是清楚了。我只写代码。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kurten</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-13T02:55:44+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/杂念/'>杂念</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://ikurten.com/blog/2011/11/13/%E5%93%8E%EF%BC%8C%E4%BA%BA%E7%94%9F%EF%BC%9B%E5%93%8E%EF%BC%8C%E4%BA%A7%E5%93%81/" data-via="" data-counturl="http://ikurten.com/blog/2011/11/13/%E5%93%8E%EF%BC%8C%E4%BA%BA%E7%94%9F%EF%BC%9B%E5%93%8E%EF%BC%8C%E4%BA%A7%E5%93%81/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/11/11/%E5%9D%91%E7%88%B9%E7%9A%84%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/" title="Previous Post: 坑爹的产品设计">&laquo; 坑爹的产品设计</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/11/27/memcached-protocol/" title="Next Post: memcached protocol">memcached protocol &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/25/hello-world/">你好，世界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/13/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">碎碎念</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/14/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%28%E4%BA%8C%29/">redis源码学习记录(二)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/22/%E4%B9%9D%E6%9C%88%E6%9D%82%E5%BF%B5/">九月杂念</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">redis源码学习记录</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - kurten -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

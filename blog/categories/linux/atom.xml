@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: linux | ikurten.com]]></title>
+  <link href="http://ikurten.com/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://ikurten.com/"/>
+  <updated>2013-01-27T10:26:12+08:00</updated>
+  <id>http://ikurten.com/</id>
+  <author>
+    <name><![CDATA[kurten]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[redis源码学习记录]]></title>
+    <link href="http://ikurten.com/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    <updated>2012-09-19T00:14:47+08:00</updated>
+    <id>http://ikurten.com/blog/2012/09/19/redis源码学习记录</id>
+    <content type="html"><![CDATA[<p>最近一直在学习redis的源代码，大致上搞清楚了它是如何启动，载入参数，开始轮询接收tcp请求，以及具体执行tcp请求的方式。参照<a href="http://pauladamsmith.com/articles/redis-under-the-hood.html">《Redis:under the hood》</a> 此文，再对照源码。目前的stable版本，和此文上有些出入，但是大致逻辑上基本一致。</p>
+
+<p>redis按照单线程轮询(epoll、kqueue、select)tcp请求，服务端使用非阻塞IO，具体轮询代码实现，包含在ae.h、ae.c、ae_epoll.c、ae_kqueue.c、ae_select.c。tcp server实现在anet.h、anet.c。</p>
+
+<p>主入口redis.c中的main函数（参照<a href="http://pauladamsmith.com/articles/redis-under-the-hood.html">《Redis:under the hood》</a> 此文），redis.c中的beforeSleep函数会创建所有客户端（server.io_ready_clients）中的event句柄，以及触发event时的调用的函数readQueryFromClient。</p>
+
+<p>java的nio中selector也可以干类似的事情，不过，selector底层实现机制虽然是基于epoll、kqueue、select，但是会有自己链接自己的现象出现。具体参看<a href="http://http://blog.csdn.net/haoel/article/details/2224055">这里</a>。</p>
+
+<p>使用redis需要注意<a href="http://redis.io/topics/latency">latency</a>，一旦某个操作很耗时的话，会导致后续操作也延时。</p>
+
+<p>这方面，<a href="http://www.erlang.org">erlang</a>就好多了。</p>
+
+<p>ps:我用vim+winmanager+ctags+bufferexplorer，具体配置看<a href="http://blog.csdn.net/wooin/article/details/1858917">这里</a>。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[centos中yum无法使用问题]]></title>
+    <link href="http://ikurten.com/blog/2011/12/15/centos%E4%B8%ADyum%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/"/>
+    <updated>2011-12-15T14:47:34+08:00</updated>
+    <id>http://ikurten.com/blog/2011/12/15/centos中yum无法使用问题</id>
+    <content type="html"><![CDATA[<p>今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
+显示错误如下：</p>
+
+<pre>Loaded plugins: fastestmirror
+Determining fastest mirrors
+YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
+/Eg. 
+removing mirrorlist with no valid mirrors: /var/cache/yum/addons/mirrorlist.txt
+Error: Cannot find a valid baseurl for repo: addons</pre>
+
+
+<p>不知道什么时候把mirrors.txt文件给去掉了。
+后来查了一下有这么一串。</p>
+
+<pre>1./var/cache/yum/base/mirrorlist.txt
+url:
+http://mirrors.163.com/centos/5.7/os/x86_64/
+http://centos.ustc.edu.cn/centos/5.7/os/x86_64/
+http://mirror.neu.edu.cn/centos/5.7/os/x86_64/
+http://mirrors.ta139.com/centos/5.7/os/x86_64/
+http://ftp.nsysu.edu.tw/CentOS/5.7/os/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/os/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://ftp.twaren.net/Linux/CentOS/5.7/os/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/os/x86_64/
+http://centos.mirror.cdnetworks.com/5.7/os/x86_64/
+http://centos.tt.co.kr/5.7/os/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/os/x86_64/
+http://mirror.khlug.org/centos/5.7/os/x86_64/
+http://mirror.yongbok.net/centos/5.7/os/x86_64/
+http://ftp.daum.net/centos/5.7/os/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/os/x86_64/
+http://mirror.averse.net/centos/5.7/os/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/os/x86_64/
+
+2./var/cache/yum/updates/mirrorlist.txt
+url:
+http://mirror.neu.edu.cn/centos/5.7/updates/x86_64/
+http://mirrors.ta139.com/centos/5.7/updates/x86_64/
+http://mirrors.stuhome.net/centos/5.7/updates/x86_64/
+http://centos.ustc.edu.cn/centos/5.7/updates/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/updates/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.daum.net/centos/5.7/updates/x86_64/
+http://mirror.khlug.org/centos/5.7/updates/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/updates/x86_64/
+http://centos.tt.co.kr/5.7/updates/x86_64/
+http://mirror.averse.net/centos/5.7/updates/x86_64/
+ftp://ftp.oss.eznetsols.org/linux/centos/5.7/updates/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/updates/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/updates/x86_64/
+http://centos.vr-zone.com/5.7/updates/x86_64/
+http://rsync.atworks.co.jp/centos/5.7/updates/x86_64/
+http://ftp.nara.wide.ad.jp/pub/Linux/centos/5.7/updates/x86_64/
+
+3./var/cache/yum/addons/mirrorlist.txt
+url:
+http://mirror.centos.org/centos/5/addons/x86_64/
+
+4./var/cache/yum/extras/mirrorlist.txt
+url:
+http://centos.ustc.edu.cn/centos/5.7/extras/x86_64/
+http://mirrors.stuhome.net/centos/5.7/extras/x86_64/
+http://mirror.neu.edu.cn/centos/5.7/extras/x86_64/
+http://mirrors.ta139.com/centos/5.7/extras/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/extras/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/extras/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/extras/x86_64/
+http://mirror.khlug.org/centos/5.7/extras/x86_64/
+http://ftp.daum.net/centos/5.7/extras/x86_64/
+http://centos.tt.co.kr/5.7/extras/x86_64/
+http://centos.vr-zone.com/5.7/extras/x86_64/
+http://mirror.averse.net/centos/5.7/extras/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/extras/x86_64/
+ftp://ftp.oss.eznetsols.org/linux/centos/5.7/extras/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/extras/x86_64/
+http://ftp.yz.yamagata-u.ac.jp/pub/linux/centos/5.7/extras/x86_64/
+http://ftp.jaist.ac.jp/pub/Linux/CentOS/5.7/extras/x86_64/</pre>
+
+
+<p>对应的把这些url拷贝到mirrorlist.txt文件中去就ok啦。
+have fun! :)</p>
+]]></content>
+  </entry>
+  
+</feed>

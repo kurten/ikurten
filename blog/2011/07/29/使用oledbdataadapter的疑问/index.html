@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>使用oledbdataadapter的疑问 - ikurten.com</title>
+  <meta name="author" content="kurten">
+
+  
+  <meta name="description" content="最近一个项目，在使用oledbdataadapter获取access数据库中的表数据时，无缘无故会丢失一个字段的数据(使用jet引擎)。同样的代码，调试的时候居然没有问题，但是直接运行，不进行断点调试没有问题。想不通到底是.net的问题，还是access的问题。找相关的资料居然没有。不过， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://ikurten.com/blog/2011/07/29/%E4%BD%BF%E7%94%A8oledbdataadapter%E7%9A%84%E7%96%91%E9%97%AE/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="ikurten.com" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">ikurten.com</a></h1>
+  
+    <h2>85后码农.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:ikurten.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/about/">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">使用oledbdataadapter的疑问</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-29T03:40:54+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>最近一个项目，在使用oledbdataadapter获取access数据库中的表数据时，无缘无故会丢失一个字段的数据(使用jet引擎)。同样的代码，调试的时候居然没有问题，但是直接运行，不进行断点调试没有问题。想不通到底是.net的问题，还是access的问题。找相关的资料居然没有。不过，总会是那个有问题的(呵呵，好像是废话)。</p>
+
+<p>很类似的，以前在获取excel的数据时(也是使用jet引擎)，会丢失一些数据，那是因为这一列中既有数字和文本，jet无法识别，将单元格格式设置为文本就可以了。</p>
+
+<p>不过，access数据库至少不会出现这样的问题。而且，明明都是文本数据，居然获取出来是空的，很伤脑筋。不过，还是另外找了种方法解决这个问题，呵呵。</p>
+
+<p>PS：前几天看一个小学奥数题，大意是如果两个正整数的积可以整除他们的和，比如70和30，那么这一对数就称为好数，那么1到16之间有多少对好数？</p>
+
+<p>我用python写了一个很简略的程序，算了一下：</p>
+
+<pre>#coding=gbk
+'''
+Created on 2011-2-18
+求好数
+@author: KURTEN
+'''
+
+i = 1
+max = 16
+xx=[]
+while i &amp;lt; max:
+         xx.append(i)
+         i = i + 1
+
+yy = xx
+for x in xx:
+    for y in yy:
+        if x &amp;lt; y:
+            if ((x * y) % (x + y) == 0):
+                print "好数[%d,%d]" %(x,y)</pre>
+
+
+<p>由此可以计算出4对好数，程序是简单的，不过，如果离开计算机，让我去手算，估计我得弄半天吧。想想小朋友们还是真可怜，不过，我小时候也是，被奥数残害，其实啊，没多大意义。</p>
+
+<p>能够简化复杂得工作，代码，确实是个好东西。码农得日子，也就这么单调得乐趣了。昨天元宵，吃了自己煮得芝麻馅的汤圆，总比不过在家的日子惬意。人，总要随着自己喜欢的道路走的，也要选择自己喜欢做的事情。就算离乡背井也无妨嘛。</p>
+
+<p>20110512：这里查明原来不同的引擎同时访问access库，有可能得到的数据不一定一致。估计是因为内部缓存的问题，或者就是访问引擎内部bug，有或者是其他灵异事件。这个我也就不得而知了。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kurten</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-29T03:40:54+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2011</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://ikurten.com/blog/2011/07/29/%E4%BD%BF%E7%94%A8oledbdataadapter%E7%9A%84%E7%96%91%E9%97%AE/" data-via="" data-counturl="http://ikurten.com/blog/2011/07/29/%E4%BD%BF%E7%94%A8oledbdataadapter%E7%9A%84%E7%96%91%E9%97%AE/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/07/29/windows%E4%B8%8Bsvn%E6%90%AD%E5%BB%BA/" title="Previous Post: windows下svn搭建">&laquo; windows下svn搭建</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/07/29/%E5%85%B3%E4%BA%8Emysqldb%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%B0%E5%BD%95/" title="Next Post: 关于mysqldb的一些记录">关于mysqldb的一些记录 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/25/hello-world/">你好，世界</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/13/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">碎碎念</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/14/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%28%E4%BA%8C%29/">redis源码学习记录(二)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/22/%E4%B9%9D%E6%9C%88%E6%9D%82%E5%BF%B5/">九月杂念</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">redis源码学习记录</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - kurten -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

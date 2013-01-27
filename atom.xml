@@ -1,0 +1,1481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[ikurten.com]]></title>
+  <link href="http://ikurten.com/atom.xml" rel="self"/>
+  <link href="http://ikurten.com/"/>
+  <updated>2013-01-27T10:26:12+08:00</updated>
+  <id>http://ikurten.com/</id>
+  <author>
+    <name><![CDATA[kurten]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[你好，世界]]></title>
+    <link href="http://ikurten.com/blog/2013/01/25/hello-world/"/>
+    <updated>2013-01-25T00:00:00+08:00</updated>
+    <id>http://ikurten.com/blog/2013/01/25/hello-world</id>
+    <content type="html"><![CDATA[<h2>你好，世界</h2>
+<p>我的第一篇文章</p>
+<p>25 Jan 2013</p></p></h>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[碎碎念]]></title>
+    <link href="http://ikurten.com/blog/2012/12/13/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <updated>2012-12-13T13:04:44+08:00</updated>
+    <id>http://ikurten.com/blog/2012/12/13/碎碎念</id>
+    <content type="html"><![CDATA[<p style="text-align: center;">其一</p>
+
+
+<p style="text-align: left;">10月底杭州离开了杭州一家刚加入不久的创业公司，其中的辛酸，也就不扯了。酸甜苦辣，总是自己吞呗。移动互联网创业的这趟浑水，是越来越混了。花钱买用户，短期内想要做大，接着寻找天使，然后接着花。而某些天使呢，自己投资一些个渠道商，然后顺带介绍给投资的一些做app的创业公司，然后么，一环套着一环，产业链就这么来了么。其他人呢，总是不好混，当然，还是有些认认真真做事情的。我啊，还是不趟这趟浑水咯。</p>
+
+
+<p style="text-align: center;">其二</p>
+
+
+<p style="text-align: left;">11月份休息，然后么，顺带考考驾照。月中还面了几个公司，本来打算留杭州的，跟家人商量了一下，还是回老家算了。期间出一些小插曲，哎，这段时间真的很背啊。月底报了去泰国的旅游团，晚上的班机来回，走的线路，碰到的基本都是中国旅游团。团费便宜，路线比较坑爹，酒店就别提了。后面几天住的酒店，在很偏的地方，还没有热水，有天晚上还停电，比较悲剧。我们团人比较少，没人参加泰国导游推荐的自费项目，这个自费项目水分太大了，6个项目平均400块钱一项。于是，我们私下自己去参加了一个项目，门票只要400泰铢一个人哦，差不多90块钱啊。</p>
+
+
+<p style="text-align: center;">其三</p>
+
+
+<p style="text-align: left;">12月初就回老家工作了，因为要路考，于是还回了趟杭州，顺利拿到驾照。现在么，天天骑电瓶车上下班。早8点晚5点。日子么，就这么过呗。</p>
+
+
+<p style="text-align: left;"></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[redis源码学习记录(二)]]></title>
+    <link href="http://ikurten.com/blog/2012/10/14/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%28%E4%BA%8C%29/"/>
+    <updated>2012-10-14T07:23:59+08:00</updated>
+    <id>http://ikurten.com/blog/2012/10/14/redis源码学习记录(二)</id>
+    <content type="html"><![CDATA[<p>续前面那篇<a href="http://kurchan.com/?p=149">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
+
+<p>当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、acceptUnixHandler、acceptCommonHandler。一旦接收到一个tcp链接，acceptCommonHandler就会创建一个redisClient，并且把它加入到event的readable列表中，等待event loop执行readQueryFromClient函数。</p>
+
+<p>接着event loop时执行readQueryFromClient，获取客户端请求，然后执行请求，调用redis.c中processCommand &#8211;> call函数。</p>
+
+<p>在执行循环的时候会有个beforeSleep的void指针，指向redis.c中的beforeSleep函数，这个函数会遍历所有的server.io_ready_clients，重新热入到event loop列表，并执行客户端请求(这是由于redis可以开启virtual memory，有些命令操作可能会被swapped从而被block掉)。配置在redis.conf中vm-enable选项。redis默认不开启vm。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[九月杂念]]></title>
+    <link href="http://ikurten.com/blog/2012/09/22/%E4%B9%9D%E6%9C%88%E6%9D%82%E5%BF%B5/"/>
+    <updated>2012-09-22T00:48:59+08:00</updated>
+    <id>http://ikurten.com/blog/2012/09/22/九月杂念</id>
+    <content type="html"><![CDATA[<p>想做的事情多了，渐渐的也就慢慢懒散了。博客，当初计划的，至少每个月都写吧，也总有段时间老是提不起劲头来写。</p>
+
+<p>本计划年内要看完的几本书，我想，还是看不完的了。<a href="http://book.douban.com/subject/3260311/">《Erlang Programming》</a>这本书年初的时候看的，现在再拿出来翻翻，还是很有收获的。打算重新学习一下C，于是又开始翻翻<a href="http://book.douban.com/subject/1139336/">《C程序设计语言》</a>。一直想学<a href="http://zh.wikipedia.org/zh/LISP">lisp</a>，虽然准备着手开始看<a href="http://groups.csail.mit.edu/mac/projects/scheme/">scheme</a>，主要还是因为<a href="http://book.douban.com/subject/1148282/">《计算机程序的构造和解释》</a>，本打算好好看看，断断续续的，只看了几页。还有<a href="http://book.douban.com/subject/1139426/">《数据结构与算法分析》</a>、<a href="http://book.douban.com/subject/5375620/">《失控》</a>、<a href="http://book.douban.com/subject/6860890/">《黑客》</a>、<a href="http://book.douban.com/subject/3244090/">《Professional Linux Kernel Architecture》</a>。。。买了很多书，基本上，合起来也没看几页啊。</p>
+
+<p>还有4个多月过年，好吧，剩下时间，认真的学习吧。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[redis源码学习记录]]></title>
+    <link href="http://ikurten.com/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    <updated>2012-09-19T00:14:47+08:00</updated>
+    <id>http://ikurten.com/blog/2012/09/19/redis源码学习记录</id>
+    <content type="html"><![CDATA[<p>最近一直在学习redis的源代码，大致上搞清楚了它是如何启动，载入参数，开始轮询接收tcp请求，以及具体执行tcp请求的方式。参照<a href="http://pauladamsmith.com/articles/redis-under-the-hood.html">《Redis:under the hood》</a> 此文，再对照源码。目前的stable版本，和此文上有些出入，但是大致逻辑上基本一致。</p>
+
+<p>redis按照单线程轮询(epoll、kqueue、select)tcp请求，服务端使用非阻塞IO，具体轮询代码实现，包含在ae.h、ae.c、ae_epoll.c、ae_kqueue.c、ae_select.c。tcp server实现在anet.h、anet.c。</p>
+
+<p>主入口redis.c中的main函数（参照<a href="http://pauladamsmith.com/articles/redis-under-the-hood.html">《Redis:under the hood》</a> 此文），redis.c中的beforeSleep函数会创建所有客户端（server.io_ready_clients）中的event句柄，以及触发event时的调用的函数readQueryFromClient。</p>
+
+<p>java的nio中selector也可以干类似的事情，不过，selector底层实现机制虽然是基于epoll、kqueue、select，但是会有自己链接自己的现象出现。具体参看<a href="http://http://blog.csdn.net/haoel/article/details/2224055">这里</a>。</p>
+
+<p>使用redis需要注意<a href="http://redis.io/topics/latency">latency</a>，一旦某个操作很耗时的话，会导致后续操作也延时。</p>
+
+<p>这方面，<a href="http://www.erlang.org">erlang</a>就好多了。</p>
+
+<p>ps:我用vim+winmanager+ctags+bufferexplorer，具体配置看<a href="http://blog.csdn.net/wooin/article/details/1858917">这里</a>。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于新公司]]></title>
+    <link href="http://ikurten.com/blog/2012/04/07/%E5%85%B3%E4%BA%8E%E6%96%B0%E5%85%AC%E5%8F%B8/"/>
+    <updated>2012-04-07T03:55:24+08:00</updated>
+    <id>http://ikurten.com/blog/2012/04/07/关于新公司</id>
+    <content type="html"><![CDATA[<p style="text-align: left;">加入新公司已经差不多有一个多月的时间了，最初么，也接过几个HR的电话，跟其他创业公司的头碰过，犹豫过，也徘徊了一下，还是决定留下来看看吧。这个团队也算一个中型公司下面的一个创业型公司，也可以说是一个创业项目吧。也是一个社区型产品。包括开发、运营在内的，团队基本上也算是草根形式的一帮人吧。我呢，依旧是干服务器这块的开发。目前公司也主要从智能手机客户端这块入手，刚起步，总归还算是慢慢进入状态吧。</p>
+
+
+<p>创业，或者小项目刚开始还是在于人。目前这个团队，内部分的还是太细，有时候团队内部沟通也不是很有效。最最讨厌的事情，还是在于有很多会议要开。团队还是越小越有效率，三五个人一个团队规模，基本上也算合适。当然，也是因为大多基本没在三五个人的创业团队呆过的，目前这种状态，基本上对于我来说算是很清闲的了。工作强度也不大，我呢，也好好恢复一下。顺便多看看，多学学吧。</p>
+
+<p>这个客户端产品，目前还是有很多地方需要改进，产品这块的出发点我很赞同，功能尽量少、能做到快速迭代，跟踪运营情况及时调整后续产品设计。最初的时候，我想也是快速开发、推出产品。一开始的时候，<a href="http://www.apple.com/ios/">iOS</a>和<a href="http://www.android.com/">Android</a>客户端还是外包出去做的。现在么，收回来自己开发，也算是有点吃力吧。等过了磨合期，我想，也应该是逐渐进入状态的。</p>
+
+<p style="text-align: left;"></p>
+
+
+<p style="text-align: left;">我呢，刚过了迷茫期，也算逐渐进入自己该有的状态吧。目前么，基本上靠自己摸索，然后慢慢前进了。琢磨着，业余再搞点啥项目什么的。想想现在自己也没啥拿得出手的东西，只能慢慢积累了。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[脸谱之死]]></title>
+    <link href="http://ikurten.com/blog/2012/03/14/%E8%84%B8%E8%B0%B1%E4%B9%8B%E6%AD%BB/"/>
+    <updated>2012-03-14T13:23:44+08:00</updated>
+    <id>http://ikurten.com/blog/2012/03/14/脸谱之死</id>
+    <content type="html"><![CDATA[<p>很早就想写点东西了，吐吐槽，发发牢骚。离开<a href="http://www.lianpu.com/">脸谱换换</a>这个创业团队之后，没多久，投资人也就宣布解散团队了，剩下的几个成员归入到他投资的另一个创业公司。其实，几个核心成员早已经走的差不多了。产品起起伏伏，或者，根本就没怎么起来过吧。我么也算经历了一个移动互联网产品的生存周期。</p>
+
+<p>一直以来，脸谱想做的事情总是很泛泛。我想投资人应该跟CEO说过，想做成啥样子，应该描绘过这张饼。其实，应该投资人自己来做CEO，这样或许更好点，脸谱也不会有这样的结局吧。CEO呢，在这里的角色其实很像接活干、接项目干，接了这个活呢，一个字，&ldquo;抄&rdquo;。当然，我不清楚CEO自己到底有没有什么概念，想把脸谱做成什么样子，或者，泛泛的讲做社交。有时候，&ldquo;抄&rdquo;也是一种学问。当然，做外包，也有学问。做创业项目外包，那学问更大了。</p>
+
+<p>从宽泛的角度切入，做出来的产品，有时候就不那么纯粹了。其实啊，就是四不像。什么都有点，却什么都不是。于是，没法有效的留住用户。做产品还是要有产品经理，当然，最完美的事情，莫过于CEO就是干产品经理出身，有丰富的背景经历，受过苦、吃过亏，走过很多弯路。现实往往没有这么美好，一个干外包项目出身的技术人员，来担当这个产品经理的角色，那么，接下去的路途是非常遥远的。首先一个是思维方式，其次，就是会走很多弯路，还有就是设计产品的方式，实现产品的方式，就是来回折腾，最后么，能赶出来，但是质量又不是那么过得去的。美其名曰，敏捷，其实啊，一点都不敏捷。劳心劳力，疲惫不堪。我见过最高效的产品设计规划，一天时间，就把接下去一个版本要实现的功能都定完细化，接下去几天实现，最后出来的产品，我个人觉得还是很棒的，真心觉得很赞。</p>
+
+<p>所以啊，你要是想敏捷，那么就花最短的时间把有限的产品功能以及具体功能流程理清楚，当然，我说，有限的产品功能，其实很多时候你以为很必须的功能，但是又相对来讲实现比较复杂的，往往都是些没必要的功能。最简单，即最实用。这些，算是经验之谈了。</p>
+
+<p>还有啊，老板千万得大肚量。产品设计，由产品经理说了算，这对于创业公司来讲，是必须遵守的天条。不管结果怎样，就算产品设计再怎么烂，你可以跟产品经理提，但是如果不被接受，则必须执行实现，不过如果你提出的异议很合理，我想任何人都是会接受的。这个如果对于产品经理即CEO的团队，那倒还好，如果产品经理非CEO的创业团队，那么，这里对CEO的肚量是个很大的考验。如果撑得过去，那么，男人的胸怀，是冤枉撑大的嘛。如果过不去，那么最终结果还是不说也罢。细细品来，其实矛盾也会在此滋生。创业团队有摩擦，其实很正常，关键是很多时候，有些人并不是那么容易释怀一些事情的。于是，就会有挣、有抢。最后呢，也就速速散了吧。当然，人非圣人，要能够做到对事不对人，的确还是有些难度的。</p>
+
+<p>真心怀念脸谱后台架构调整的那段时光啊，是我收获最多的时候，也得感谢那位架构师大哥啦。自从他断断续续过来，到最后不来，我们这，人心也就那么散掉了。创业还是需要激情的，到最后变成了一种煎熬，那么这个团队，这个项目也差不多该结束了。</p>
+
+<p>还有一点，想吐槽的，其实就是人情味了。最初的时候，也是最最重要的时候，虽然压力大，但是一起努力。毕竟大家也是一起有点憧憬，有点想法，有点激情，想做出点事情来的。也算朋友，互相帮助，互相学习，然后一起成长。当然，此时如果积累下去，那么逐渐形成的一种氛围，渐渐的影响力越大，那么，公司传承的东西，也会茁壮成长。这种事，等到大了，渐渐体会的到，如果后知后觉。影响力，其实还是一点点积累出来的东西，总归还是需要大家认同的。(2012-03-20增)</p>
+
+<p>最终呢，还有一点，我真的是很不服气的，就是工资了。一月份的时候发了一部分，说得好好的，余下的会发的，然后呢，拖到现在才发。期间呢，在讨论工资的问题上，对于我这样在2月底走的耍了些手段。七扣八扣的，到最后也没几个钱了。拿到手，总共的10分之一差不多。原来，这人啊，就是这么对待我们这些一起奋斗过那么久的战友的，难怪脸谱就这么死了。想想自己也算幸运见识了这个人吧。总会碰到这么几个，当面一套，背后一套的。总不清楚投资人知不知道这事情，我想，总归是知道点的吧，他又不用当恶人，少亏点钱，他也乐的。就怕啊，某些人中饱私囊！</p>
+
+<p style="text-align: left;">我呢，最后也算花钱买个教训吧！</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[最近这段创业生活]]></title>
+    <link href="http://ikurten.com/blog/2012/02/10/%E6%9C%80%E8%BF%91%E8%BF%99%E6%AE%B5%E5%88%9B%E4%B8%9A%E7%94%9F%E6%B4%BB/"/>
+    <updated>2012-02-10T02:05:15+08:00</updated>
+    <id>http://ikurten.com/blog/2012/02/10/最近这段创业生活</id>
+    <content type="html"><![CDATA[<p>自从去年6月份进入目前这家公司，到现在差不多也有将近9个月的时间了。从刚开始基情四射，到现在天天敲钟，这次创业，也就差不多这么快结束了。我呢，也算得上有些收获吧。<a href="http://www.paulgraham.com/">Paul Graham</a>说，创业最重要的还是看前5个人，现在看来，这句话确实是非常正确的。反正以后如果创业，要是老板外包行业出身，那我是得三思而后行了的。对于那些工作多年的，特别是国内一些外包公司的人，多半是带些外包从业气息的，这些人，如果再进入外包行业么，那也算对路。要是来互联网行业创业，多半，还是要死的。</p>
+
+<p>前面一家公司的文化，特别是呆过3-5年的公司，绝对深入骨髓的。包括一些行事风格，除非么，有自我觉悟，懂得看些书，学习点经验，慢慢改么，否则，多半下场还是可以预测的。</p>
+
+<p>看完<a href="http://book.douban.com/subject/5914587/">《启示录》</a>，对比一下我们做产品的过程，人家犯过的错，我们也在犯，感慨万千啊。自问，我们的产品根本不能解决什么问题，于是，为何要用这个？专注于解决小问题，如果可以解决好Ctrl+C以及Ctrl+V的问题（听说过这么一则笑话，一个老板，在公司电脑上对一份文件Ctrl+C，复制了一下，然后在家里电脑上Ctrl+V，粘贴，可惜，什么都没有），那么你就可以挣钱了（Dropbox&#8212;>可惜被墙）。</p>
+
+<p>创业刚起步阶段，最重要的，还是大家相互激发，相互促进，而不是说，你说得话就一定要听，不听么，好吧，这事你不用做了，走吧。很多事情，还是在于团队，但是产品，拍板的还在于产品经理。如果带项目的，或者做测试的去为产品功能、需求拍板，那么最终的产品可想而知了。哎，总是会有些无奈的。</p>
+
+<p>再者，还是效率了。本以为，创业公司的效率还是会很高的。比如，一天确定接下去版本的产品需求，一星期左右实现，基本上没多大问题。可惜啊，定个产品需求，要考虑这个，考虑那个，考虑以后要做什么什么，最终么，定义的实现，为了兼容上一版本的，还得来回折腾。期间呢，开发过程经常性质的被打断。come on！！！还一定要扯你，说你效率不够，开发进度老是拖。然后么，就接着定死你的上班时间，时间不到？早走？好吧，扣钱！于是么，一整套外包做法就出来了。童鞋，别忘了咱是一起再创业啊，咱也承担一定风险的啊。你要想想，如果公司逐渐壮大了，你要传承下去的是什么？就是这中东西么？come on！！！</p>
+
+<p>这么一段时间，也算是对我自身成长的一种帮助吧。从刚开始的，对web开发的一些技术基本上不懂，到目前的，也算做过点项目了（我们自己开发的即时聊天系统，以及一些业务的api）。对于java web开发的一些道道呢，也算熟悉了（<a href="http://www.springsource.org/">spring</a>、<a href="http://struts.apache.org/">struts2</a>、<a href="http://ibatis.apache.org/">ibatis</a>、<a href="http://tomcat.apache.org/">tomcat</a>）。期间呢，也算折腾过<a href="http://mongodb.org">mongodb</a>。本来的，接下去想把业务上一些单点的逻辑给去掉。目前呢，我们API（运行在tomcat环境下）是单点的，其中还包含一块文件存储的，打算用<a href="http://www.mongodb.org/display/DOCS/Master+Slave">mongodb master/slave</a>存储文件，以及一些空间数据，不过<a href="http://mongodb.org">mongodb</a> 1.8存文件有limit，<a href="http://www.mongodb.org/display/DOCS/When+to+use+GridFS">最大只支持16M</a>，我们用2.0+，也就存存小文件，基本没啥问题。API呢，做一下<a href="http://httpd.apache.org/">apache</a>+<a href="http://tomcat.apache.org/">tomcat</a>的负载均衡，不过个人还是倾向于用<a href="http://nginx.org">nginx</a>，我们的即时聊天呢，目前来讲是没有单点的。</p>
+
+<p>即时聊天还是需要优化，把<a href="http://memcachedb.org/memcacheq/">memcacheq</a>给去掉，包括后台处理消息的应用，全部使用<a href="http://erlang.org">erlang</a>来写，基本上的话，那就是自有协议的<a href="http://www.ejabberd.im/">ejabberd</a>了。以前我们即时聊天使用的是<a href="http://www.igniterealtime.org/projects/openfire/">openfire</a>，我来的时候也还在用，不过，经常性质的会出现问题，我估计么，可能是因为没有用好。</p>
+
+<p>接下去么，还是得继续找工作啊，简历么，海投了。。。找个技术氛围浓厚，有没有那么多边边框框的工作，真不容易啊！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于又一次辞职]]></title>
+    <link href="http://ikurten.com/blog/2012/01/20/%E5%85%B3%E4%BA%8E%E5%8F%88%E4%B8%80%E6%AC%A1%E8%BE%9E%E8%81%8C/"/>
+    <updated>2012-01-20T11:57:14+08:00</updated>
+    <id>http://ikurten.com/blog/2012/01/20/关于又一次辞职</id>
+    <content type="html"><![CDATA[<p>昨天跟头提了离职，是啊，这是迟早的事情么。我们这个创业项目啊，也差不多快死了。团队散了，真的，这么折腾，真疲了。没有做产品经验的人主导做产品，而且还是做外包项目出身。这么做，首先最重要的问题都没有解决，还想，这个里面要加这个、加那个。哎，最终啊，还是这么死死的，没啥特色。在他们眼里，移动客户端的产品就那样子，这边抄一点，那边抄一点，就行了。从来不曾觉得为什么要加这个，能解决什么问题？有什么帮助？</p>
+
+<p>我呆着，也算有半年多了，不怎么甘心这么折腾，基本上啊，都要走了，年底了，散伙饭都没吃。算是一种遗憾了。半年里，看着好几个同事走，又来了好几个新同事，这回，都走了。</p>
+
+<p>最近，又买了几本书，<a href="http://book.douban.com/subject/4163938/">《软件随想录》</a>、<a href="http://book.douban.com/subject/1827702/">《点石成金》</a>，这两本书都是经验啊，一本算是创业以及软件行业的心得经验，另一本是网页设计的经验之谈，都蛮不错的。人到了一定时候是不是真就不看书？看别人怎么做就可以了？我觉着，活到老学到老嘛。总要做点和别人不一样的事情出来，现在么，算是一点点积累吧。这半年时间，做得这个项目，我还是非常受益的，虽然，经验尚浅，但是折腾点事情还是靠谱的。</p>
+
+<p>过完年，还得开始找工作啊，想做服务器端的开发，一直打算写个消息队列来着，由于前段时间一直忙，接下去应该有时间写了，基于<a href="http://memcached.org/">memcached</a>协议的消息队列，用<a href="http://erlang.org">erlang</a>写，嘿嘿，存储引擎使用leveldb或者直接文件存储。然后用<a href="http://python.org">python</a>写个客户端，顺便学习学习<a href="http://twistedmatrix.com/trac">Twisted</a>，事件驱动模式的python库，事件驱动对于服务器端的开发确实高效，该干嘛时干嘛，有人搭讪，立马回答，完了继续该干嘛干嘛，不需要耗着资源一直等着搭讪。</p>
+
+<p>忽然觉着，自己能折腾的事情越来越多，但是，还是不够沉淀。接下去，得找个能沉淀些东西的活。外包神马的，最讨厌了啊。</p>
+
+<p>今天，回家过年，这两天，有点小插曲，注定着2012过得不是很顺啊。</p>
+
+<p>人生么，在于折腾啊！:)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[年终总结]]></title>
+    <link href="http://ikurten.com/blog/2011/12/17/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    <updated>2011-12-17T06:53:20+08:00</updated>
+    <id>http://ikurten.com/blog/2011/12/17/年终总结</id>
+    <content type="html"><![CDATA[<p>今年换了份工作，原先是搞GIS项目二次开发的，说白了就是拿别人的SDK根据业务需求方做些定制开发，对于一些特定的业务流程做一下优化，处理一下特定的数据，对于GIS来说，数据就是业务，业务就是数据。也就一些小项目，自己不是很喜欢搞这个，干到4月底于是就辞职了。</p>
+
+<p>呆了一个来月，觉着自己是该找找工作了，于是，海发简历，你懂得。不过，发的都是些互联网创业公司。因为自己对创业神马的很感兴趣，在大学里一直看一些赢在中国这样的视频，导致骨子里一味的想创业，所以就一直寻寻觅觅。后来就到了现在这家创业公司。面试的时候，是轮着面，一个面完接着另一个，想想创业公司也总该招人谨慎点吧。也是因为自己的背景和他们要求的不是很符合，所以就认认真真的回答问题。后来呢，我花了一个下午，做了一个wap页面，是用php写的，用了jquery mobile这个还是alpha版本的js框架，那时我对php也是刚刚入门，js神马的是早期看过一点，也不熟，更不用说CSS和jquery mobile这个框架了。当然啦，我是照着产品经理的原型做的，最终结果模样瞅着还行，于是就这么pass了，第二天就正是上班啦。那天刚好是6月1号，儿童节啊。现在想想，有点诧异啊，当时我怎么就能找到jquery mobile这么个东西呢？也算幸运啊，就这么pass了。</p>
+
+<p>我本来就冲着java web开发这个岗位做的，刚开始对spring，struts，ibatis这些东西都不熟，当然因为对php有点了解，于是开始就写php，做手机访问页面。当时对于java也算稍微了解一点了，就自个摸索这折腾折腾。当时有个架构师，不过经常性质的不来，还有两个开发人员，一个是leader，还有一个就是员工了。后来又来了个实习的。我差不多花了一个多星期的时间，把要求使用的wap页面写完，期间，修修，改改，来回折腾了很多回。咱头的性子很急躁，脾气也不咋滴，于是，期间还经常性质的和产品经理&ldquo;聊聊天、谈谈心&rdquo;，于是，设计也是来回折腾，不提也罢啊。</p>
+
+<p>一个星期后，正式开始接触spring，struts，ibatis这些东西，还有tomcat，也算干上了java web开发了。那是主要是用struts包装一些url，用户iphone、android手机客户端调用，就是api。一开始，调试那个配置，实在是件很累的事情，也是，本身那些东西不知道从哪里搞来的，就这么一直用着，天知道啊。那时我们的聊天系统使用的是openfire，基于xmpp协议的时时聊天系统。这个东西，间歇性质的会出些问题，虽然是到3.X的版本了，不过大部分原因还是因为我们都不熟悉他的缘故吧。而且，openfire会有消息丢失的现象，当时，由于搞iphone开发的人就一个，还是菜鸟，所以iphone版本也是很糟糕的版本，android版本有三个人开发稍微好点，不过，设计也是很烂很烂的，一点都不易用。有两个UI，但是纯粹只做UI图，基本不写CSS及其他东西，单纯的只用ps做图，称为设计。产品经理会用axure做原型。</p>
+
+<p>过了一段时间，搞iphone开发的来了一个牛人，同时，头又从原先呆的公司找来几个人做iphone和android，基本都是有好几年工作经验的人。产品经理还是原先那个，继续搞他的设计。iphone和android的都重新架构设计，代码都重写了一遍。这期间服务器开发api这边走了两个人，那架构师还是间歇性质的过来一下。于是，就剩下我和一个实习的了。恰好，新来一个高级架构师，打算用erlang自己写个消息系统，我一听，立马来了兴趣，这架构师人蛮好的，过来之后带我和那个实习生。我们么，也算努力，分工的时候，我们给这个消息系统取了个名字&ldquo;擎天柱（Optimus Prime）&rdquo;，名字很拉风。我分工做memcacheq通信框架，用spring包装一下，开放给后台java应用做driver。同时，我也用这个框架做了几个处理特定消息的程序，我们称她为后台应用app，因为消息都是通过memcacheq做中转，所以，前台有高并发特性的erlang支持，后台可以慢慢做事情，这种模式，对于增加和横向扩展都非常容易。</p>
+
+<p>本来我想参与iphone客户端协议开发，但是想想自己对于位运算这种玩意玩不转，于是就放弃了。这个消息系统大概花了1个月的时间，我们服务器从原先的2台云主机，一台兼容机，一台dell服务器，扩展到4台dell服务器，一台兼容机。期间学习到了很多东西，包括使用iptables，apache与tomcat做负载均衡，用iptables做负载均衡，tcp/ip通讯，等等，对我帮助很多的还要感谢新来的架构师，原先那个，这期间也就不来了。这期间，android组开发，也走了一个人，iphone组，开发来了个实习生。服务器组开发这边就我们三。等到我们新消息系统上线，iphone新版也推出来了。</p>
+
+<p>接下去就是客户端改版啦，我呢，也参与者做wap页面和我们网站主页的改版。这期间，主要就是谢谢php，js还有一些客户端使用的api业务更改，修改一下原有的bug。改版还是主要由于投资人的影响。说实话，我真不觉的我们头对这产品想做成啥样有个大概想法。很笼统的，说做熟人社交。嗯，对，熟人社交是不错。关键是切入点，一直看米聊、微信、path、linkedin。。。都不知道想啥，最后还是在这IM、幸会神马的动作迅速，老想着抄别人点啥。。。最后，哎。。。然后产品经理由iphone开发的那个经验丰富的人来担任了，原先那个么，也就走了。</p>
+
+<p>然后，下一版本，又改版啦，之后就是坚定的走商务路线，开始上名片，上邀请好友。同时要上传通讯录给你自动匹配好友，期间使用http协议做上传，然后又改成tcp，接着又改回http，这事情不是一般的折腾。期间就碰到一个memcacheq最大消息体64K的问题，于是，抽空学习了一下他的源代码，还有就是memcachedb的。基本上两个实现差不多。光光名片接口讨论，刚开始说，很简单的，只要能取到，然后能下载就成。接着说，这个恐怕不行吧，不能这样做。邀请接口讨论也是这么折腾。接着么，由于头的不信任。产品经理最后，只能换到头自己身上了。你说，你让人家做产品经理，好，那设计什么的，都让他去做，你要信任他吧？不用，他弄了一套，然后你自己又回去弄一套方案，接着，跟他说你那个不行，还是用我的吧。于是，那你自己去弄呗。</p>
+
+<p>设计么，至画个ui，然后说，我都画在ui上了，你照做吧。还好，会给我们讲讲ui。好吧，你狠，我照做。接口设计照着ui做吧，你不行，不能这么干，不照做吧，不行你不能这么干。总是在讨论接口实现的业务时，经常纠结的，这个也要加，那个也要做，总说，以后我们可能会这样的，你不能这么草率，以后我们需要神马神马的，你不能这么照ui设计。</p>
+
+<p>接着，就因为一些问题，我们架构师还和头争执，于是，产品神马的，都成浮云了。头有个毛病，就是做产品时不知道怎么取舍。在他眼里，我们客户端应用的版本，因为一个小问题，就得重新发布一个新版本。当然，这期间，名片下载上传与好友邀请与推荐是我设计的，从中也学到了很多东西。做开发的，关键还得看产品设计啊。因为接口目前的用户就是客户端。客户端的业务逻辑就是产品设计决定的。如果说，没有一个清晰的产品体验逻辑，任何设计都是浮云啊。</p>
+
+<p>最近刚刚做完活动的接口，哎，这段时间真的是折腾死人了。有几个接口差不多开发完成的时候，突然告知，不能这么干，逻辑还得改，改就改吧，反正我是习以为常了。幸好，这事有一个新来的架构师扛着。当然，期间也有些很坑爹的事情。QA，知道吧，现在QA不单单要测试产品，连产品需求咋整的，都要QA来弄，我们这QA也可怜，天天被折腾，苦逼啊。还有么，就是经常性质的会听到，你去看看别人怎么做的么，然后再来跟我谈这个事情。尼玛，从没听过，产品功能要参考别人，然后自己没有想法做到什么程度的，直接抛给你一句，先去看别人怎么做的。我们开发么，经常性的被打断，来查查这个问题，来看看这个是怎么回事。还要死定个时间，硬要在这段时间弄完，弄不完，你想办法，好吧，我是想不到办法了，最后么，这个跟我原先想的不一样啊，这个又问题啊。你早干嘛去了？早干嘛不来说说清楚？那些不做，那些做，为啥什么都一期做了？为啥不考虑考虑这么做了有啥用？为啥要这么做？</p>
+
+<p>原先那个，现在是公司顾问，就周五来一天。哎，乐得悠闲啊。真怀念开发&ldquo;擎天柱&rdquo;那段时光啊。我估摸着，我是不是得换份工作？到年底了，总感觉头对任何人都有中监视心理，总觉着你干活不怎么卖力，也不想想为啥进度会拖慢。我想，只是旁观者清吧。我呢，也犯过几个错误，对于scheme free有了更深刻的感触，对于mysql应用，也加小心。对于业务变更，要更改字段，要千万小心。nsql还是很有必要深入学习一下。</p>
+
+<p>犯过错，才会成长么，如果一个公司的头，没有这种远见，总想着，谁谁谁尽快把活干完，不在乎谁谁谁成长多少，那么，是不是该考虑换个公司？</p>
+
+<p>前段时间，买了好几本书，都没有看完。kindle里面还有很多资料也没有看，对于感兴趣的事情我得专注啊。</p>
+
+<p>琐碎的事情，罗列于此。总的来说，这大半年的时光，自己还是成长了很多，特别是开发&ldquo;擎天柱&rdquo;那段时间，了解了压力测试，写过loadrunner脚本，本打算学习一个tsung，服务器产品性能，以及tcp/ip通讯的东西，同时也接触到了erlang这们相当优雅的并发编程语言。Joe老头还是很牛叉的，虽然没有把他写得书《Programming Erlang》看完，但是看完了他写的那篇论文，还是很有成就感的。本打算开发完&ldquo;擎天柱&rdquo;，乘有空的时候，用erlang写一个基于memcached协议的消息队列，参考bitcask的实现，直接用文件存储。但是看到FQueue的实现之后，发觉，用RandomAccessFile实现性能不错的文件型持久化消息队列也挺简单，用jmemcached做缓存，实现memcached协议。这个计划，暂时搁浅了，总感觉用erlang写一个应该性能更不错。</p>
+
+<p>新的一年，找一份新工作，期待宽松的工作氛围，老板不会一天到晚督促你干活干活，老板信任每个员工，给予充分的自有，有自由的发挥空间，最好不要严格的考勤，最后一点，还是我喜欢的，高并发、数据存取、high performance，最好可以使用nsql产品。</p>
+
+<p>看书、看书、看书，把前段时间买的几本书看完。同时重新学习一下C语言，把《Programming Erlang》看完，用erlang写一个消息队列，学习一下linux内核，把《Professional Linux Kernel Architecture》这本书给看了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[centos中yum无法使用问题]]></title>
+    <link href="http://ikurten.com/blog/2011/12/15/centos%E4%B8%ADyum%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/"/>
+    <updated>2011-12-15T14:47:34+08:00</updated>
+    <id>http://ikurten.com/blog/2011/12/15/centos中yum无法使用问题</id>
+    <content type="html"><![CDATA[<p>今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
+显示错误如下：</p>
+
+<pre>Loaded plugins: fastestmirror
+Determining fastest mirrors
+YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
+/Eg. 
+removing mirrorlist with no valid mirrors: /var/cache/yum/addons/mirrorlist.txt
+Error: Cannot find a valid baseurl for repo: addons</pre>
+
+
+<p>不知道什么时候把mirrors.txt文件给去掉了。
+后来查了一下有这么一串。</p>
+
+<pre>1./var/cache/yum/base/mirrorlist.txt
+url:
+http://mirrors.163.com/centos/5.7/os/x86_64/
+http://centos.ustc.edu.cn/centos/5.7/os/x86_64/
+http://mirror.neu.edu.cn/centos/5.7/os/x86_64/
+http://mirrors.ta139.com/centos/5.7/os/x86_64/
+http://ftp.nsysu.edu.tw/CentOS/5.7/os/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/os/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://ftp.twaren.net/Linux/CentOS/5.7/os/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/os/x86_64/
+http://centos.mirror.cdnetworks.com/5.7/os/x86_64/
+http://centos.tt.co.kr/5.7/os/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/os/x86_64/
+http://mirror.khlug.org/centos/5.7/os/x86_64/
+http://mirror.yongbok.net/centos/5.7/os/x86_64/
+http://ftp.daum.net/centos/5.7/os/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/os/x86_64/
+http://mirror.averse.net/centos/5.7/os/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/os/x86_64/
+
+2./var/cache/yum/updates/mirrorlist.txt
+url:
+http://mirror.neu.edu.cn/centos/5.7/updates/x86_64/
+http://mirrors.ta139.com/centos/5.7/updates/x86_64/
+http://mirrors.stuhome.net/centos/5.7/updates/x86_64/
+http://centos.ustc.edu.cn/centos/5.7/updates/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/updates/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.daum.net/centos/5.7/updates/x86_64/
+http://mirror.khlug.org/centos/5.7/updates/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/updates/x86_64/
+http://centos.tt.co.kr/5.7/updates/x86_64/
+http://mirror.averse.net/centos/5.7/updates/x86_64/
+ftp://ftp.oss.eznetsols.org/linux/centos/5.7/updates/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/updates/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/updates/x86_64/
+http://centos.vr-zone.com/5.7/updates/x86_64/
+http://rsync.atworks.co.jp/centos/5.7/updates/x86_64/
+http://ftp.nara.wide.ad.jp/pub/Linux/centos/5.7/updates/x86_64/
+
+3./var/cache/yum/addons/mirrorlist.txt
+url:
+http://mirror.centos.org/centos/5/addons/x86_64/
+
+4./var/cache/yum/extras/mirrorlist.txt
+url:
+http://centos.ustc.edu.cn/centos/5.7/extras/x86_64/
+http://mirrors.stuhome.net/centos/5.7/extras/x86_64/
+http://mirror.neu.edu.cn/centos/5.7/extras/x86_64/
+http://mirrors.ta139.com/centos/5.7/extras/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/extras/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/extras/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/extras/x86_64/
+http://mirror.khlug.org/centos/5.7/extras/x86_64/
+http://ftp.daum.net/centos/5.7/extras/x86_64/
+http://centos.tt.co.kr/5.7/extras/x86_64/
+http://centos.vr-zone.com/5.7/extras/x86_64/
+http://mirror.averse.net/centos/5.7/extras/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/extras/x86_64/
+ftp://ftp.oss.eznetsols.org/linux/centos/5.7/extras/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/extras/x86_64/
+http://ftp.yz.yamagata-u.ac.jp/pub/linux/centos/5.7/extras/x86_64/
+http://ftp.jaist.ac.jp/pub/Linux/CentOS/5.7/extras/x86_64/</pre>
+
+
+<p>对应的把这些url拷贝到mirrorlist.txt文件中去就ok啦。
+have fun! :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[阅读memcacheq源码记录]]></title>
+    <link href="http://ikurten.com/blog/2011/12/04/%E9%98%85%E8%AF%BBmemcacheq%E6%BA%90%E7%A0%81%E8%AE%B0%E5%BD%95/"/>
+    <updated>2011-12-04T12:07:34+08:00</updated>
+    <id>http://ikurten.com/blog/2011/12/04/阅读memcacheq源码记录</id>
+    <content type="html"><![CDATA[<p>越来越觉着大学里学的谭浩强的《C语言程序设计》太狗血了，哎，悔不当初啊。</p>
+
+<p>今天下午闲着看了一下<a href="http://memcachedb.org/memcacheq/">memcacheq</a>这个消息队列的源代码，存储引擎用得<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>，<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>支持队列方式的数据存储，只不过一个record必须fixed-length，具体能存多大的长度，我没再官方的doc中找到，不过，<a href="http://memcachedb.org/memcacheq/">memcacheq</a>作者说最大消息长度不能超过64K，而且，如果你超过了64K，消息队列就挂了，嗯，这个我碰到过了，超过64K，存入消息队列之后，整个消息队列就得重启。所以，如果你不确定以后业务变更会增加消息体的大小，那么我不建议你使用<a href="http://memcachedb.org/memcacheq/">memcacheq</a> :) 。</p>
+
+<p><a href="http://memcachedb.org/memcacheq/">memcacheq</a>在内存里维护一个队列的hash，memcacheq.c文件实现了memcached协议，bdb.c文件实现了对于bdb的读写，发觉消息队列持久化用bdb实现实在是很轻量、很简洁，item.c对协议层的封装，操作结构体item。</p>
+
+<p>用<a href="http://libevent.org/">libevent</a>对收到的通信包做callback，包括对bdb做增、删、存操作。bdb也用<a href="http://libevent.org/">libevent</a>，对<a href="http://libevent.org/">libevent</a>没有研究，略过N字 :)。</p>
+
+<p>ps&nbsp;<a href="http://memcachedb.org/memcacheq/">memcacheq</a>测试使用的是python写的memcache.py。</p>
+
+<p>简单，有效的持久化消息队列，性能过得去，抽空我得好好看看C语言，学习一下 :) 复习一下数据结构，以前的早忘记了，而且也没怎么好好学。老外写的<a href="http://book.douban.com/subject/1139336/">《C语言程序设计》</a>这本，不错的。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[memcached protocol]]></title>
+    <link href="http://ikurten.com/blog/2011/11/27/memcached-protocol/"/>
+    <updated>2011-11-27T05:56:29+08:00</updated>
+    <id>http://ikurten.com/blog/2011/11/27/memcached-protocol</id>
+    <content type="html"><![CDATA[<p>Protocol</p>
+
+<hr />
+
+<p>Clients of memcached communicate with server through TCP connections.</p>
+
+<p>(A UDP interface is also available; details are below under &#8220;UDP</p>
+
+<p>protocol.&#8221;) A given running memcached server listens on some</p>
+
+<p>(configurable) port; clients connect to that port, send commands to</p>
+
+<p>the server, read responses, and eventually close the connection.</p>
+
+<p>There is no need to send any command to end the session. A client may</p>
+
+<p>just close the connection at any moment it no longer needs it. Note,</p>
+
+<p>however, that clients are encouraged to cache their connections rather</p>
+
+<p>than reopen them every time they need to store or retrieve data.&nbsp; This</p>
+
+<p>is because memcached is especially designed to work very efficiently</p>
+
+<p>with a very large number (many hundreds, more than a thousand if</p>
+
+<p>necessary) of open connections. Caching connections will eliminate the</p>
+
+<p>overhead associated with establishing a TCP connection (the overhead</p>
+
+<p>of preparing for a new connection on the server side is insignificant</p>
+
+<p>compared to this).</p>
+
+<p>There are two kinds of data sent in the memcache protocol: text lines</p>
+
+<p>and unstructured data.&nbsp; Text lines are used for commands from clients</p>
+
+<p>and responses from servers. Unstructured data is sent when a client</p>
+
+<p>wants to store or retrieve data. The server will transmit back</p>
+
+<p>unstructured data in exactly the same way it received it, as a byte</p>
+
+<p>stream. The server doesn&#8217;t care about byte order issues in</p>
+
+<p>unstructured data and isn&#8217;t aware of them. There are no limitations on</p>
+
+<p>characters that may appear in unstructured data; however, the reader</p>
+
+<p>of such data (either a client or a server) will always know, from a</p>
+
+<p>preceding text line, the exact length of the data block being</p>
+
+<p>transmitted.</p>
+
+<p>Text lines are always terminated by \r\n. Unstructured data is <em>also</em></p>
+
+<p>terminated by \r\n, even though \r, \n or any other 8-bit characters</p>
+
+<p>may also appear inside the data. Therefore, when a client retrieves</p>
+
+<p>data from a server, it must use the length of the data block (which it</p>
+
+<p>will be provided with) to determine where the data block ends, and not</p>
+
+<p>the fact that \r\n follows the end of the data block, even though it</p>
+
+<p>does.</p>
+
+<p>Keys</p>
+
+<hr />
+
+<p>Data stored by memcached is identified with the help of a key. A key</p>
+
+<p>is a text string which should uniquely identify the data for clients</p>
+
+<p>that are interested in storing and retrieving it.&nbsp; Currently the</p>
+
+<p>length limit of a key is set at 250 characters (of course, normally</p>
+
+<p>clients wouldn&#8217;t need to use such long keys); the key must not include</p>
+
+<p>control characters or whitespace.</p>
+
+<p>Commands</p>
+
+<hr />
+
+<p>There are three types of commands.</p>
+
+<p>Storage commands (there are six: &#8220;set&#8221;, &#8220;add&#8221;, &#8220;replace&#8221;, &#8220;append&#8221;</p>
+
+<p>&#8220;prepend&#8221; and &#8220;cas&#8221;) ask the server to store some data identified by a key. The</p>
+
+<p>client sends a command line, and then a data block; after that the</p>
+
+<p>client expects one line of response, which will indicate success or</p>
+
+<p>faulure.</p>
+
+<p>Retrieval commands (there are two: &#8220;get&#8221; and &#8220;gets&#8221;) ask the server to</p>
+
+<p>retrieve data corresponding to a set of keys (one or more keys in one</p>
+
+<p>request). The client sends a command line, which includes all the</p>
+
+<p>requested keys; after that for each item the server finds it sends to</p>
+
+<p>the client one response line with information about the item, and one</p>
+
+<p>data block with the item&#8217;s data; this continues until the server</p>
+
+<p>finished with the &#8220;END&#8221; response line.</p>
+
+<p>All other commands don&#8217;t involve unstructured data. In all of them,</p>
+
+<p>the client sends one command line, and expects (depending on the</p>
+
+<p>command) either one line of response, or several lines of response</p>
+
+<p>ending with &#8220;END&#8221; on the last line.</p>
+
+<p>A command line always starts with the name of the command, followed by</p>
+
+<p>parameters (if any) delimited by whitespace. Command names are</p>
+
+<p>lower-case and are case-sensitive.</p>
+
+<p>Expiration times</p>
+
+<hr />
+
+<p>Some commands involve a client sending some kind of expiration time</p>
+
+<p>(relative to an item or to an operation requested by the client) to</p>
+
+<p>the server. In all such cases, the actual value sent may either be</p>
+
+<p>Unix time (number of seconds since January 1, 1970, as a 32-bit</p>
+
+<p>value), or a number of seconds starting from current time. In the</p>
+
+<p>latter case, this number of seconds may not exceed 60<em>60</em>24*30 (number</p>
+
+<p>of seconds in 30 days); if the number sent by a client is larger than</p>
+
+<p>that, the server will consider it to be real Unix time value rather</p>
+
+<p>than an offset from current time.</p>
+
+<p>Error strings</p>
+
+<hr />
+
+<p>Each command sent by a client may be answered with an error string</p>
+
+<p>from the server. These error strings come in three types:</p>
+
+<ul>
+<li>&#8220;ERROR\r\n&#8221;</li>
+</ul>
+
+
+<p>means the client sent a nonexistent command name.</p>
+
+<ul>
+<li>&#8220;CLIENT_ERROR <error>\r\n&#8221;</li>
+</ul>
+
+
+<p>means some sort of client error in the input line, i.e. the input</p>
+
+<p>doesn&#8217;t conform to the protocol in some way. <error> is a</p>
+
+<p>human-readable error string.</p>
+
+<ul>
+<li>&#8220;SERVER_ERROR <error>\r\n&#8221;</li>
+</ul>
+
+
+<p>means some sort of server error prevents the server from carrying</p>
+
+<p>out the command. <error> is a human-readable error string. In cases</p>
+
+<p>of severe server errors, which make it impossible to continue</p>
+
+<p>serving the client (this shouldn&#8217;t normally happen), the server will</p>
+
+<p>close the connection after sending the error line. This is the only</p>
+
+<p>case in which the server closes a connection to a client.</p>
+
+<p>In the descriptions of individual commands below, these error lines</p>
+
+<p>are not again specifically mentioned, but clients must allow for their</p>
+
+<p>possibility.</p>
+
+<p>Storage commands</p>
+
+<hr />
+
+<p>First, the client sends a command line which looks like this:</p>
+
+<p><command name> <key> <flags> <exptime> <bytes> [noreply]\r\n</p>
+
+<p>cas <key> <flags> <exptime> <bytes> <cas unqiue> [noreply]\r\n</p>
+
+<ul>
+<li><command name> is &#8220;set&#8221;, &#8220;add&#8221;, &#8220;replace&#8221;, &#8220;append&#8221; or &#8220;prepend&#8221;</li>
+</ul>
+
+
+<p>&#8220;set&#8221; means &#8220;store this data&#8221;.</p>
+
+<p>&#8220;add&#8221; means &#8220;store this data, but only if the server <em>doesn&#8217;t</em> already</p>
+
+<p>hold data for this key&#8221;.</p>
+
+<p>&#8220;replace&#8221; means &#8220;store this data, but only if the server <em>does</em></p>
+
+<p>already hold data for this key&#8221;.</p>
+
+<p>&#8220;append&#8221; means &#8220;add this data to an existing key after existing data&#8221;.</p>
+
+<p>&#8220;prepend&#8221; means &#8220;add this data to an existing key before existing data&#8221;.</p>
+
+<p>The append and prepend commands do not accept flags or exptime.</p>
+
+<p>They update existing data portions, and ignore new flag and exptime</p>
+
+<p>settings.</p>
+
+<p>&#8220;cas&#8221; is a check and set operation which means &#8220;store this data but</p>
+
+<p>only if no one else has updated since I last fetched it.&#8221;</p>
+
+<ul>
+<li><p><key> is the key under which the client asks to store the data</p></li>
+<li><p><flags> is an arbitrary 16-bit unsigned integer (written out in</p></li>
+</ul>
+
+
+<p>decimal) that the server stores along with the data and sends back</p>
+
+<p>when the item is retrieved. Clients may use this as a bit field to</p>
+
+<p>store data-specific information; this field is opaque to the server.</p>
+
+<p>Note that in memcached 1.2.1 and higher, flags may be 32-bits, instead</p>
+
+<p>of 16, but you might want to restrict yourself to 16 bits for</p>
+
+<p>compatibility with older versions.</p>
+
+<ul>
+<li><exptime> is expiration time. If it&#8217;s 0, the item never expires</li>
+</ul>
+
+
+<p>(although it may be deleted from the cache to make place for other</p>
+
+<p>items). If it&#8217;s non-zero (either Unix time or offset in seconds from</p>
+
+<p>current time), it is guaranteed that clients will not be able to</p>
+
+<p>retrieve this item after the expiration time arrives (measured by</p>
+
+<p>server time).</p>
+
+<ul>
+<li><bytes> is the number of bytes in the data block to follow, <em>not</em></li>
+</ul>
+
+
+<p>including the delimiting \r\n. <bytes> may be zero (in which case</p>
+
+<p>it&#8217;s followed by an empty data block).</p>
+
+<ul>
+<li><cas unique> is a unique 64-bit value of an existing entry.</li>
+</ul>
+
+
+<p>Clients should use the value returned from the &#8220;gets&#8221; command</p>
+
+<p>when issuing &#8220;cas&#8221; updates.</p>
+
+<ul>
+<li>&#8220;noreply&#8221; optional parameter instructs the server to not send the</li>
+</ul>
+
+
+<p>reply.&nbsp; NOTE: if the request line is malformed, the server can&#8217;t</p>
+
+<p>parse &#8220;noreply&#8221; option reliably.&nbsp; In this case it may send the error</p>
+
+<p>to the client, and not reading it on the client side will break</p>
+
+<p>things.&nbsp; Client should construct only valid requests.</p>
+
+<p>After this line, the client sends the data block:</p>
+
+<p><data block>\r\n</p>
+
+<ul>
+<li><data block> is a chunk of arbitrary 8-bit data of length <bytes></li>
+</ul>
+
+
+<p>from the previous line.</p>
+
+<p>After sending the command line and the data blockm the client awaits</p>
+
+<p>the reply, which may be:</p>
+
+<ul>
+<li><p>&#8220;STORED\r\n&#8221;, to indicate success.</p></li>
+<li><p>&#8220;NOT_STORED\r\n&#8221; to indicate the data was not stored, but not</p></li>
+</ul>
+
+
+<p>because of an error. This normally means that either that the</p>
+
+<p>condition for an &#8220;add&#8221; or a &#8220;replace&#8221; command wasn&#8217;t met, or that the</p>
+
+<p>item is in a delete queue (see the &#8220;delete&#8221; command below).</p>
+
+<ul>
+<li>&#8220;EXISTS\r\n&#8221; to indicate that the item you are trying to store with</li>
+</ul>
+
+
+<p>a &#8220;cas&#8221; command has been modified since you last fetched it.</p>
+
+<ul>
+<li>&#8220;NOT_FOUND\r\n&#8221; to indicate that the item you are trying to store</li>
+</ul>
+
+
+<p>with a &#8220;cas&#8221; command did not exist or has been deleted.</p>
+
+<p>Retrieval command:</p>
+
+<hr />
+
+<p>The retrieval commands &#8220;get&#8221; and &#8220;gets&#8221; operates like this:</p>
+
+<p>get <key>*\r\n</p>
+
+<p>gets <key>*\r\n</p>
+
+<ul>
+<li><key>* means one or more key strings separated by whitespace.</li>
+</ul>
+
+
+<p>After this command, the client expects zero or more items, each of</p>
+
+<p>which is received as a text line followed by a data block. After all</p>
+
+<p>the items have been transmitted, the server sends the string</p>
+
+<p>&#8220;END\r\n&#8221;</p>
+
+<p>to indicate the end of response.</p>
+
+<p>Each item sent by the server looks like this:</p>
+
+<p>VALUE <key> <flags> <bytes> [<cas unique>]\r\n</p>
+
+<p><data block>\r\n</p>
+
+<ul>
+<li><p><key> is the key for the item being sent</p></li>
+<li><p><flags> is the flags value set by the storage command</p></li>
+<li><p><bytes> is the length of the data block to follow, <em>not</em> including</p></li>
+</ul>
+
+
+<p>its delimiting \r\n</p>
+
+<ul>
+<li><cas unique> is a unique 64-bit integer that uniquely identifies</li>
+</ul>
+
+
+<p>this specific item.</p>
+
+<ul>
+<li><data block> is the data for this item.</li>
+</ul>
+
+
+<p>If some of the keys appearing in a retrieval request are not sent back</p>
+
+<p>by the server in the item list this means that the server does not</p>
+
+<p>hold items with such keys (because they were never stored, or stored</p>
+
+<p>but deleted to make space for more items, or expired, or explicitly</p>
+
+<p>deleted by a client).</p>
+
+<p>Deletion</p>
+
+<hr />
+
+<p>The command &#8220;delete&#8221; allows for explicit deletion of items:</p>
+
+<p>delete <key> [<time>] [noreply]\r\n</p>
+
+<ul>
+<li><p><key> is the key of the item the client wishes the server to delete</p></li>
+<li><p><time> is the amount of time in seconds (or Unix time until which)</p></li>
+</ul>
+
+
+<p>the client wishes the server to refuse &#8220;add&#8221; and &#8220;replace&#8221; commands</p>
+
+<p>with this key. For this amount of item, the item is put into a</p>
+
+<p>delete queue, which means that it won&#8217;t possible to retrieve it by</p>
+
+<p>the &#8220;get&#8221; command, but &#8220;add&#8221; and &#8220;replace&#8221; command with this key</p>
+
+<p>will also fail (the &#8220;set&#8221; command will succeed, however). After the</p>
+
+<p>time passes, the item is finally deleted from server memory.</p>
+
+<p>The parameter <time> is optional, and, if absent, defaults to 0</p>
+
+<p>(which means that the item will be deleted immediately and further</p>
+
+<p>storage commands with this key will succeed).</p>
+
+<ul>
+<li>&#8220;noreply&#8221; optional parameter instructs the server to not send the</li>
+</ul>
+
+
+<p>reply.&nbsp; See the note in Storage commands regarding malformed</p>
+
+<p>requests.</p>
+
+<p>The response line to this command can be one of:</p>
+
+<ul>
+<li><p>&#8220;DELETED\r\n&#8221; to indicate success</p></li>
+<li><p>&#8220;NOT_FOUND\r\n&#8221; to indicate that the item with this key was not</p></li>
+</ul>
+
+
+<p>found.</p>
+
+<p>See the &#8220;flush_all&#8221; command below for immediate invalidation</p>
+
+<p>of all existing items.</p>
+
+<p>Increment/Decrement</p>
+
+<hr />
+
+<p>Commands &#8220;incr&#8221; and &#8220;decr&#8221; are used to change data for some item</p>
+
+<p>in-place, incrementing or decrementing it. The data for the item is</p>
+
+<p>treated as decimal representation of a 64-bit unsigned integer. If the</p>
+
+<p>current data value does not conform to such a representation, the</p>
+
+<p>commands behave as if the value were 0. Also, the item must already</p>
+
+<p>exist for incr/decr to work; these commands won&#8217;t pretend that a</p>
+
+<p>non-existent key exists with value 0; instead, they will fail.</p>
+
+<p>The client sends the command line:</p>
+
+<p>incr <key> <value> [noreply]\r\n</p>
+
+<p>or</p>
+
+<p>decr <key> <value> [noreply]\r\n</p>
+
+<ul>
+<li><p><key> is the key of the item the client wishes to change</p></li>
+<li><p><value> is the amount by which the client wants to increase/decrease</p></li>
+</ul>
+
+
+<p>the item. It is a decimal representation of a 64-bit unsigned integer.</p>
+
+<ul>
+<li>&#8220;noreply&#8221; optional parameter instructs the server to not send the</li>
+</ul>
+
+
+<p>reply.&nbsp; See the note in Storage commands regarding malformed</p>
+
+<p>requests.</p>
+
+<p>The response will be one of:</p>
+
+<ul>
+<li><p>&#8220;NOT_FOUND\r\n&#8221; to indicate the item with this value was not found</p></li>
+<li><p><value>\r\n , where <value> is the new value of the item&#8217;s data,</p></li>
+</ul>
+
+
+<p>after the increment/decrement operation was carried out.</p>
+
+<p>Note that underflow in the &#8220;decr&#8221; command is caught: if a client tries</p>
+
+<p>to decrease the value below 0, the new value will be 0.&nbsp; Overflow in</p>
+
+<p>the &#8220;incr&#8221; command will wrap around the 64 bit mark.</p>
+
+<p>Note also that decrementing a number such that it loses length isn&#8217;t</p>
+
+<p>guaranteed to decrement its returned length.&nbsp; The number MAY be</p>
+
+<p>space-padded at the end, but this is purely an implementation</p>
+
+<p>optimization, so you also shouldn&#8217;t rely on that.</p>
+
+<p>Statistics</p>
+
+<hr />
+
+<p>The command &#8220;stats&#8221; is used to query the server about statistics it</p>
+
+<p>maintains and other internal data. It has two forms. Without</p>
+
+<p>arguments:</p>
+
+<p>stats\r\n</p>
+
+<p>it causes the server to output general-purpose statistics and</p>
+
+<p>settings, documented below.&nbsp; In the other form it has some arguments:</p>
+
+<p>stats <args>\r\n</p>
+
+<p>Depending on <args>, various internal data is sent by the server. The</p>
+
+<p>kinds of arguments and the data sent are not documented in this vesion</p>
+
+<p>of the protocol, and are subject to change for the convenience of</p>
+
+<p>memcache developers.</p>
+
+<p>General-purpose statistics</p>
+
+<hr />
+
+<p>Upon receiving the &#8220;stats&#8221; command without arguments, the server sents</p>
+
+<p>a number of lines which look like this:</p>
+
+<p>STAT <name> <value>\r\n</p>
+
+<p>The server terminates this list with the line</p>
+
+<p>END\r\n</p>
+
+<p>In each line of statistics, <name> is the name of this statistic, and</p>
+
+<p><value> is the data.&nbsp; The following is the list of all names sent in</p>
+
+<p>response to the &#8220;stats&#8221; command, together with the type of the value</p>
+
+<p>sent for this name, and the meaning of the value.</p>
+
+<p>In the type column below, &#8220;32u&#8221; means a 32-bit unsigned integer, &#8220;64u&#8221;</p>
+
+<p>means a 64-bit unsigner integer. &#8216;32u:32u&#8217; means two 32-but unsigned</p>
+
+<p>integers separated by a colon.</p>
+
+<p>Name&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Type &nbsp; &nbsp; Meaning</p>
+
+<hr />
+
+<p>pid &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Process id of this server process</p>
+
+<p>uptime&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Number of seconds this server has been running</p>
+
+<p>time&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; current UNIX time according to the server</p>
+
+<p>version &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; string &nbsp; Version string of this server</p>
+
+<p>pointer_size&nbsp; &nbsp; &nbsp; 32 &nbsp; &nbsp; &nbsp; Default size of pointers on the host OS</p>
+
+<p>(generally 32 or 64)</p>
+
+<p>rusage_user &nbsp; &nbsp; &nbsp; 32u:32u&nbsp; Accumulated user time for this process</p>
+
+<p>(seconds:microseconds)</p>
+
+<p>rusage_system &nbsp; &nbsp; 32u:32u&nbsp; Accumulated system time for this process</p>
+
+<p>(seconds:microseconds)</p>
+
+<p>curr_items&nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Current number of items stored by the server</p>
+
+<p>total_items &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Total number of items stored by this server</p>
+
+<p>ever since it started</p>
+
+<p>bytes &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Current number of bytes used by this server</p>
+
+<p>to store items</p>
+
+<p>curr_connections&nbsp; 32u&nbsp; &nbsp; &nbsp; Number of open connections</p>
+
+<p>total_connections 32u&nbsp; &nbsp; &nbsp; Total number of connections opened since</p>
+
+<p>the server started running</p>
+
+<p>connection_structures 32u&nbsp; Number of connection structures allocated</p>
+
+<p>by the server</p>
+
+<p>cmd_get &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Cumulative number of retrieval requests</p>
+
+<p>cmd_set &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Cumulative number of storage requests</p>
+
+<p>get_hits&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Number of keys that have been requested and</p>
+
+<p>found present</p>
+
+<p>get_misses&nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Number of items that have been requested</p>
+
+<p>and not found</p>
+
+<p>evictions &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Number of valid items removed from cache</p>
+
+<p>to free memory for new items</p>
+
+<p>bytes_read&nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Total number of bytes read by this server</p>
+
+<p>from network</p>
+
+<p>bytes_written &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Total number of bytes sent by this server to</p>
+
+<p>network</p>
+
+<p>limit_maxbytes&nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Number of bytes this server is allowed to</p>
+
+<p>use for storage.</p>
+
+<p>threads &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Number of worker threads requested.</p>
+
+<p>(see doc/threads.txt)</p>
+
+<p>Item statistics</p>
+
+<hr />
+
+<p>CAVEAT: This section describes statistics which are subject to change in the</p>
+
+<p>future.</p>
+
+<p>The &#8220;stats&#8221; command with the argument of &#8220;items&#8221; returns information about</p>
+
+<p>item storage per slab class. The data is returned in the format:</p>
+
+<p>STAT items:<slabclass>:<stat> <value>\r\n</p>
+
+<p>The server terminates this list with the line</p>
+
+<p>END\r\n</p>
+
+<p>The slabclass aligns with class ids used by the &#8220;stats slabs&#8221; command. Where</p>
+
+<p>&#8220;stats slabs&#8221; describes size and memory usage, &#8220;stats items&#8221; shows higher</p>
+
+<p>level information.</p>
+
+<p>The following item values are defined as of writing.</p>
+
+<p>Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Meaning</p>
+
+<hr />
+
+<p>number &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Number of items presently stored in this class. Expired</p>
+
+<p>items are not automatically excluded.</p>
+
+<p>age&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Age of the oldest item in the LRU.</p>
+
+<p>evicted&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Number of times an item had to be evicted from the LRU</p>
+
+<p>before it expired.</p>
+
+<p>outofmemory&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Number of times the underlying slab class was unable to</p>
+
+<p>store a new item. This means you are running with -M or</p>
+
+<p>an eviction failed.</p>
+
+<p>Note this will only display information about slabs which exist, so an empty</p>
+
+<p>cache will return an empty set.</p>
+
+<p>Item size statistics</p>
+
+<hr />
+
+<p>CAVEAT: This section describes statistics which are subject to change in the</p>
+
+<p>future.</p>
+
+<p>The &#8220;stats&#8221; command with the argument of &#8220;sizes&#8221; returns information about the</p>
+
+<p>general size and count of all items stored in the cache.</p>
+
+<p>WARNING: This command WILL lock up your cache! It iterates over <em>every item</em></p>
+
+<p>and examines the size. While the operation is fast, if you have many items</p>
+
+<p>you could prevent memcached from serving requests for several seconds.</p>
+
+<p>The data is returned in the following format:</p>
+
+<p><size> <count>\r\n</p>
+
+<p>The server terminates this list with the line</p>
+
+<p>END\r\n</p>
+
+<p>&#8216;size&#8217; is an approximate size of the item, within 32 bytes.</p>
+
+<p>&#8216;count&#8217; is the amount of items that exist within that 32-byte range.</p>
+
+<p>This is essentially a display of all of your items if there was a slab class</p>
+
+<p>for every 32 bytes. You can use this to determine if adjusting the slab growth</p>
+
+<p>factor would save memory overhead. For example: generating more classes in the</p>
+
+<p>lower range could allow items to fit more snugly into their slab classes, if</p>
+
+<p>most of your items are less than 200 bytes in size.</p>
+
+<p>Slab statistics</p>
+
+<hr />
+
+<p>CAVEAT: This section describes statistics which are subject to change in the</p>
+
+<p>future.</p>
+
+<p>The &#8220;stats&#8221; command with the argument of &#8220;slabs&#8221; returns information about</p>
+
+<p>each of the slabs created by memcached during runtime. This includes per-slab</p>
+
+<p>information along with some totals. The data is returned in the format:</p>
+
+<p>STAT <slabclass>:<stat> <value>\r\n</p>
+
+<p>STAT <stat> <value>\r\n</p>
+
+<p>The server terminates this list with the line</p>
+
+<p>END\r\n</p>
+
+<p>Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Meaning</p>
+
+<hr />
+
+<p>chunk_size &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The amount of space each chunk uses. One item will use</p>
+
+<p>one chunk of the appropriate size.</p>
+
+<p>chunks_per_page&nbsp; &nbsp; &nbsp; &nbsp; How many chunks exist within one page. A page by</p>
+
+<p>default is one megabyte in size. Slabs are allocated per</p>
+
+<p>page, then broken into chunks.</p>
+
+<p>total_pages&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total number of pages allocated to the slab class.</p>
+
+<p>total_chunks &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total number of chunks allocated to the slab class.</p>
+
+<p>used_chunks&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; How many chunks have been allocated to items.</p>
+
+<p>free_chunks&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Chunks not yet allocated to items, or freed via delete.</p>
+
+<p>free_chunks_end&nbsp; &nbsp; &nbsp; &nbsp; Number of free chunks at the end of the last allocated</p>
+
+<p>page.</p>
+
+<p>active_slabs &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total number of slab classes allocated.</p>
+
+<p>total_malloced &nbsp; &nbsp; &nbsp; &nbsp; Total amount of memory allocated to slab pages.</p>
+
+<p>Other commands</p>
+
+<hr />
+
+<p>&#8220;flush_all&#8221; is a command with an optional numeric argument. It always</p>
+
+<p>succeeds, and the server sends &#8220;OK\r\n&#8221; in response (unless &#8220;noreply&#8221;</p>
+
+<p>is given as the last parameter). Its effect is to invalidate all</p>
+
+<p>existing items immediately (by default) or after the expiration</p>
+
+<p>specified.&nbsp; After invalidation none of the items will be returned in</p>
+
+<p>response to a retrieval command (unless it&#8217;s stored again under the</p>
+
+<p>same key <em>after</em> flush_all has invalidated the items). flush_all</p>
+
+<p>doesn&#8217;t actually free all the memory taken up by existing items; that</p>
+
+<p>will happen gradually as new items are stored. The most precise</p>
+
+<p>definition of what flush_all does is the following: it causes all</p>
+
+<p>items whose update time is earlier than the time at which flush_all</p>
+
+<p>was set to be executed to be ignored for retrieval purposes.</p>
+
+<p>The intent of flush_all with a delay, was that in a setting where you</p>
+
+<p>have a pool of memcached servers, and you need to flush all content,</p>
+
+<p>you have the option of not resetting all memcached servers at the</p>
+
+<p>same time (which could e.g. cause a spike in database load with all</p>
+
+<p>clients suddenly needing to recreate content that would otherwise</p>
+
+<p>have been found in the memcached daemon).</p>
+
+<p>The delay option allows you to have them reset in e.g. 10 second</p>
+
+<p>intervals (by passing 0 to the first, 10 to the second, 20 to the</p>
+
+<p>third, etc. etc.).</p>
+
+<p>&#8220;version&#8221; is a command with no arguments:</p>
+
+<p>version\r\n</p>
+
+<p>In response, the server sends&nbsp;&#8220;VERSION <version>\r\n&#8221;, where <version> is the version string for the</p>
+
+<p>server.</p>
+
+<p>&#8220;verbosity&#8221; is a command with a numeric argument. It always succeeds,</p>
+
+<p>and the server sends &#8220;OK\r\n&#8221; in response (unless &#8220;noreply&#8221; is given</p>
+
+<p>as the last parameter). Its effect is to set the verbosity level of</p>
+
+<p>the logging output.</p>
+
+<p>&#8220;quit&#8221; is a command with no arguments:</p>
+
+<p>quit\r\n</p>
+
+<p>Upon receiving this command, the server closes the</p>
+
+<p>connection. However, the client may also simply close the connection</p>
+
+<p>when it no longer needs it, without issuing this command.</p>
+
+<p>UDP protocol</p>
+
+<hr />
+
+<p>For very large installations where the number of clients is high enough</p>
+
+<p>that the number of TCP connections causes scaling difficulties, there is</p>
+
+<p>also a UDP-based interface. The UDP interface does not provide guaranteed</p>
+
+<p>delivery, so should only be used for operations that aren&#8217;t required to</p>
+
+<p>succeed; typically it is used for &#8220;get&#8221; requests where a missing or</p>
+
+<p>incomplete response can simply be treated as a cache miss.</p>
+
+<p>Each UDP datagram contains a simple frame header, followed by data in the</p>
+
+<p>same format as the TCP protocol described above. In the current</p>
+
+<p>implementation, requests must be contained in a single UDP datagram, but</p>
+
+<p>responses may span several datagrams. (The only common requests that would</p>
+
+<p>span multiple datagrams are huge multi-key &#8220;get&#8221; requests and &#8220;set&#8221;</p>
+
+<p>requests, both of which are more suitable to TCP transport for reliability</p>
+
+<p>reasons anyway.)</p>
+
+<p>The frame header is 8 bytes long, as follows (all values are 16-bit integers</p>
+
+<p>in network byte order, high byte first):</p>
+
+<p>0-1 Request ID</p>
+
+<p>2-3 Sequence number</p>
+
+<p>4-5 Total number of datagrams in this message</p>
+
+<p>6-7 Reserved for future use; must be 0</p>
+
+<p>The request ID is supplied by the client. Typically it will be a</p>
+
+<p>monotonically increasing value starting from a random seed, but the client</p>
+
+<p>is free to use whatever request IDs it likes. The server&#8217;s response will</p>
+
+<p>contain the same ID as the incoming request. The client uses the request ID</p>
+
+<p>to differentiate between responses to outstanding requests if there are</p>
+
+<p>several pending from the same server; any datagrams with an unknown request</p>
+
+<p>ID are probably delayed responses to an earlier request and should be</p>
+
+<p>discarded.</p>
+
+<p>The sequence number ranges from 0 to n-1, where n is the total number of</p>
+
+<p>datagrams in the message. The client should concatenate the payloads of the</p>
+
+<p>datagrams for a given response in sequence number order; the resulting byte</p>
+
+<p>stream will contain a complete response in the same format as the TCP</p>
+
+<p>protocol (including terminating \r\n sequences).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[哎，人生；哎，产品]]></title>
+    <link href="http://ikurten.com/blog/2011/11/13/%E5%93%8E%EF%BC%8C%E4%BA%BA%E7%94%9F%EF%BC%9B%E5%93%8E%EF%BC%8C%E4%BA%A7%E5%93%81/"/>
+    <updated>2011-11-13T02:55:44+08:00</updated>
+    <id>http://ikurten.com/blog/2011/11/13/哎，人生；哎，产品</id>
+    <content type="html"><![CDATA[<p>前段时间由于项目上面的业务变更，导致memcacheq这个消息队列使用有点捉襟见肘。由于其对于消息体大小有限制，而且最大不能超过60K，就萌生了自己写一个消息队列的想法。总是掌握在自己手中，能应对现有的业务需要的东西用着才爽啊。本来计划是有空就改写的，但是由于产品上面一而再再而三的修改功能、修改方向，最坑爹的事情是没有功能定义的情况下得去照搬别的产品的功能。悲剧ing。于是这个计划一直没有实施。</p>
+
+<p>哎，技术架构方案的选择真得是件麻烦的事情，得遇见今后一段时间的业务变更与增长，又要考虑现有资源。这样做出合理的，可以实现的方案。我们那架构师也辛苦，总得和老板设计的产品做pk。心力交瘁啊。有时候想想，也迷茫，咱这是做了啥东西？用来干啥？对自己也没多大帮助啊？更坑爹的事情是，把外包那套管理项目的方式折腾过来，每天都是下班时过来给你折腾点东西，杯具ing。产品设计上面没有明确的功能性设计，只是笼统的说，我要这个功能，其他你可以去参考别人怎么做的。你妹啊！</p>
+
+<p>一个ui图，再加个说明，给你，你去设计接口吧。好吧，设计完接口又说，你这样不行，客户端没法调用的，两个接口，怎么可以这样子用，客户端调用很麻烦的，你如果做客户端，你怎么去弄？哎，坑爹啊！</p>
+
+<p>神马浮云啊，没做过产品经理的，把项目管理那套东西搬过来，好吧，你行的。我算是清楚了。我只写代码。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[坑爹的产品设计]]></title>
+    <link href="http://ikurten.com/blog/2011/11/11/%E5%9D%91%E7%88%B9%E7%9A%84%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/"/>
+    <updated>2011-11-11T00:30:52+08:00</updated>
+    <id>http://ikurten.com/blog/2011/11/11/坑爹的产品设计</id>
+    <content type="html"><![CDATA[<p>坑爹的产品设计会造成神马后果，哎，我总算见识了。从没见过时间被扣的这么死的，好吧，你是老板，我认了。也不想想，万一有啥问题要查，要调试，这不还是被打断？</p>
+
+<p>搞项目的，以为看了些别人的产品就来折腾产品设计，好吧，你牛。这么好的一个产品经理摆在那里，不要，成，那你自己弄出点好的事情来啊？一要个功能，就来，你看看别人怎么做的么，你看过么？没吧？那你去看看然后给出一个解决方案来吧？行不？什么时间可以有？明天？</p>
+
+<p>坑爹啊，我一个搞技术的人给你去折腾功能设计方案，你妹啊！一会要查这个问题，一会要做这个事情，我又不是神。行吧行吧，总会有个解决方法的。打工的，我忍了。看吧，看别人怎么做的呗。</p>
+
+<p>好吧，你只要有这个功能，功能怎么样的，你不管。成啊，最后呢？还不是需要实现去改？来回折腾累不累啊？硬要短时间内完成，行啊，那你别介意有什么意外问题啊。又要没有别的问题，又要快、好的实现，但是你有好好的去设计这个功能么？还不就是画了一下uiflow？能解决问题么？坑爹啊！</p>
+
+<p>哎，看别人有的功能，你也想加，ok，可以，你得想想我们这个产品用来做啥的吧？迷茫啊，用来做啥都不知道，亮点呢？好的产品一般都是功能简单，但是都是必须的功能，而且都是能抓住用户粘度的功能。我们呢？有想过么？用户的粘度？</p>
+
+<p>这个总得好好考虑吧？行，我一个码农，不知道说啥，嘿，你说干啥就干啥呗，反正也讲不通，就这样吧！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[吐吐槽]]></title>
+    <link href="http://ikurten.com/blog/2011/11/08/%E5%90%90%E5%90%90%E6%A7%BD/"/>
+    <updated>2011-11-08T02:13:54+08:00</updated>
+    <id>http://ikurten.com/blog/2011/11/08/吐吐槽</id>
+    <content type="html"><![CDATA[<p>近来很不顺，工作上面，不爽。很多问题总是来回的折腾。好吧，产品入口没有设计好，想用技术手段去解决后续的问题？这不是坑爹是什么？我们做的东西，自己不用，为啥？就单纯用来发发消息？做测试啊，你以为呢？</p>
+
+<p>产品的应用场景有概念么？这东西用来干啥的？那些是用户？那些是潜在用户？目标性有么？为啥我不用啊，我拿你这东西就给别人发发消息，我直接打电话不就得了。做产品，一味的看别人做了那些，嗯，好，我也加上去，可以啊。关键是你做的是什么产品啊？四不像啊？</p>
+
+<p>功能功能，坑爹的功能。东西做简单点，是王道啊。为啥一上来说了一个功能，就着急着实现？后来出现一些问题，还不是靠测试来找？要是把功能定义、流程、影响、其他附属内容啥的都考虑全了，还需要那么多测试么？</p>
+
+<p>互联网公司怎么不能在上班时玩游戏？怎么不能闲聊？怎么不能干啥干啥啦？悲剧的人生啊。看着人家休息，玩玩心里就不舒服，还干啥啊？搞飞机去算了。</p>
+
+<p>完全木有氛围，人是不错，但是氛围么，哎。。。</p>
+
+<p>现在就开始拿着人当枪使了，悲崔的我啊，搞政治咯。算啦吧，歇歇吧。都是狗屁，都歇歇啦！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[此文，算作对最近的一个记录吧]]></title>
+    <link href="http://ikurten.com/blog/2011/10/18/%E6%AD%A4%E6%96%87%EF%BC%8C%E7%AE%97%E4%BD%9C%E5%AF%B9%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%B8%AA%E8%AE%B0%E5%BD%95%E5%90%A7/"/>
+    <updated>2011-10-18T01:02:02+08:00</updated>
+    <id>http://ikurten.com/blog/2011/10/18/此文，算作对最近的一个记录吧</id>
+    <content type="html"><![CDATA[<p>朋友说，人的年纪到了26岁，身体就开始走下坡路了。现在体会来看，这话真的是不错。久不锻炼，自己这身子还真实熬不了夜，走步动远路了。最近这段时间，连偶尔打球这种活动都几乎没有了，嗯，真的得开始锻炼了。很早就开始想学太极，苦于没有师傅教，抽空去报个培训班吧。</p>
+
+<p>最近上班，总是会添些厌烦得情绪。多少还是对于老板做事得态度吧。人都很好，只是驱动力不明。事情么，又是这又是那。问题，总得解决啊。</p>
+
+<p>前段时间，一同事抽奖，抽了个三星9001，然后呢，我以两包烟的价格换来了这个手机。android操作系统，多少用着感觉不爽，复杂、而且不安全。短信神马得都会被截。想想还是iphone安全点。不过，自从有了人肉这种东西，安不安全，还真不好说。</p>
+
+<p>这星期开始重构原先的api项目，其他得事情，挪到下周去干吧。发觉自己越来越没啥耐心写一大段一大段文字了。或者，渐渐的开始模糊一些记忆了。买了几本书，没有看完，于是又买了两本。偶尔翻翻，也还是好事。</p>
+
+<p>记得以前写文字总在夜深人静得时候，现在么，总是在早上上班之前，时间不同，感觉也不同。此文，算作对最近的一个记录吧。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[911絮叨]]></title>
+    <link href="http://ikurten.com/blog/2011/09/11/911%E7%B5%AE%E5%8F%A8/"/>
+    <updated>2011-09-11T02:35:51+08:00</updated>
+    <id>http://ikurten.com/blog/2011/09/11/911絮叨</id>
+    <content type="html"><![CDATA[<p>忽然发觉啊，年纪大了，总增添了点懒惰。人，也经常性得感觉到疲乏。搞技术的，似乎大多都这样吧。有时候，想做的事情，会不了了之。当然，也慢慢习惯了，一休息就宅着。于是，又增加了惰性。到现在，总觉着有点亏欠这点时光了啊。不过有时候，也会翻翻老黄历，怀念怀念过去的那点时光。人生在世的，总是走走停停，停停走走。</p>
+
+<p>从毕业到现在，手头是增加了很多数码产品，我么，也逐渐成为果粉。不过，话又说回来，苹果的产品确实做得不错！记得11年前，刚上初中那会，表姐把她那台用剩下得电脑给了我，于是，就有了第一台电脑。当时也没怎么细想，就觉着，那电脑太烂了。也没怎么用，就开了三次机，之后就再也没去搭理它了。等到很长一段时间之后，才明白，当时如果多折腾折腾，现在应该会好很多。</p>
+
+<p>上初中那会，听说老美双子大楼被炸了，还是有点不太相信的，死了很多人啊。死人这种事情总是不太愿意听到或者看到的。</p>
+
+<p>回想刚上初中那会，每天骑车30分钟上下学，都不知道我是怎么坚持下来的。现在为了生计，还是这样，其实10年对我来说都一样，只不过，年纪大了，看过了很多，了解了很多，同时也学到了很多。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[测试ifttt]]></title>
+    <link href="http://ikurten.com/blog/2011/08/03/%E6%B5%8B%E8%AF%95ifttt/"/>
+    <updated>2011-08-03T03:09:18+08:00</updated>
+    <id>http://ikurten.com/blog/2011/08/03/测试ifttt</id>
+    <content type="html"><![CDATA[<p>测试ifttt，你懂的。。。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mysql主从配置]]></title>
+    <link href="http://ikurten.com/blog/2011/08/02/mysql%E4%B8%BB%E4%BB%8E%E9%85%8D%E7%BD%AE/"/>
+    <updated>2011-08-02T00:37:49+08:00</updated>
+    <id>http://ikurten.com/blog/2011/08/02/mysql主从配置</id>
+    <content type="html"><![CDATA[<p>mysql由于其cluster没有很好得解决方案，所以没有被广泛的使用。使用最广的还是mysql的主从备份，从而读写分离。mysql 5.5版本的主从replication性能还是相当不错的，下面是配置方法（昨天刚在两台测试服务器中尝试，记录一下）。参考<a href="http://dev.mysql.com/doc/refman/5.0/en/replication-howto.html">官方手册</a>。</p>
+
+<p>1、安装mysql（此处省略N字。。。）</p>
+
+<p>2、因为我配的是服务器，所以我使用了mysql-large.cnf文件作为/etc/my.cnf。</p>
+
+<p>3、在my.cnf中([mysqld] 下面)</p>
+
+<pre>[mysqld]
+log-bin=mysql-bin
+server-id=1</pre>
+
+
+<p>当然如果你要使用innodb事务支持，那就的加上这两个参数配置 innodb_flush_log_at_trx_commit=1 和 sync_binlog=1。同时确保skip-networking没有启用，否则所有slave都无法连接master<code>。</code></p>
+
+<p>重启mysql。</p>
+
+<p>4、配置slave，重复 2。</p>
+
+<p>5、在my.cnf中([mysqld] 下面)</p>
+
+<pre>[mysqld]
+server-id=2  #如果有多台slave，那么每台得id都必须唯一</pre>
+
+
+<p>重启mysql。</p>
+
+<p>6、在master中新建用于replication的用户</p>
+
+<pre>mysql> CREATE USER 'repl'@'%.mydomain.com' IDENTIFIED BY 'slavepass';
+mysql> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%.mydomain.com';</pre>
+
+
+<p>7、在slave中执行</p>
+
+<pre>mysql> CHANGE MASTER TO
+    ->     MASTER_HOST='master_host_name',
+    ->     MASTER_USER='replication_user_name',
+    ->     MASTER_PASSWORD='replication_password',
+    ->     MASTER_LOG_FILE='recorded_log_file_name',
+    ->     MASTER_LOG_POS=recorded_log_position;</pre>
+
+
+<pre>change master to master_host='192.168.1.194', master_user='admin',
+master_password='000000', master_log_file='mysql-bin.000001',
+master_log_pos=268;</pre>
+
+
+<p>再执行 start slave;
+查看一下slave的状态：show slave status\G;
+如果Slave_IO_Running 和 Slave_SQL_Running 两列的值都为 &ldquo;Yes&rdquo;，之后，你在master中新建数据库神马的操作，就会自动同步至slave中了。</p>
+
+<p>mysql修改密码，如果采用sql方式更新user表，需要使用 flush privileges; 命令启用新密码。</p>
+
+<p>创建用户</p>
+
+<pre>create user 'username'@'localhost' IDENTIFIED BY 'password';</pre>
+
+
+<p>设置用户权限</p>
+
+<pre>GRANT ALL PRIVILEGES ON *.* TO kkk@"%" IDENTIFIED BY '000000' WITH
+GRANT OPTION;</pre>
+
+
+<p>移除权限</p>
+
+<pre>revoke all on openfire.* from username@'localhost';</pre>
+
+
+<p>添加字段</p>
+
+<pre>alter table test add column ttt varchar(12);</pre>
+
+
+<p>修改字段名称</p>
+
+<pre>alter table test change ttt newttt varchar(12);</pre>
+
+]]></content>
+  </entry>
+  
+</feed>
