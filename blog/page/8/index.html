@@ -9,7 +9,7 @@
   <meta name="author" content="kurten">
 
   
-  <meta name="description" content="我在mac下面使用mysqldb的时候，居然老是说importerror，说调用dlopen打开编译之后的_mysql.so时，无法载入这个libmysqlclient.16.dylib，mysql的依赖库。 把libmysqlclient.16.dylib设置为共享库， &hellip;">
+  <meta name="description" content="最近一个项目，在使用oledbdataadapter获取access数据库中的表数据时，无缘无故会丢失一个字段的数据(使用jet引擎)。同样的代码，调试的时候居然没有问题，但是直接运行，不进行断点调试没有问题。想不通到底是.net的问题，还是access的问题。找相关的资料居然没有。不过， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,78 +71,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/07/29/%E5%85%B3%E4%BA%8Emysqldb%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%B0%E5%BD%95/">关于mysqldb的一些记录</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-29T03:42:04+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>我在mac下面使用<a href="http://sourceforge.net/projects/mysql-python/" target="_blank">mysqldb</a>的时候，居然老是说importerror，说调用dlopen打开编译之后的_mysql.so时，无法载入这个libmysqlclient.16.dylib，mysql的依赖库。</p>
-
-<p>把libmysqlclient.16.dylib设置为共享库，又添加了DYLD_LIBRARY_PATH，在控制台的python环境下面，可以使用，但是在netbeans或者easyeclipse下面居然不行，很诧异的问题。</p>
-
-<p>问题如下：</p>
-
-<pre>/Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/_mysql.py:3: UserWarning: Module _mysql was already imported from /Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/_mysql.pyc, but /Library/Python/2.6/site-packages/MySQL_python_embedded-1.2.3-py2.6-macosx-10.6-universal.egg is being added to sys.path
-
-/Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/_mysql.py:3: UserWarning: Module MySQLdb was already imported from /Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/MySQLdb/__init__.pyc, but /Library/Python/2.6/site-packages/MySQL_python_embedded-1.2.3-py2.6-macosx-10.6-universal.egg is being added to sys.path
-Traceback (most recent call last):
-File "/Users/KURTEN/workspace/tt/src/test.py", line 7, in &amp;lt;module&amp;gt;
-import MySQLdb
-File "build/bdist.macosx-10.6-universal/egg/MySQLdb/__init__.py", line 19, in &amp;lt;module&amp;gt;
-File "build/bdist.macosx-10.6-universal/egg/_mysql.py", line 7, in &amp;lt;module&amp;gt;
-File "build/bdist.macosx-10.6-universal/egg/_mysql.py", line 6, in __bootstrap__
-ImportError: dlopen(/Users/KURTEN/.python-eggs/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg-tmp/_mysql.so, 2): Library not loaded: libmysqlclient.16.dylib
-Referenced from: /Users/KURTEN/.python-eggs/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg-tmp/_mysql.so
-Reason: image not found</pre>
-
-
-<p>代码如下：</p>
-
-<pre>import MySQLdb
-con=MySQLdb.connect("localhost","root","chfkurten")
-con.select_db("cake")
-cur=con.cursor()
-cur.execute("select * from wp_links")
-for c in cur:
-    print c
-con.close()</pre>
-
-
-<p>为这个事情，折腾了好几天，今天无意之中在mysql的官方网站找到一个纯python实现的<a href="https://launchpad.net/myconnpy" target="_blank">mysql connector</a>，具体性能没与mysqldb比较过，估计要比mysqldb直接使用mysql的api差，算是mysqldb的代替品吧。</p>
-
-<p>纠结与这个原因，于是我转向了php，总归是有了ide，提高效率么。特别是智能提示，呵呵，太过依赖了。</p>
-
-<p>20110512加：这个问题其实是因为mysql的版本问题。写这篇日志的时候mysqldb的api只支持5.1所以，换回来就好了。（这里出问题的mysql版本是5.5。）</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/blog/2011/07/29/%E4%BD%BF%E7%94%A8oledbdataadapter%E7%9A%84%E7%96%91%E9%97%AE/">使用oledbdataadapter的疑问</a></h1>
     
     
@@ -159,7 +87,7 @@ con.close()</pre>
   
 
 
-<time datetime="2011-07-29T03:40:54+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2011</time>
+<time datetime="2011-07-29T03:40:54+08:00" pubdate data-updated="true">2011-07-29</time>
         
       </p>
     
@@ -231,7 +159,7 @@ for x in xx:
   
 
 
-<time datetime="2011-07-29T03:39:33+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2011</time>
+<time datetime="2011-07-29T03:39:33+08:00" pubdate data-updated="true">2011-07-29</time>
         
       </p>
     
@@ -283,7 +211,7 @@ svnadmin create c:\svn</p>
   
 
 
-<time datetime="2011-07-29T03:39:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2011</time>
+<time datetime="2011-07-29T03:39:00+08:00" pubdate data-updated="true">2011-07-29</time>
         
       </p>
     
@@ -324,10 +252,6 @@ svnadmin create c:\svn</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/01/25/hello-world/">你好，世界</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2012/12/13/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">碎碎念</a>
       </li>
     
@@ -343,7 +267,48 @@ svnadmin create c:\svn</p>
         <a href="/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">redis源码学习记录</a>
       </li>
     
+      <li class="post">
+        <a href="/blog/2012/04/07/%E5%85%B3%E4%BA%8E%E6%96%B0%E5%85%AC%E5%8F%B8/">关于新公司</a>
+      </li>
+    
   </ul>
+</section>
+<section>
+  <h1>Links</h1>
+  <ul id="recent_posts">
+      <li class="post">
+        <a href="http://hmfly.info/">GeoVisual(GIS读研南)</a>
+      </li>
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/kurten">@kurten</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'kurten',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 
