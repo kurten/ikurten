@@ -9,7 +9,7 @@
   <meta name="author" content="kurten">
 
   
-  <meta name="description" content="其一 10月底杭州离开了杭州一家刚加入不久的创业公司，其中的辛酸，也就不扯了。酸甜苦辣，总是自己吞呗。移动互联网创业的这趟浑水，是越来越混了。花钱买用户，短期内想要做大，接着寻找天使，然后接着花。而某些天使呢，自己投资一些个渠道商，然后顺带介绍给投资的一些做app的创业公司，然后么，一环套着一环， &hellip;">
+  <meta name="description" content="关于博客迁移 满打满算，折腾了大半天终于把博客迁移的事情搞定了。接下去可以使用markdown来写blog了。mac下面有个不错的工具Mou，可以即时查看写的成果。blog是托管在github上面的，其实就是使用jekyll来生成静态的html。博客模版用得是octopress。关于如何操作， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +71,50 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/01/27/blog-migrate-to-github/">博客迁移</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-27T16:29:00+08:00" pubdate data-updated="true">2013-01-27</time>
+        
+         | <a href="/blog/2013/01/27/blog-migrate-to-github/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>关于博客迁移</h3>
+
+<blockquote><p>满打满算，折腾了大半天终于把博客迁移的事情搞定了。接下去可以使用markdown来写blog了。mac下面有个不错的工具<a href="http://mouapp.com/">Mou</a>，可以即时查看写的成果。blog是托管在<a href="https://github.com">github</a>上面的，其实就是使用<a href="http://jekyllrb.com/">jekyll</a>来生成静态的html。博客模版用得是<a href="http://octopress.org/">octopress</a>。关于如何操作，以及怎么折腾域名指向可以参考<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">这里</a>。</p></blockquote>
+
+<h3>关于工作</h3>
+
+<blockquote><p>元旦后又回了杭州，加入了一家创业公司<a href="http://www.qeemo.me">Qeemo</a>。2013年希望有好的开始吧。</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/12/13/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">碎碎念</a></h1>
     
     
@@ -88,6 +132,8 @@
 
 
 <time datetime="2012-12-13T13:04:44+08:00" pubdate data-updated="true">2012-12-13</time>
+        
+         | <a href="/blog/2012/12/13/%E7%A2%8E%E7%A2%8E%E5%BF%B5/#disqus_thread">Comments</a>
         
       </p>
     
@@ -144,12 +190,14 @@
 
 <time datetime="2012-10-14T07:23:59+08:00" pubdate data-updated="true">2012-10-14</time>
         
+         | <a href="/blog/2012/10/14/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%28%E4%BA%8C%29/#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>续前面那篇<a href="http://kurchan.com/?p=149">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
+  <div class="entry-content"><p>续前面那篇<a href="http://ikurten.com/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
 
 <p>当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、acceptUnixHandler、acceptCommonHandler。一旦接收到一个tcp链接，acceptCommonHandler就会创建一个redisClient，并且把它加入到event的readable列表中，等待event loop执行readQueryFromClient函数。</p>
 
@@ -185,6 +233,8 @@
 
 
 <time datetime="2012-09-22T00:48:59+08:00" pubdate data-updated="true">2012-09-22</time>
+        
+         | <a href="/blog/2012/09/22/%E4%B9%9D%E6%9C%88%E6%9D%82%E5%BF%B5/#disqus_thread">Comments</a>
         
       </p>
     
@@ -226,6 +276,8 @@
 
 <time datetime="2012-09-19T00:14:47+08:00" pubdate data-updated="true">2012-09-19</time>
         
+         | <a href="/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
@@ -251,53 +303,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/07/%E5%85%B3%E4%BA%8E%E6%96%B0%E5%85%AC%E5%8F%B8/">关于新公司</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-07T03:55:24+08:00" pubdate data-updated="true">2012-04-07</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p style="text-align: left;">加入新公司已经差不多有一个多月的时间了，最初么，也接过几个HR的电话，跟其他创业公司的头碰过，犹豫过，也徘徊了一下，还是决定留下来看看吧。这个团队也算一个中型公司下面的一个创业型公司，也可以说是一个创业项目吧。也是一个社区型产品。包括开发、运营在内的，团队基本上也算是草根形式的一帮人吧。我呢，依旧是干服务器这块的开发。目前公司也主要从智能手机客户端这块入手，刚起步，总归还算是慢慢进入状态吧。</p>
-
-
-<p>创业，或者小项目刚开始还是在于人。目前这个团队，内部分的还是太细，有时候团队内部沟通也不是很有效。最最讨厌的事情，还是在于有很多会议要开。团队还是越小越有效率，三五个人一个团队规模，基本上也算合适。当然，也是因为大多基本没在三五个人的创业团队呆过的，目前这种状态，基本上对于我来说算是很清闲的了。工作强度也不大，我呢，也好好恢复一下。顺便多看看，多学学吧。</p>
-
-<p>这个客户端产品，目前还是有很多地方需要改进，产品这块的出发点我很赞同，功能尽量少、能做到快速迭代，跟踪运营情况及时调整后续产品设计。最初的时候，我想也是快速开发、推出产品。一开始的时候，<a href="http://www.apple.com/ios/">iOS</a>和<a href="http://www.android.com/">Android</a>客户端还是外包出去做的。现在么，收回来自己开发，也算是有点吃力吧。等过了磨合期，我想，也应该是逐渐进入状态的。</p>
-
-<p style="text-align: left;"></p>
-
-
-<p style="text-align: left;">我呢，刚过了迷茫期，也算逐渐进入自己该有的状态吧。目前么，基本上靠自己摸索，然后慢慢前进了。琢磨着，业余再搞点啥项目什么的。想想现在自己也没啥拿得出手的东西，只能慢慢积累了。</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -314,6 +319,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/01/27/blog-migrate-to-github/">博客迁移</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/12/13/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">碎碎念</a>
       </li>
     
@@ -327,10 +336,6 @@
     
       <li class="post">
         <a href="/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">redis源码学习记录</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/04/07/%E5%85%B3%E4%BA%8E%E6%96%B0%E5%85%AC%E5%8F%B8/">关于新公司</a>
       </li>
     
   </ul>
@@ -382,6 +387,41 @@
 </aside>
 
     </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - kurten -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'ikurten';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+>
   </div>
   <footer role="contentinfo"><p>
   Copyright &copy; 2013 - kurten -

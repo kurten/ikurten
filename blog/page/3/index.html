@@ -9,7 +9,10 @@
   <meta name="author" content="kurten">
 
   
-  <meta name="description" content="越来越觉着大学里学的谭浩强的《C语言程序设计》太狗血了，哎，悔不当初啊。 今天下午闲着看了一下memcacheq这个消息队列的源代码，存储引擎用得bdb，bdb支持队列方式的数据存储，只不过一个record必须fixed-length，具体能存多大的长度，我没再官方的doc中找到，不过， &hellip;">
+  <meta name="description" content="今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
+显示错误如下： Loaded plugins: fastestmirror
+Determining fastest mirrors
+YumRepo &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +74,133 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2011/12/15/centos%E4%B8%ADyum%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/">Centos中yum无法使用问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-15T14:47:34+08:00" pubdate data-updated="true">2011-12-15</time>
+        
+         | <a href="/blog/2011/12/15/centos%E4%B8%ADyum%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
+显示错误如下：</p>
+
+<pre>Loaded plugins: fastestmirror
+Determining fastest mirrors
+YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
+/Eg. 
+removing mirrorlist with no valid mirrors: /var/cache/yum/addons/mirrorlist.txt
+Error: Cannot find a valid baseurl for repo: addons</pre>
+
+
+<p>不知道什么时候把mirrors.txt文件给去掉了。
+后来查了一下有这么一串。</p>
+
+<pre>1./var/cache/yum/base/mirrorlist.txt
+url:
+http://mirrors.163.com/centos/5.7/os/x86_64/
+http://centos.ustc.edu.cn/centos/5.7/os/x86_64/
+http://mirror.neu.edu.cn/centos/5.7/os/x86_64/
+http://mirrors.ta139.com/centos/5.7/os/x86_64/
+http://ftp.nsysu.edu.tw/CentOS/5.7/os/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/os/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://ftp.twaren.net/Linux/CentOS/5.7/os/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/os/x86_64/
+http://centos.mirror.cdnetworks.com/5.7/os/x86_64/
+http://centos.tt.co.kr/5.7/os/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/os/x86_64/
+http://mirror.khlug.org/centos/5.7/os/x86_64/
+http://mirror.yongbok.net/centos/5.7/os/x86_64/
+http://ftp.daum.net/centos/5.7/os/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/os/x86_64/
+http://mirror.averse.net/centos/5.7/os/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/os/x86_64/
+
+2./var/cache/yum/updates/mirrorlist.txt
+url:
+http://mirror.neu.edu.cn/centos/5.7/updates/x86_64/
+http://mirrors.ta139.com/centos/5.7/updates/x86_64/
+http://mirrors.stuhome.net/centos/5.7/updates/x86_64/
+http://centos.ustc.edu.cn/centos/5.7/updates/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/updates/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.daum.net/centos/5.7/updates/x86_64/
+http://mirror.khlug.org/centos/5.7/updates/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/updates/x86_64/
+http://centos.tt.co.kr/5.7/updates/x86_64/
+http://mirror.averse.net/centos/5.7/updates/x86_64/
+ftp://ftp.oss.eznetsols.org/linux/centos/5.7/updates/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/updates/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/updates/x86_64/
+http://centos.vr-zone.com/5.7/updates/x86_64/
+http://rsync.atworks.co.jp/centos/5.7/updates/x86_64/
+http://ftp.nara.wide.ad.jp/pub/Linux/centos/5.7/updates/x86_64/
+
+3./var/cache/yum/addons/mirrorlist.txt
+url:
+http://mirror.centos.org/centos/5/addons/x86_64/
+
+4./var/cache/yum/extras/mirrorlist.txt
+url:
+http://centos.ustc.edu.cn/centos/5.7/extras/x86_64/
+http://mirrors.stuhome.net/centos/5.7/extras/x86_64/
+http://mirror.neu.edu.cn/centos/5.7/extras/x86_64/
+http://mirrors.ta139.com/centos/5.7/extras/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/extras/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/extras/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/extras/x86_64/
+http://mirror.khlug.org/centos/5.7/extras/x86_64/
+http://ftp.daum.net/centos/5.7/extras/x86_64/
+http://centos.tt.co.kr/5.7/extras/x86_64/
+http://centos.vr-zone.com/5.7/extras/x86_64/
+http://mirror.averse.net/centos/5.7/extras/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/extras/x86_64/
+ftp://ftp.oss.eznetsols.org/linux/centos/5.7/extras/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/extras/x86_64/
+http://ftp.yz.yamagata-u.ac.jp/pub/linux/centos/5.7/extras/x86_64/
+http://ftp.jaist.ac.jp/pub/Linux/CentOS/5.7/extras/x86_64/</pre>
+
+
+<p>对应的把这些url拷贝到mirrorlist.txt文件中去就ok啦。
+have fun! :)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2011/12/04/%E9%98%85%E8%AF%BBmemcacheq%E6%BA%90%E7%A0%81%E8%AE%B0%E5%BD%95/">阅读memcacheq源码记录</a></h1>
     
     
@@ -88,6 +218,8 @@
 
 
 <time datetime="2011-12-04T12:07:34+08:00" pubdate data-updated="true">2011-12-04</time>
+        
+         | <a href="/blog/2011/12/04/%E9%98%85%E8%AF%BBmemcacheq%E6%BA%90%E7%A0%81%E8%AE%B0%E5%BD%95/#disqus_thread">Comments</a>
         
       </p>
     
@@ -134,6 +266,8 @@
 
 
 <time datetime="2011-11-27T05:56:29+08:00" pubdate data-updated="true">2011-11-27</time>
+        
+         | <a href="/blog/2011/11/27/memcached-protocol/#disqus_thread">Comments</a>
         
       </p>
     
@@ -1110,6 +1244,8 @@
 
 <time datetime="2011-11-13T02:55:44+08:00" pubdate data-updated="true">2011-11-13</time>
         
+         | <a href="/blog/2011/11/13/%E5%93%8E%EF%BC%8C%E4%BA%BA%E7%94%9F%EF%BC%9B%E5%93%8E%EF%BC%8C%E4%BA%A7%E5%93%81/#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
@@ -1152,6 +1288,8 @@
 
 <time datetime="2011-11-11T00:30:52+08:00" pubdate data-updated="true">2011-11-11</time>
         
+         | <a href="/blog/2011/11/11/%E5%9D%91%E7%88%B9%E7%9A%84%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
@@ -1168,52 +1306,6 @@
 <p>哎，看别人有的功能，你也想加，ok，可以，你得想想我们这个产品用来做啥的吧？迷茫啊，用来做啥都不知道，亮点呢？好的产品一般都是功能简单，但是都是必须的功能，而且都是能抓住用户粘度的功能。我们呢？有想过么？用户的粘度？</p>
 
 <p>这个总得好好考虑吧？行，我一个码农，不知道说啥，嘿，你说干啥就干啥呗，反正也讲不通，就这样吧！</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/11/08/%E5%90%90%E5%90%90%E6%A7%BD/">吐吐槽</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-08T02:13:54+08:00" pubdate data-updated="true">2011-11-08</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>近来很不顺，工作上面，不爽。很多问题总是来回的折腾。好吧，产品入口没有设计好，想用技术手段去解决后续的问题？这不是坑爹是什么？我们做的东西，自己不用，为啥？就单纯用来发发消息？做测试啊，你以为呢？</p>
-
-<p>产品的应用场景有概念么？这东西用来干啥的？那些是用户？那些是潜在用户？目标性有么？为啥我不用啊，我拿你这东西就给别人发发消息，我直接打电话不就得了。做产品，一味的看别人做了那些，嗯，好，我也加上去，可以啊。关键是你做的是什么产品啊？四不像啊？</p>
-
-<p>功能功能，坑爹的功能。东西做简单点，是王道啊。为啥一上来说了一个功能，就着急着实现？后来出现一些问题，还不是靠测试来找？要是把功能定义、流程、影响、其他附属内容啥的都考虑全了，还需要那么多测试么？</p>
-
-<p>互联网公司怎么不能在上班时玩游戏？怎么不能闲聊？怎么不能干啥干啥啦？悲剧的人生啊。看着人家休息，玩玩心里就不舒服，还干啥啊？搞飞机去算了。</p>
-
-<p>完全木有氛围，人是不错，但是氛围么，哎。。。</p>
-
-<p>现在就开始拿着人当枪使了，悲崔的我啊，搞政治咯。算啦吧，歇歇吧。都是狗屁，都歇歇啦！</p>
 </div>
   
   
@@ -1239,6 +1331,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/01/27/blog-migrate-to-github/">博客迁移</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/12/13/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">碎碎念</a>
       </li>
     
@@ -1252,10 +1348,6 @@
     
       <li class="post">
         <a href="/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">redis源码学习记录</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/04/07/%E5%85%B3%E4%BA%8E%E6%96%B0%E5%85%AC%E5%8F%B8/">关于新公司</a>
       </li>
     
   </ul>
@@ -1315,6 +1407,19 @@
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'ikurten';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 

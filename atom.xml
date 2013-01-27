@@ -4,7 +4,7 @@
   <title><![CDATA[ikurten.com]]></title>
   <link href="http://ikurten.com/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-01-27T16:00:22+08:00</updated>
+  <updated>2013-01-27T17:06:21+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
     <name><![CDATA[kurten]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[博客迁移]]></title>
+    <link href="http://ikurten.com/blog/2013/01/27/blog-migrate-to-github/"/>
+    <updated>2013-01-27T16:29:00+08:00</updated>
+    <id>http://ikurten.com/blog/2013/01/27/blog-migrate-to-github</id>
+    <content type="html"><![CDATA[<h3>关于博客迁移</h3>
+
+<blockquote><p>满打满算，折腾了大半天终于把博客迁移的事情搞定了。接下去可以使用markdown来写blog了。mac下面有个不错的工具<a href="http://mouapp.com/">Mou</a>，可以即时查看写的成果。blog是托管在<a href="https://github.com">github</a>上面的，其实就是使用<a href="http://jekyllrb.com/">jekyll</a>来生成静态的html。博客模版用得是<a href="http://octopress.org/">octopress</a>。关于如何操作，以及怎么折腾域名指向可以参考<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">这里</a>。</p></blockquote>
+
+<h3>关于工作</h3>
+
+<blockquote><p>元旦后又回了杭州，加入了一家创业公司<a href="http://www.qeemo.me">Qeemo</a>。2013年希望有好的开始吧。</p></blockquote>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[碎碎念]]></title>
@@ -46,7 +61,7 @@
     <link href="http://ikurten.com/blog/2012/10/14/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%28%E4%BA%8C%29/"/>
     <updated>2012-10-14T07:23:59+08:00</updated>
     <id>http://ikurten.com/blog/2012/10/14/redis源码学习记录(二)</id>
-    <content type="html"><![CDATA[<p>续前面那篇<a href="http://kurchan.com/?p=149">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
+    <content type="html"><![CDATA[<p>续前面那篇<a href="http://ikurten.com/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
 
 <p>当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、acceptUnixHandler、acceptCommonHandler。一旦接收到一个tcp链接，acceptCommonHandler就会创建一个redisClient，并且把它加入到event的readable列表中，等待event loop执行readQueryFromClient函数。</p>
 
@@ -1463,19 +1478,6 @@ GRANT OPTION;</pre>
 <p>修改字段名称</p>
 
 <pre>alter table test change ttt newttt varchar(12);</pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[关于癌症]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/%E5%85%B3%E4%BA%8E%E7%99%8C%E7%97%87/"/>
-    <updated>2011-07-29T10:13:53+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/关于癌症</id>
-    <content type="html"><![CDATA[<div id="_mcePaste"><span style="line-height: 24px;">昨晚接到一个朋友电话，让我整晚都睡不着。他说他父亲换了肺癌，而且还是晚期。于是，就瞒着父亲。接下去，就是回家，然后好好照料他父亲了。生老病死的，不过突然听到亲人换了绝症，还是难以置信的事情。于是，什么都做不了，除了在最后的一段时间里好好照顾他，还能做什么呢？</span></div>
-
-
-<div><span style="line-height: 24px;">记录一下，以后多给父母打电话，多回回家。</span></div>
 
 ]]></content>
   </entry>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 开源 | ikurten.com]]></title>
   <link href="http://ikurten.com/blog/categories/开源/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-01-27T16:00:22+08:00</updated>
+  <updated>2013-01-27T17:06:21+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
     <name><![CDATA[kurten]]></name>
@@ -18,7 +18,7 @@
     <link href="http://ikurten.com/blog/2012/10/14/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%28%E4%BA%8C%29/"/>
     <updated>2012-10-14T07:23:59+08:00</updated>
     <id>http://ikurten.com/blog/2012/10/14/redis源码学习记录(二)</id>
-    <content type="html"><![CDATA[<p>续前面那篇<a href="http://kurchan.com/?p=149">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
+    <content type="html"><![CDATA[<p>续前面那篇<a href="http://ikurten.com/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
 
 <p>当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、acceptUnixHandler、acceptCommonHandler。一旦接收到一个tcp链接，acceptCommonHandler就会创建一个redisClient，并且把它加入到event的readable列表中，等待event loop执行readQueryFromClient函数。</p>
 
