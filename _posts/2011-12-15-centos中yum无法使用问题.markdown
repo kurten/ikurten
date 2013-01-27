@@ -1,0 +1,101 @@
+---
+layout: post
+status: publish
+published: true
+title: centos中yum无法使用问题
+author: Kurten
+author_login: kurchan
+author_email: chinkurten@gmail.com
+author_url: http://kurchan.com
+wordpress_id: 97
+wordpress_url: http://kurchan.com/?p=97
+date: 2011-12-15 14:47:34.000000000 +08:00
+categories:
+- linux
+tags: []
+comments: []
+---
+今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
+显示错误如下：
+<pre>Loaded plugins: fastestmirror
+Determining fastest mirrors
+YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
+/Eg. 
+removing mirrorlist with no valid mirrors: /var/cache/yum/addons/mirrorlist.txt
+Error: Cannot find a valid baseurl for repo: addons</pre>
+不知道什么时候把mirrors.txt文件给去掉了。
+后来查了一下有这么一串。
+<pre>1./var/cache/yum/base/mirrorlist.txt
+url:
+http://mirrors.163.com/centos/5.7/os/x86_64/
+http://centos.ustc.edu.cn/centos/5.7/os/x86_64/
+http://mirror.neu.edu.cn/centos/5.7/os/x86_64/
+http://mirrors.ta139.com/centos/5.7/os/x86_64/
+http://ftp.nsysu.edu.tw/CentOS/5.7/os/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/os/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://ftp.twaren.net/Linux/CentOS/5.7/os/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/os/x86_64/
+http://centos.mirror.cdnetworks.com/5.7/os/x86_64/
+http://centos.tt.co.kr/5.7/os/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/os/x86_64/
+http://mirror.khlug.org/centos/5.7/os/x86_64/
+http://mirror.yongbok.net/centos/5.7/os/x86_64/
+http://ftp.daum.net/centos/5.7/os/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/os/x86_64/
+http://mirror.averse.net/centos/5.7/os/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/os/x86_64/
+
+2./var/cache/yum/updates/mirrorlist.txt
+url:
+http://mirror.neu.edu.cn/centos/5.7/updates/x86_64/
+http://mirrors.ta139.com/centos/5.7/updates/x86_64/
+http://mirrors.stuhome.net/centos/5.7/updates/x86_64/
+http://centos.ustc.edu.cn/centos/5.7/updates/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/updates/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.daum.net/centos/5.7/updates/x86_64/
+http://mirror.khlug.org/centos/5.7/updates/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/updates/x86_64/
+http://centos.tt.co.kr/5.7/updates/x86_64/
+http://mirror.averse.net/centos/5.7/updates/x86_64/
+ftp://ftp.oss.eznetsols.org/linux/centos/5.7/updates/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/updates/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/updates/x86_64/
+http://centos.vr-zone.com/5.7/updates/x86_64/
+http://rsync.atworks.co.jp/centos/5.7/updates/x86_64/
+http://ftp.nara.wide.ad.jp/pub/Linux/centos/5.7/updates/x86_64/
+
+3./var/cache/yum/addons/mirrorlist.txt
+url:
+http://mirror.centos.org/centos/5/addons/x86_64/
+
+4./var/cache/yum/extras/mirrorlist.txt
+url:
+http://centos.ustc.edu.cn/centos/5.7/extras/x86_64/
+http://mirrors.stuhome.net/centos/5.7/extras/x86_64/
+http://mirror.neu.edu.cn/centos/5.7/extras/x86_64/
+http://mirrors.ta139.com/centos/5.7/extras/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/extras/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/extras/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/extras/x86_64/
+http://mirror.khlug.org/centos/5.7/extras/x86_64/
+http://ftp.daum.net/centos/5.7/extras/x86_64/
+http://centos.tt.co.kr/5.7/extras/x86_64/
+http://centos.vr-zone.com/5.7/extras/x86_64/
+http://mirror.averse.net/centos/5.7/extras/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/extras/x86_64/
+ftp://ftp.oss.eznetsols.org/linux/centos/5.7/extras/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/extras/x86_64/
+http://ftp.yz.yamagata-u.ac.jp/pub/linux/centos/5.7/extras/x86_64/
+http://ftp.jaist.ac.jp/pub/Linux/CentOS/5.7/extras/x86_64/</pre>
+对应的把这些url拷贝到mirrorlist.txt文件中去就ok啦。
+have fun! :)

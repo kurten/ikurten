@@ -1,0 +1,23 @@
+---
+layout: post
+status: publish
+published: true
+title: 教训
+author: Kurten
+author_login: kurchan
+author_email: chinkurten@gmail.com
+author_url: http://kurchan.com
+wordpress_id: 27
+wordpress_url: http://kurchan.com/?p=27
+date: 2011-07-29 03:46:13.000000000 +08:00
+categories: []
+tags: []
+comments: []
+---
+前天是个值得纪念的日子，我犯了一个很严重的错误，导致<a href="http://kurchan.com/www.apple.com" target="_blank">mac</a>上以前的所有资料全部丢失。安装<a href="http://www.ubuntu.com/" target="_blank">ubuntu</a>的时候，我居然选择了安装mac os的磁盘作为swap space，于是，接下去的事情就不用多说了。人生最痛苦的事情莫过于此。昨天折腾了一整天，换回了mac系统，于是，之后就不想在装<a href="http://www.ubuntu.com/" target="_blank">ubuntu</a>了。幸好我有<a href="http://www.amazon.com/" target="_blank">kindle</a>，我有个习惯，电子资料神马的，要看的都塞到里面去。于是，不用一样样去找。幸好我用<a href="http://www.google.com/chrome/" target="_blank">chrome</a>，幸好我平时的阅读习惯神马的<a href="http://www.google.com/chrome/" target="_blank">chrome</a>会保留。I love cloud。
+
+<a href="http://en.wikipedia.org/wiki/Cloud_computing" target="_blank">云</a>真是个好东西，如果与操作系统挂钩，直接同步数据，那么，就不需要担心你自己的使用习惯，安装软件神马的。他会帮你搞定。只是，带宽啊！还有就是该死的<a href="http://zh.wikipedia.org/zh-cn/GFW" target="_blank">gfw</a>了。确实啊，<a href="http://www.dropbox.com/" target="_blank">dropbox</a>是个好东西。当然，<a href="http://zh.wikipedia.org/zh-cn/GFW" target="_blank">gfw</a>也不是一无是处，在互联网行业中，copy国外的模式神马的，也好。团购神马的，围脖神马的，lbs神马的。facebook神马的。未来肯定是数字时代。
+
+当然，也有创新，有了团购，特别是团购多了之后，你就可以把这些资源进行整合。围脖神马的多了之后你也可以整合做app，吸引流量。淘宝神马的，用户这么多，让流量变现的app肯定是大赞的。<a href="http://www.alipay.com/" target="_blank">支付宝</a>就不用说了。<a href="http://www.vancl.com/" target="_blank">凡客</a>，<a href="http://www.moonbasa.com/" target="_blank">梦芭莎</a>，<a href="http://www.360buy.com/" target="_blank">京东</a>等等。混战啊。关键啊，还是用户为本。个性化的内容提供，还是很有前途的。
+
+木有用<a href="http://www.python.org/" target="_blank">python</a>系的做，<a href="http://www.php.net/" target="_blank">php</a>系，那么好吧，只能学么。管理后台神马的，木有经验就木有人要。哎，被催啊。记得曾经看到过一篇文章，fastcgi神马的，最好是会被wsgi神马的代替的么。那么，拭目以待吧。

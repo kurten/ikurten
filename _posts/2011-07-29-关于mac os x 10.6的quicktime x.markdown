@@ -1,0 +1,23 @@
+---
+layout: post
+status: publish
+published: true
+title: 关于mac os x 10.6的quicktime x
+author: Kurten
+author_login: kurchan
+author_email: chinkurten@gmail.com
+author_url: http://kurchan.com
+wordpress_id: 33
+wordpress_url: http://kurchan.com/?p=33
+date: 2011-07-29 03:50:05.000000000 +08:00
+categories: []
+tags: []
+comments: []
+---
+昨天因为看到有个lion dp3补丁，于是手痒，下来安装一下试试。mac os x10.7开发者预览版，尝试一下。没想到，无法更新，而且出错。于是，痛苦的过程开始了，重启进步了系统了。只能用系统盘修复了（ps：系统盘中的是10.6.4的版本）。这个只能怪我自己手痒了。
+
+然后下载更新，因为我原先系统是10.6.7版本，10.6.4的系统<a href="http://developer.apple.com/xcode/" target="_blank">xcode4.1</a>，<a href="http://www.apple.com/mac/facetime/" target="_blank">facetime 1.0</a>都没法用。更新完成，然后安装xcode完忽然出现一个dyld share cache问题，需要（sudo update_dyld_shared_cache -force）这个命令。之后，就是quicktime.framework这个问题了。其中一件灵异事件是，我把这个文件夹移除了，执行命令就没有问题，不移除就出现无法执行share cache这个问题。貌似是一个bug？没深入研究过。
+
+貌似有很多应用需要依赖这个包，<a href="http://www.qq.com/" target="_blank">qq</a>、<a href="http://www.macww.org/" target="_blank">aliwangwang</a>、以及<a href="http://www.popcap.com/" target="_blank">popcap</a>开发的几个游戏。估计是调用了显示movie动画的接口。如果谁像我一样手痒，但是还没删除这些相关的东西，那么我建议你还是别动他，不然很多依赖程序就无法使用了。当然，删除了不是没办法挽救。可以使用<a href="http://www.macupdate.com/app/mac/6812/pacifist" target="_blank">pacifist</a>这个工具软件，打开你的系统安装光盘，然后从对应的文件夹路径下面去找这些东西，直接安装到默认路径就可以了。当然，如果嫌弃quicktime x，可以使用<a href="http://mplayerx.org/" target="_blank">mplayerx</a>这个播放器还是相当不错的。当然，在此基础上进行修改的，<a href="https://bitbucket.org/Tomasen/splayerx/wiki/Home" target="_blank">splayerx</a>也是不错的，省去了你去匹配字母的事情。射手网上字幕资源还是相当多的。
+
+其他的就看你慢慢发觉了。

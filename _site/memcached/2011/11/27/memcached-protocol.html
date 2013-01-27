@@ -1,0 +1,940 @@
+<p>Protocol</p>
+
+<hr />
+
+<p>Clients of memcached communicate with server through TCP connections.</p>
+
+<p>(A UDP interface is also available; details are below under "UDP</p>
+
+<p>protocol.") A given running memcached server listens on some</p>
+
+<p>(configurable) port; clients connect to that port, send commands to</p>
+
+<p>the server, read responses, and eventually close the connection.</p>
+
+<p>There is no need to send any command to end the session. A client may</p>
+
+<p>just close the connection at any moment it no longer needs it. Note,</p>
+
+<p>however, that clients are encouraged to cache their connections rather</p>
+
+<p>than reopen them every time they need to store or retrieve data.&nbsp; This</p>
+
+<p>is because memcached is especially designed to work very efficiently</p>
+
+<p>with a very large number (many hundreds, more than a thousand if</p>
+
+<p>necessary) of open connections. Caching connections will eliminate the</p>
+
+<p>overhead associated with establishing a TCP connection (the overhead</p>
+
+<p>of preparing for a new connection on the server side is insignificant</p>
+
+<p>compared to this).</p>
+
+<p>There are two kinds of data sent in the memcache protocol: text lines</p>
+
+<p>and unstructured data.&nbsp; Text lines are used for commands from clients</p>
+
+<p>and responses from servers. Unstructured data is sent when a client</p>
+
+<p>wants to store or retrieve data. The server will transmit back</p>
+
+<p>unstructured data in exactly the same way it received it, as a byte</p>
+
+<p>stream. The server doesn't care about byte order issues in</p>
+
+<p>unstructured data and isn't aware of them. There are no limitations on</p>
+
+<p>characters that may appear in unstructured data; however, the reader</p>
+
+<p>of such data (either a client or a server) will always know, from a</p>
+
+<p>preceding text line, the exact length of the data block being</p>
+
+<p>transmitted.</p>
+
+<p>Text lines are always terminated by \r\n. Unstructured data is <em>also</em></p>
+
+<p>terminated by \r\n, even though \r, \n or any other 8-bit characters</p>
+
+<p>may also appear inside the data. Therefore, when a client retrieves</p>
+
+<p>data from a server, it must use the length of the data block (which it</p>
+
+<p>will be provided with) to determine where the data block ends, and not</p>
+
+<p>the fact that \r\n follows the end of the data block, even though it</p>
+
+<p>does.</p>
+
+<p>Keys</p>
+
+<hr />
+
+<p>Data stored by memcached is identified with the help of a key. A key</p>
+
+<p>is a text string which should uniquely identify the data for clients</p>
+
+<p>that are interested in storing and retrieving it.&nbsp; Currently the</p>
+
+<p>length limit of a key is set at 250 characters (of course, normally</p>
+
+<p>clients wouldn't need to use such long keys); the key must not include</p>
+
+<p>control characters or whitespace.</p>
+
+<p>Commands</p>
+
+<hr />
+
+<p>There are three types of commands.</p>
+
+<p>Storage commands (there are six: "set", "add", "replace", "append"</p>
+
+<p>"prepend" and "cas") ask the server to store some data identified by a key. The</p>
+
+<p>client sends a command line, and then a data block; after that the</p>
+
+<p>client expects one line of response, which will indicate success or</p>
+
+<p>faulure.</p>
+
+<p>Retrieval commands (there are two: "get" and "gets") ask the server to</p>
+
+<p>retrieve data corresponding to a set of keys (one or more keys in one</p>
+
+<p>request). The client sends a command line, which includes all the</p>
+
+<p>requested keys; after that for each item the server finds it sends to</p>
+
+<p>the client one response line with information about the item, and one</p>
+
+<p>data block with the item's data; this continues until the server</p>
+
+<p>finished with the "END" response line.</p>
+
+<p>All other commands don't involve unstructured data. In all of them,</p>
+
+<p>the client sends one command line, and expects (depending on the</p>
+
+<p>command) either one line of response, or several lines of response</p>
+
+<p>ending with "END" on the last line.</p>
+
+<p>A command line always starts with the name of the command, followed by</p>
+
+<p>parameters (if any) delimited by whitespace. Command names are</p>
+
+<p>lower-case and are case-sensitive.</p>
+
+<p>Expiration times</p>
+
+<hr />
+
+<p>Some commands involve a client sending some kind of expiration time</p>
+
+<p>(relative to an item or to an operation requested by the client) to</p>
+
+<p>the server. In all such cases, the actual value sent may either be</p>
+
+<p>Unix time (number of seconds since January 1, 1970, as a 32-bit</p>
+
+<p>value), or a number of seconds starting from current time. In the</p>
+
+<p>latter case, this number of seconds may not exceed 60<em>60</em>24*30 (number</p>
+
+<p>of seconds in 30 days); if the number sent by a client is larger than</p>
+
+<p>that, the server will consider it to be real Unix time value rather</p>
+
+<p>than an offset from current time.</p>
+
+<p>Error strings</p>
+
+<hr />
+
+<p>Each command sent by a client may be answered with an error string</p>
+
+<p>from the server. These error strings come in three types:</p>
+
+<ul>
+<li>"ERROR\r\n"</li>
+</ul>
+
+
+<p>means the client sent a nonexistent command name.</p>
+
+<ul>
+<li>"CLIENT_ERROR <error>\r\n"</li>
+</ul>
+
+
+<p>means some sort of client error in the input line, i.e. the input</p>
+
+<p>doesn't conform to the protocol in some way. <error> is a</p>
+
+<p>human-readable error string.</p>
+
+<ul>
+<li>"SERVER_ERROR <error>\r\n"</li>
+</ul>
+
+
+<p>means some sort of server error prevents the server from carrying</p>
+
+<p>out the command. <error> is a human-readable error string. In cases</p>
+
+<p>of severe server errors, which make it impossible to continue</p>
+
+<p>serving the client (this shouldn't normally happen), the server will</p>
+
+<p>close the connection after sending the error line. This is the only</p>
+
+<p>case in which the server closes a connection to a client.</p>
+
+<p>In the descriptions of individual commands below, these error lines</p>
+
+<p>are not again specifically mentioned, but clients must allow for their</p>
+
+<p>possibility.</p>
+
+<p>Storage commands</p>
+
+<hr />
+
+<p>First, the client sends a command line which looks like this:</p>
+
+<p><command name> <key> <flags> <exptime> <bytes> [noreply]\r\n</p>
+
+<p>cas <key> <flags> <exptime> <bytes> <cas unqiue> [noreply]\r\n</p>
+
+<ul>
+<li><command name> is "set", "add", "replace", "append" or "prepend"</li>
+</ul>
+
+
+<p>"set" means "store this data".</p>
+
+<p>"add" means "store this data, but only if the server <em>doesn't</em> already</p>
+
+<p>hold data for this key".</p>
+
+<p>"replace" means "store this data, but only if the server <em>does</em></p>
+
+<p>already hold data for this key".</p>
+
+<p>"append" means "add this data to an existing key after existing data".</p>
+
+<p>"prepend" means "add this data to an existing key before existing data".</p>
+
+<p>The append and prepend commands do not accept flags or exptime.</p>
+
+<p>They update existing data portions, and ignore new flag and exptime</p>
+
+<p>settings.</p>
+
+<p>"cas" is a check and set operation which means "store this data but</p>
+
+<p>only if no one else has updated since I last fetched it."</p>
+
+<ul>
+<li><p><key> is the key under which the client asks to store the data</p></li>
+<li><p><flags> is an arbitrary 16-bit unsigned integer (written out in</p></li>
+</ul>
+
+
+<p>decimal) that the server stores along with the data and sends back</p>
+
+<p>when the item is retrieved. Clients may use this as a bit field to</p>
+
+<p>store data-specific information; this field is opaque to the server.</p>
+
+<p>Note that in memcached 1.2.1 and higher, flags may be 32-bits, instead</p>
+
+<p>of 16, but you might want to restrict yourself to 16 bits for</p>
+
+<p>compatibility with older versions.</p>
+
+<ul>
+<li><exptime> is expiration time. If it's 0, the item never expires</li>
+</ul>
+
+
+<p>(although it may be deleted from the cache to make place for other</p>
+
+<p>items). If it's non-zero (either Unix time or offset in seconds from</p>
+
+<p>current time), it is guaranteed that clients will not be able to</p>
+
+<p>retrieve this item after the expiration time arrives (measured by</p>
+
+<p>server time).</p>
+
+<ul>
+<li><bytes> is the number of bytes in the data block to follow, <em>not</em></li>
+</ul>
+
+
+<p>including the delimiting \r\n. <bytes> may be zero (in which case</p>
+
+<p>it's followed by an empty data block).</p>
+
+<ul>
+<li><cas unique> is a unique 64-bit value of an existing entry.</li>
+</ul>
+
+
+<p>Clients should use the value returned from the "gets" command</p>
+
+<p>when issuing "cas" updates.</p>
+
+<ul>
+<li>"noreply" optional parameter instructs the server to not send the</li>
+</ul>
+
+
+<p>reply.&nbsp; NOTE: if the request line is malformed, the server can't</p>
+
+<p>parse "noreply" option reliably.&nbsp; In this case it may send the error</p>
+
+<p>to the client, and not reading it on the client side will break</p>
+
+<p>things.&nbsp; Client should construct only valid requests.</p>
+
+<p>After this line, the client sends the data block:</p>
+
+<p><data block>\r\n</p>
+
+<ul>
+<li><data block> is a chunk of arbitrary 8-bit data of length <bytes></li>
+</ul>
+
+
+<p>from the previous line.</p>
+
+<p>After sending the command line and the data blockm the client awaits</p>
+
+<p>the reply, which may be:</p>
+
+<ul>
+<li><p>"STORED\r\n", to indicate success.</p></li>
+<li><p>"NOT_STORED\r\n" to indicate the data was not stored, but not</p></li>
+</ul>
+
+
+<p>because of an error. This normally means that either that the</p>
+
+<p>condition for an "add" or a "replace" command wasn't met, or that the</p>
+
+<p>item is in a delete queue (see the "delete" command below).</p>
+
+<ul>
+<li>"EXISTS\r\n" to indicate that the item you are trying to store with</li>
+</ul>
+
+
+<p>a "cas" command has been modified since you last fetched it.</p>
+
+<ul>
+<li>"NOT_FOUND\r\n" to indicate that the item you are trying to store</li>
+</ul>
+
+
+<p>with a "cas" command did not exist or has been deleted.</p>
+
+<p>Retrieval command:</p>
+
+<hr />
+
+<p>The retrieval commands "get" and "gets" operates like this:</p>
+
+<p>get <key>*\r\n</p>
+
+<p>gets <key>*\r\n</p>
+
+<ul>
+<li><key>* means one or more key strings separated by whitespace.</li>
+</ul>
+
+
+<p>After this command, the client expects zero or more items, each of</p>
+
+<p>which is received as a text line followed by a data block. After all</p>
+
+<p>the items have been transmitted, the server sends the string</p>
+
+<p>"END\r\n"</p>
+
+<p>to indicate the end of response.</p>
+
+<p>Each item sent by the server looks like this:</p>
+
+<p>VALUE <key> <flags> <bytes> [<cas unique>]\r\n</p>
+
+<p><data block>\r\n</p>
+
+<ul>
+<li><p><key> is the key for the item being sent</p></li>
+<li><p><flags> is the flags value set by the storage command</p></li>
+<li><p><bytes> is the length of the data block to follow, <em>not</em> including</p></li>
+</ul>
+
+
+<p>its delimiting \r\n</p>
+
+<ul>
+<li><cas unique> is a unique 64-bit integer that uniquely identifies</li>
+</ul>
+
+
+<p>this specific item.</p>
+
+<ul>
+<li><data block> is the data for this item.</li>
+</ul>
+
+
+<p>If some of the keys appearing in a retrieval request are not sent back</p>
+
+<p>by the server in the item list this means that the server does not</p>
+
+<p>hold items with such keys (because they were never stored, or stored</p>
+
+<p>but deleted to make space for more items, or expired, or explicitly</p>
+
+<p>deleted by a client).</p>
+
+<p>Deletion</p>
+
+<hr />
+
+<p>The command "delete" allows for explicit deletion of items:</p>
+
+<p>delete <key> [<time>] [noreply]\r\n</p>
+
+<ul>
+<li><p><key> is the key of the item the client wishes the server to delete</p></li>
+<li><p><time> is the amount of time in seconds (or Unix time until which)</p></li>
+</ul>
+
+
+<p>the client wishes the server to refuse "add" and "replace" commands</p>
+
+<p>with this key. For this amount of item, the item is put into a</p>
+
+<p>delete queue, which means that it won't possible to retrieve it by</p>
+
+<p>the "get" command, but "add" and "replace" command with this key</p>
+
+<p>will also fail (the "set" command will succeed, however). After the</p>
+
+<p>time passes, the item is finally deleted from server memory.</p>
+
+<p>The parameter <time> is optional, and, if absent, defaults to 0</p>
+
+<p>(which means that the item will be deleted immediately and further</p>
+
+<p>storage commands with this key will succeed).</p>
+
+<ul>
+<li>"noreply" optional parameter instructs the server to not send the</li>
+</ul>
+
+
+<p>reply.&nbsp; See the note in Storage commands regarding malformed</p>
+
+<p>requests.</p>
+
+<p>The response line to this command can be one of:</p>
+
+<ul>
+<li><p>"DELETED\r\n" to indicate success</p></li>
+<li><p>"NOT_FOUND\r\n" to indicate that the item with this key was not</p></li>
+</ul>
+
+
+<p>found.</p>
+
+<p>See the "flush_all" command below for immediate invalidation</p>
+
+<p>of all existing items.</p>
+
+<p>Increment/Decrement</p>
+
+<hr />
+
+<p>Commands "incr" and "decr" are used to change data for some item</p>
+
+<p>in-place, incrementing or decrementing it. The data for the item is</p>
+
+<p>treated as decimal representation of a 64-bit unsigned integer. If the</p>
+
+<p>current data value does not conform to such a representation, the</p>
+
+<p>commands behave as if the value were 0. Also, the item must already</p>
+
+<p>exist for incr/decr to work; these commands won't pretend that a</p>
+
+<p>non-existent key exists with value 0; instead, they will fail.</p>
+
+<p>The client sends the command line:</p>
+
+<p>incr <key> <value> [noreply]\r\n</p>
+
+<p>or</p>
+
+<p>decr <key> <value> [noreply]\r\n</p>
+
+<ul>
+<li><p><key> is the key of the item the client wishes to change</p></li>
+<li><p><value> is the amount by which the client wants to increase/decrease</p></li>
+</ul>
+
+
+<p>the item. It is a decimal representation of a 64-bit unsigned integer.</p>
+
+<ul>
+<li>"noreply" optional parameter instructs the server to not send the</li>
+</ul>
+
+
+<p>reply.&nbsp; See the note in Storage commands regarding malformed</p>
+
+<p>requests.</p>
+
+<p>The response will be one of:</p>
+
+<ul>
+<li><p>"NOT_FOUND\r\n" to indicate the item with this value was not found</p></li>
+<li><p><value>\r\n , where <value> is the new value of the item's data,</p></li>
+</ul>
+
+
+<p>after the increment/decrement operation was carried out.</p>
+
+<p>Note that underflow in the "decr" command is caught: if a client tries</p>
+
+<p>to decrease the value below 0, the new value will be 0.&nbsp; Overflow in</p>
+
+<p>the "incr" command will wrap around the 64 bit mark.</p>
+
+<p>Note also that decrementing a number such that it loses length isn't</p>
+
+<p>guaranteed to decrement its returned length.&nbsp; The number MAY be</p>
+
+<p>space-padded at the end, but this is purely an implementation</p>
+
+<p>optimization, so you also shouldn't rely on that.</p>
+
+<p>Statistics</p>
+
+<hr />
+
+<p>The command "stats" is used to query the server about statistics it</p>
+
+<p>maintains and other internal data. It has two forms. Without</p>
+
+<p>arguments:</p>
+
+<p>stats\r\n</p>
+
+<p>it causes the server to output general-purpose statistics and</p>
+
+<p>settings, documented below.&nbsp; In the other form it has some arguments:</p>
+
+<p>stats <args>\r\n</p>
+
+<p>Depending on <args>, various internal data is sent by the server. The</p>
+
+<p>kinds of arguments and the data sent are not documented in this vesion</p>
+
+<p>of the protocol, and are subject to change for the convenience of</p>
+
+<p>memcache developers.</p>
+
+<p>General-purpose statistics</p>
+
+<hr />
+
+<p>Upon receiving the "stats" command without arguments, the server sents</p>
+
+<p>a number of lines which look like this:</p>
+
+<p>STAT <name> <value>\r\n</p>
+
+<p>The server terminates this list with the line</p>
+
+<p>END\r\n</p>
+
+<p>In each line of statistics, <name> is the name of this statistic, and</p>
+
+<p><value> is the data.&nbsp; The following is the list of all names sent in</p>
+
+<p>response to the "stats" command, together with the type of the value</p>
+
+<p>sent for this name, and the meaning of the value.</p>
+
+<p>In the type column below, "32u" means a 32-bit unsigned integer, "64u"</p>
+
+<p>means a 64-bit unsigner integer. '32u:32u' means two 32-but unsigned</p>
+
+<p>integers separated by a colon.</p>
+
+<p>Name&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Type &nbsp; &nbsp; Meaning</p>
+
+<hr />
+
+<p>pid &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Process id of this server process</p>
+
+<p>uptime&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Number of seconds this server has been running</p>
+
+<p>time&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; current UNIX time according to the server</p>
+
+<p>version &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; string &nbsp; Version string of this server</p>
+
+<p>pointer_size&nbsp; &nbsp; &nbsp; 32 &nbsp; &nbsp; &nbsp; Default size of pointers on the host OS</p>
+
+<p>(generally 32 or 64)</p>
+
+<p>rusage_user &nbsp; &nbsp; &nbsp; 32u:32u&nbsp; Accumulated user time for this process</p>
+
+<p>(seconds:microseconds)</p>
+
+<p>rusage_system &nbsp; &nbsp; 32u:32u&nbsp; Accumulated system time for this process</p>
+
+<p>(seconds:microseconds)</p>
+
+<p>curr_items&nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Current number of items stored by the server</p>
+
+<p>total_items &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Total number of items stored by this server</p>
+
+<p>ever since it started</p>
+
+<p>bytes &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Current number of bytes used by this server</p>
+
+<p>to store items</p>
+
+<p>curr_connections&nbsp; 32u&nbsp; &nbsp; &nbsp; Number of open connections</p>
+
+<p>total_connections 32u&nbsp; &nbsp; &nbsp; Total number of connections opened since</p>
+
+<p>the server started running</p>
+
+<p>connection_structures 32u&nbsp; Number of connection structures allocated</p>
+
+<p>by the server</p>
+
+<p>cmd_get &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Cumulative number of retrieval requests</p>
+
+<p>cmd_set &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Cumulative number of storage requests</p>
+
+<p>get_hits&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Number of keys that have been requested and</p>
+
+<p>found present</p>
+
+<p>get_misses&nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Number of items that have been requested</p>
+
+<p>and not found</p>
+
+<p>evictions &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Number of valid items removed from cache</p>
+
+<p>to free memory for new items</p>
+
+<p>bytes_read&nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Total number of bytes read by this server</p>
+
+<p>from network</p>
+
+<p>bytes_written &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Total number of bytes sent by this server to</p>
+
+<p>network</p>
+
+<p>limit_maxbytes&nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Number of bytes this server is allowed to</p>
+
+<p>use for storage.</p>
+
+<p>threads &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Number of worker threads requested.</p>
+
+<p>(see doc/threads.txt)</p>
+
+<p>Item statistics</p>
+
+<hr />
+
+<p>CAVEAT: This section describes statistics which are subject to change in the</p>
+
+<p>future.</p>
+
+<p>The "stats" command with the argument of "items" returns information about</p>
+
+<p>item storage per slab class. The data is returned in the format:</p>
+
+<p>STAT items:<slabclass>:<stat> <value>\r\n</p>
+
+<p>The server terminates this list with the line</p>
+
+<p>END\r\n</p>
+
+<p>The slabclass aligns with class ids used by the "stats slabs" command. Where</p>
+
+<p>"stats slabs" describes size and memory usage, "stats items" shows higher</p>
+
+<p>level information.</p>
+
+<p>The following item values are defined as of writing.</p>
+
+<p>Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Meaning</p>
+
+<hr />
+
+<p>number &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Number of items presently stored in this class. Expired</p>
+
+<p>items are not automatically excluded.</p>
+
+<p>age&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Age of the oldest item in the LRU.</p>
+
+<p>evicted&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Number of times an item had to be evicted from the LRU</p>
+
+<p>before it expired.</p>
+
+<p>outofmemory&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Number of times the underlying slab class was unable to</p>
+
+<p>store a new item. This means you are running with -M or</p>
+
+<p>an eviction failed.</p>
+
+<p>Note this will only display information about slabs which exist, so an empty</p>
+
+<p>cache will return an empty set.</p>
+
+<p>Item size statistics</p>
+
+<hr />
+
+<p>CAVEAT: This section describes statistics which are subject to change in the</p>
+
+<p>future.</p>
+
+<p>The "stats" command with the argument of "sizes" returns information about the</p>
+
+<p>general size and count of all items stored in the cache.</p>
+
+<p>WARNING: This command WILL lock up your cache! It iterates over <em>every item</em></p>
+
+<p>and examines the size. While the operation is fast, if you have many items</p>
+
+<p>you could prevent memcached from serving requests for several seconds.</p>
+
+<p>The data is returned in the following format:</p>
+
+<p><size> <count>\r\n</p>
+
+<p>The server terminates this list with the line</p>
+
+<p>END\r\n</p>
+
+<p>'size' is an approximate size of the item, within 32 bytes.</p>
+
+<p>'count' is the amount of items that exist within that 32-byte range.</p>
+
+<p>This is essentially a display of all of your items if there was a slab class</p>
+
+<p>for every 32 bytes. You can use this to determine if adjusting the slab growth</p>
+
+<p>factor would save memory overhead. For example: generating more classes in the</p>
+
+<p>lower range could allow items to fit more snugly into their slab classes, if</p>
+
+<p>most of your items are less than 200 bytes in size.</p>
+
+<p>Slab statistics</p>
+
+<hr />
+
+<p>CAVEAT: This section describes statistics which are subject to change in the</p>
+
+<p>future.</p>
+
+<p>The "stats" command with the argument of "slabs" returns information about</p>
+
+<p>each of the slabs created by memcached during runtime. This includes per-slab</p>
+
+<p>information along with some totals. The data is returned in the format:</p>
+
+<p>STAT <slabclass>:<stat> <value>\r\n</p>
+
+<p>STAT <stat> <value>\r\n</p>
+
+<p>The server terminates this list with the line</p>
+
+<p>END\r\n</p>
+
+<p>Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Meaning</p>
+
+<hr />
+
+<p>chunk_size &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The amount of space each chunk uses. One item will use</p>
+
+<p>one chunk of the appropriate size.</p>
+
+<p>chunks_per_page&nbsp; &nbsp; &nbsp; &nbsp; How many chunks exist within one page. A page by</p>
+
+<p>default is one megabyte in size. Slabs are allocated per</p>
+
+<p>page, then broken into chunks.</p>
+
+<p>total_pages&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total number of pages allocated to the slab class.</p>
+
+<p>total_chunks &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total number of chunks allocated to the slab class.</p>
+
+<p>used_chunks&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; How many chunks have been allocated to items.</p>
+
+<p>free_chunks&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Chunks not yet allocated to items, or freed via delete.</p>
+
+<p>free_chunks_end&nbsp; &nbsp; &nbsp; &nbsp; Number of free chunks at the end of the last allocated</p>
+
+<p>page.</p>
+
+<p>active_slabs &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total number of slab classes allocated.</p>
+
+<p>total_malloced &nbsp; &nbsp; &nbsp; &nbsp; Total amount of memory allocated to slab pages.</p>
+
+<p>Other commands</p>
+
+<hr />
+
+<p>"flush_all" is a command with an optional numeric argument. It always</p>
+
+<p>succeeds, and the server sends "OK\r\n" in response (unless "noreply"</p>
+
+<p>is given as the last parameter). Its effect is to invalidate all</p>
+
+<p>existing items immediately (by default) or after the expiration</p>
+
+<p>specified.&nbsp; After invalidation none of the items will be returned in</p>
+
+<p>response to a retrieval command (unless it's stored again under the</p>
+
+<p>same key <em>after</em> flush_all has invalidated the items). flush_all</p>
+
+<p>doesn't actually free all the memory taken up by existing items; that</p>
+
+<p>will happen gradually as new items are stored. The most precise</p>
+
+<p>definition of what flush_all does is the following: it causes all</p>
+
+<p>items whose update time is earlier than the time at which flush_all</p>
+
+<p>was set to be executed to be ignored for retrieval purposes.</p>
+
+<p>The intent of flush_all with a delay, was that in a setting where you</p>
+
+<p>have a pool of memcached servers, and you need to flush all content,</p>
+
+<p>you have the option of not resetting all memcached servers at the</p>
+
+<p>same time (which could e.g. cause a spike in database load with all</p>
+
+<p>clients suddenly needing to recreate content that would otherwise</p>
+
+<p>have been found in the memcached daemon).</p>
+
+<p>The delay option allows you to have them reset in e.g. 10 second</p>
+
+<p>intervals (by passing 0 to the first, 10 to the second, 20 to the</p>
+
+<p>third, etc. etc.).</p>
+
+<p>"version" is a command with no arguments:</p>
+
+<p>version\r\n</p>
+
+<p>In response, the server sends&nbsp;"VERSION <version>\r\n", where <version> is the version string for the</p>
+
+<p>server.</p>
+
+<p>"verbosity" is a command with a numeric argument. It always succeeds,</p>
+
+<p>and the server sends "OK\r\n" in response (unless "noreply" is given</p>
+
+<p>as the last parameter). Its effect is to set the verbosity level of</p>
+
+<p>the logging output.</p>
+
+<p>"quit" is a command with no arguments:</p>
+
+<p>quit\r\n</p>
+
+<p>Upon receiving this command, the server closes the</p>
+
+<p>connection. However, the client may also simply close the connection</p>
+
+<p>when it no longer needs it, without issuing this command.</p>
+
+<p>UDP protocol</p>
+
+<hr />
+
+<p>For very large installations where the number of clients is high enough</p>
+
+<p>that the number of TCP connections causes scaling difficulties, there is</p>
+
+<p>also a UDP-based interface. The UDP interface does not provide guaranteed</p>
+
+<p>delivery, so should only be used for operations that aren't required to</p>
+
+<p>succeed; typically it is used for "get" requests where a missing or</p>
+
+<p>incomplete response can simply be treated as a cache miss.</p>
+
+<p>Each UDP datagram contains a simple frame header, followed by data in the</p>
+
+<p>same format as the TCP protocol described above. In the current</p>
+
+<p>implementation, requests must be contained in a single UDP datagram, but</p>
+
+<p>responses may span several datagrams. (The only common requests that would</p>
+
+<p>span multiple datagrams are huge multi-key "get" requests and "set"</p>
+
+<p>requests, both of which are more suitable to TCP transport for reliability</p>
+
+<p>reasons anyway.)</p>
+
+<p>The frame header is 8 bytes long, as follows (all values are 16-bit integers</p>
+
+<p>in network byte order, high byte first):</p>
+
+<p>0-1 Request ID</p>
+
+<p>2-3 Sequence number</p>
+
+<p>4-5 Total number of datagrams in this message</p>
+
+<p>6-7 Reserved for future use; must be 0</p>
+
+<p>The request ID is supplied by the client. Typically it will be a</p>
+
+<p>monotonically increasing value starting from a random seed, but the client</p>
+
+<p>is free to use whatever request IDs it likes. The server's response will</p>
+
+<p>contain the same ID as the incoming request. The client uses the request ID</p>
+
+<p>to differentiate between responses to outstanding requests if there are</p>
+
+<p>several pending from the same server; any datagrams with an unknown request</p>
+
+<p>ID are probably delayed responses to an earlier request and should be</p>
+
+<p>discarded.</p>
+
+<p>The sequence number ranges from 0 to n-1, where n is the total number of</p>
+
+<p>datagrams in the message. The client should concatenate the payloads of the</p>
+
+<p>datagrams for a given response in sequence number order; the resulting byte</p>
+
+<p>stream will contain a complete response in the same format as the TCP</p>
+
+<p>protocol (including terminating \r\n sequences).</p>

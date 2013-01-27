@@ -1,0 +1,29 @@
+---
+layout: post
+status: publish
+published: true
+title: ubuntu编译安装php5.3.5
+author: Kurten
+author_login: kurchan
+author_email: chinkurten@gmail.com
+author_url: http://kurchan.com
+wordpress_id: 46
+wordpress_url: http://kurchan.com/?p=46
+date: 2011-07-29 04:03:06.000000000 +08:00
+categories:
+- 开源
+tags: []
+comments: []
+---
+<div></div>
+<div>安装apache，mysql，mysql需要libmysqld-dev</div>
+<div>sudo apt-get install libxml2-dev</div>
+<div>sudo apt-get install libmysqld-dev</div>
+<div>sudo apt-get install libbz2-dev</div>
+<div>sudo apt-get install libcurl4-gnutls-dev</div>
+<div>sudo apt-get install libmcrypt-dev</div>
+<div></div>
+<div>./configure &ndash;prefix=/usr/local/php5 &ndash;with-config-file-path=/usr/local/php5/etc &ndash;with-mysql &ndash;with-mysqli &ndash;enable-debug &ndash;with-pic &ndash;disable-rpath &ndash;without-pear &ndash;with-bz2 &ndash;with-apxs2=/usr/local/apache2/bin/apxs &ndash;with-freetype-dir &ndash;with-jpeg-dir &ndash;with-png-dir &ndash;with-zlib &ndash;with-libxml-dir &ndash;enable-xml &ndash;enable-debug &ndash;disable-rpath &ndash;enable-discard-path &ndash;enable-safe-mode &ndash;enable-bcmath &ndash;enable-shmop &ndash;enable-sysvsem &ndash;enable-inline-optimization &ndash;with-curl &ndash;with-curlwrappers &ndash;enable-mbregex &ndash;enable-fastcgi &ndash;enable-force-cgi-redirect &ndash;enable-mbstring &ndash;enable-soap &ndash;enable-sockets &ndash;with-mcrypt</div>
+<div></div>
+<div>sudo make</div>
+<div>sudo make install</div>

@@ -1,0 +1,23 @@
+---
+layout: post
+status: publish
+published: true
+title: 新的起点
+author: Kurten
+author_login: kurchan
+author_email: chinkurten@gmail.com
+author_url: http://kurchan.com
+wordpress_id: 29
+wordpress_url: http://kurchan.com/?p=29
+date: 2011-07-29 03:47:01.000000000 +08:00
+categories: []
+tags: []
+comments: []
+---
+周一的时候我跟头儿说，我要辞职。然后么，就是一些文档整理，工作移交。只是，因为还要做一部分工作。所以，只能到下个星期办手续了。对于一份自己不喜欢的工作、不喜欢的行业，迟早是要说88的。虽然，照样干的很好，照样可以获得很多。我辞职了，别人问，去哪家公司发展了？我说，没有，我只是单纯的辞职而已。需要一点时间准备，厚积薄发么。
+
+找一家互联网公司，我喜欢他们在做的事情，大不大不要紧。他们做的事情，要是我认为可以的，值得去做的事情。恩，就是这个目的。不然，枉费我这份激情了。技术、产品，只有自己真正热爱的才算。可以不计利益、不问付出，因为肯定会有回报。
+
+谁又不是开始就会的，不是后天锻炼出来的么？我没做过不代表我就不会了。只不过，没有碰到过问题，就不可能成长么。我只是希望做自己又热情去做的，喜欢的事情。仅此而已。于是，我开始使用mac，我开始接触unix，接触hadoop，hbase，cassandra，mongodb，redis，还有nginx，python，ipython。同时么，了解linux，php，mysql。了解web架构么，看书么。
+
+stay hungry，stay foolish！follow my heart！

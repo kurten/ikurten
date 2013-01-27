@@ -1,0 +1,20 @@
+---
+layout: post
+status: publish
+published: true
+title: 流川枫与苍井空
+author: Kurten
+author_login: kurchan
+author_email: chinkurten@gmail.com
+author_url: http://kurchan.com
+wordpress_id: 42
+wordpress_url: http://kurchan.com/?p=42
+date: 2011-07-29 04:00:21.000000000 +08:00
+categories: []
+tags: []
+comments: []
+---
+<embed src="http://player.youku.com/player.php/sid/XMjY5NTczMDk2/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+
+
+纪念该纪念的。。。

@@ -1,0 +1,17 @@
+<p>本来想用文档存储的，现在就记录在这吧。</p>
+
+<p>一、下载软件安装
+1、apache http server ：<a href="http://httpd.apache.org/download.cgi" target="_blank">http://httpd.apache.org/download.cgi</a>
+2、subversion：<a href="http://sourceforge.net/projects/win32svn/" target="_blank">http://sourceforge.net/projects/win32svn/</a>
+3、TortoiseSVN：<a href="http://tortoisesvn.net/downloads.html" target="_blank">http://tortoisesvn.net/downloads.html</a></p>
+
+<p>二、用svnadmin create命令创建版本库
+svnadmin create c:\svn</p>
+
+<p>三、配置用户与密码
+1、修改conf文件夹下svnserve.conf文件，去掉&ldquo;# password-db = passwd&rdquo;前&ldquo;#&rdquo;。
+2、修改passwd文件，在[user]下添加用户名与密码，例如：admin = 123。
+3、权限管理在authz中设置，对应用户名什么权限。</p>
+
+<p>四、启动版本库服务
+在cmd中输入svnserve -d -r c:\svn，不要关闭cmd。</p>

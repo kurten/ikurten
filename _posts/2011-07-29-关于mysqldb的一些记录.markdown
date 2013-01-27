@@ -1,0 +1,47 @@
+---
+layout: post
+status: publish
+published: true
+title: 关于mysqldb的一些记录
+author: Kurten
+author_login: kurchan
+author_email: chinkurten@gmail.com
+author_url: http://kurchan.com
+wordpress_id: 17
+wordpress_url: http://kurchan.com/?p=17
+date: 2011-07-29 03:42:04.000000000 +08:00
+categories: []
+tags: []
+comments: []
+---
+我在mac下面使用<a href="http://sourceforge.net/projects/mysql-python/" target="_blank">mysqldb</a>的时候，居然老是说importerror，说调用dlopen打开编译之后的_mysql.so时，无法载入这个libmysqlclient.16.dylib，mysql的依赖库。
+
+把libmysqlclient.16.dylib设置为共享库，又添加了DYLD_LIBRARY_PATH，在控制台的python环境下面，可以使用，但是在netbeans或者easyeclipse下面居然不行，很诧异的问题。
+
+问题如下：
+<pre>/Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/_mysql.py:3: UserWarning: Module _mysql was already imported from /Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/_mysql.pyc, but /Library/Python/2.6/site-packages/MySQL_python_embedded-1.2.3-py2.6-macosx-10.6-universal.egg is being added to sys.path
+
+/Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/_mysql.py:3: UserWarning: Module MySQLdb was already imported from /Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/MySQLdb/__init__.pyc, but /Library/Python/2.6/site-packages/MySQL_python_embedded-1.2.3-py2.6-macosx-10.6-universal.egg is being added to sys.path
+Traceback (most recent call last):
+File "/Users/KURTEN/workspace/tt/src/test.py", line 7, in &amp;lt;module&amp;gt;
+import MySQLdb
+File "build/bdist.macosx-10.6-universal/egg/MySQLdb/__init__.py", line 19, in &amp;lt;module&amp;gt;
+File "build/bdist.macosx-10.6-universal/egg/_mysql.py", line 7, in &amp;lt;module&amp;gt;
+File "build/bdist.macosx-10.6-universal/egg/_mysql.py", line 6, in __bootstrap__
+ImportError: dlopen(/Users/KURTEN/.python-eggs/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg-tmp/_mysql.so, 2): Library not loaded: libmysqlclient.16.dylib
+Referenced from: /Users/KURTEN/.python-eggs/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg-tmp/_mysql.so
+Reason: image not found</pre>
+代码如下：
+<pre>import MySQLdb
+con=MySQLdb.connect("localhost","root","chfkurten")
+con.select_db("cake")
+cur=con.cursor()
+cur.execute("select * from wp_links")
+for c in cur:
+    print c
+con.close()</pre>
+为这个事情，折腾了好几天，今天无意之中在mysql的官方网站找到一个纯python实现的<a href="https://launchpad.net/myconnpy" target="_blank">mysql connector</a>，具体性能没与mysqldb比较过，估计要比mysqldb直接使用mysql的api差，算是mysqldb的代替品吧。
+
+纠结与这个原因，于是我转向了php，总归是有了ide，提高效率么。特别是智能提示，呵呵，太过依赖了。
+
+20110512加：这个问题其实是因为mysql的版本问题。写这篇日志的时候mysqldb的api只支持5.1所以，换回来就好了。（这里出问题的mysql版本是5.5。）

@@ -1,0 +1,23 @@
+<p>这个星期做了点事情，做了几个接口，大致了解了目前后台架构，以及一些设计方面的事情。后台主要是用java系的技术，<a href="http://tomcat.apache.org/" target="_blank">tomcat</a>做接口容器。实时消息这块主要由<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>去处理，基本上就是直接使用<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>的原有功能（除了clustering插件）。</p>
+
+<p>整体的系统框架是用了<a href="http://www.springsource.org/" target="_blank">spring</a>+<a href="http://ibatis.apache.org/" target="_blank">ibatis</a>+<a href="http://struts.apache.org/" target="_blank">struts</a>。用<a href="http://www.springsource.org/" target="_blank">spring</a>控制（<a href="http://dev.csdn.net/htmls/24/24397.html" target="_blank">IoC</a>）整体的接口封装，业务逻辑实现。数据层使用<a href="http://ibatis.apache.org/" target="_blank">ibatis</a>做数据库映射。数据库目前使用<a href="http://www.mysql.com/" target="_blank">mysql</a>。</p>
+
+<p>现在把<a href="http://tomcat.apache.org/" target="_blank">tomcat</a>，<a href="http://www.mysql.com/" target="_blank">mysql</a>，还有<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>架在一台服务器上，目前的<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>并发最高5000左右。网上看了一下，<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>并发具体可以支持多少也没啥具体介绍，官方也没有明确表示单<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>能支持多少的并发量。这个问题有待学习啊。还有就是，用户的消息数据会丢失，这个频率貌似还有点高。这个问题很纠结啊。</p>
+
+<p>后续发展的话，<a href="http://tomcat.apache.org/" target="_blank">tomcat</a>，<a href="http://www.mysql.com/" target="_blank">mysql</a>，单独部署，然后<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>安装clustering插件进行集群（不过，这个也不是这么好部的，装上这个插件之后就不能使用了，哎）。消息丢失这块，也没啥好办法，引入消息队列或许可以减少丢失频率。</p>
+
+<p>服务器端接口这块暂时还没有引入<a href="http://oauth.net/2/" target="_blank">oauth</a>机制。这个需要后续接入了。</p>
+
+<p>然后再来说说前端，现在做的一些手机web前端页面也是我做的，用<a href="http://www.php.net/" target="_blank">php</a>+<a href="http://kurchan.com/jquerymobile.com" target="_blank">jquerymobile</a>框架。同时也学到了前端一些页面设计上的事。也算对于最近这段时间有个交代了。前端还是有很多事情做的。页面载入速度优化就可以引入很多问题。可以查看<a href="http://oreilly.com/catalog/9780596529307" target="_blank">high performance web sites</a>，谁看谁知道。web前端这方面yahoo做得还是挺牛的。嗯，把这本书看完！</p>
+
+<p>后续学习目标(其实也就是看几本书)：</p>
+
+<p>1、xmpp(XMPP The Definitive Guide)、openfire</p>
+
+<p>2、spring框架、tomcat(Tomcat The Definitive Guide)</p>
+
+<p>3、mysql(High Performance MySQL/Web Operations Keeping the Data On Time)</p>
+
+<p>4、服务器性能优化(Operating Systems Design and Implementation/The Art of Computer Systems Performance Analysis Techniques)</p>
+
+<p>5、js压缩（high performance web sites）</p>
