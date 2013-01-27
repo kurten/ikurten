@@ -1,7 +1,0 @@
-<p>续前面那篇<a href="http://kurchan.com/?p=149">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
-
-<p>当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、acceptUnixHandler、acceptCommonHandler。一旦接收到一个tcp链接，acceptCommonHandler就会创建一个redisClient，并且把它加入到event的readable列表中，等待event loop执行readQueryFromClient函数。</p>
-
-<p>接着event loop时执行readQueryFromClient，获取客户端请求，然后执行请求，调用redis.c中processCommand --> call函数。</p>
-
-<p>在执行循环的时候会有个beforeSleep的void指针，指向redis.c中的beforeSleep函数，这个函数会遍历所有的server.io_ready_clients，重新热入到event loop列表，并执行客户端请求(这是由于redis可以开启virtual memory，有些命令操作可能会被swapped从而被block掉)。配置在redis.conf中vm-enable选项。redis默认不开启vm。</p>
