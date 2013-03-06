@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mysql技术 | ikurten.com]]></title>
   <link href="http://ikurten.com/blog/categories/mysql技术/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-03-07T00:33:12+08:00</updated>
+  <updated>2013-03-07T01:08:34+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
     <name><![CDATA[Kurten]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[mysql主从配置]]></title>
-    <link href="http://ikurten.com/blog/2011/08/02/mysql-master-slave/"/>
+    <link href="http://ikurten.com/blog/2011/08/02/53/"/>
     <updated>2011-08-02T00:37:49+08:00</updated>
-    <id>http://ikurten.com/blog/2011/08/02/mysql-master-slave</id>
+    <id>http://ikurten.com/blog/2011/08/02/53</id>
     <content type="html"><![CDATA[<p>mysql由于其cluster没有很好得解决方案，所以没有被广泛的使用。使用最广的还是mysql的主从备份，从而读写分离。mysql 5.5版本的主从replication性能还是相当不错的，下面是配置方法（昨天刚在两台测试服务器中尝试，记录一下）。参考<a href="http://dev.mysql.com/doc/refman/5.0/en/replication-howto.html">官方手册</a>。</p>
 
 <p>1、安装mysql（此处省略N字。。。）</p>

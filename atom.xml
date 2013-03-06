@@ -4,7 +4,7 @@
   <title><![CDATA[ikurten.com]]></title>
   <link href="http://ikurten.com/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-03-07T00:33:12+08:00</updated>
+  <updated>2013-03-07T01:08:34+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
     <name><![CDATA[Kurten]]></name>
@@ -1155,9 +1155,9 @@ have fun! :)</p>
   
   <entry>
     <title type="html"><![CDATA[mysql主从配置]]></title>
-    <link href="http://ikurten.com/blog/2011/08/02/mysql-master-slave/"/>
+    <link href="http://ikurten.com/blog/2011/08/02/53/"/>
     <updated>2011-08-02T00:37:49+08:00</updated>
-    <id>http://ikurten.com/blog/2011/08/02/mysql-master-slave</id>
+    <id>http://ikurten.com/blog/2011/08/02/53</id>
     <content type="html"><![CDATA[<p>mysql由于其cluster没有很好得解决方案，所以没有被广泛的使用。使用最广的还是mysql的主从备份，从而读写分离。mysql 5.5版本的主从replication性能还是相当不错的，下面是配置方法（昨天刚在两台测试服务器中尝试，记录一下）。参考<a href="http://dev.mysql.com/doc/refman/5.0/en/replication-howto.html">官方手册</a>。</p>
 
 <p>1、安装mysql（此处省略N字。。。）</p>
@@ -1242,9 +1242,9 @@ GRANT OPTION;</pre>
   
   <entry>
     <title type="html"><![CDATA[关于癌症]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/cancer/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/51/"/>
     <updated>2011-07-29T10:13:53+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/cancer</id>
+    <id>http://ikurten.com/blog/2011/07/29/51</id>
     <content type="html"><![CDATA[<div id="_mcePaste"><span style="line-height: 24px;">昨晚接到一个朋友电话，让我整晚都睡不着。他说他父亲换了肺癌，而且还是晚期。于是，就瞒着父亲。接下去，就是回家，然后好好照料他父亲了。生老病死的，不过突然听到亲人换了绝症，还是难以置信的事情。于是，什么都做不了，除了在最后的一段时间里好好照顾他，还能做什么呢？</span></div>
 
 
@@ -1255,9 +1255,9 @@ GRANT OPTION;</pre>
   
   <entry>
     <title type="html"><![CDATA[关于memcacheq的记录]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/memcacheq/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/48/"/>
     <updated>2011-07-29T04:03:25+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/memcacheq</id>
+    <id>http://ikurten.com/blog/2011/07/29/48</id>
     <content type="html"><![CDATA[<p>上个星期，因为项目需要，学习了一下<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>（一个持久化的消息队列），同时，写了一个定制性质的client（当然，协议还是用<a href="http://memcached.org/" target="_blank">memcached</a>的）。由于自身业务上面的需要，把这个client折腾成了可以根据配置进行扩展的方式。主要是针对业务处理消息的方法。</p>
 
 <p>单纯的<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>、<a href="http://memcachedb.org/" target="_blank">memcachedb</a>、<a href="http://memcached.org/" target="_blank">memcached</a>其实都没有集群的能力，只是用于单机的。如果没有客户端，那么也算不得一个完整的东西。原先的client采用连接池的方式，用来继承扩展还是太过麻烦，于是就自己写了一个socket连接。连接协议摆在那，自己写一个还是相对轻松很多的。各个业务以及一个queue连接，采用线程的处理方式。这样的话，就需要对线程进行定时检查，防止线程处理过程中索死或者interrupted，这主要还是为了容错。</p>
@@ -1270,9 +1270,9 @@ GRANT OPTION;</pre>
   
   <entry>
     <title type="html"><![CDATA[ubuntu编译安装php5.3.5]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/ubuntu-install-php5-3-5/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/46/"/>
     <updated>2011-07-29T04:03:06+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/ubuntu-install-php5-3-5</id>
+    <id>http://ikurten.com/blog/2011/07/29/46</id>
     <content type="html"><![CDATA[<div></div>
 
 
@@ -1313,9 +1313,9 @@ GRANT OPTION;</pre>
   
   <entry>
     <title type="html"><![CDATA[关于服务器端的学习记录]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/server-learning/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/44/"/>
     <updated>2011-07-29T04:01:09+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/server-learning</id>
+    <id>http://ikurten.com/blog/2011/07/29/44</id>
     <content type="html"><![CDATA[<p>这个星期做了点事情，做了几个接口，大致了解了目前后台架构，以及一些设计方面的事情。后台主要是用java系的技术，<a href="http://tomcat.apache.org/" target="_blank">tomcat</a>做接口容器。实时消息这块主要由<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>去处理，基本上就是直接使用<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>的原有功能（除了clustering插件）。</p>
 
 <p>整体的系统框架是用了<a href="http://www.springsource.org/" target="_blank">spring</a>+<a href="http://ibatis.apache.org/" target="_blank">ibatis</a>+<a href="http://struts.apache.org/" target="_blank">struts</a>。用<a href="http://www.springsource.org/" target="_blank">spring</a>控制（<a href="http://dev.csdn.net/htmls/24/24397.html" target="_blank">IoC</a>）整体的接口封装，业务逻辑实现。数据层使用<a href="http://ibatis.apache.org/" target="_blank">ibatis</a>做数据库映射。数据库目前使用<a href="http://www.mysql.com/" target="_blank">mysql</a>。</p>
@@ -1344,9 +1344,9 @@ GRANT OPTION;</pre>
   
   <entry>
     <title type="html"><![CDATA[流川枫与苍井空]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/moview/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/42/"/>
     <updated>2011-07-29T04:00:21+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/moview</id>
+    <id>http://ikurten.com/blog/2011/07/29/42</id>
     <content type="html"><![CDATA[<p><embed src="http://player.youku.com/player.php/sid/XMjY5NTczMDk2/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed></p>
 
 <p>纪念该纪念的。。。</p>
@@ -1355,9 +1355,9 @@ GRANT OPTION;</pre>
   
   <entry>
     <title type="html"><![CDATA[这段时间]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/recent-time/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/40/"/>
     <updated>2011-07-29T03:57:02+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/recent-time</id>
+    <id>http://ikurten.com/blog/2011/07/29/40</id>
     <content type="html"><![CDATA[<p>上星期加入了<a href="http://www.lianpu.com/" target="_blank">脸谱换换</a>创业团队，本来我是想去做web服务器端开发的，因为我么会点php于是折腾起了前端一些页面以及与后台接口调用神马的事情。工作状态，怎么说呢，感觉还好，我反正效率挺高的。可是啊，折腾发布这个事情可不是一般的纠结啊。每次都是发布之前过来看看，然后觉着神马要改了，然后修改。哎，你之前做神马去了？于是么，白天基本轻松，到晚上，哎。</p>
 
 <p>潦草，太潦草了。产品先确定功能点，然后优化，嗯，这个很好。需求么？今天谈一下，明天谈一下，产品经理啊，悲崔！好么，昨天有人说，要做网站版本的脸谱换换，好哇，想法很好么，瞎扯淡。您这是做产品么？怎么神马都做？让<a href="http://www.path.com/" target="_blank">path</a>情何以堪啊！</p>
@@ -1372,9 +1372,9 @@ GRANT OPTION;</pre>
   
   <entry>
     <title type="html"><![CDATA[美丽说功能点以及个人评估]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/meilishuo/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/38/"/>
     <updated>2011-07-29T03:56:44+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/meilishuo</id>
+    <id>http://ikurten.com/blog/2011/07/29/38</id>
     <content type="html"><![CDATA[<p>美丽说功能点</p>
 
 <p>一、我的首页</p>
@@ -1425,9 +1425,9 @@ GRANT OPTION;</pre>
   
   <entry>
     <title type="html"><![CDATA[蘑菇街功能点以及个人评估]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/mogujie/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/35/"/>
     <updated>2011-07-29T03:50:31+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/mogujie</id>
+    <id>http://ikurten.com/blog/2011/07/29/35</id>
     <content type="html"><![CDATA[<p>蘑菇街功能点</p>
 
 <p>一、个人空间</p>
@@ -1502,9 +1502,9 @@ GRANT OPTION;</pre>
   
   <entry>
     <title type="html"><![CDATA[关于mac os x 10.6的quicktime x]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/mac-os-x-10.6-quicktime+x/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/33/"/>
     <updated>2011-07-29T03:50:05+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/mac-os-x-10.6-quicktime x</id>
+    <id>http://ikurten.com/blog/2011/07/29/33</id>
     <content type="html"><![CDATA[<p>昨天因为看到有个lion dp3补丁，于是手痒，下来安装一下试试。mac os x10.7开发者预览版，尝试一下。没想到，无法更新，而且出错。于是，痛苦的过程开始了，重启进步了系统了。只能用系统盘修复了（ps：系统盘中的是10.6.4的版本）。这个只能怪我自己手痒了。</p>
 
 <p>然后下载更新，因为我原先系统是10.6.7版本，10.6.4的系统<a href="http://developer.apple.com/xcode/" target="_blank">xcode4.1</a>，<a href="http://www.apple.com/mac/facetime/" target="_blank">facetime 1.0</a>都没法用。更新完成，然后安装xcode完忽然出现一个dyld share cache问题，需要（sudo update_dyld_shared_cache -force）这个命令。之后，就是quicktime.framework这个问题了。其中一件灵异事件是，我把这个文件夹移除了，执行命令就没有问题，不移除就出现无法执行share cache这个问题。貌似是一个bug？没深入研究过。</p>
@@ -1517,9 +1517,9 @@ GRANT OPTION;</pre>
   
   <entry>
     <title type="html"><![CDATA[关于面试的记录]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/viewer/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/31/"/>
     <updated>2011-07-29T03:47:20+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/viewer</id>
+    <id>http://ikurten.com/blog/2011/07/29/31</id>
     <content type="html"><![CDATA[<p>这算是我第一次写关于面试后的记录。呵呵，刚去了<a href="http://www.mogujie.com/" target="_blank">蘑菇街</a>这个公司面试，在<a href="http://ditu.google.cn/maps?ie=UTF8&amp;q=%E6%9D%AD%E5%B7%9E%E5%B1%B1%E6%B0%B4%E4%BA%BA%E5%AE%B6&amp;fb=1&amp;hq=%E5%B1%B1%E6%B0%B4%E4%BA%BA%E5%AE%B6&amp;hnear=%E4%B8%AD%E5%9B%BD%E6%B5%99%E6%B1%9F%E7%9C%81%E6%9D%AD%E5%B7%9E&amp;cid=0,0,12302633174348231143&amp;ll=30.271873,120.110564&amp;spn=0.011471,0.023904&amp;z=16&amp;iwloc=A&amp;brcurrent=3,0x344b62bcdd3a234d:0x325d39b9ca1e5a93,0,0x344b641bf7eabb35:0x6eaa153514876e2f%3B5,0,0" target="_blank">山水人家</a>。我算是比较幸运啦，能够在他们搬家之前见一下他们第一个办公场地。之后他们要搬去别的地方了。</p>
 
 <p>办公场地其实就是一个套房，你懂得，基本上都在客厅办公。我去应聘web研发的，因为本身对于服务器端的技术比较感兴趣。跟搞技术的聊天，还是比较好的，思想比较单纯，只聊聊技术。虽然，我没有web开发的经验，特别是对于php的实践经验，但是php这门语言，还是很容易上手的。因为本身没有繁杂的内容，特别是有编码经验的人来说。只是函数以及一些特定的用法比较多，真正熟悉还是需要时日。</p>
@@ -1544,9 +1544,9 @@ GRANT OPTION;</pre>
   
   <entry>
     <title type="html"><![CDATA[新的起点]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/new-start/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/29/"/>
     <updated>2011-07-29T03:47:01+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/new-start</id>
+    <id>http://ikurten.com/blog/2011/07/29/29</id>
     <content type="html"><![CDATA[<p>周一的时候我跟头儿说，我要辞职。然后么，就是一些文档整理，工作移交。只是，因为还要做一部分工作。所以，只能到下个星期办手续了。对于一份自己不喜欢的工作、不喜欢的行业，迟早是要说88的。虽然，照样干的很好，照样可以获得很多。我辞职了，别人问，去哪家公司发展了？我说，没有，我只是单纯的辞职而已。需要一点时间准备，厚积薄发么。</p>
 
 <p>找一家互联网公司，我喜欢他们在做的事情，大不大不要紧。他们做的事情，要是我认为可以的，值得去做的事情。恩，就是这个目的。不然，枉费我这份激情了。技术、产品，只有自己真正热爱的才算。可以不计利益、不问付出，因为肯定会有回报。</p>
