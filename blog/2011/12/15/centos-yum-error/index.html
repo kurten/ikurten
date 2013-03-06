@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>centos中yum无法使用问题 - ikurten.com</title>
+  <meta name="author" content="Kurten">
+
+  
+  <meta name="description" content="Centos中yum无法使用问题 2011-12-15 | Comments <!-- google_ad_client = "ca-pub-7721655128098525"; /* Blog Main */ google_ad_slot = "7466725066"; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://ikurten.com/blog/2011/12/15/centos-yum-error">
+  <link href="/favicon.ico" rel="icon">
+  
+  <link href="/assets/bootstrap/css/spacelab.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/css/custom.css" rel="stylesheet" type="text/css">
+  <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+  
+  <link href="/atom.xml" rel="alternate" title="ikurten.com" type="application/atom+xml">
+  
+  
+
+</head>
+
+<body    data-spy="scroll">
+
+  <div class="container">
+    <header class="jumbotron subhead" id="overview">
+      
+<div class="subscribe">
+  <table>
+    <tr>
+      <td><span>Get Updates: &nbsp;</span></td>
+      
+	  
+      
+      <td><a href="/atom.xml" class="btn"><i class="icon-cog"></i> By RSS</a></td>
+      
+      
+    </tr>
+  </table>
+</div>
+
+<h1 class="title">ikurten.com</h1>
+
+  <p class="lead">85后码农</p>
+
+
+      <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container" style="width: auto;">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <div class="nav-collapse">
+                <ul class="nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/blog/archives">Blog</a></li>
+          <!--<li><a href="/projects">Projects</a></li>-->
+          <li><a href="/blog/about">About Me</a></li>
+        </ul>
+
+        
+          <form action="http://google.com/search" method="get" class="navbar-search pull-left">
+            <fieldset role="search">
+              <input type="hidden" name="q" value="site:ikurten.com" />
+              <input type="text" name="q" results="0" placeholder="Search" class="search-query span2" />
+            </fieldset>
+          </form>
+        
+        
+      </div><!-- /.nav-collapse -->
+    </div>
+  </div><!-- /navbar-inner -->
+</div>
+
+    </header>
+    <div id="main">
+      <div id="content">
+        <div class="row">
+  
+  <div class="span8">
+    
+  <header>
+    
+      <h1 class="entry-title">Centos中yum无法使用问题</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-15T14:47:34+08:00" pubdate data-updated="true">2011-12-15</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  
+    <div style="float: right; padding-left: 15px; padding-botom: 15px; ">
+      <script type="text/javascript"><!--
+      google_ad_client = "ca-pub-7721655128098525";
+      /* Blog Main */
+      google_ad_slot = "7466725066";
+      google_ad_width = 336;
+      google_ad_height = 280;
+      //-->
+      </script>
+      <script type="text/javascript"
+      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+      </script>
+    </div>
+  
+  
+  <div class="entry-content"><p>今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
+显示错误如下：</p>
+
+<pre>Loaded plugins: fastestmirror
+Determining fastest mirrors
+YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
+/Eg. 
+removing mirrorlist with no valid mirrors: /var/cache/yum/addons/mirrorlist.txt
+Error: Cannot find a valid baseurl for repo: addons</pre>
+
+
+<p>不知道什么时候把mirrors.txt文件给去掉了。
+后来查了一下有这么一串。</p>
+
+<pre>1./var/cache/yum/base/mirrorlist.txt
+url:
+http://mirrors.163.com/centos/5.7/os/x86_64/
+http://centos.ustc.edu.cn/centos/5.7/os/x86_64/
+http://mirror.neu.edu.cn/centos/5.7/os/x86_64/
+http://mirrors.ta139.com/centos/5.7/os/x86_64/
+http://ftp.nsysu.edu.tw/CentOS/5.7/os/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/os/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://ftp.twaren.net/Linux/CentOS/5.7/os/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/os/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/os/x86_64/
+http://centos.mirror.cdnetworks.com/5.7/os/x86_64/
+http://centos.tt.co.kr/5.7/os/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/os/x86_64/
+http://mirror.khlug.org/centos/5.7/os/x86_64/
+http://mirror.yongbok.net/centos/5.7/os/x86_64/
+http://ftp.daum.net/centos/5.7/os/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/os/x86_64/
+http://mirror.averse.net/centos/5.7/os/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/os/x86_64/
+
+2./var/cache/yum/updates/mirrorlist.txt
+url:
+http://mirror.neu.edu.cn/centos/5.7/updates/x86_64/
+http://mirrors.ta139.com/centos/5.7/updates/x86_64/
+http://mirrors.stuhome.net/centos/5.7/updates/x86_64/
+http://centos.ustc.edu.cn/centos/5.7/updates/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/updates/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
+http://ftp.daum.net/centos/5.7/updates/x86_64/
+http://mirror.khlug.org/centos/5.7/updates/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/updates/x86_64/
+http://centos.tt.co.kr/5.7/updates/x86_64/
+http://mirror.averse.net/centos/5.7/updates/x86_64/
+ftp://ftp.oss.eznetsols.org/linux/centos/5.7/updates/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/updates/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/updates/x86_64/
+http://centos.vr-zone.com/5.7/updates/x86_64/
+http://rsync.atworks.co.jp/centos/5.7/updates/x86_64/
+http://ftp.nara.wide.ad.jp/pub/Linux/centos/5.7/updates/x86_64/
+
+3./var/cache/yum/addons/mirrorlist.txt
+url:
+http://mirror.centos.org/centos/5/addons/x86_64/
+
+4./var/cache/yum/extras/mirrorlist.txt
+url:
+http://centos.ustc.edu.cn/centos/5.7/extras/x86_64/
+http://mirrors.stuhome.net/centos/5.7/extras/x86_64/
+http://mirror.neu.edu.cn/centos/5.7/extras/x86_64/
+http://mirrors.ta139.com/centos/5.7/extras/x86_64/
+http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.stu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.tc.edu.tw/Linux/CentOS/5.7/extras/x86_64/
+http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/extras/x86_64/
+http://mirror01.idc.hinet.net/CentOS/5.7/extras/x86_64/
+http://data.nicehosting.co.kr/os/CentOS/5.7/extras/x86_64/
+http://mirror.khlug.org/centos/5.7/extras/x86_64/
+http://ftp.daum.net/centos/5.7/extras/x86_64/
+http://centos.tt.co.kr/5.7/extras/x86_64/
+http://centos.vr-zone.com/5.7/extras/x86_64/
+http://mirror.averse.net/centos/5.7/extras/x86_64/
+http://mirrors.sin1.sg.voxel.net/centos/5.7/extras/x86_64/
+ftp://ftp.oss.eznetsols.org/linux/centos/5.7/extras/x86_64/
+http://mirror.nus.edu.sg/centos/5.7/extras/x86_64/
+http://ftp.yz.yamagata-u.ac.jp/pub/linux/centos/5.7/extras/x86_64/
+http://ftp.jaist.ac.jp/pub/Linux/CentOS/5.7/extras/x86_64/</pre>
+
+
+<p>对应的把这些url拷贝到mirrorlist.txt文件中去就ok啦。
+have fun! :)</p>
+</div>
+
+  
+    <script type="text/javascript"><!--
+    google_ad_client = "ca-pub-7721655128098525";
+    /* Blog Bottom */
+    google_ad_slot = "4562123819";
+    google_ad_width = 728;
+    google_ad_height = 90;
+    //-->
+    </script>
+    <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+  
+
+
+    <footer>
+      <p class="meta">
+        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kurten</span></span>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-15T14:47:34+08:00" pubdate data-updated="true">2011-12-15</time>
+        
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+      </p>
+      
+        <div class="sharing">
+  <br/>
+  
+  
+  
+</div>
+
+      
+      <p class="meta">
+        
+          <a class="basic-alignment pull-left" href="/blog/2011/12/04/memcacheq/" title="Previous Post: 阅读memcacheq源码记录">&laquo; 阅读memcacheq源码记录</a>
+        
+        
+          <a class="basic-alignment pull-right" href="/blog/2012/09/19/redis1/" title="Next Post: redis源码学习记录">redis源码学习记录 &raquo;</a>
+        
+      </p>
+    </footer>
+    
+    
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
+  </div>
+
+  
+    
+    <div class="span sidebar">
+    <div class="well">
+      
+        <section>
+  <h2>Recent Posts</h2>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/27/blog-migrate-to-github/">博客迁移</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/14/redis2/">redis源码学习记录(二)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/19/redis1/">redis源码学习记录</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/15/centos-yum-error/">centos中yum无法使用问题</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/04/memcacheq/">阅读memcacheq源码记录</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Links</h1>
+  <ul id="recent_posts">
+      <li class="post">
+        <a href="http://hmfly.info/">GeoVisual(GIS读研南)</a>
+      </li>
+  </ul>
+</section>
+
+<section>
+  <h2>GitHub Repos</h2>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/kurten">@kurten</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'kurten',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section>
+  <h2>On Delicious</h2>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/kurten?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/kurten">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+
+
+      
+    </div>
+  </div>
+
+
+
+  
+</div>
+
+
+      </div>
+    </div>
+    <footer class="footer"><p>
+  Copyright &copy; 2013 - Kurten -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> -
+  <span class="credit">Theme by <a href="https://github.com/barmstrong/octopress-bootstrap">Brian Armstrong</a></span> -
+  <span class="credit">Edited by <a href="http://ikurten.com">Kurten</a></span>
+</p>
+</footer>
+    
+
+<script type="text/javascript">
+      var disqus_shortname = 'ikurten';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ikurten.com/blog/2011/12/15/centos-yum-error/';
+        var disqus_url = 'http://ikurten.com/blog/2011/12/15/centos-yum-error/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+
+
+  </div>
+</body>
+</html>

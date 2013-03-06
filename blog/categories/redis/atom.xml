@@ -4,10 +4,10 @@
   <title><![CDATA[Category: redis | ikurten.com]]></title>
   <link href="http://ikurten.com/blog/categories/redis/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-01-27T17:06:21+08:00</updated>
+  <updated>2013-03-07T00:33:12+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
-    <name><![CDATA[kurten]]></name>
+    <name><![CDATA[Kurten]]></name>
     <email><![CDATA[chinkurten@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,10 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[redis源码学习记录(二)]]></title>
-    <link href="http://ikurten.com/blog/2012/10/14/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%28%E4%BA%8C%29/"/>
+    <link href="http://ikurten.com/blog/2012/10/14/redis2/"/>
     <updated>2012-10-14T07:23:59+08:00</updated>
-    <id>http://ikurten.com/blog/2012/10/14/redis源码学习记录(二)</id>
-    <content type="html"><![CDATA[<p>续前面那篇<a href="http://ikurten.com/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
+    <id>http://ikurten.com/blog/2012/10/14/redis2</id>
+    <content type="html"><![CDATA[<p>续前面那篇<a href="http://ikurten.com/blog/2012/09/19/redis1/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
 
 <p>当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、acceptUnixHandler、acceptCommonHandler。一旦接收到一个tcp链接，acceptCommonHandler就会创建一个redisClient，并且把它加入到event的readable列表中，等待event loop执行readQueryFromClient函数。</p>
 
@@ -30,9 +30,9 @@
   
   <entry>
     <title type="html"><![CDATA[redis源码学习记录]]></title>
-    <link href="http://ikurten.com/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    <link href="http://ikurten.com/blog/2012/09/19/redis1/"/>
     <updated>2012-09-19T00:14:47+08:00</updated>
-    <id>http://ikurten.com/blog/2012/09/19/redis源码学习记录</id>
+    <id>http://ikurten.com/blog/2012/09/19/redis1</id>
     <content type="html"><![CDATA[<p>最近一直在学习redis的源代码，大致上搞清楚了它是如何启动，载入参数，开始轮询接收tcp请求，以及具体执行tcp请求的方式。参照<a href="http://pauladamsmith.com/articles/redis-under-the-hood.html">《Redis:under the hood》</a> 此文，再对照源码。目前的stable版本，和此文上有些出入，但是大致逻辑上基本一致。</p>
 
 <p>redis按照单线程轮询(epoll、kqueue、select)tcp请求，服务端使用非阻塞IO，具体轮询代码实现，包含在ae.h、ae.c、ae_epoll.c、ae_kqueue.c、ae_select.c。tcp server实现在anet.h、anet.c。</p>

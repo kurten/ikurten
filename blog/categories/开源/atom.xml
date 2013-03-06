@@ -4,10 +4,10 @@
   <title><![CDATA[Category: 开源 | ikurten.com]]></title>
   <link href="http://ikurten.com/blog/categories/开源/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-01-27T17:06:21+08:00</updated>
+  <updated>2013-03-07T00:33:12+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
-    <name><![CDATA[kurten]]></name>
+    <name><![CDATA[Kurten]]></name>
     <email><![CDATA[chinkurten@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,10 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[redis源码学习记录(二)]]></title>
-    <link href="http://ikurten.com/blog/2012/10/14/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%28%E4%BA%8C%29/"/>
+    <link href="http://ikurten.com/blog/2012/10/14/redis2/"/>
     <updated>2012-10-14T07:23:59+08:00</updated>
-    <id>http://ikurten.com/blog/2012/10/14/redis源码学习记录(二)</id>
-    <content type="html"><![CDATA[<p>续前面那篇<a href="http://ikurten.com/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
+    <id>http://ikurten.com/blog/2012/10/14/redis2</id>
+    <content type="html"><![CDATA[<p>续前面那篇<a href="http://ikurten.com/blog/2012/09/19/redis1/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
 
 <p>当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、acceptUnixHandler、acceptCommonHandler。一旦接收到一个tcp链接，acceptCommonHandler就会创建一个redisClient，并且把它加入到event的readable列表中，等待event loop执行readQueryFromClient函数。</p>
 
@@ -30,9 +30,9 @@
   
   <entry>
     <title type="html"><![CDATA[ubuntu编译安装php5.3.5]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/ubuntu%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85php5-3-5/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/ubuntu-install-php5-3-5/"/>
     <updated>2011-07-29T04:03:06+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/ubuntu编译安装php5-3-5</id>
+    <id>http://ikurten.com/blog/2011/07/29/ubuntu-install-php5-3-5</id>
     <content type="html"><![CDATA[<div></div>
 
 

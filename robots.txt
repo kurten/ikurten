@@ -1,4 +1,2 @@
 User-agent: *
-Disallow: 
-
-Sitemap: http://ikurten.com/sitemap.xml 
+Allow: /

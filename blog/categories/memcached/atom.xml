@@ -4,10 +4,10 @@
   <title><![CDATA[Category: memcached | ikurten.com]]></title>
   <link href="http://ikurten.com/blog/categories/memcached/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-01-27T17:06:21+08:00</updated>
+  <updated>2013-03-07T00:33:12+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
-    <name><![CDATA[kurten]]></name>
+    <name><![CDATA[Kurten]]></name>
     <email><![CDATA[chinkurten@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[阅读memcacheq源码记录]]></title>
-    <link href="http://ikurten.com/blog/2011/12/04/%E9%98%85%E8%AF%BBmemcacheq%E6%BA%90%E7%A0%81%E8%AE%B0%E5%BD%95/"/>
+    <link href="http://ikurten.com/blog/2011/12/04/memcacheq/"/>
     <updated>2011-12-04T12:07:34+08:00</updated>
-    <id>http://ikurten.com/blog/2011/12/04/阅读memcacheq源码记录</id>
+    <id>http://ikurten.com/blog/2011/12/04/memcacheq</id>
     <content type="html"><![CDATA[<p>越来越觉着大学里学的谭浩强的《C语言程序设计》太狗血了，哎，悔不当初啊。</p>
 
 <p>今天下午闲着看了一下<a href="http://memcachedb.org/memcacheq/">memcacheq</a>这个消息队列的源代码，存储引擎用得<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>，<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>支持队列方式的数据存储，只不过一个record必须fixed-length，具体能存多大的长度，我没再官方的doc中找到，不过，<a href="http://memcachedb.org/memcacheq/">memcacheq</a>作者说最大消息长度不能超过64K，而且，如果你超过了64K，消息队列就挂了，嗯，这个我碰到过了，超过64K，存入消息队列之后，整个消息队列就得重启。所以，如果你不确定以后业务变更会增加消息体的大小，那么我不建议你使用<a href="http://memcachedb.org/memcacheq/">memcacheq</a> :) 。</p>
@@ -982,9 +982,9 @@
   
   <entry>
     <title type="html"><![CDATA[关于memcacheq的记录]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/%E5%85%B3%E4%BA%8Ememcacheq%E7%9A%84%E8%AE%B0%E5%BD%95/"/>
+    <link href="http://ikurten.com/blog/2011/07/29/memcacheq/"/>
     <updated>2011-07-29T04:03:25+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/关于memcacheq的记录</id>
+    <id>http://ikurten.com/blog/2011/07/29/memcacheq</id>
     <content type="html"><![CDATA[<p>上个星期，因为项目需要，学习了一下<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>（一个持久化的消息队列），同时，写了一个定制性质的client（当然，协议还是用<a href="http://memcached.org/" target="_blank">memcached</a>的）。由于自身业务上面的需要，把这个client折腾成了可以根据配置进行扩展的方式。主要是针对业务处理消息的方法。</p>
 
 <p>单纯的<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>、<a href="http://memcachedb.org/" target="_blank">memcachedb</a>、<a href="http://memcached.org/" target="_blank">memcached</a>其实都没有集群的能力，只是用于单机的。如果没有客户端，那么也算不得一个完整的东西。原先的client采用连接池的方式，用来继承扩展还是太过麻烦，于是就自己写了一个socket连接。连接协议摆在那，自己写一个还是相对轻松很多的。各个业务以及一个queue连接，采用线程的处理方式。这样的话，就需要对线程进行定时检查，防止线程处理过程中索死或者interrupted，这主要还是为了容错。</p>

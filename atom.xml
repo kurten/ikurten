@@ -4,10 +4,10 @@
   <title><![CDATA[ikurten.com]]></title>
   <link href="http://ikurten.com/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-01-27T17:06:21+08:00</updated>
+  <updated>2013-03-07T00:33:12+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
-    <name><![CDATA[kurten]]></name>
+    <name><![CDATA[Kurten]]></name>
     <email><![CDATA[chinkurten@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -29,39 +29,11 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[碎碎念]]></title>
-    <link href="http://ikurten.com/blog/2012/12/13/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    <updated>2012-12-13T13:04:44+08:00</updated>
-    <id>http://ikurten.com/blog/2012/12/13/碎碎念</id>
-    <content type="html"><![CDATA[<p style="text-align: center;">其一</p>
-
-
-<p style="text-align: left;">10月底杭州离开了杭州一家刚加入不久的创业公司，其中的辛酸，也就不扯了。酸甜苦辣，总是自己吞呗。移动互联网创业的这趟浑水，是越来越混了。花钱买用户，短期内想要做大，接着寻找天使，然后接着花。而某些天使呢，自己投资一些个渠道商，然后顺带介绍给投资的一些做app的创业公司，然后么，一环套着一环，产业链就这么来了么。其他人呢，总是不好混，当然，还是有些认认真真做事情的。我啊，还是不趟这趟浑水咯。</p>
-
-
-<p style="text-align: center;">其二</p>
-
-
-<p style="text-align: left;">11月份休息，然后么，顺带考考驾照。月中还面了几个公司，本来打算留杭州的，跟家人商量了一下，还是回老家算了。期间出一些小插曲，哎，这段时间真的很背啊。月底报了去泰国的旅游团，晚上的班机来回，走的线路，碰到的基本都是中国旅游团。团费便宜，路线比较坑爹，酒店就别提了。后面几天住的酒店，在很偏的地方，还没有热水，有天晚上还停电，比较悲剧。我们团人比较少，没人参加泰国导游推荐的自费项目，这个自费项目水分太大了，6个项目平均400块钱一项。于是，我们私下自己去参加了一个项目，门票只要400泰铢一个人哦，差不多90块钱啊。</p>
-
-
-<p style="text-align: center;">其三</p>
-
-
-<p style="text-align: left;">12月初就回老家工作了，因为要路考，于是还回了趟杭州，顺利拿到驾照。现在么，天天骑电瓶车上下班。早8点晚5点。日子么，就这么过呗。</p>
-
-
-<p style="text-align: left;"></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[redis源码学习记录(二)]]></title>
-    <link href="http://ikurten.com/blog/2012/10/14/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%28%E4%BA%8C%29/"/>
+    <link href="http://ikurten.com/blog/2012/10/14/redis2/"/>
     <updated>2012-10-14T07:23:59+08:00</updated>
-    <id>http://ikurten.com/blog/2012/10/14/redis源码学习记录(二)</id>
-    <content type="html"><![CDATA[<p>续前面那篇<a href="http://ikurten.com/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
+    <id>http://ikurten.com/blog/2012/10/14/redis2</id>
+    <content type="html"><![CDATA[<p>续前面那篇<a href="http://ikurten.com/blog/2012/09/19/redis1/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
 
 <p>当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、acceptUnixHandler、acceptCommonHandler。一旦接收到一个tcp链接，acceptCommonHandler就会创建一个redisClient，并且把它加入到event的readable列表中，等待event loop执行readQueryFromClient函数。</p>
 
@@ -72,23 +44,10 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[九月杂念]]></title>
-    <link href="http://ikurten.com/blog/2012/09/22/%E4%B9%9D%E6%9C%88%E6%9D%82%E5%BF%B5/"/>
-    <updated>2012-09-22T00:48:59+08:00</updated>
-    <id>http://ikurten.com/blog/2012/09/22/九月杂念</id>
-    <content type="html"><![CDATA[<p>想做的事情多了，渐渐的也就慢慢懒散了。博客，当初计划的，至少每个月都写吧，也总有段时间老是提不起劲头来写。</p>
-
-<p>本计划年内要看完的几本书，我想，还是看不完的了。<a href="http://book.douban.com/subject/3260311/">《Erlang Programming》</a>这本书年初的时候看的，现在再拿出来翻翻，还是很有收获的。打算重新学习一下C，于是又开始翻翻<a href="http://book.douban.com/subject/1139336/">《C程序设计语言》</a>。一直想学<a href="http://zh.wikipedia.org/zh/LISP">lisp</a>，虽然准备着手开始看<a href="http://groups.csail.mit.edu/mac/projects/scheme/">scheme</a>，主要还是因为<a href="http://book.douban.com/subject/1148282/">《计算机程序的构造和解释》</a>，本打算好好看看，断断续续的，只看了几页。还有<a href="http://book.douban.com/subject/1139426/">《数据结构与算法分析》</a>、<a href="http://book.douban.com/subject/5375620/">《失控》</a>、<a href="http://book.douban.com/subject/6860890/">《黑客》</a>、<a href="http://book.douban.com/subject/3244090/">《Professional Linux Kernel Architecture》</a>。。。买了很多书，基本上，合起来也没看几页啊。</p>
-
-<p>还有4个多月过年，好吧，剩下时间，认真的学习吧。</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[redis源码学习记录]]></title>
-    <link href="http://ikurten.com/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    <link href="http://ikurten.com/blog/2012/09/19/redis1/"/>
     <updated>2012-09-19T00:14:47+08:00</updated>
-    <id>http://ikurten.com/blog/2012/09/19/redis源码学习记录</id>
+    <id>http://ikurten.com/blog/2012/09/19/redis1</id>
     <content type="html"><![CDATA[<p>最近一直在学习redis的源代码，大致上搞清楚了它是如何启动，载入参数，开始轮询接收tcp请求，以及具体执行tcp请求的方式。参照<a href="http://pauladamsmith.com/articles/redis-under-the-hood.html">《Redis:under the hood》</a> 此文，再对照源码。目前的stable版本，和此文上有些出入，但是大致逻辑上基本一致。</p>
 
 <p>redis按照单线程轮询(epoll、kqueue、select)tcp请求，服务端使用非阻塞IO，具体轮询代码实现，包含在ae.h、ae.c、ae_epoll.c、ae_kqueue.c、ae_select.c。tcp server实现在anet.h、anet.c。</p>
@@ -106,141 +65,10 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[关于新公司]]></title>
-    <link href="http://ikurten.com/blog/2012/04/07/%E5%85%B3%E4%BA%8E%E6%96%B0%E5%85%AC%E5%8F%B8/"/>
-    <updated>2012-04-07T03:55:24+08:00</updated>
-    <id>http://ikurten.com/blog/2012/04/07/关于新公司</id>
-    <content type="html"><![CDATA[<p style="text-align: left;">加入新公司已经差不多有一个多月的时间了，最初么，也接过几个HR的电话，跟其他创业公司的头碰过，犹豫过，也徘徊了一下，还是决定留下来看看吧。这个团队也算一个中型公司下面的一个创业型公司，也可以说是一个创业项目吧。也是一个社区型产品。包括开发、运营在内的，团队基本上也算是草根形式的一帮人吧。我呢，依旧是干服务器这块的开发。目前公司也主要从智能手机客户端这块入手，刚起步，总归还算是慢慢进入状态吧。</p>
-
-
-<p>创业，或者小项目刚开始还是在于人。目前这个团队，内部分的还是太细，有时候团队内部沟通也不是很有效。最最讨厌的事情，还是在于有很多会议要开。团队还是越小越有效率，三五个人一个团队规模，基本上也算合适。当然，也是因为大多基本没在三五个人的创业团队呆过的，目前这种状态，基本上对于我来说算是很清闲的了。工作强度也不大，我呢，也好好恢复一下。顺便多看看，多学学吧。</p>
-
-<p>这个客户端产品，目前还是有很多地方需要改进，产品这块的出发点我很赞同，功能尽量少、能做到快速迭代，跟踪运营情况及时调整后续产品设计。最初的时候，我想也是快速开发、推出产品。一开始的时候，<a href="http://www.apple.com/ios/">iOS</a>和<a href="http://www.android.com/">Android</a>客户端还是外包出去做的。现在么，收回来自己开发，也算是有点吃力吧。等过了磨合期，我想，也应该是逐渐进入状态的。</p>
-
-<p style="text-align: left;"></p>
-
-
-<p style="text-align: left;">我呢，刚过了迷茫期，也算逐渐进入自己该有的状态吧。目前么，基本上靠自己摸索，然后慢慢前进了。琢磨着，业余再搞点啥项目什么的。想想现在自己也没啥拿得出手的东西，只能慢慢积累了。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[脸谱之死]]></title>
-    <link href="http://ikurten.com/blog/2012/03/14/%E8%84%B8%E8%B0%B1%E4%B9%8B%E6%AD%BB/"/>
-    <updated>2012-03-14T13:23:44+08:00</updated>
-    <id>http://ikurten.com/blog/2012/03/14/脸谱之死</id>
-    <content type="html"><![CDATA[<p>很早就想写点东西了，吐吐槽，发发牢骚。离开<a href="http://www.lianpu.com/">脸谱换换</a>这个创业团队之后，没多久，投资人也就宣布解散团队了，剩下的几个成员归入到他投资的另一个创业公司。其实，几个核心成员早已经走的差不多了。产品起起伏伏，或者，根本就没怎么起来过吧。我么也算经历了一个移动互联网产品的生存周期。</p>
-
-<p>一直以来，脸谱想做的事情总是很泛泛。我想投资人应该跟CEO说过，想做成啥样子，应该描绘过这张饼。其实，应该投资人自己来做CEO，这样或许更好点，脸谱也不会有这样的结局吧。CEO呢，在这里的角色其实很像接活干、接项目干，接了这个活呢，一个字，&ldquo;抄&rdquo;。当然，我不清楚CEO自己到底有没有什么概念，想把脸谱做成什么样子，或者，泛泛的讲做社交。有时候，&ldquo;抄&rdquo;也是一种学问。当然，做外包，也有学问。做创业项目外包，那学问更大了。</p>
-
-<p>从宽泛的角度切入，做出来的产品，有时候就不那么纯粹了。其实啊，就是四不像。什么都有点，却什么都不是。于是，没法有效的留住用户。做产品还是要有产品经理，当然，最完美的事情，莫过于CEO就是干产品经理出身，有丰富的背景经历，受过苦、吃过亏，走过很多弯路。现实往往没有这么美好，一个干外包项目出身的技术人员，来担当这个产品经理的角色，那么，接下去的路途是非常遥远的。首先一个是思维方式，其次，就是会走很多弯路，还有就是设计产品的方式，实现产品的方式，就是来回折腾，最后么，能赶出来，但是质量又不是那么过得去的。美其名曰，敏捷，其实啊，一点都不敏捷。劳心劳力，疲惫不堪。我见过最高效的产品设计规划，一天时间，就把接下去一个版本要实现的功能都定完细化，接下去几天实现，最后出来的产品，我个人觉得还是很棒的，真心觉得很赞。</p>
-
-<p>所以啊，你要是想敏捷，那么就花最短的时间把有限的产品功能以及具体功能流程理清楚，当然，我说，有限的产品功能，其实很多时候你以为很必须的功能，但是又相对来讲实现比较复杂的，往往都是些没必要的功能。最简单，即最实用。这些，算是经验之谈了。</p>
-
-<p>还有啊，老板千万得大肚量。产品设计，由产品经理说了算，这对于创业公司来讲，是必须遵守的天条。不管结果怎样，就算产品设计再怎么烂，你可以跟产品经理提，但是如果不被接受，则必须执行实现，不过如果你提出的异议很合理，我想任何人都是会接受的。这个如果对于产品经理即CEO的团队，那倒还好，如果产品经理非CEO的创业团队，那么，这里对CEO的肚量是个很大的考验。如果撑得过去，那么，男人的胸怀，是冤枉撑大的嘛。如果过不去，那么最终结果还是不说也罢。细细品来，其实矛盾也会在此滋生。创业团队有摩擦，其实很正常，关键是很多时候，有些人并不是那么容易释怀一些事情的。于是，就会有挣、有抢。最后呢，也就速速散了吧。当然，人非圣人，要能够做到对事不对人，的确还是有些难度的。</p>
-
-<p>真心怀念脸谱后台架构调整的那段时光啊，是我收获最多的时候，也得感谢那位架构师大哥啦。自从他断断续续过来，到最后不来，我们这，人心也就那么散掉了。创业还是需要激情的，到最后变成了一种煎熬，那么这个团队，这个项目也差不多该结束了。</p>
-
-<p>还有一点，想吐槽的，其实就是人情味了。最初的时候，也是最最重要的时候，虽然压力大，但是一起努力。毕竟大家也是一起有点憧憬，有点想法，有点激情，想做出点事情来的。也算朋友，互相帮助，互相学习，然后一起成长。当然，此时如果积累下去，那么逐渐形成的一种氛围，渐渐的影响力越大，那么，公司传承的东西，也会茁壮成长。这种事，等到大了，渐渐体会的到，如果后知后觉。影响力，其实还是一点点积累出来的东西，总归还是需要大家认同的。(2012-03-20增)</p>
-
-<p>最终呢，还有一点，我真的是很不服气的，就是工资了。一月份的时候发了一部分，说得好好的，余下的会发的，然后呢，拖到现在才发。期间呢，在讨论工资的问题上，对于我这样在2月底走的耍了些手段。七扣八扣的，到最后也没几个钱了。拿到手，总共的10分之一差不多。原来，这人啊，就是这么对待我们这些一起奋斗过那么久的战友的，难怪脸谱就这么死了。想想自己也算幸运见识了这个人吧。总会碰到这么几个，当面一套，背后一套的。总不清楚投资人知不知道这事情，我想，总归是知道点的吧，他又不用当恶人，少亏点钱，他也乐的。就怕啊，某些人中饱私囊！</p>
-
-<p style="text-align: left;">我呢，最后也算花钱买个教训吧！</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[最近这段创业生活]]></title>
-    <link href="http://ikurten.com/blog/2012/02/10/%E6%9C%80%E8%BF%91%E8%BF%99%E6%AE%B5%E5%88%9B%E4%B8%9A%E7%94%9F%E6%B4%BB/"/>
-    <updated>2012-02-10T02:05:15+08:00</updated>
-    <id>http://ikurten.com/blog/2012/02/10/最近这段创业生活</id>
-    <content type="html"><![CDATA[<p>自从去年6月份进入目前这家公司，到现在差不多也有将近9个月的时间了。从刚开始基情四射，到现在天天敲钟，这次创业，也就差不多这么快结束了。我呢，也算得上有些收获吧。<a href="http://www.paulgraham.com/">Paul Graham</a>说，创业最重要的还是看前5个人，现在看来，这句话确实是非常正确的。反正以后如果创业，要是老板外包行业出身，那我是得三思而后行了的。对于那些工作多年的，特别是国内一些外包公司的人，多半是带些外包从业气息的，这些人，如果再进入外包行业么，那也算对路。要是来互联网行业创业，多半，还是要死的。</p>
-
-<p>前面一家公司的文化，特别是呆过3-5年的公司，绝对深入骨髓的。包括一些行事风格，除非么，有自我觉悟，懂得看些书，学习点经验，慢慢改么，否则，多半下场还是可以预测的。</p>
-
-<p>看完<a href="http://book.douban.com/subject/5914587/">《启示录》</a>，对比一下我们做产品的过程，人家犯过的错，我们也在犯，感慨万千啊。自问，我们的产品根本不能解决什么问题，于是，为何要用这个？专注于解决小问题，如果可以解决好Ctrl+C以及Ctrl+V的问题（听说过这么一则笑话，一个老板，在公司电脑上对一份文件Ctrl+C，复制了一下，然后在家里电脑上Ctrl+V，粘贴，可惜，什么都没有），那么你就可以挣钱了（Dropbox&#8212;>可惜被墙）。</p>
-
-<p>创业刚起步阶段，最重要的，还是大家相互激发，相互促进，而不是说，你说得话就一定要听，不听么，好吧，这事你不用做了，走吧。很多事情，还是在于团队，但是产品，拍板的还在于产品经理。如果带项目的，或者做测试的去为产品功能、需求拍板，那么最终的产品可想而知了。哎，总是会有些无奈的。</p>
-
-<p>再者，还是效率了。本以为，创业公司的效率还是会很高的。比如，一天确定接下去版本的产品需求，一星期左右实现，基本上没多大问题。可惜啊，定个产品需求，要考虑这个，考虑那个，考虑以后要做什么什么，最终么，定义的实现，为了兼容上一版本的，还得来回折腾。期间呢，开发过程经常性质的被打断。come on！！！还一定要扯你，说你效率不够，开发进度老是拖。然后么，就接着定死你的上班时间，时间不到？早走？好吧，扣钱！于是么，一整套外包做法就出来了。童鞋，别忘了咱是一起再创业啊，咱也承担一定风险的啊。你要想想，如果公司逐渐壮大了，你要传承下去的是什么？就是这中东西么？come on！！！</p>
-
-<p>这么一段时间，也算是对我自身成长的一种帮助吧。从刚开始的，对web开发的一些技术基本上不懂，到目前的，也算做过点项目了（我们自己开发的即时聊天系统，以及一些业务的api）。对于java web开发的一些道道呢，也算熟悉了（<a href="http://www.springsource.org/">spring</a>、<a href="http://struts.apache.org/">struts2</a>、<a href="http://ibatis.apache.org/">ibatis</a>、<a href="http://tomcat.apache.org/">tomcat</a>）。期间呢，也算折腾过<a href="http://mongodb.org">mongodb</a>。本来的，接下去想把业务上一些单点的逻辑给去掉。目前呢，我们API（运行在tomcat环境下）是单点的，其中还包含一块文件存储的，打算用<a href="http://www.mongodb.org/display/DOCS/Master+Slave">mongodb master/slave</a>存储文件，以及一些空间数据，不过<a href="http://mongodb.org">mongodb</a> 1.8存文件有limit，<a href="http://www.mongodb.org/display/DOCS/When+to+use+GridFS">最大只支持16M</a>，我们用2.0+，也就存存小文件，基本没啥问题。API呢，做一下<a href="http://httpd.apache.org/">apache</a>+<a href="http://tomcat.apache.org/">tomcat</a>的负载均衡，不过个人还是倾向于用<a href="http://nginx.org">nginx</a>，我们的即时聊天呢，目前来讲是没有单点的。</p>
-
-<p>即时聊天还是需要优化，把<a href="http://memcachedb.org/memcacheq/">memcacheq</a>给去掉，包括后台处理消息的应用，全部使用<a href="http://erlang.org">erlang</a>来写，基本上的话，那就是自有协议的<a href="http://www.ejabberd.im/">ejabberd</a>了。以前我们即时聊天使用的是<a href="http://www.igniterealtime.org/projects/openfire/">openfire</a>，我来的时候也还在用，不过，经常性质的会出现问题，我估计么，可能是因为没有用好。</p>
-
-<p>接下去么，还是得继续找工作啊，简历么，海投了。。。找个技术氛围浓厚，有没有那么多边边框框的工作，真不容易啊！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[关于又一次辞职]]></title>
-    <link href="http://ikurten.com/blog/2012/01/20/%E5%85%B3%E4%BA%8E%E5%8F%88%E4%B8%80%E6%AC%A1%E8%BE%9E%E8%81%8C/"/>
-    <updated>2012-01-20T11:57:14+08:00</updated>
-    <id>http://ikurten.com/blog/2012/01/20/关于又一次辞职</id>
-    <content type="html"><![CDATA[<p>昨天跟头提了离职，是啊，这是迟早的事情么。我们这个创业项目啊，也差不多快死了。团队散了，真的，这么折腾，真疲了。没有做产品经验的人主导做产品，而且还是做外包项目出身。这么做，首先最重要的问题都没有解决，还想，这个里面要加这个、加那个。哎，最终啊，还是这么死死的，没啥特色。在他们眼里，移动客户端的产品就那样子，这边抄一点，那边抄一点，就行了。从来不曾觉得为什么要加这个，能解决什么问题？有什么帮助？</p>
-
-<p>我呆着，也算有半年多了，不怎么甘心这么折腾，基本上啊，都要走了，年底了，散伙饭都没吃。算是一种遗憾了。半年里，看着好几个同事走，又来了好几个新同事，这回，都走了。</p>
-
-<p>最近，又买了几本书，<a href="http://book.douban.com/subject/4163938/">《软件随想录》</a>、<a href="http://book.douban.com/subject/1827702/">《点石成金》</a>，这两本书都是经验啊，一本算是创业以及软件行业的心得经验，另一本是网页设计的经验之谈，都蛮不错的。人到了一定时候是不是真就不看书？看别人怎么做就可以了？我觉着，活到老学到老嘛。总要做点和别人不一样的事情出来，现在么，算是一点点积累吧。这半年时间，做得这个项目，我还是非常受益的，虽然，经验尚浅，但是折腾点事情还是靠谱的。</p>
-
-<p>过完年，还得开始找工作啊，想做服务器端的开发，一直打算写个消息队列来着，由于前段时间一直忙，接下去应该有时间写了，基于<a href="http://memcached.org/">memcached</a>协议的消息队列，用<a href="http://erlang.org">erlang</a>写，嘿嘿，存储引擎使用leveldb或者直接文件存储。然后用<a href="http://python.org">python</a>写个客户端，顺便学习学习<a href="http://twistedmatrix.com/trac">Twisted</a>，事件驱动模式的python库，事件驱动对于服务器端的开发确实高效，该干嘛时干嘛，有人搭讪，立马回答，完了继续该干嘛干嘛，不需要耗着资源一直等着搭讪。</p>
-
-<p>忽然觉着，自己能折腾的事情越来越多，但是，还是不够沉淀。接下去，得找个能沉淀些东西的活。外包神马的，最讨厌了啊。</p>
-
-<p>今天，回家过年，这两天，有点小插曲，注定着2012过得不是很顺啊。</p>
-
-<p>人生么，在于折腾啊！:)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[年终总结]]></title>
-    <link href="http://ikurten.com/blog/2011/12/17/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
-    <updated>2011-12-17T06:53:20+08:00</updated>
-    <id>http://ikurten.com/blog/2011/12/17/年终总结</id>
-    <content type="html"><![CDATA[<p>今年换了份工作，原先是搞GIS项目二次开发的，说白了就是拿别人的SDK根据业务需求方做些定制开发，对于一些特定的业务流程做一下优化，处理一下特定的数据，对于GIS来说，数据就是业务，业务就是数据。也就一些小项目，自己不是很喜欢搞这个，干到4月底于是就辞职了。</p>
-
-<p>呆了一个来月，觉着自己是该找找工作了，于是，海发简历，你懂得。不过，发的都是些互联网创业公司。因为自己对创业神马的很感兴趣，在大学里一直看一些赢在中国这样的视频，导致骨子里一味的想创业，所以就一直寻寻觅觅。后来就到了现在这家创业公司。面试的时候，是轮着面，一个面完接着另一个，想想创业公司也总该招人谨慎点吧。也是因为自己的背景和他们要求的不是很符合，所以就认认真真的回答问题。后来呢，我花了一个下午，做了一个wap页面，是用php写的，用了jquery mobile这个还是alpha版本的js框架，那时我对php也是刚刚入门，js神马的是早期看过一点，也不熟，更不用说CSS和jquery mobile这个框架了。当然啦，我是照着产品经理的原型做的，最终结果模样瞅着还行，于是就这么pass了，第二天就正是上班啦。那天刚好是6月1号，儿童节啊。现在想想，有点诧异啊，当时我怎么就能找到jquery mobile这么个东西呢？也算幸运啊，就这么pass了。</p>
-
-<p>我本来就冲着java web开发这个岗位做的，刚开始对spring，struts，ibatis这些东西都不熟，当然因为对php有点了解，于是开始就写php，做手机访问页面。当时对于java也算稍微了解一点了，就自个摸索这折腾折腾。当时有个架构师，不过经常性质的不来，还有两个开发人员，一个是leader，还有一个就是员工了。后来又来了个实习的。我差不多花了一个多星期的时间，把要求使用的wap页面写完，期间，修修，改改，来回折腾了很多回。咱头的性子很急躁，脾气也不咋滴，于是，期间还经常性质的和产品经理&ldquo;聊聊天、谈谈心&rdquo;，于是，设计也是来回折腾，不提也罢啊。</p>
-
-<p>一个星期后，正式开始接触spring，struts，ibatis这些东西，还有tomcat，也算干上了java web开发了。那是主要是用struts包装一些url，用户iphone、android手机客户端调用，就是api。一开始，调试那个配置，实在是件很累的事情，也是，本身那些东西不知道从哪里搞来的，就这么一直用着，天知道啊。那时我们的聊天系统使用的是openfire，基于xmpp协议的时时聊天系统。这个东西，间歇性质的会出些问题，虽然是到3.X的版本了，不过大部分原因还是因为我们都不熟悉他的缘故吧。而且，openfire会有消息丢失的现象，当时，由于搞iphone开发的人就一个，还是菜鸟，所以iphone版本也是很糟糕的版本，android版本有三个人开发稍微好点，不过，设计也是很烂很烂的，一点都不易用。有两个UI，但是纯粹只做UI图，基本不写CSS及其他东西，单纯的只用ps做图，称为设计。产品经理会用axure做原型。</p>
-
-<p>过了一段时间，搞iphone开发的来了一个牛人，同时，头又从原先呆的公司找来几个人做iphone和android，基本都是有好几年工作经验的人。产品经理还是原先那个，继续搞他的设计。iphone和android的都重新架构设计，代码都重写了一遍。这期间服务器开发api这边走了两个人，那架构师还是间歇性质的过来一下。于是，就剩下我和一个实习的了。恰好，新来一个高级架构师，打算用erlang自己写个消息系统，我一听，立马来了兴趣，这架构师人蛮好的，过来之后带我和那个实习生。我们么，也算努力，分工的时候，我们给这个消息系统取了个名字&ldquo;擎天柱（Optimus Prime）&rdquo;，名字很拉风。我分工做memcacheq通信框架，用spring包装一下，开放给后台java应用做driver。同时，我也用这个框架做了几个处理特定消息的程序，我们称她为后台应用app，因为消息都是通过memcacheq做中转，所以，前台有高并发特性的erlang支持，后台可以慢慢做事情，这种模式，对于增加和横向扩展都非常容易。</p>
-
-<p>本来我想参与iphone客户端协议开发，但是想想自己对于位运算这种玩意玩不转，于是就放弃了。这个消息系统大概花了1个月的时间，我们服务器从原先的2台云主机，一台兼容机，一台dell服务器，扩展到4台dell服务器，一台兼容机。期间学习到了很多东西，包括使用iptables，apache与tomcat做负载均衡，用iptables做负载均衡，tcp/ip通讯，等等，对我帮助很多的还要感谢新来的架构师，原先那个，这期间也就不来了。这期间，android组开发，也走了一个人，iphone组，开发来了个实习生。服务器组开发这边就我们三。等到我们新消息系统上线，iphone新版也推出来了。</p>
-
-<p>接下去就是客户端改版啦，我呢，也参与者做wap页面和我们网站主页的改版。这期间，主要就是谢谢php，js还有一些客户端使用的api业务更改，修改一下原有的bug。改版还是主要由于投资人的影响。说实话，我真不觉的我们头对这产品想做成啥样有个大概想法。很笼统的，说做熟人社交。嗯，对，熟人社交是不错。关键是切入点，一直看米聊、微信、path、linkedin。。。都不知道想啥，最后还是在这IM、幸会神马的动作迅速，老想着抄别人点啥。。。最后，哎。。。然后产品经理由iphone开发的那个经验丰富的人来担任了，原先那个么，也就走了。</p>
-
-<p>然后，下一版本，又改版啦，之后就是坚定的走商务路线，开始上名片，上邀请好友。同时要上传通讯录给你自动匹配好友，期间使用http协议做上传，然后又改成tcp，接着又改回http，这事情不是一般的折腾。期间就碰到一个memcacheq最大消息体64K的问题，于是，抽空学习了一下他的源代码，还有就是memcachedb的。基本上两个实现差不多。光光名片接口讨论，刚开始说，很简单的，只要能取到，然后能下载就成。接着说，这个恐怕不行吧，不能这样做。邀请接口讨论也是这么折腾。接着么，由于头的不信任。产品经理最后，只能换到头自己身上了。你说，你让人家做产品经理，好，那设计什么的，都让他去做，你要信任他吧？不用，他弄了一套，然后你自己又回去弄一套方案，接着，跟他说你那个不行，还是用我的吧。于是，那你自己去弄呗。</p>
-
-<p>设计么，至画个ui，然后说，我都画在ui上了，你照做吧。还好，会给我们讲讲ui。好吧，你狠，我照做。接口设计照着ui做吧，你不行，不能这么干，不照做吧，不行你不能这么干。总是在讨论接口实现的业务时，经常纠结的，这个也要加，那个也要做，总说，以后我们可能会这样的，你不能这么草率，以后我们需要神马神马的，你不能这么照ui设计。</p>
-
-<p>接着，就因为一些问题，我们架构师还和头争执，于是，产品神马的，都成浮云了。头有个毛病，就是做产品时不知道怎么取舍。在他眼里，我们客户端应用的版本，因为一个小问题，就得重新发布一个新版本。当然，这期间，名片下载上传与好友邀请与推荐是我设计的，从中也学到了很多东西。做开发的，关键还得看产品设计啊。因为接口目前的用户就是客户端。客户端的业务逻辑就是产品设计决定的。如果说，没有一个清晰的产品体验逻辑，任何设计都是浮云啊。</p>
-
-<p>最近刚刚做完活动的接口，哎，这段时间真的是折腾死人了。有几个接口差不多开发完成的时候，突然告知，不能这么干，逻辑还得改，改就改吧，反正我是习以为常了。幸好，这事有一个新来的架构师扛着。当然，期间也有些很坑爹的事情。QA，知道吧，现在QA不单单要测试产品，连产品需求咋整的，都要QA来弄，我们这QA也可怜，天天被折腾，苦逼啊。还有么，就是经常性质的会听到，你去看看别人怎么做的么，然后再来跟我谈这个事情。尼玛，从没听过，产品功能要参考别人，然后自己没有想法做到什么程度的，直接抛给你一句，先去看别人怎么做的。我们开发么，经常性的被打断，来查查这个问题，来看看这个是怎么回事。还要死定个时间，硬要在这段时间弄完，弄不完，你想办法，好吧，我是想不到办法了，最后么，这个跟我原先想的不一样啊，这个又问题啊。你早干嘛去了？早干嘛不来说说清楚？那些不做，那些做，为啥什么都一期做了？为啥不考虑考虑这么做了有啥用？为啥要这么做？</p>
-
-<p>原先那个，现在是公司顾问，就周五来一天。哎，乐得悠闲啊。真怀念开发&ldquo;擎天柱&rdquo;那段时光啊。我估摸着，我是不是得换份工作？到年底了，总感觉头对任何人都有中监视心理，总觉着你干活不怎么卖力，也不想想为啥进度会拖慢。我想，只是旁观者清吧。我呢，也犯过几个错误，对于scheme free有了更深刻的感触，对于mysql应用，也加小心。对于业务变更，要更改字段，要千万小心。nsql还是很有必要深入学习一下。</p>
-
-<p>犯过错，才会成长么，如果一个公司的头，没有这种远见，总想着，谁谁谁尽快把活干完，不在乎谁谁谁成长多少，那么，是不是该考虑换个公司？</p>
-
-<p>前段时间，买了好几本书，都没有看完。kindle里面还有很多资料也没有看，对于感兴趣的事情我得专注啊。</p>
-
-<p>琐碎的事情，罗列于此。总的来说，这大半年的时光，自己还是成长了很多，特别是开发&ldquo;擎天柱&rdquo;那段时间，了解了压力测试，写过loadrunner脚本，本打算学习一个tsung，服务器产品性能，以及tcp/ip通讯的东西，同时也接触到了erlang这们相当优雅的并发编程语言。Joe老头还是很牛叉的，虽然没有把他写得书《Programming Erlang》看完，但是看完了他写的那篇论文，还是很有成就感的。本打算开发完&ldquo;擎天柱&rdquo;，乘有空的时候，用erlang写一个基于memcached协议的消息队列，参考bitcask的实现，直接用文件存储。但是看到FQueue的实现之后，发觉，用RandomAccessFile实现性能不错的文件型持久化消息队列也挺简单，用jmemcached做缓存，实现memcached协议。这个计划，暂时搁浅了，总感觉用erlang写一个应该性能更不错。</p>
-
-<p>新的一年，找一份新工作，期待宽松的工作氛围，老板不会一天到晚督促你干活干活，老板信任每个员工，给予充分的自有，有自由的发挥空间，最好不要严格的考勤，最后一点，还是我喜欢的，高并发、数据存取、high performance，最好可以使用nsql产品。</p>
-
-<p>看书、看书、看书，把前段时间买的几本书看完。同时重新学习一下C语言，把《Programming Erlang》看完，用erlang写一个消息队列，学习一下linux内核，把《Professional Linux Kernel Architecture》这本书给看了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[centos中yum无法使用问题]]></title>
-    <link href="http://ikurten.com/blog/2011/12/15/centos%E4%B8%ADyum%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/"/>
+    <link href="http://ikurten.com/blog/2011/12/15/centos-yum-error/"/>
     <updated>2011-12-15T14:47:34+08:00</updated>
-    <id>http://ikurten.com/blog/2011/12/15/centos中yum无法使用问题</id>
+    <id>http://ikurten.com/blog/2011/12/15/centos-yum-error</id>
     <content type="html"><![CDATA[<p>今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
 显示错误如下：</p>
 
@@ -336,9 +164,9 @@ have fun! :)</p>
   
   <entry>
     <title type="html"><![CDATA[阅读memcacheq源码记录]]></title>
-    <link href="http://ikurten.com/blog/2011/12/04/%E9%98%85%E8%AF%BBmemcacheq%E6%BA%90%E7%A0%81%E8%AE%B0%E5%BD%95/"/>
+    <link href="http://ikurten.com/blog/2011/12/04/memcacheq/"/>
     <updated>2011-12-04T12:07:34+08:00</updated>
-    <id>http://ikurten.com/blog/2011/12/04/阅读memcacheq源码记录</id>
+    <id>http://ikurten.com/blog/2011/12/04/memcacheq</id>
     <content type="html"><![CDATA[<p>越来越觉着大学里学的谭浩强的《C语言程序设计》太狗血了，哎，悔不当初啊。</p>
 
 <p>今天下午闲着看了一下<a href="http://memcachedb.org/memcacheq/">memcacheq</a>这个消息队列的源代码，存储引擎用得<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>，<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>支持队列方式的数据存储，只不过一个record必须fixed-length，具体能存多大的长度，我没再官方的doc中找到，不过，<a href="http://memcachedb.org/memcacheq/">memcacheq</a>作者说最大消息长度不能超过64K，而且，如果你超过了64K，消息队列就挂了，嗯，这个我碰到过了，超过64K，存入消息队列之后，整个消息队列就得重启。所以，如果你不确定以后业务变更会增加消息体的大小，那么我不建议你使用<a href="http://memcachedb.org/memcacheq/">memcacheq</a> :) 。</p>
@@ -1302,80 +1130,10 @@ have fun! :)</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[哎，人生；哎，产品]]></title>
-    <link href="http://ikurten.com/blog/2011/11/13/%E5%93%8E%EF%BC%8C%E4%BA%BA%E7%94%9F%EF%BC%9B%E5%93%8E%EF%BC%8C%E4%BA%A7%E5%93%81/"/>
-    <updated>2011-11-13T02:55:44+08:00</updated>
-    <id>http://ikurten.com/blog/2011/11/13/哎，人生；哎，产品</id>
-    <content type="html"><![CDATA[<p>前段时间由于项目上面的业务变更，导致memcacheq这个消息队列使用有点捉襟见肘。由于其对于消息体大小有限制，而且最大不能超过60K，就萌生了自己写一个消息队列的想法。总是掌握在自己手中，能应对现有的业务需要的东西用着才爽啊。本来计划是有空就改写的，但是由于产品上面一而再再而三的修改功能、修改方向，最坑爹的事情是没有功能定义的情况下得去照搬别的产品的功能。悲剧ing。于是这个计划一直没有实施。</p>
-
-<p>哎，技术架构方案的选择真得是件麻烦的事情，得遇见今后一段时间的业务变更与增长，又要考虑现有资源。这样做出合理的，可以实现的方案。我们那架构师也辛苦，总得和老板设计的产品做pk。心力交瘁啊。有时候想想，也迷茫，咱这是做了啥东西？用来干啥？对自己也没多大帮助啊？更坑爹的事情是，把外包那套管理项目的方式折腾过来，每天都是下班时过来给你折腾点东西，杯具ing。产品设计上面没有明确的功能性设计，只是笼统的说，我要这个功能，其他你可以去参考别人怎么做的。你妹啊！</p>
-
-<p>一个ui图，再加个说明，给你，你去设计接口吧。好吧，设计完接口又说，你这样不行，客户端没法调用的，两个接口，怎么可以这样子用，客户端调用很麻烦的，你如果做客户端，你怎么去弄？哎，坑爹啊！</p>
-
-<p>神马浮云啊，没做过产品经理的，把项目管理那套东西搬过来，好吧，你行的。我算是清楚了。我只写代码。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[坑爹的产品设计]]></title>
-    <link href="http://ikurten.com/blog/2011/11/11/%E5%9D%91%E7%88%B9%E7%9A%84%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/"/>
-    <updated>2011-11-11T00:30:52+08:00</updated>
-    <id>http://ikurten.com/blog/2011/11/11/坑爹的产品设计</id>
-    <content type="html"><![CDATA[<p>坑爹的产品设计会造成神马后果，哎，我总算见识了。从没见过时间被扣的这么死的，好吧，你是老板，我认了。也不想想，万一有啥问题要查，要调试，这不还是被打断？</p>
-
-<p>搞项目的，以为看了些别人的产品就来折腾产品设计，好吧，你牛。这么好的一个产品经理摆在那里，不要，成，那你自己弄出点好的事情来啊？一要个功能，就来，你看看别人怎么做的么，你看过么？没吧？那你去看看然后给出一个解决方案来吧？行不？什么时间可以有？明天？</p>
-
-<p>坑爹啊，我一个搞技术的人给你去折腾功能设计方案，你妹啊！一会要查这个问题，一会要做这个事情，我又不是神。行吧行吧，总会有个解决方法的。打工的，我忍了。看吧，看别人怎么做的呗。</p>
-
-<p>好吧，你只要有这个功能，功能怎么样的，你不管。成啊，最后呢？还不是需要实现去改？来回折腾累不累啊？硬要短时间内完成，行啊，那你别介意有什么意外问题啊。又要没有别的问题，又要快、好的实现，但是你有好好的去设计这个功能么？还不就是画了一下uiflow？能解决问题么？坑爹啊！</p>
-
-<p>哎，看别人有的功能，你也想加，ok，可以，你得想想我们这个产品用来做啥的吧？迷茫啊，用来做啥都不知道，亮点呢？好的产品一般都是功能简单，但是都是必须的功能，而且都是能抓住用户粘度的功能。我们呢？有想过么？用户的粘度？</p>
-
-<p>这个总得好好考虑吧？行，我一个码农，不知道说啥，嘿，你说干啥就干啥呗，反正也讲不通，就这样吧！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[吐吐槽]]></title>
-    <link href="http://ikurten.com/blog/2011/11/08/%E5%90%90%E5%90%90%E6%A7%BD/"/>
-    <updated>2011-11-08T02:13:54+08:00</updated>
-    <id>http://ikurten.com/blog/2011/11/08/吐吐槽</id>
-    <content type="html"><![CDATA[<p>近来很不顺，工作上面，不爽。很多问题总是来回的折腾。好吧，产品入口没有设计好，想用技术手段去解决后续的问题？这不是坑爹是什么？我们做的东西，自己不用，为啥？就单纯用来发发消息？做测试啊，你以为呢？</p>
-
-<p>产品的应用场景有概念么？这东西用来干啥的？那些是用户？那些是潜在用户？目标性有么？为啥我不用啊，我拿你这东西就给别人发发消息，我直接打电话不就得了。做产品，一味的看别人做了那些，嗯，好，我也加上去，可以啊。关键是你做的是什么产品啊？四不像啊？</p>
-
-<p>功能功能，坑爹的功能。东西做简单点，是王道啊。为啥一上来说了一个功能，就着急着实现？后来出现一些问题，还不是靠测试来找？要是把功能定义、流程、影响、其他附属内容啥的都考虑全了，还需要那么多测试么？</p>
-
-<p>互联网公司怎么不能在上班时玩游戏？怎么不能闲聊？怎么不能干啥干啥啦？悲剧的人生啊。看着人家休息，玩玩心里就不舒服，还干啥啊？搞飞机去算了。</p>
-
-<p>完全木有氛围，人是不错，但是氛围么，哎。。。</p>
-
-<p>现在就开始拿着人当枪使了，悲崔的我啊，搞政治咯。算啦吧，歇歇吧。都是狗屁，都歇歇啦！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[此文，算作对最近的一个记录吧]]></title>
-    <link href="http://ikurten.com/blog/2011/10/18/%E6%AD%A4%E6%96%87%EF%BC%8C%E7%AE%97%E4%BD%9C%E5%AF%B9%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%B8%AA%E8%AE%B0%E5%BD%95%E5%90%A7/"/>
-    <updated>2011-10-18T01:02:02+08:00</updated>
-    <id>http://ikurten.com/blog/2011/10/18/此文，算作对最近的一个记录吧</id>
-    <content type="html"><![CDATA[<p>朋友说，人的年纪到了26岁，身体就开始走下坡路了。现在体会来看，这话真的是不错。久不锻炼，自己这身子还真实熬不了夜，走步动远路了。最近这段时间，连偶尔打球这种活动都几乎没有了，嗯，真的得开始锻炼了。很早就开始想学太极，苦于没有师傅教，抽空去报个培训班吧。</p>
-
-<p>最近上班，总是会添些厌烦得情绪。多少还是对于老板做事得态度吧。人都很好，只是驱动力不明。事情么，又是这又是那。问题，总得解决啊。</p>
-
-<p>前段时间，一同事抽奖，抽了个三星9001，然后呢，我以两包烟的价格换来了这个手机。android操作系统，多少用着感觉不爽，复杂、而且不安全。短信神马得都会被截。想想还是iphone安全点。不过，自从有了人肉这种东西，安不安全，还真不好说。</p>
-
-<p>这星期开始重构原先的api项目，其他得事情，挪到下周去干吧。发觉自己越来越没啥耐心写一大段一大段文字了。或者，渐渐的开始模糊一些记忆了。买了几本书，没有看完，于是又买了两本。偶尔翻翻，也还是好事。</p>
-
-<p>记得以前写文字总在夜深人静得时候，现在么，总是在早上上班之前，时间不同，感觉也不同。此文，算作对最近的一个记录吧。</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[911絮叨]]></title>
-    <link href="http://ikurten.com/blog/2011/09/11/911%E7%B5%AE%E5%8F%A8/"/>
+    <link href="http://ikurten.com/blog/2011/09/11/911/"/>
     <updated>2011-09-11T02:35:51+08:00</updated>
-    <id>http://ikurten.com/blog/2011/09/11/911絮叨</id>
+    <id>http://ikurten.com/blog/2011/09/11/911</id>
     <content type="html"><![CDATA[<p>忽然发觉啊，年纪大了，总增添了点懒惰。人，也经常性得感觉到疲乏。搞技术的，似乎大多都这样吧。有时候，想做的事情，会不了了之。当然，也慢慢习惯了，一休息就宅着。于是，又增加了惰性。到现在，总觉着有点亏欠这点时光了啊。不过有时候，也会翻翻老黄历，怀念怀念过去的那点时光。人生在世的，总是走走停停，停停走走。</p>
 
 <p>从毕业到现在，手头是增加了很多数码产品，我么，也逐渐成为果粉。不过，话又说回来，苹果的产品确实做得不错！记得11年前，刚上初中那会，表姐把她那台用剩下得电脑给了我，于是，就有了第一台电脑。当时也没怎么细想，就觉着，那电脑太烂了。也没怎么用，就开了三次机，之后就再也没去搭理它了。等到很长一段时间之后，才明白，当时如果多折腾折腾，现在应该会好很多。</p>
@@ -1388,18 +1146,18 @@ have fun! :)</p>
   
   <entry>
     <title type="html"><![CDATA[测试ifttt]]></title>
-    <link href="http://ikurten.com/blog/2011/08/03/%E6%B5%8B%E8%AF%95ifttt/"/>
+    <link href="http://ikurten.com/blog/2011/08/03/test-ifttt/"/>
     <updated>2011-08-03T03:09:18+08:00</updated>
-    <id>http://ikurten.com/blog/2011/08/03/测试ifttt</id>
+    <id>http://ikurten.com/blog/2011/08/03/test-ifttt</id>
     <content type="html"><![CDATA[<p>测试ifttt，你懂的。。。</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[mysql主从配置]]></title>
-    <link href="http://ikurten.com/blog/2011/08/02/mysql%E4%B8%BB%E4%BB%8E%E9%85%8D%E7%BD%AE/"/>
+    <link href="http://ikurten.com/blog/2011/08/02/mysql-master-slave/"/>
     <updated>2011-08-02T00:37:49+08:00</updated>
-    <id>http://ikurten.com/blog/2011/08/02/mysql主从配置</id>
+    <id>http://ikurten.com/blog/2011/08/02/mysql-master-slave</id>
     <content type="html"><![CDATA[<p>mysql由于其cluster没有很好得解决方案，所以没有被广泛的使用。使用最广的还是mysql的主从备份，从而读写分离。mysql 5.5版本的主从replication性能还是相当不错的，下面是配置方法（昨天刚在两台测试服务器中尝试，记录一下）。参考<a href="http://dev.mysql.com/doc/refman/5.0/en/replication-howto.html">官方手册</a>。</p>
 
 <p>1、安装mysql（此处省略N字。。。）</p>
@@ -1479,6 +1237,323 @@ GRANT OPTION;</pre>
 
 <pre>alter table test change ttt newttt varchar(12);</pre>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于癌症]]></title>
+    <link href="http://ikurten.com/blog/2011/07/29/cancer/"/>
+    <updated>2011-07-29T10:13:53+08:00</updated>
+    <id>http://ikurten.com/blog/2011/07/29/cancer</id>
+    <content type="html"><![CDATA[<div id="_mcePaste"><span style="line-height: 24px;">昨晚接到一个朋友电话，让我整晚都睡不着。他说他父亲换了肺癌，而且还是晚期。于是，就瞒着父亲。接下去，就是回家，然后好好照料他父亲了。生老病死的，不过突然听到亲人换了绝症，还是难以置信的事情。于是，什么都做不了，除了在最后的一段时间里好好照顾他，还能做什么呢？</span></div>
+
+
+<div><span style="line-height: 24px;">记录一下，以后多给父母打电话，多回回家。</span></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于memcacheq的记录]]></title>
+    <link href="http://ikurten.com/blog/2011/07/29/memcacheq/"/>
+    <updated>2011-07-29T04:03:25+08:00</updated>
+    <id>http://ikurten.com/blog/2011/07/29/memcacheq</id>
+    <content type="html"><![CDATA[<p>上个星期，因为项目需要，学习了一下<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>（一个持久化的消息队列），同时，写了一个定制性质的client（当然，协议还是用<a href="http://memcached.org/" target="_blank">memcached</a>的）。由于自身业务上面的需要，把这个client折腾成了可以根据配置进行扩展的方式。主要是针对业务处理消息的方法。</p>
+
+<p>单纯的<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>、<a href="http://memcachedb.org/" target="_blank">memcachedb</a>、<a href="http://memcached.org/" target="_blank">memcached</a>其实都没有集群的能力，只是用于单机的。如果没有客户端，那么也算不得一个完整的东西。原先的client采用连接池的方式，用来继承扩展还是太过麻烦，于是就自己写了一个socket连接。连接协议摆在那，自己写一个还是相对轻松很多的。各个业务以及一个queue连接，采用线程的处理方式。这样的话，就需要对线程进行定时检查，防止线程处理过程中索死或者interrupted，这主要还是为了容错。</p>
+
+<p>这次的后台架构，主要还是为了替换掉原先的基于xmpp的消息通信方式，消息丢失么，这是最讨厌的。虽然，我们的业务对于并发没有很高的要求，但是丢失这个问题，还是比较严重的，xmpp没有消息回执，所以时常会导致消息丢失。同时，它的clustering插件也太过于恶心，后续还是会被弃用的。</p>
+
+<p>这星期么，去测试一下<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>多队列单机的性能，同时，深入学习一下<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>的源代码。阅读源代码确实可以学习到很多东西。特别是别人的逻辑，思路。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ubuntu编译安装php5.3.5]]></title>
+    <link href="http://ikurten.com/blog/2011/07/29/ubuntu-install-php5-3-5/"/>
+    <updated>2011-07-29T04:03:06+08:00</updated>
+    <id>http://ikurten.com/blog/2011/07/29/ubuntu-install-php5-3-5</id>
+    <content type="html"><![CDATA[<div></div>
+
+
+<div>安装apache，mysql，mysql需要libmysqld-dev</div>
+
+
+<div>sudo apt-get install libxml2-dev</div>
+
+
+<div>sudo apt-get install libmysqld-dev</div>
+
+
+<div>sudo apt-get install libbz2-dev</div>
+
+
+<div>sudo apt-get install libcurl4-gnutls-dev</div>
+
+
+<div>sudo apt-get install libmcrypt-dev</div>
+
+
+<div></div>
+
+
+<div>./configure &ndash;prefix=/usr/local/php5 &ndash;with-config-file-path=/usr/local/php5/etc &ndash;with-mysql &ndash;with-mysqli &ndash;enable-debug &ndash;with-pic &ndash;disable-rpath &ndash;without-pear &ndash;with-bz2 &ndash;with-apxs2=/usr/local/apache2/bin/apxs &ndash;with-freetype-dir &ndash;with-jpeg-dir &ndash;with-png-dir &ndash;with-zlib &ndash;with-libxml-dir &ndash;enable-xml &ndash;enable-debug &ndash;disable-rpath &ndash;enable-discard-path &ndash;enable-safe-mode &ndash;enable-bcmath &ndash;enable-shmop &ndash;enable-sysvsem &ndash;enable-inline-optimization &ndash;with-curl &ndash;with-curlwrappers &ndash;enable-mbregex &ndash;enable-fastcgi &ndash;enable-force-cgi-redirect &ndash;enable-mbstring &ndash;enable-soap &ndash;enable-sockets &ndash;with-mcrypt</div>
+
+
+<div></div>
+
+
+<div>sudo make</div>
+
+
+<div>sudo make install</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于服务器端的学习记录]]></title>
+    <link href="http://ikurten.com/blog/2011/07/29/server-learning/"/>
+    <updated>2011-07-29T04:01:09+08:00</updated>
+    <id>http://ikurten.com/blog/2011/07/29/server-learning</id>
+    <content type="html"><![CDATA[<p>这个星期做了点事情，做了几个接口，大致了解了目前后台架构，以及一些设计方面的事情。后台主要是用java系的技术，<a href="http://tomcat.apache.org/" target="_blank">tomcat</a>做接口容器。实时消息这块主要由<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>去处理，基本上就是直接使用<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>的原有功能（除了clustering插件）。</p>
+
+<p>整体的系统框架是用了<a href="http://www.springsource.org/" target="_blank">spring</a>+<a href="http://ibatis.apache.org/" target="_blank">ibatis</a>+<a href="http://struts.apache.org/" target="_blank">struts</a>。用<a href="http://www.springsource.org/" target="_blank">spring</a>控制（<a href="http://dev.csdn.net/htmls/24/24397.html" target="_blank">IoC</a>）整体的接口封装，业务逻辑实现。数据层使用<a href="http://ibatis.apache.org/" target="_blank">ibatis</a>做数据库映射。数据库目前使用<a href="http://www.mysql.com/" target="_blank">mysql</a>。</p>
+
+<p>现在把<a href="http://tomcat.apache.org/" target="_blank">tomcat</a>，<a href="http://www.mysql.com/" target="_blank">mysql</a>，还有<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>架在一台服务器上，目前的<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>并发最高5000左右。网上看了一下，<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>并发具体可以支持多少也没啥具体介绍，官方也没有明确表示单<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>能支持多少的并发量。这个问题有待学习啊。还有就是，用户的消息数据会丢失，这个频率貌似还有点高。这个问题很纠结啊。</p>
+
+<p>后续发展的话，<a href="http://tomcat.apache.org/" target="_blank">tomcat</a>，<a href="http://www.mysql.com/" target="_blank">mysql</a>，单独部署，然后<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>安装clustering插件进行集群（不过，这个也不是这么好部的，装上这个插件之后就不能使用了，哎）。消息丢失这块，也没啥好办法，引入消息队列或许可以减少丢失频率。</p>
+
+<p>服务器端接口这块暂时还没有引入<a href="http://oauth.net/2/" target="_blank">oauth</a>机制。这个需要后续接入了。</p>
+
+<p>然后再来说说前端，现在做的一些手机web前端页面也是我做的，用<a href="http://www.php.net/" target="_blank">php</a>+<a href="http://kurchan.com/jquerymobile.com" target="_blank">jquerymobile</a>框架。同时也学到了前端一些页面设计上的事。也算对于最近这段时间有个交代了。前端还是有很多事情做的。页面载入速度优化就可以引入很多问题。可以查看<a href="http://oreilly.com/catalog/9780596529307" target="_blank">high performance web sites</a>，谁看谁知道。web前端这方面yahoo做得还是挺牛的。嗯，把这本书看完！</p>
+
+<p>后续学习目标(其实也就是看几本书)：</p>
+
+<p>1、xmpp(XMPP The Definitive Guide)、openfire</p>
+
+<p>2、spring框架、tomcat(Tomcat The Definitive Guide)</p>
+
+<p>3、mysql(High Performance MySQL/Web Operations Keeping the Data On Time)</p>
+
+<p>4、服务器性能优化(Operating Systems Design and Implementation/The Art of Computer Systems Performance Analysis Techniques)</p>
+
+<p>5、js压缩（high performance web sites）</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[流川枫与苍井空]]></title>
+    <link href="http://ikurten.com/blog/2011/07/29/moview/"/>
+    <updated>2011-07-29T04:00:21+08:00</updated>
+    <id>http://ikurten.com/blog/2011/07/29/moview</id>
+    <content type="html"><![CDATA[<p><embed src="http://player.youku.com/player.php/sid/XMjY5NTczMDk2/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed></p>
+
+<p>纪念该纪念的。。。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[这段时间]]></title>
+    <link href="http://ikurten.com/blog/2011/07/29/recent-time/"/>
+    <updated>2011-07-29T03:57:02+08:00</updated>
+    <id>http://ikurten.com/blog/2011/07/29/recent-time</id>
+    <content type="html"><![CDATA[<p>上星期加入了<a href="http://www.lianpu.com/" target="_blank">脸谱换换</a>创业团队，本来我是想去做web服务器端开发的，因为我么会点php于是折腾起了前端一些页面以及与后台接口调用神马的事情。工作状态，怎么说呢，感觉还好，我反正效率挺高的。可是啊，折腾发布这个事情可不是一般的纠结啊。每次都是发布之前过来看看，然后觉着神马要改了，然后修改。哎，你之前做神马去了？于是么，白天基本轻松，到晚上，哎。</p>
+
+<p>潦草，太潦草了。产品先确定功能点，然后优化，嗯，这个很好。需求么？今天谈一下，明天谈一下，产品经理啊，悲崔！好么，昨天有人说，要做网站版本的脸谱换换，好哇，想法很好么，瞎扯淡。您这是做产品么？怎么神马都做？让<a href="http://www.path.com/" target="_blank">path</a>情何以堪啊！</p>
+
+<p>前段时间做的产品记录么，哎，没时间继续做了。最近<a href="http://www.mogujie.com/" target="_blank">蘑菇街</a>改版了，功能简洁，舒适。不错的社交电子商务产品，继续看好之。</p>
+
+<p>对于<a href="http://www.lianpu.com/" target="_blank">脸谱换换</a>产品的服务器端技术架构，等我弄熟了那些东西在做记录吧。现在写了也只是copy，没神马意思滴。主要用到的技术么，<a href="http://www.mysql.com/" target="_blank">mysql</a>、<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>（<a href="http://xmpp.org/" target="_blank">xmpp</a>的一个server实现）、基于java的<a href="http://www.springsource.org/" target="_blank">spring</a>、<a href="http://struts.apache.org/" target="_blank">struts</a>等等这些框架。</p>
+
+<p>产品要做专，功能神马的，浮云啊，关键是需求点转化成功能的概率啊有多大！嗯，特别佩服毕加索，优秀的艺术家复制，伟大的艺术家偷。我么，继续stay hungry，stay foolish！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[美丽说功能点以及个人评估]]></title>
+    <link href="http://ikurten.com/blog/2011/07/29/meilishuo/"/>
+    <updated>2011-07-29T03:56:44+08:00</updated>
+    <id>http://ikurten.com/blog/2011/07/29/meilishuo</id>
+    <content type="html"><![CDATA[<p>美丽说功能点</p>
+
+<p>一、我的首页</p>
+
+<p>1）发表文字信息、图片、宝贝链接（可以同步至新浪、人人）。</p>
+
+<p>2）查看关注的人发表、转发的内容（宝贝、照片等）。</p>
+
+<p>3）看看大家&ndash;>未关注用户的发表、转发的内容（提供时时推送）。</p>
+
+<p>还有一个就是&ldquo;去我的美丽说&rdquo;，进入后可以查看我发布的文字以及图片信息，以及我喜欢的分享。</p>
+
+<p>对于发布信息这个模块来说，可以直接将功能集成，成为一个单纯的聊聊，其余冗余。&nbsp;这里，我感觉层次设计有问题，可能是导航菜单太少的缘故。&ldquo;我的首页&rdquo;或者可以修改成我的美丽说，这样既可以查看我已经发布的信息，进行修改，或者直接发布新的。</p>
+
+<p>二、扮美达人</p>
+
+<p>类似人气用户推荐，以及相应的人气用户列表查看。</p>
+
+<p>选择人气用户后进入美丽说海报浏览模式，以照片为主。进入分享内容后显示照片、评论、转发功能，是否喜欢。</p>
+
+<p>三、挑衣服</p>
+
+<p>用户分享的照片列表（列表中居然会出现灯具等东西，真汗啊）。</p>
+
+<p>同二描述。</p>
+
+<p>四、当红好店</p>
+
+<p>用户推荐的淘宝店铺（不知道他是如何折腾出这个用户推荐的淘宝店铺的，感觉这个流量转换率很低啊，没啥用啊）。</p>
+
+<p>五、美丽Q&amp;A</p>
+
+<p>简单的问答型BBS（分最新以及最受欢迎两个区）。</p>
+
+<p>既然提供了支持功能，推送至最受欢迎区，那你就再做点好事，折腾个不支持功能呗。不然，我都支持一下，不是全放到最受欢迎那边去了？</p>
+
+<p>六、团购</p>
+
+<p>提供给淘宝卖家的团购平台，卖家可以自主提交团购产品。</p>
+
+<p>评估</p>
+
+<p>导航菜单该具备的居然省略了，页面层次组织不够明显，点击进入查看宝贝具体内容时找不着地方。不知道自己在浏览神马东西了。对比蘑菇街，这个设计体验明显是不同档次。还有就是对于字体，美丽说的字体与蘑菇街的字体（评论、以及描述的字体），对比一下，很明显的。优化空间很大啊。</p>
+
+<p>这是今天的功课，明天继续。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[蘑菇街功能点以及个人评估]]></title>
+    <link href="http://ikurten.com/blog/2011/07/29/mogujie/"/>
+    <updated>2011-07-29T03:50:31+08:00</updated>
+    <id>http://ikurten.com/blog/2011/07/29/mogujie</id>
+    <content type="html"><![CDATA[<p>蘑菇街功能点</p>
+
+<p>一、个人空间</p>
+
+<p>1）&ldquo;我家首页&rdquo;：</p>
+
+<p>1、商品实拍照片为主（可以多张照片），以及相应的商品描述，可以添加购买链接。</p>
+
+<p>2、可以对该商品进行评价、转发。</p>
+
+<p>3、可以加入自己喜欢的列表、同时分享。</p>
+
+<p>4、列表显示分享者的其他分享内容。</p>
+
+<p>5、二手闲置&mdash;-交易平台（接入第三方，支付宝），类似围脖的话题模式。</p>
+
+<p>6、显示关注的用户所转发的、喜欢的、分享的内容。</p>
+
+<p>7、用户账户设置等辅助功能。</p>
+
+<p>我感觉 &ldquo;我家首页&rdquo;中功能点重复很多，&ldquo;随便聊聊&rdquo;可以直接发送商品、店铺链接或者直接上传图片，没必要再将其细分出来。</p>
+
+<p>2）&ldquo;主题&rdquo;：</p>
+
+<p>&ldquo;主题吧&rdquo;&mdash;-创建主题（BBS模式）后生成的内容。</p>
+
+<p>3）&ldquo;相册&rdquo;：</p>
+
+<p>上传、分享的自拍照片等图片。</p>
+
+<p>4）&ldquo;宝贝&rdquo;：</p>
+
+<p>上传、分享的商品照片。</p>
+
+<p>5）&ldquo;喜欢&rdquo;：</p>
+
+<p>点击喜欢按钮后存储的内容（用户分享的商品、或者自拍照等）。</p>
+
+<p>二、购物分享</p>
+
+<p>1）采用画报模式（以图片为主，显示描述，如果有评论，最多只显示2条）。</p>
+
+<p>2）点击图片，显示分享主要内容，购买链接、图片、喜欢、评论、其他分享等。</p>
+
+<p>评论按钮多余。</p>
+
+<p>三、看实拍</p>
+
+<p>1）商品购买后实际拍摄照片分享（用户搭配、描述等）。</p>
+
+<p>2）以看画报模式为主（图片为主）。</p>
+
+<p>四、找达人</p>
+
+<p>显示粉丝多的、分享多的、人气旺的用户，比如评论多的等等。</p>
+
+<p>五、淘闲置</p>
+
+<p>如&ldquo;我家首页&rdquo;中二手闲置，接入支付宝担保交易平台。</p>
+
+<p>六、主题吧</p>
+
+<p>类似BBS模式，首先分不同主题：购物实拍、蘑菇自拍等等。再进行区分子主题：网购、实体等等。用户可以创建主题帖子。</p>
+
+<p>评估</p>
+
+<p>从整体上来说蘑菇街网站UI设计上比较舒服，让人感觉很清新（以绿色为主的缘故吧）。初步使用来看就可以了解，蘑菇街这个网站就是提供给买家、卖家分享购物商品的一个社交平台。从功能点进入相应的页面，信息呈现上面还是比较有层次感的。信息呈现交互上面个人相对比较喜欢画报这种方式，以图片展示为主，对于感兴趣的，点击进入可以进行评论等操作。</p>
+
+<p>昨天做的功课，发布出来。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于mac os x 10.6的quicktime x]]></title>
+    <link href="http://ikurten.com/blog/2011/07/29/mac-os-x-10.6-quicktime+x/"/>
+    <updated>2011-07-29T03:50:05+08:00</updated>
+    <id>http://ikurten.com/blog/2011/07/29/mac-os-x-10.6-quicktime x</id>
+    <content type="html"><![CDATA[<p>昨天因为看到有个lion dp3补丁，于是手痒，下来安装一下试试。mac os x10.7开发者预览版，尝试一下。没想到，无法更新，而且出错。于是，痛苦的过程开始了，重启进步了系统了。只能用系统盘修复了（ps：系统盘中的是10.6.4的版本）。这个只能怪我自己手痒了。</p>
+
+<p>然后下载更新，因为我原先系统是10.6.7版本，10.6.4的系统<a href="http://developer.apple.com/xcode/" target="_blank">xcode4.1</a>，<a href="http://www.apple.com/mac/facetime/" target="_blank">facetime 1.0</a>都没法用。更新完成，然后安装xcode完忽然出现一个dyld share cache问题，需要（sudo update_dyld_shared_cache -force）这个命令。之后，就是quicktime.framework这个问题了。其中一件灵异事件是，我把这个文件夹移除了，执行命令就没有问题，不移除就出现无法执行share cache这个问题。貌似是一个bug？没深入研究过。</p>
+
+<p>貌似有很多应用需要依赖这个包，<a href="http://www.qq.com/" target="_blank">qq</a>、<a href="http://www.macww.org/" target="_blank">aliwangwang</a>、以及<a href="http://www.popcap.com/" target="_blank">popcap</a>开发的几个游戏。估计是调用了显示movie动画的接口。如果谁像我一样手痒，但是还没删除这些相关的东西，那么我建议你还是别动他，不然很多依赖程序就无法使用了。当然，删除了不是没办法挽救。可以使用<a href="http://www.macupdate.com/app/mac/6812/pacifist" target="_blank">pacifist</a>这个工具软件，打开你的系统安装光盘，然后从对应的文件夹路径下面去找这些东西，直接安装到默认路径就可以了。当然，如果嫌弃quicktime x，可以使用<a href="http://mplayerx.org/" target="_blank">mplayerx</a>这个播放器还是相当不错的。当然，在此基础上进行修改的，<a href="https://bitbucket.org/Tomasen/splayerx/wiki/Home" target="_blank">splayerx</a>也是不错的，省去了你去匹配字母的事情。射手网上字幕资源还是相当多的。</p>
+
+<p>其他的就看你慢慢发觉了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于面试的记录]]></title>
+    <link href="http://ikurten.com/blog/2011/07/29/viewer/"/>
+    <updated>2011-07-29T03:47:20+08:00</updated>
+    <id>http://ikurten.com/blog/2011/07/29/viewer</id>
+    <content type="html"><![CDATA[<p>这算是我第一次写关于面试后的记录。呵呵，刚去了<a href="http://www.mogujie.com/" target="_blank">蘑菇街</a>这个公司面试，在<a href="http://ditu.google.cn/maps?ie=UTF8&amp;q=%E6%9D%AD%E5%B7%9E%E5%B1%B1%E6%B0%B4%E4%BA%BA%E5%AE%B6&amp;fb=1&amp;hq=%E5%B1%B1%E6%B0%B4%E4%BA%BA%E5%AE%B6&amp;hnear=%E4%B8%AD%E5%9B%BD%E6%B5%99%E6%B1%9F%E7%9C%81%E6%9D%AD%E5%B7%9E&amp;cid=0,0,12302633174348231143&amp;ll=30.271873,120.110564&amp;spn=0.011471,0.023904&amp;z=16&amp;iwloc=A&amp;brcurrent=3,0x344b62bcdd3a234d:0x325d39b9ca1e5a93,0,0x344b641bf7eabb35:0x6eaa153514876e2f%3B5,0,0" target="_blank">山水人家</a>。我算是比较幸运啦，能够在他们搬家之前见一下他们第一个办公场地。之后他们要搬去别的地方了。</p>
+
+<p>办公场地其实就是一个套房，你懂得，基本上都在客厅办公。我去应聘web研发的，因为本身对于服务器端的技术比较感兴趣。跟搞技术的聊天，还是比较好的，思想比较单纯，只聊聊技术。虽然，我没有web开发的经验，特别是对于php的实践经验，但是php这门语言，还是很容易上手的。因为本身没有繁杂的内容，特别是有编码经验的人来说。只是函数以及一些特定的用法比较多，真正熟悉还是需要时日。</p>
+
+<p>面试的时候，让产品经理去面试技术人员，于是，我这个技术人员表示鸭梨好大。特别是这个产品经理还挂着总负责的头衔，也就是CEO。于是，接下去的内容就惨不忍睹了。不过，这样也好，本身每个人的思维方式不同。</p>
+
+<p>需要记录一些注意的问题：</p>
+
+<p>1、需要有准备的应对所有问题。</p>
+
+<p>2、要多多了解未知的东西，所以，需要学会提问。（这里特别提一下<a href="http://iamsujie.com/8000/8018/" target="_blank">这篇文章</a>）</p>
+
+<p>总结了一下，如果从技术角度来讲，还是有希望的。但是，不知道结果的事情，还是不乱猜的好。</p>
+
+<p>以下是人家给我的回信，记录下来算是自勉吧：</p>
+
+<p>&ldquo;我们主要考虑你之前的经验和我们匹配程度不高，另外一点很重要的事情是我们还不能很明确你在技术方面的兴趣程度，从谈话过程中，我们发现你不喜欢谈技术细节和一些深入的东西，你对技术的兴趣、以及以后你在技术方面的成长我们有一定的担心。</p>
+
+<p>找到自己喜欢做的事情非常重要，只有做自己喜欢的事情才能做好、做成。如果你现在还不明确你的兴趣是什么，要抓紧时间想想清楚，如果你已经知道了自己的兴趣，那花些时间验证一下。&rdquo;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[新的起点]]></title>
+    <link href="http://ikurten.com/blog/2011/07/29/new-start/"/>
+    <updated>2011-07-29T03:47:01+08:00</updated>
+    <id>http://ikurten.com/blog/2011/07/29/new-start</id>
+    <content type="html"><![CDATA[<p>周一的时候我跟头儿说，我要辞职。然后么，就是一些文档整理，工作移交。只是，因为还要做一部分工作。所以，只能到下个星期办手续了。对于一份自己不喜欢的工作、不喜欢的行业，迟早是要说88的。虽然，照样干的很好，照样可以获得很多。我辞职了，别人问，去哪家公司发展了？我说，没有，我只是单纯的辞职而已。需要一点时间准备，厚积薄发么。</p>
+
+<p>找一家互联网公司，我喜欢他们在做的事情，大不大不要紧。他们做的事情，要是我认为可以的，值得去做的事情。恩，就是这个目的。不然，枉费我这份激情了。技术、产品，只有自己真正热爱的才算。可以不计利益、不问付出，因为肯定会有回报。</p>
+
+<p>谁又不是开始就会的，不是后天锻炼出来的么？我没做过不代表我就不会了。只不过，没有碰到过问题，就不可能成长么。我只是希望做自己又热情去做的，喜欢的事情。仅此而已。于是，我开始使用mac，我开始接触unix，接触hadoop，hbase，cassandra，mongodb，redis，还有nginx，python，ipython。同时么，了解linux，php，mysql。了解web架构么，看书么。</p>
+
+<p>stay hungry，stay foolish！follow my heart！</p>
 ]]></content>
   </entry>
   

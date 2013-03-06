@@ -6,13 +6,10 @@
 <head>
   <meta charset="utf-8">
   <title>ikurten.com</title>
-  <meta name="author" content="kurten">
+  <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
-显示错误如下： Loaded plugins: fastestmirror
-Determining fastest mirrors
-YumRepo &hellip;">
+  <meta name="description" content="上个星期，因为项目需要，学习了一下memcacheq（一个持久化的消息队列），同时，写了一个定制性质的client（当然，协议还是用memcached的）。由于自身业务上面的需要，把这个client折腾成了可以根据配置进行扩展的方式。主要是针对业务处理消息的方法。 单纯的memcacheq、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,52 +18,81 @@ YumRepo &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ikurten.com/blog/page/3/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://ikurten.com/blog/page/3">
+  <link href="/favicon.ico" rel="icon">
+  
+  <link href="/assets/bootstrap/css/spacelab.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+  <link href="/assets/bootstrap/css/custom.css" rel="stylesheet" type="text/css">
+  <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+  
   <link href="/atom.xml" rel="alternate" title="ikurten.com" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+  
   
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">ikurten.com</a></h1>
-  
-    <h2>85后码农.</h2>
-  
-</hgroup>
+<body    data-spy="scroll">
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:ikurten.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/blog/about/">About Me</a></li>
-</ul>
+  <div class="container">
+    <header class="jumbotron subhead" id="overview">
+      
+<div class="subscribe">
+  <table>
+    <tr>
+      <td><span>Get Updates: &nbsp;</span></td>
+      
+	  
+      
+      <td><a href="/atom.xml" class="btn"><i class="icon-cog"></i> By RSS</a></td>
+      
+      
+    </tr>
+  </table>
+</div>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+<h1 class="title">ikurten.com</h1>
+
+  <p class="lead">85后码农</p>
+
+
+      <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container" style="width: auto;">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <div class="nav-collapse">
+                <ul class="nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/blog/archives">Blog</a></li>
+          <!--<li><a href="/projects">Projects</a></li>-->
+          <li><a href="/blog/about">About Me</a></li>
+        </ul>
+
+        
+          <form action="http://google.com/search" method="get" class="navbar-search pull-left">
+            <fieldset role="search">
+              <input type="hidden" name="q" value="site:ikurten.com" />
+              <input type="text" name="q" results="0" placeholder="Search" class="search-query span2" />
+            </fieldset>
+          </form>
+        
+        
+      </div><!-- /.nav-collapse -->
+    </div>
+  </div><!-- /navbar-inner -->
+</div>
+
+    </header>
+    <div id="main">
+      <div id="content">
+        <div class="row">
+
+
+<div class="blog-index span8">
   
   
   
@@ -74,7 +100,7 @@ YumRepo &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/12/15/centos%E4%B8%ADyum%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/">Centos中yum无法使用问题</a></h1>
+      <h1 class="entry-title"><a href="/blog/2011/07/29/memcacheq/">关于memcacheq的记录</a></h1>
     
     
       <p class="meta">
@@ -90,105 +116,22 @@ YumRepo &hellip;">
   
 
 
-<time datetime="2011-12-15T14:47:34+08:00" pubdate data-updated="true">2011-12-15</time>
+<time datetime="2011-07-29T04:03:25+08:00" pubdate data-updated="true">2011-07-29</time>
         
-         | <a href="/blog/2011/12/15/centos%E4%B8%ADyum%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/#disqus_thread">Comments</a>
+         | <a href="/blog/2011/07/29/memcacheq/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
-显示错误如下：</p>
+  <div class="entry-content"><p>上个星期，因为项目需要，学习了一下<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>（一个持久化的消息队列），同时，写了一个定制性质的client（当然，协议还是用<a href="http://memcached.org/" target="_blank">memcached</a>的）。由于自身业务上面的需要，把这个client折腾成了可以根据配置进行扩展的方式。主要是针对业务处理消息的方法。</p>
 
-<pre>Loaded plugins: fastestmirror
-Determining fastest mirrors
-YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
-/Eg. 
-removing mirrorlist with no valid mirrors: /var/cache/yum/addons/mirrorlist.txt
-Error: Cannot find a valid baseurl for repo: addons</pre>
+<p>单纯的<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>、<a href="http://memcachedb.org/" target="_blank">memcachedb</a>、<a href="http://memcached.org/" target="_blank">memcached</a>其实都没有集群的能力，只是用于单机的。如果没有客户端，那么也算不得一个完整的东西。原先的client采用连接池的方式，用来继承扩展还是太过麻烦，于是就自己写了一个socket连接。连接协议摆在那，自己写一个还是相对轻松很多的。各个业务以及一个queue连接，采用线程的处理方式。这样的话，就需要对线程进行定时检查，防止线程处理过程中索死或者interrupted，这主要还是为了容错。</p>
 
+<p>这次的后台架构，主要还是为了替换掉原先的基于xmpp的消息通信方式，消息丢失么，这是最讨厌的。虽然，我们的业务对于并发没有很高的要求，但是丢失这个问题，还是比较严重的，xmpp没有消息回执，所以时常会导致消息丢失。同时，它的clustering插件也太过于恶心，后续还是会被弃用的。</p>
 
-<p>不知道什么时候把mirrors.txt文件给去掉了。
-后来查了一下有这么一串。</p>
-
-<pre>1./var/cache/yum/base/mirrorlist.txt
-url:
-http://mirrors.163.com/centos/5.7/os/x86_64/
-http://centos.ustc.edu.cn/centos/5.7/os/x86_64/
-http://mirror.neu.edu.cn/centos/5.7/os/x86_64/
-http://mirrors.ta139.com/centos/5.7/os/x86_64/
-http://ftp.nsysu.edu.tw/CentOS/5.7/os/x86_64/
-http://ftp.tc.edu.tw/Linux/CentOS/5.7/os/x86_64/
-http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/os/x86_64/
-http://ftp.stu.edu.tw/Linux/CentOS/5.7/os/x86_64/
-http://ftp.twaren.net/Linux/CentOS/5.7/os/x86_64/
-http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/os/x86_64/
-http://mirror01.idc.hinet.net/CentOS/5.7/os/x86_64/
-http://centos.mirror.cdnetworks.com/5.7/os/x86_64/
-http://centos.tt.co.kr/5.7/os/x86_64/
-http://data.nicehosting.co.kr/os/CentOS/5.7/os/x86_64/
-http://mirror.khlug.org/centos/5.7/os/x86_64/
-http://mirror.yongbok.net/centos/5.7/os/x86_64/
-http://ftp.daum.net/centos/5.7/os/x86_64/
-http://mirror.nus.edu.sg/centos/5.7/os/x86_64/
-http://mirror.averse.net/centos/5.7/os/x86_64/
-http://mirrors.sin1.sg.voxel.net/centos/5.7/os/x86_64/
-
-2./var/cache/yum/updates/mirrorlist.txt
-url:
-http://mirror.neu.edu.cn/centos/5.7/updates/x86_64/
-http://mirrors.ta139.com/centos/5.7/updates/x86_64/
-http://mirrors.stuhome.net/centos/5.7/updates/x86_64/
-http://centos.ustc.edu.cn/centos/5.7/updates/x86_64/
-http://ftp.stu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
-http://mirror01.idc.hinet.net/CentOS/5.7/updates/x86_64/
-http://ftp.tc.edu.tw/Linux/CentOS/5.7/updates/x86_64/
-http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/updates/x86_64/
-http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
-http://ftp.daum.net/centos/5.7/updates/x86_64/
-http://mirror.khlug.org/centos/5.7/updates/x86_64/
-http://data.nicehosting.co.kr/os/CentOS/5.7/updates/x86_64/
-http://centos.tt.co.kr/5.7/updates/x86_64/
-http://mirror.averse.net/centos/5.7/updates/x86_64/
-ftp://ftp.oss.eznetsols.org/linux/centos/5.7/updates/x86_64/
-http://mirror.nus.edu.sg/centos/5.7/updates/x86_64/
-http://mirrors.sin1.sg.voxel.net/centos/5.7/updates/x86_64/
-http://centos.vr-zone.com/5.7/updates/x86_64/
-http://rsync.atworks.co.jp/centos/5.7/updates/x86_64/
-http://ftp.nara.wide.ad.jp/pub/Linux/centos/5.7/updates/x86_64/
-
-3./var/cache/yum/addons/mirrorlist.txt
-url:
-http://mirror.centos.org/centos/5/addons/x86_64/
-
-4./var/cache/yum/extras/mirrorlist.txt
-url:
-http://centos.ustc.edu.cn/centos/5.7/extras/x86_64/
-http://mirrors.stuhome.net/centos/5.7/extras/x86_64/
-http://mirror.neu.edu.cn/centos/5.7/extras/x86_64/
-http://mirrors.ta139.com/centos/5.7/extras/x86_64/
-http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
-http://ftp.stu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
-http://ftp.tc.edu.tw/Linux/CentOS/5.7/extras/x86_64/
-http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/extras/x86_64/
-http://mirror01.idc.hinet.net/CentOS/5.7/extras/x86_64/
-http://data.nicehosting.co.kr/os/CentOS/5.7/extras/x86_64/
-http://mirror.khlug.org/centos/5.7/extras/x86_64/
-http://ftp.daum.net/centos/5.7/extras/x86_64/
-http://centos.tt.co.kr/5.7/extras/x86_64/
-http://centos.vr-zone.com/5.7/extras/x86_64/
-http://mirror.averse.net/centos/5.7/extras/x86_64/
-http://mirrors.sin1.sg.voxel.net/centos/5.7/extras/x86_64/
-ftp://ftp.oss.eznetsols.org/linux/centos/5.7/extras/x86_64/
-http://mirror.nus.edu.sg/centos/5.7/extras/x86_64/
-http://ftp.yz.yamagata-u.ac.jp/pub/linux/centos/5.7/extras/x86_64/
-http://ftp.jaist.ac.jp/pub/Linux/CentOS/5.7/extras/x86_64/</pre>
-
-
-<p>对应的把这些url拷贝到mirrorlist.txt文件中去就ok啦。
-have fun! :)</p>
+<p>这星期么，去测试一下<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>多队列单机的性能，同时，深入学习一下<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>的源代码。阅读源代码确实可以学习到很多东西。特别是别人的逻辑，思路。</p>
 </div>
   
   
@@ -201,7 +144,7 @@ have fun! :)</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/12/04/%E9%98%85%E8%AF%BBmemcacheq%E6%BA%90%E7%A0%81%E8%AE%B0%E5%BD%95/">阅读memcacheq源码记录</a></h1>
+      <h1 class="entry-title"><a href="/blog/2011/07/29/ubuntu-install-php5-3-5/">ubuntu编译安装php5.3.5</a></h1>
     
     
       <p class="meta">
@@ -217,26 +160,50 @@ have fun! :)</p>
   
 
 
-<time datetime="2011-12-04T12:07:34+08:00" pubdate data-updated="true">2011-12-04</time>
+<time datetime="2011-07-29T04:03:06+08:00" pubdate data-updated="true">2011-07-29</time>
         
-         | <a href="/blog/2011/12/04/%E9%98%85%E8%AF%BBmemcacheq%E6%BA%90%E7%A0%81%E8%AE%B0%E5%BD%95/#disqus_thread">Comments</a>
+         | <a href="/blog/2011/07/29/ubuntu-install-php5-3-5/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>越来越觉着大学里学的谭浩强的《C语言程序设计》太狗血了，哎，悔不当初啊。</p>
+  <div class="entry-content"><div></div>
 
-<p>今天下午闲着看了一下<a href="http://memcachedb.org/memcacheq/">memcacheq</a>这个消息队列的源代码，存储引擎用得<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>，<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>支持队列方式的数据存储，只不过一个record必须fixed-length，具体能存多大的长度，我没再官方的doc中找到，不过，<a href="http://memcachedb.org/memcacheq/">memcacheq</a>作者说最大消息长度不能超过64K，而且，如果你超过了64K，消息队列就挂了，嗯，这个我碰到过了，超过64K，存入消息队列之后，整个消息队列就得重启。所以，如果你不确定以后业务变更会增加消息体的大小，那么我不建议你使用<a href="http://memcachedb.org/memcacheq/">memcacheq</a> :) 。</p>
 
-<p><a href="http://memcachedb.org/memcacheq/">memcacheq</a>在内存里维护一个队列的hash，memcacheq.c文件实现了memcached协议，bdb.c文件实现了对于bdb的读写，发觉消息队列持久化用bdb实现实在是很轻量、很简洁，item.c对协议层的封装，操作结构体item。</p>
+<div>安装apache，mysql，mysql需要libmysqld-dev</div>
 
-<p>用<a href="http://libevent.org/">libevent</a>对收到的通信包做callback，包括对bdb做增、删、存操作。bdb也用<a href="http://libevent.org/">libevent</a>，对<a href="http://libevent.org/">libevent</a>没有研究，略过N字 :)。</p>
 
-<p>ps&nbsp;<a href="http://memcachedb.org/memcacheq/">memcacheq</a>测试使用的是python写的memcache.py。</p>
+<div>sudo apt-get install libxml2-dev</div>
 
-<p>简单，有效的持久化消息队列，性能过得去，抽空我得好好看看C语言，学习一下 :) 复习一下数据结构，以前的早忘记了，而且也没怎么好好学。老外写的<a href="http://book.douban.com/subject/1139336/">《C语言程序设计》</a>这本，不错的。</p>
+
+<div>sudo apt-get install libmysqld-dev</div>
+
+
+<div>sudo apt-get install libbz2-dev</div>
+
+
+<div>sudo apt-get install libcurl4-gnutls-dev</div>
+
+
+<div>sudo apt-get install libmcrypt-dev</div>
+
+
+<div></div>
+
+
+<div>./configure &ndash;prefix=/usr/local/php5 &ndash;with-config-file-path=/usr/local/php5/etc &ndash;with-mysql &ndash;with-mysqli &ndash;enable-debug &ndash;with-pic &ndash;disable-rpath &ndash;without-pear &ndash;with-bz2 &ndash;with-apxs2=/usr/local/apache2/bin/apxs &ndash;with-freetype-dir &ndash;with-jpeg-dir &ndash;with-png-dir &ndash;with-zlib &ndash;with-libxml-dir &ndash;enable-xml &ndash;enable-debug &ndash;disable-rpath &ndash;enable-discard-path &ndash;enable-safe-mode &ndash;enable-bcmath &ndash;enable-shmop &ndash;enable-sysvsem &ndash;enable-inline-optimization &ndash;with-curl &ndash;with-curlwrappers &ndash;enable-mbregex &ndash;enable-fastcgi &ndash;enable-force-cgi-redirect &ndash;enable-mbstring &ndash;enable-soap &ndash;enable-sockets &ndash;with-mcrypt</div>
+
+
+<div></div>
+
+
+<div>sudo make</div>
+
+
+<div>sudo make install</div>
+
 </div>
   
   
@@ -249,7 +216,7 @@ have fun! :)</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/11/27/memcached-protocol/">Memcached Protocol</a></h1>
+      <h1 class="entry-title"><a href="/blog/2011/07/29/server-learning/">关于服务器端的学习记录</a></h1>
     
     
       <p class="meta">
@@ -265,955 +232,38 @@ have fun! :)</p>
   
 
 
-<time datetime="2011-11-27T05:56:29+08:00" pubdate data-updated="true">2011-11-27</time>
+<time datetime="2011-07-29T04:01:09+08:00" pubdate data-updated="true">2011-07-29</time>
         
-         | <a href="/blog/2011/11/27/memcached-protocol/#disqus_thread">Comments</a>
+         | <a href="/blog/2011/07/29/server-learning/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Protocol</p>
+  <div class="entry-content"><p>这个星期做了点事情，做了几个接口，大致了解了目前后台架构，以及一些设计方面的事情。后台主要是用java系的技术，<a href="http://tomcat.apache.org/" target="_blank">tomcat</a>做接口容器。实时消息这块主要由<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>去处理，基本上就是直接使用<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>的原有功能（除了clustering插件）。</p>
 
-<hr />
+<p>整体的系统框架是用了<a href="http://www.springsource.org/" target="_blank">spring</a>+<a href="http://ibatis.apache.org/" target="_blank">ibatis</a>+<a href="http://struts.apache.org/" target="_blank">struts</a>。用<a href="http://www.springsource.org/" target="_blank">spring</a>控制（<a href="http://dev.csdn.net/htmls/24/24397.html" target="_blank">IoC</a>）整体的接口封装，业务逻辑实现。数据层使用<a href="http://ibatis.apache.org/" target="_blank">ibatis</a>做数据库映射。数据库目前使用<a href="http://www.mysql.com/" target="_blank">mysql</a>。</p>
 
-<p>Clients of memcached communicate with server through TCP connections.</p>
+<p>现在把<a href="http://tomcat.apache.org/" target="_blank">tomcat</a>，<a href="http://www.mysql.com/" target="_blank">mysql</a>，还有<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>架在一台服务器上，目前的<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>并发最高5000左右。网上看了一下，<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>并发具体可以支持多少也没啥具体介绍，官方也没有明确表示单<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>能支持多少的并发量。这个问题有待学习啊。还有就是，用户的消息数据会丢失，这个频率貌似还有点高。这个问题很纠结啊。</p>
 
-<p>(A UDP interface is also available; details are below under &#8220;UDP</p>
+<p>后续发展的话，<a href="http://tomcat.apache.org/" target="_blank">tomcat</a>，<a href="http://www.mysql.com/" target="_blank">mysql</a>，单独部署，然后<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>安装clustering插件进行集群（不过，这个也不是这么好部的，装上这个插件之后就不能使用了，哎）。消息丢失这块，也没啥好办法，引入消息队列或许可以减少丢失频率。</p>
 
-<p>protocol.&#8221;) A given running memcached server listens on some</p>
+<p>服务器端接口这块暂时还没有引入<a href="http://oauth.net/2/" target="_blank">oauth</a>机制。这个需要后续接入了。</p>
 
-<p>(configurable) port; clients connect to that port, send commands to</p>
+<p>然后再来说说前端，现在做的一些手机web前端页面也是我做的，用<a href="http://www.php.net/" target="_blank">php</a>+<a href="http://kurchan.com/jquerymobile.com" target="_blank">jquerymobile</a>框架。同时也学到了前端一些页面设计上的事。也算对于最近这段时间有个交代了。前端还是有很多事情做的。页面载入速度优化就可以引入很多问题。可以查看<a href="http://oreilly.com/catalog/9780596529307" target="_blank">high performance web sites</a>，谁看谁知道。web前端这方面yahoo做得还是挺牛的。嗯，把这本书看完！</p>
 
-<p>the server, read responses, and eventually close the connection.</p>
+<p>后续学习目标(其实也就是看几本书)：</p>
 
-<p>There is no need to send any command to end the session. A client may</p>
+<p>1、xmpp(XMPP The Definitive Guide)、openfire</p>
 
-<p>just close the connection at any moment it no longer needs it. Note,</p>
+<p>2、spring框架、tomcat(Tomcat The Definitive Guide)</p>
 
-<p>however, that clients are encouraged to cache their connections rather</p>
+<p>3、mysql(High Performance MySQL/Web Operations Keeping the Data On Time)</p>
 
-<p>than reopen them every time they need to store or retrieve data.&nbsp; This</p>
+<p>4、服务器性能优化(Operating Systems Design and Implementation/The Art of Computer Systems Performance Analysis Techniques)</p>
 
-<p>is because memcached is especially designed to work very efficiently</p>
-
-<p>with a very large number (many hundreds, more than a thousand if</p>
-
-<p>necessary) of open connections. Caching connections will eliminate the</p>
-
-<p>overhead associated with establishing a TCP connection (the overhead</p>
-
-<p>of preparing for a new connection on the server side is insignificant</p>
-
-<p>compared to this).</p>
-
-<p>There are two kinds of data sent in the memcache protocol: text lines</p>
-
-<p>and unstructured data.&nbsp; Text lines are used for commands from clients</p>
-
-<p>and responses from servers. Unstructured data is sent when a client</p>
-
-<p>wants to store or retrieve data. The server will transmit back</p>
-
-<p>unstructured data in exactly the same way it received it, as a byte</p>
-
-<p>stream. The server doesn&#8217;t care about byte order issues in</p>
-
-<p>unstructured data and isn&#8217;t aware of them. There are no limitations on</p>
-
-<p>characters that may appear in unstructured data; however, the reader</p>
-
-<p>of such data (either a client or a server) will always know, from a</p>
-
-<p>preceding text line, the exact length of the data block being</p>
-
-<p>transmitted.</p>
-
-<p>Text lines are always terminated by \r\n. Unstructured data is <em>also</em></p>
-
-<p>terminated by \r\n, even though \r, \n or any other 8-bit characters</p>
-
-<p>may also appear inside the data. Therefore, when a client retrieves</p>
-
-<p>data from a server, it must use the length of the data block (which it</p>
-
-<p>will be provided with) to determine where the data block ends, and not</p>
-
-<p>the fact that \r\n follows the end of the data block, even though it</p>
-
-<p>does.</p>
-
-<p>Keys</p>
-
-<hr />
-
-<p>Data stored by memcached is identified with the help of a key. A key</p>
-
-<p>is a text string which should uniquely identify the data for clients</p>
-
-<p>that are interested in storing and retrieving it.&nbsp; Currently the</p>
-
-<p>length limit of a key is set at 250 characters (of course, normally</p>
-
-<p>clients wouldn&#8217;t need to use such long keys); the key must not include</p>
-
-<p>control characters or whitespace.</p>
-
-<p>Commands</p>
-
-<hr />
-
-<p>There are three types of commands.</p>
-
-<p>Storage commands (there are six: &#8220;set&#8221;, &#8220;add&#8221;, &#8220;replace&#8221;, &#8220;append&#8221;</p>
-
-<p>&#8220;prepend&#8221; and &#8220;cas&#8221;) ask the server to store some data identified by a key. The</p>
-
-<p>client sends a command line, and then a data block; after that the</p>
-
-<p>client expects one line of response, which will indicate success or</p>
-
-<p>faulure.</p>
-
-<p>Retrieval commands (there are two: &#8220;get&#8221; and &#8220;gets&#8221;) ask the server to</p>
-
-<p>retrieve data corresponding to a set of keys (one or more keys in one</p>
-
-<p>request). The client sends a command line, which includes all the</p>
-
-<p>requested keys; after that for each item the server finds it sends to</p>
-
-<p>the client one response line with information about the item, and one</p>
-
-<p>data block with the item&#8217;s data; this continues until the server</p>
-
-<p>finished with the &#8220;END&#8221; response line.</p>
-
-<p>All other commands don&#8217;t involve unstructured data. In all of them,</p>
-
-<p>the client sends one command line, and expects (depending on the</p>
-
-<p>command) either one line of response, or several lines of response</p>
-
-<p>ending with &#8220;END&#8221; on the last line.</p>
-
-<p>A command line always starts with the name of the command, followed by</p>
-
-<p>parameters (if any) delimited by whitespace. Command names are</p>
-
-<p>lower-case and are case-sensitive.</p>
-
-<p>Expiration times</p>
-
-<hr />
-
-<p>Some commands involve a client sending some kind of expiration time</p>
-
-<p>(relative to an item or to an operation requested by the client) to</p>
-
-<p>the server. In all such cases, the actual value sent may either be</p>
-
-<p>Unix time (number of seconds since January 1, 1970, as a 32-bit</p>
-
-<p>value), or a number of seconds starting from current time. In the</p>
-
-<p>latter case, this number of seconds may not exceed 60<em>60</em>24*30 (number</p>
-
-<p>of seconds in 30 days); if the number sent by a client is larger than</p>
-
-<p>that, the server will consider it to be real Unix time value rather</p>
-
-<p>than an offset from current time.</p>
-
-<p>Error strings</p>
-
-<hr />
-
-<p>Each command sent by a client may be answered with an error string</p>
-
-<p>from the server. These error strings come in three types:</p>
-
-<ul>
-<li>&#8220;ERROR\r\n&#8221;</li>
-</ul>
-
-
-<p>means the client sent a nonexistent command name.</p>
-
-<ul>
-<li>&#8220;CLIENT_ERROR <error>\r\n&#8221;</li>
-</ul>
-
-
-<p>means some sort of client error in the input line, i.e. the input</p>
-
-<p>doesn&#8217;t conform to the protocol in some way. <error> is a</p>
-
-<p>human-readable error string.</p>
-
-<ul>
-<li>&#8220;SERVER_ERROR <error>\r\n&#8221;</li>
-</ul>
-
-
-<p>means some sort of server error prevents the server from carrying</p>
-
-<p>out the command. <error> is a human-readable error string. In cases</p>
-
-<p>of severe server errors, which make it impossible to continue</p>
-
-<p>serving the client (this shouldn&#8217;t normally happen), the server will</p>
-
-<p>close the connection after sending the error line. This is the only</p>
-
-<p>case in which the server closes a connection to a client.</p>
-
-<p>In the descriptions of individual commands below, these error lines</p>
-
-<p>are not again specifically mentioned, but clients must allow for their</p>
-
-<p>possibility.</p>
-
-<p>Storage commands</p>
-
-<hr />
-
-<p>First, the client sends a command line which looks like this:</p>
-
-<p><command name> <key> <flags> <exptime> <bytes> [noreply]\r\n</p>
-
-<p>cas <key> <flags> <exptime> <bytes> <cas unqiue> [noreply]\r\n</p>
-
-<ul>
-<li><command name> is &#8220;set&#8221;, &#8220;add&#8221;, &#8220;replace&#8221;, &#8220;append&#8221; or &#8220;prepend&#8221;</li>
-</ul>
-
-
-<p>&#8220;set&#8221; means &#8220;store this data&#8221;.</p>
-
-<p>&#8220;add&#8221; means &#8220;store this data, but only if the server <em>doesn&#8217;t</em> already</p>
-
-<p>hold data for this key&#8221;.</p>
-
-<p>&#8220;replace&#8221; means &#8220;store this data, but only if the server <em>does</em></p>
-
-<p>already hold data for this key&#8221;.</p>
-
-<p>&#8220;append&#8221; means &#8220;add this data to an existing key after existing data&#8221;.</p>
-
-<p>&#8220;prepend&#8221; means &#8220;add this data to an existing key before existing data&#8221;.</p>
-
-<p>The append and prepend commands do not accept flags or exptime.</p>
-
-<p>They update existing data portions, and ignore new flag and exptime</p>
-
-<p>settings.</p>
-
-<p>&#8220;cas&#8221; is a check and set operation which means &#8220;store this data but</p>
-
-<p>only if no one else has updated since I last fetched it.&#8221;</p>
-
-<ul>
-<li><p><key> is the key under which the client asks to store the data</p></li>
-<li><p><flags> is an arbitrary 16-bit unsigned integer (written out in</p></li>
-</ul>
-
-
-<p>decimal) that the server stores along with the data and sends back</p>
-
-<p>when the item is retrieved. Clients may use this as a bit field to</p>
-
-<p>store data-specific information; this field is opaque to the server.</p>
-
-<p>Note that in memcached 1.2.1 and higher, flags may be 32-bits, instead</p>
-
-<p>of 16, but you might want to restrict yourself to 16 bits for</p>
-
-<p>compatibility with older versions.</p>
-
-<ul>
-<li><exptime> is expiration time. If it&#8217;s 0, the item never expires</li>
-</ul>
-
-
-<p>(although it may be deleted from the cache to make place for other</p>
-
-<p>items). If it&#8217;s non-zero (either Unix time or offset in seconds from</p>
-
-<p>current time), it is guaranteed that clients will not be able to</p>
-
-<p>retrieve this item after the expiration time arrives (measured by</p>
-
-<p>server time).</p>
-
-<ul>
-<li><bytes> is the number of bytes in the data block to follow, <em>not</em></li>
-</ul>
-
-
-<p>including the delimiting \r\n. <bytes> may be zero (in which case</p>
-
-<p>it&#8217;s followed by an empty data block).</p>
-
-<ul>
-<li><cas unique> is a unique 64-bit value of an existing entry.</li>
-</ul>
-
-
-<p>Clients should use the value returned from the &#8220;gets&#8221; command</p>
-
-<p>when issuing &#8220;cas&#8221; updates.</p>
-
-<ul>
-<li>&#8220;noreply&#8221; optional parameter instructs the server to not send the</li>
-</ul>
-
-
-<p>reply.&nbsp; NOTE: if the request line is malformed, the server can&#8217;t</p>
-
-<p>parse &#8220;noreply&#8221; option reliably.&nbsp; In this case it may send the error</p>
-
-<p>to the client, and not reading it on the client side will break</p>
-
-<p>things.&nbsp; Client should construct only valid requests.</p>
-
-<p>After this line, the client sends the data block:</p>
-
-<p><data block>\r\n</p>
-
-<ul>
-<li><data block> is a chunk of arbitrary 8-bit data of length <bytes></li>
-</ul>
-
-
-<p>from the previous line.</p>
-
-<p>After sending the command line and the data blockm the client awaits</p>
-
-<p>the reply, which may be:</p>
-
-<ul>
-<li><p>&#8220;STORED\r\n&#8221;, to indicate success.</p></li>
-<li><p>&#8220;NOT_STORED\r\n&#8221; to indicate the data was not stored, but not</p></li>
-</ul>
-
-
-<p>because of an error. This normally means that either that the</p>
-
-<p>condition for an &#8220;add&#8221; or a &#8220;replace&#8221; command wasn&#8217;t met, or that the</p>
-
-<p>item is in a delete queue (see the &#8220;delete&#8221; command below).</p>
-
-<ul>
-<li>&#8220;EXISTS\r\n&#8221; to indicate that the item you are trying to store with</li>
-</ul>
-
-
-<p>a &#8220;cas&#8221; command has been modified since you last fetched it.</p>
-
-<ul>
-<li>&#8220;NOT_FOUND\r\n&#8221; to indicate that the item you are trying to store</li>
-</ul>
-
-
-<p>with a &#8220;cas&#8221; command did not exist or has been deleted.</p>
-
-<p>Retrieval command:</p>
-
-<hr />
-
-<p>The retrieval commands &#8220;get&#8221; and &#8220;gets&#8221; operates like this:</p>
-
-<p>get <key>*\r\n</p>
-
-<p>gets <key>*\r\n</p>
-
-<ul>
-<li><key>* means one or more key strings separated by whitespace.</li>
-</ul>
-
-
-<p>After this command, the client expects zero or more items, each of</p>
-
-<p>which is received as a text line followed by a data block. After all</p>
-
-<p>the items have been transmitted, the server sends the string</p>
-
-<p>&#8220;END\r\n&#8221;</p>
-
-<p>to indicate the end of response.</p>
-
-<p>Each item sent by the server looks like this:</p>
-
-<p>VALUE <key> <flags> <bytes> [<cas unique>]\r\n</p>
-
-<p><data block>\r\n</p>
-
-<ul>
-<li><p><key> is the key for the item being sent</p></li>
-<li><p><flags> is the flags value set by the storage command</p></li>
-<li><p><bytes> is the length of the data block to follow, <em>not</em> including</p></li>
-</ul>
-
-
-<p>its delimiting \r\n</p>
-
-<ul>
-<li><cas unique> is a unique 64-bit integer that uniquely identifies</li>
-</ul>
-
-
-<p>this specific item.</p>
-
-<ul>
-<li><data block> is the data for this item.</li>
-</ul>
-
-
-<p>If some of the keys appearing in a retrieval request are not sent back</p>
-
-<p>by the server in the item list this means that the server does not</p>
-
-<p>hold items with such keys (because they were never stored, or stored</p>
-
-<p>but deleted to make space for more items, or expired, or explicitly</p>
-
-<p>deleted by a client).</p>
-
-<p>Deletion</p>
-
-<hr />
-
-<p>The command &#8220;delete&#8221; allows for explicit deletion of items:</p>
-
-<p>delete <key> [<time>] [noreply]\r\n</p>
-
-<ul>
-<li><p><key> is the key of the item the client wishes the server to delete</p></li>
-<li><p><time> is the amount of time in seconds (or Unix time until which)</p></li>
-</ul>
-
-
-<p>the client wishes the server to refuse &#8220;add&#8221; and &#8220;replace&#8221; commands</p>
-
-<p>with this key. For this amount of item, the item is put into a</p>
-
-<p>delete queue, which means that it won&#8217;t possible to retrieve it by</p>
-
-<p>the &#8220;get&#8221; command, but &#8220;add&#8221; and &#8220;replace&#8221; command with this key</p>
-
-<p>will also fail (the &#8220;set&#8221; command will succeed, however). After the</p>
-
-<p>time passes, the item is finally deleted from server memory.</p>
-
-<p>The parameter <time> is optional, and, if absent, defaults to 0</p>
-
-<p>(which means that the item will be deleted immediately and further</p>
-
-<p>storage commands with this key will succeed).</p>
-
-<ul>
-<li>&#8220;noreply&#8221; optional parameter instructs the server to not send the</li>
-</ul>
-
-
-<p>reply.&nbsp; See the note in Storage commands regarding malformed</p>
-
-<p>requests.</p>
-
-<p>The response line to this command can be one of:</p>
-
-<ul>
-<li><p>&#8220;DELETED\r\n&#8221; to indicate success</p></li>
-<li><p>&#8220;NOT_FOUND\r\n&#8221; to indicate that the item with this key was not</p></li>
-</ul>
-
-
-<p>found.</p>
-
-<p>See the &#8220;flush_all&#8221; command below for immediate invalidation</p>
-
-<p>of all existing items.</p>
-
-<p>Increment/Decrement</p>
-
-<hr />
-
-<p>Commands &#8220;incr&#8221; and &#8220;decr&#8221; are used to change data for some item</p>
-
-<p>in-place, incrementing or decrementing it. The data for the item is</p>
-
-<p>treated as decimal representation of a 64-bit unsigned integer. If the</p>
-
-<p>current data value does not conform to such a representation, the</p>
-
-<p>commands behave as if the value were 0. Also, the item must already</p>
-
-<p>exist for incr/decr to work; these commands won&#8217;t pretend that a</p>
-
-<p>non-existent key exists with value 0; instead, they will fail.</p>
-
-<p>The client sends the command line:</p>
-
-<p>incr <key> <value> [noreply]\r\n</p>
-
-<p>or</p>
-
-<p>decr <key> <value> [noreply]\r\n</p>
-
-<ul>
-<li><p><key> is the key of the item the client wishes to change</p></li>
-<li><p><value> is the amount by which the client wants to increase/decrease</p></li>
-</ul>
-
-
-<p>the item. It is a decimal representation of a 64-bit unsigned integer.</p>
-
-<ul>
-<li>&#8220;noreply&#8221; optional parameter instructs the server to not send the</li>
-</ul>
-
-
-<p>reply.&nbsp; See the note in Storage commands regarding malformed</p>
-
-<p>requests.</p>
-
-<p>The response will be one of:</p>
-
-<ul>
-<li><p>&#8220;NOT_FOUND\r\n&#8221; to indicate the item with this value was not found</p></li>
-<li><p><value>\r\n , where <value> is the new value of the item&#8217;s data,</p></li>
-</ul>
-
-
-<p>after the increment/decrement operation was carried out.</p>
-
-<p>Note that underflow in the &#8220;decr&#8221; command is caught: if a client tries</p>
-
-<p>to decrease the value below 0, the new value will be 0.&nbsp; Overflow in</p>
-
-<p>the &#8220;incr&#8221; command will wrap around the 64 bit mark.</p>
-
-<p>Note also that decrementing a number such that it loses length isn&#8217;t</p>
-
-<p>guaranteed to decrement its returned length.&nbsp; The number MAY be</p>
-
-<p>space-padded at the end, but this is purely an implementation</p>
-
-<p>optimization, so you also shouldn&#8217;t rely on that.</p>
-
-<p>Statistics</p>
-
-<hr />
-
-<p>The command &#8220;stats&#8221; is used to query the server about statistics it</p>
-
-<p>maintains and other internal data. It has two forms. Without</p>
-
-<p>arguments:</p>
-
-<p>stats\r\n</p>
-
-<p>it causes the server to output general-purpose statistics and</p>
-
-<p>settings, documented below.&nbsp; In the other form it has some arguments:</p>
-
-<p>stats <args>\r\n</p>
-
-<p>Depending on <args>, various internal data is sent by the server. The</p>
-
-<p>kinds of arguments and the data sent are not documented in this vesion</p>
-
-<p>of the protocol, and are subject to change for the convenience of</p>
-
-<p>memcache developers.</p>
-
-<p>General-purpose statistics</p>
-
-<hr />
-
-<p>Upon receiving the &#8220;stats&#8221; command without arguments, the server sents</p>
-
-<p>a number of lines which look like this:</p>
-
-<p>STAT <name> <value>\r\n</p>
-
-<p>The server terminates this list with the line</p>
-
-<p>END\r\n</p>
-
-<p>In each line of statistics, <name> is the name of this statistic, and</p>
-
-<p><value> is the data.&nbsp; The following is the list of all names sent in</p>
-
-<p>response to the &#8220;stats&#8221; command, together with the type of the value</p>
-
-<p>sent for this name, and the meaning of the value.</p>
-
-<p>In the type column below, &#8220;32u&#8221; means a 32-bit unsigned integer, &#8220;64u&#8221;</p>
-
-<p>means a 64-bit unsigner integer. &#8216;32u:32u&#8217; means two 32-but unsigned</p>
-
-<p>integers separated by a colon.</p>
-
-<p>Name&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Type &nbsp; &nbsp; Meaning</p>
-
-<hr />
-
-<p>pid &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Process id of this server process</p>
-
-<p>uptime&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Number of seconds this server has been running</p>
-
-<p>time&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; current UNIX time according to the server</p>
-
-<p>version &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; string &nbsp; Version string of this server</p>
-
-<p>pointer_size&nbsp; &nbsp; &nbsp; 32 &nbsp; &nbsp; &nbsp; Default size of pointers on the host OS</p>
-
-<p>(generally 32 or 64)</p>
-
-<p>rusage_user &nbsp; &nbsp; &nbsp; 32u:32u&nbsp; Accumulated user time for this process</p>
-
-<p>(seconds:microseconds)</p>
-
-<p>rusage_system &nbsp; &nbsp; 32u:32u&nbsp; Accumulated system time for this process</p>
-
-<p>(seconds:microseconds)</p>
-
-<p>curr_items&nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Current number of items stored by the server</p>
-
-<p>total_items &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Total number of items stored by this server</p>
-
-<p>ever since it started</p>
-
-<p>bytes &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Current number of bytes used by this server</p>
-
-<p>to store items</p>
-
-<p>curr_connections&nbsp; 32u&nbsp; &nbsp; &nbsp; Number of open connections</p>
-
-<p>total_connections 32u&nbsp; &nbsp; &nbsp; Total number of connections opened since</p>
-
-<p>the server started running</p>
-
-<p>connection_structures 32u&nbsp; Number of connection structures allocated</p>
-
-<p>by the server</p>
-
-<p>cmd_get &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Cumulative number of retrieval requests</p>
-
-<p>cmd_set &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Cumulative number of storage requests</p>
-
-<p>get_hits&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Number of keys that have been requested and</p>
-
-<p>found present</p>
-
-<p>get_misses&nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Number of items that have been requested</p>
-
-<p>and not found</p>
-
-<p>evictions &nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Number of valid items removed from cache</p>
-
-<p>to free memory for new items</p>
-
-<p>bytes_read&nbsp; &nbsp; &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Total number of bytes read by this server</p>
-
-<p>from network</p>
-
-<p>bytes_written &nbsp; &nbsp; 64u&nbsp; &nbsp; &nbsp; Total number of bytes sent by this server to</p>
-
-<p>network</p>
-
-<p>limit_maxbytes&nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Number of bytes this server is allowed to</p>
-
-<p>use for storage.</p>
-
-<p>threads &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 32u&nbsp; &nbsp; &nbsp; Number of worker threads requested.</p>
-
-<p>(see doc/threads.txt)</p>
-
-<p>Item statistics</p>
-
-<hr />
-
-<p>CAVEAT: This section describes statistics which are subject to change in the</p>
-
-<p>future.</p>
-
-<p>The &#8220;stats&#8221; command with the argument of &#8220;items&#8221; returns information about</p>
-
-<p>item storage per slab class. The data is returned in the format:</p>
-
-<p>STAT items:<slabclass>:<stat> <value>\r\n</p>
-
-<p>The server terminates this list with the line</p>
-
-<p>END\r\n</p>
-
-<p>The slabclass aligns with class ids used by the &#8220;stats slabs&#8221; command. Where</p>
-
-<p>&#8220;stats slabs&#8221; describes size and memory usage, &#8220;stats items&#8221; shows higher</p>
-
-<p>level information.</p>
-
-<p>The following item values are defined as of writing.</p>
-
-<p>Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Meaning</p>
-
-<hr />
-
-<p>number &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Number of items presently stored in this class. Expired</p>
-
-<p>items are not automatically excluded.</p>
-
-<p>age&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Age of the oldest item in the LRU.</p>
-
-<p>evicted&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Number of times an item had to be evicted from the LRU</p>
-
-<p>before it expired.</p>
-
-<p>outofmemory&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Number of times the underlying slab class was unable to</p>
-
-<p>store a new item. This means you are running with -M or</p>
-
-<p>an eviction failed.</p>
-
-<p>Note this will only display information about slabs which exist, so an empty</p>
-
-<p>cache will return an empty set.</p>
-
-<p>Item size statistics</p>
-
-<hr />
-
-<p>CAVEAT: This section describes statistics which are subject to change in the</p>
-
-<p>future.</p>
-
-<p>The &#8220;stats&#8221; command with the argument of &#8220;sizes&#8221; returns information about the</p>
-
-<p>general size and count of all items stored in the cache.</p>
-
-<p>WARNING: This command WILL lock up your cache! It iterates over <em>every item</em></p>
-
-<p>and examines the size. While the operation is fast, if you have many items</p>
-
-<p>you could prevent memcached from serving requests for several seconds.</p>
-
-<p>The data is returned in the following format:</p>
-
-<p><size> <count>\r\n</p>
-
-<p>The server terminates this list with the line</p>
-
-<p>END\r\n</p>
-
-<p>&#8216;size&#8217; is an approximate size of the item, within 32 bytes.</p>
-
-<p>&#8216;count&#8217; is the amount of items that exist within that 32-byte range.</p>
-
-<p>This is essentially a display of all of your items if there was a slab class</p>
-
-<p>for every 32 bytes. You can use this to determine if adjusting the slab growth</p>
-
-<p>factor would save memory overhead. For example: generating more classes in the</p>
-
-<p>lower range could allow items to fit more snugly into their slab classes, if</p>
-
-<p>most of your items are less than 200 bytes in size.</p>
-
-<p>Slab statistics</p>
-
-<hr />
-
-<p>CAVEAT: This section describes statistics which are subject to change in the</p>
-
-<p>future.</p>
-
-<p>The &#8220;stats&#8221; command with the argument of &#8220;slabs&#8221; returns information about</p>
-
-<p>each of the slabs created by memcached during runtime. This includes per-slab</p>
-
-<p>information along with some totals. The data is returned in the format:</p>
-
-<p>STAT <slabclass>:<stat> <value>\r\n</p>
-
-<p>STAT <stat> <value>\r\n</p>
-
-<p>The server terminates this list with the line</p>
-
-<p>END\r\n</p>
-
-<p>Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Meaning</p>
-
-<hr />
-
-<p>chunk_size &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The amount of space each chunk uses. One item will use</p>
-
-<p>one chunk of the appropriate size.</p>
-
-<p>chunks_per_page&nbsp; &nbsp; &nbsp; &nbsp; How many chunks exist within one page. A page by</p>
-
-<p>default is one megabyte in size. Slabs are allocated per</p>
-
-<p>page, then broken into chunks.</p>
-
-<p>total_pages&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total number of pages allocated to the slab class.</p>
-
-<p>total_chunks &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total number of chunks allocated to the slab class.</p>
-
-<p>used_chunks&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; How many chunks have been allocated to items.</p>
-
-<p>free_chunks&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Chunks not yet allocated to items, or freed via delete.</p>
-
-<p>free_chunks_end&nbsp; &nbsp; &nbsp; &nbsp; Number of free chunks at the end of the last allocated</p>
-
-<p>page.</p>
-
-<p>active_slabs &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total number of slab classes allocated.</p>
-
-<p>total_malloced &nbsp; &nbsp; &nbsp; &nbsp; Total amount of memory allocated to slab pages.</p>
-
-<p>Other commands</p>
-
-<hr />
-
-<p>&#8220;flush_all&#8221; is a command with an optional numeric argument. It always</p>
-
-<p>succeeds, and the server sends &#8220;OK\r\n&#8221; in response (unless &#8220;noreply&#8221;</p>
-
-<p>is given as the last parameter). Its effect is to invalidate all</p>
-
-<p>existing items immediately (by default) or after the expiration</p>
-
-<p>specified.&nbsp; After invalidation none of the items will be returned in</p>
-
-<p>response to a retrieval command (unless it&#8217;s stored again under the</p>
-
-<p>same key <em>after</em> flush_all has invalidated the items). flush_all</p>
-
-<p>doesn&#8217;t actually free all the memory taken up by existing items; that</p>
-
-<p>will happen gradually as new items are stored. The most precise</p>
-
-<p>definition of what flush_all does is the following: it causes all</p>
-
-<p>items whose update time is earlier than the time at which flush_all</p>
-
-<p>was set to be executed to be ignored for retrieval purposes.</p>
-
-<p>The intent of flush_all with a delay, was that in a setting where you</p>
-
-<p>have a pool of memcached servers, and you need to flush all content,</p>
-
-<p>you have the option of not resetting all memcached servers at the</p>
-
-<p>same time (which could e.g. cause a spike in database load with all</p>
-
-<p>clients suddenly needing to recreate content that would otherwise</p>
-
-<p>have been found in the memcached daemon).</p>
-
-<p>The delay option allows you to have them reset in e.g. 10 second</p>
-
-<p>intervals (by passing 0 to the first, 10 to the second, 20 to the</p>
-
-<p>third, etc. etc.).</p>
-
-<p>&#8220;version&#8221; is a command with no arguments:</p>
-
-<p>version\r\n</p>
-
-<p>In response, the server sends&nbsp;&#8220;VERSION <version>\r\n&#8221;, where <version> is the version string for the</p>
-
-<p>server.</p>
-
-<p>&#8220;verbosity&#8221; is a command with a numeric argument. It always succeeds,</p>
-
-<p>and the server sends &#8220;OK\r\n&#8221; in response (unless &#8220;noreply&#8221; is given</p>
-
-<p>as the last parameter). Its effect is to set the verbosity level of</p>
-
-<p>the logging output.</p>
-
-<p>&#8220;quit&#8221; is a command with no arguments:</p>
-
-<p>quit\r\n</p>
-
-<p>Upon receiving this command, the server closes the</p>
-
-<p>connection. However, the client may also simply close the connection</p>
-
-<p>when it no longer needs it, without issuing this command.</p>
-
-<p>UDP protocol</p>
-
-<hr />
-
-<p>For very large installations where the number of clients is high enough</p>
-
-<p>that the number of TCP connections causes scaling difficulties, there is</p>
-
-<p>also a UDP-based interface. The UDP interface does not provide guaranteed</p>
-
-<p>delivery, so should only be used for operations that aren&#8217;t required to</p>
-
-<p>succeed; typically it is used for &#8220;get&#8221; requests where a missing or</p>
-
-<p>incomplete response can simply be treated as a cache miss.</p>
-
-<p>Each UDP datagram contains a simple frame header, followed by data in the</p>
-
-<p>same format as the TCP protocol described above. In the current</p>
-
-<p>implementation, requests must be contained in a single UDP datagram, but</p>
-
-<p>responses may span several datagrams. (The only common requests that would</p>
-
-<p>span multiple datagrams are huge multi-key &#8220;get&#8221; requests and &#8220;set&#8221;</p>
-
-<p>requests, both of which are more suitable to TCP transport for reliability</p>
-
-<p>reasons anyway.)</p>
-
-<p>The frame header is 8 bytes long, as follows (all values are 16-bit integers</p>
-
-<p>in network byte order, high byte first):</p>
-
-<p>0-1 Request ID</p>
-
-<p>2-3 Sequence number</p>
-
-<p>4-5 Total number of datagrams in this message</p>
-
-<p>6-7 Reserved for future use; must be 0</p>
-
-<p>The request ID is supplied by the client. Typically it will be a</p>
-
-<p>monotonically increasing value starting from a random seed, but the client</p>
-
-<p>is free to use whatever request IDs it likes. The server&#8217;s response will</p>
-
-<p>contain the same ID as the incoming request. The client uses the request ID</p>
-
-<p>to differentiate between responses to outstanding requests if there are</p>
-
-<p>several pending from the same server; any datagrams with an unknown request</p>
-
-<p>ID are probably delayed responses to an earlier request and should be</p>
-
-<p>discarded.</p>
-
-<p>The sequence number ranges from 0 to n-1, where n is the total number of</p>
-
-<p>datagrams in the message. The client should concatenate the payloads of the</p>
-
-<p>datagrams for a given response in sequence number order; the resulting byte</p>
-
-<p>stream will contain a complete response in the same format as the TCP</p>
-
-<p>protocol (including terminating \r\n sequences).</p>
+<p>5、js压缩（high performance web sites）</p>
 </div>
   
   
@@ -1226,7 +276,7 @@ have fun! :)</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/11/13/%E5%93%8E%EF%BC%8C%E4%BA%BA%E7%94%9F%EF%BC%9B%E5%93%8E%EF%BC%8C%E4%BA%A7%E5%93%81/">哎，人生；哎，产品</a></h1>
+      <h1 class="entry-title"><a href="/blog/2011/07/29/moview/">流川枫与苍井空</a></h1>
     
     
       <p class="meta">
@@ -1242,22 +292,18 @@ have fun! :)</p>
   
 
 
-<time datetime="2011-11-13T02:55:44+08:00" pubdate data-updated="true">2011-11-13</time>
+<time datetime="2011-07-29T04:00:21+08:00" pubdate data-updated="true">2011-07-29</time>
         
-         | <a href="/blog/2011/11/13/%E5%93%8E%EF%BC%8C%E4%BA%BA%E7%94%9F%EF%BC%9B%E5%93%8E%EF%BC%8C%E4%BA%A7%E5%93%81/#disqus_thread">Comments</a>
+         | <a href="/blog/2011/07/29/moview/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>前段时间由于项目上面的业务变更，导致memcacheq这个消息队列使用有点捉襟见肘。由于其对于消息体大小有限制，而且最大不能超过60K，就萌生了自己写一个消息队列的想法。总是掌握在自己手中，能应对现有的业务需要的东西用着才爽啊。本来计划是有空就改写的，但是由于产品上面一而再再而三的修改功能、修改方向，最坑爹的事情是没有功能定义的情况下得去照搬别的产品的功能。悲剧ing。于是这个计划一直没有实施。</p>
+  <div class="entry-content"><p><embed src="http://player.youku.com/player.php/sid/XMjY5NTczMDk2/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed></p>
 
-<p>哎，技术架构方案的选择真得是件麻烦的事情，得遇见今后一段时间的业务变更与增长，又要考虑现有资源。这样做出合理的，可以实现的方案。我们那架构师也辛苦，总得和老板设计的产品做pk。心力交瘁啊。有时候想想，也迷茫，咱这是做了啥东西？用来干啥？对自己也没多大帮助啊？更坑爹的事情是，把外包那套管理项目的方式折腾过来，每天都是下班时过来给你折腾点东西，杯具ing。产品设计上面没有明确的功能性设计，只是笼统的说，我要这个功能，其他你可以去参考别人怎么做的。你妹啊！</p>
-
-<p>一个ui图，再加个说明，给你，你去设计接口吧。好吧，设计完接口又说，你这样不行，客户端没法调用的，两个接口，怎么可以这样子用，客户端调用很麻烦的，你如果做客户端，你怎么去弄？哎，坑爹啊！</p>
-
-<p>神马浮云啊，没做过产品经理的，把项目管理那套东西搬过来，好吧，你行的。我算是清楚了。我只写代码。</p>
+<p>纪念该纪念的。。。</p>
 </div>
   
   
@@ -1270,7 +316,7 @@ have fun! :)</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/11/11/%E5%9D%91%E7%88%B9%E7%9A%84%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/">坑爹的产品设计</a></h1>
+      <h1 class="entry-title"><a href="/blog/2011/07/29/recent-time/">这段时间</a></h1>
     
     
       <p class="meta">
@@ -1286,26 +332,24 @@ have fun! :)</p>
   
 
 
-<time datetime="2011-11-11T00:30:52+08:00" pubdate data-updated="true">2011-11-11</time>
+<time datetime="2011-07-29T03:57:02+08:00" pubdate data-updated="true">2011-07-29</time>
         
-         | <a href="/blog/2011/11/11/%E5%9D%91%E7%88%B9%E7%9A%84%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1/#disqus_thread">Comments</a>
+         | <a href="/blog/2011/07/29/recent-time/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>坑爹的产品设计会造成神马后果，哎，我总算见识了。从没见过时间被扣的这么死的，好吧，你是老板，我认了。也不想想，万一有啥问题要查，要调试，这不还是被打断？</p>
+  <div class="entry-content"><p>上星期加入了<a href="http://www.lianpu.com/" target="_blank">脸谱换换</a>创业团队，本来我是想去做web服务器端开发的，因为我么会点php于是折腾起了前端一些页面以及与后台接口调用神马的事情。工作状态，怎么说呢，感觉还好，我反正效率挺高的。可是啊，折腾发布这个事情可不是一般的纠结啊。每次都是发布之前过来看看，然后觉着神马要改了，然后修改。哎，你之前做神马去了？于是么，白天基本轻松，到晚上，哎。</p>
 
-<p>搞项目的，以为看了些别人的产品就来折腾产品设计，好吧，你牛。这么好的一个产品经理摆在那里，不要，成，那你自己弄出点好的事情来啊？一要个功能，就来，你看看别人怎么做的么，你看过么？没吧？那你去看看然后给出一个解决方案来吧？行不？什么时间可以有？明天？</p>
+<p>潦草，太潦草了。产品先确定功能点，然后优化，嗯，这个很好。需求么？今天谈一下，明天谈一下，产品经理啊，悲崔！好么，昨天有人说，要做网站版本的脸谱换换，好哇，想法很好么，瞎扯淡。您这是做产品么？怎么神马都做？让<a href="http://www.path.com/" target="_blank">path</a>情何以堪啊！</p>
 
-<p>坑爹啊，我一个搞技术的人给你去折腾功能设计方案，你妹啊！一会要查这个问题，一会要做这个事情，我又不是神。行吧行吧，总会有个解决方法的。打工的，我忍了。看吧，看别人怎么做的呗。</p>
+<p>前段时间做的产品记录么，哎，没时间继续做了。最近<a href="http://www.mogujie.com/" target="_blank">蘑菇街</a>改版了，功能简洁，舒适。不错的社交电子商务产品，继续看好之。</p>
 
-<p>好吧，你只要有这个功能，功能怎么样的，你不管。成啊，最后呢？还不是需要实现去改？来回折腾累不累啊？硬要短时间内完成，行啊，那你别介意有什么意外问题啊。又要没有别的问题，又要快、好的实现，但是你有好好的去设计这个功能么？还不就是画了一下uiflow？能解决问题么？坑爹啊！</p>
+<p>对于<a href="http://www.lianpu.com/" target="_blank">脸谱换换</a>产品的服务器端技术架构，等我弄熟了那些东西在做记录吧。现在写了也只是copy，没神马意思滴。主要用到的技术么，<a href="http://www.mysql.com/" target="_blank">mysql</a>、<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>（<a href="http://xmpp.org/" target="_blank">xmpp</a>的一个server实现）、基于java的<a href="http://www.springsource.org/" target="_blank">spring</a>、<a href="http://struts.apache.org/" target="_blank">struts</a>等等这些框架。</p>
 
-<p>哎，看别人有的功能，你也想加，ok，可以，你得想想我们这个产品用来做啥的吧？迷茫啊，用来做啥都不知道，亮点呢？好的产品一般都是功能简单，但是都是必须的功能，而且都是能抓住用户粘度的功能。我们呢？有想过么？用户的粘度？</p>
-
-<p>这个总得好好考虑吧？行，我一个码农，不知道说啥，嘿，你说干啥就干啥呗，反正也讲不通，就这样吧！</p>
+<p>产品要做专，功能神马的，浮云啊，关键是需求点转化成功能的概率啊有多大！嗯，特别佩服毕加索，优秀的艺术家复制，伟大的艺术家偷。我么，继续stay hungry，stay foolish！</p>
 </div>
   
   
@@ -1318,16 +362,19 @@ have fun! :)</p>
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
-	<a href="/blog/about/">About Me</a>
     
     <a class="next" href="/blog/page/2/">Newer &rarr;</a>
     
   </div>
 </div>
-<aside class="sidebar">
+
+
   
-    <section>
-  <h1>Recent Posts</h1>
+    <div class="span sidebar">
+    <div class="well">
+      
+        <section>
+  <h2>Recent Posts</h2>
   <ul id="recent_posts">
     
       <li class="post">
@@ -1335,19 +382,19 @@ have fun! :)</p>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/12/13/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">碎碎念</a>
+        <a href="/blog/2012/10/14/redis2/">redis源码学习记录(二)</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/10/14/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%28%E4%BA%8C%29/">redis源码学习记录(二)</a>
+        <a href="/blog/2012/09/19/redis1/">redis源码学习记录</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/09/22/%E4%B9%9D%E6%9C%88%E6%9D%82%E5%BF%B5/">九月杂念</a>
+        <a href="/blog/2011/12/15/centos-yum-error/">centos中yum无法使用问题</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/09/19/redis%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">redis源码学习记录</a>
+        <a href="/blog/2011/12/04/memcacheq/">阅读memcacheq源码记录</a>
       </li>
     
   </ul>
@@ -1362,7 +409,7 @@ have fun! :)</p>
 </section>
 
 <section>
-  <h1>GitHub Repos</h1>
+  <h2>GitHub Repos</h2>
   <ul id="gh_repos">
     <li class="loading">Status updating&#8230;</li>
   </ul>
@@ -1392,21 +439,34 @@ have fun! :)</p>
 
 
 
+<section>
+  <h2>On Delicious</h2>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/kurten?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/kurten">My Delicious Bookmarks &raquo;</a></p>
+</section>
 
 
 
-  
-</aside>
 
+      
     </div>
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - kurten -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
 
+
+
+
+</div>
+      </div>
+    </div>
+    <footer class="footer"><p>
+  Copyright &copy; 2013 - Kurten -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> -
+  <span class="credit">Theme by <a href="https://github.com/barmstrong/octopress-bootstrap">Brian Armstrong</a></span> -
+  <span class="credit">Edited by <a href="http://ikurten.com">Kurten</a></span>
+</p>
 </footer>
-  
+    
 
 <script type="text/javascript">
       var disqus_shortname = 'ikurten';
@@ -1427,9 +487,10 @@ have fun! :)</p>
 
 
 
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
 
 
-
-
+  </div>
 </body>
 </html>
