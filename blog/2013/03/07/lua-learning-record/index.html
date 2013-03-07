@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ikurten.com</title>
+  <title>lua学习笔记 - ikurten.com</title>
   <meta name="author" content="Kurten">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ikurten.com">
+  <link rel="canonical" href="http://ikurten.com/blog/2013/03/07/lua-learning-record">
   <link href="/favicon.ico" rel="icon">
   
   <link href="/assets/bootstrap/css/spacelab.min.css" rel="stylesheet" type="text/css">
@@ -90,17 +90,12 @@
     <div id="main">
       <div id="content">
         <div class="row">
-
-
-<div class="blog-index span8">
   
-  
-  
-    <article>
-      
+  <div class="span8">
+    
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/03/07/lua-learning-record/">Lua学习笔记</a></h1>
+      <h1 class="entry-title">Lua学习笔记</h1>
     
     
       <p class="meta">
@@ -118,13 +113,15 @@
 
 <time datetime="2013-03-07T22:13:00+08:00" pubdate data-updated="true">2013-03-07</time>
         
-         | <a href="/blog/2013/03/07/lua-learning-record/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
+  
+  
   <div class="entry-content"><blockquote><p>最近在学习<a href="http://www.lua.org">lua</a>，看的是luachina翻译的《Programming in Lua》。从总体上来说，<a href="http://www.lua.org">lua</a>是一门小巧，可扩展性、性能都相当不错的脚本语言，特别是有了<a href="http://luajit.org">luajit</a>，<a href="http://www.lua.org">lua</a>的执行性能更是成倍提高。<a href="http://www.lua.org">lua</a>的闭包感觉和javascript的闭包实现上面感觉差不多。例如：</p></blockquote>
 
 <figure class='code'><figcaption><span>lua closure example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -196,22 +193,18 @@
 
 <p>前两天使用<a href="http://www.lua.org">lua</a>和<a href="http://openresty.org">openresty</a>做了个Demo API测试，用的是RESTful风格。<a href="http://nginx.org">nginx</a>配合<a href="http://www.lua.org">lua</a>以及其他的第三方模块，用来开发api确实是再适合不过的了。简单的几个配置，一段脚本就可以实现一个api功能。特别对于现在的iOS和Android app的api开发上面，敏捷迭代，监控以及部署，非常适合用<a href="http://openresty.org">openresty</a>来开发。后续如果有机会，考虑直接用他来写一些功能了，:)。</p></blockquote>
 </div>
-  
+
   
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/27/blog-migrate-to-github/">博客迁移</a></h1>
-    
-    
+    <footer>
       <p class="meta">
         
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kurten</span></span>
+
+        
 
 
 
@@ -223,261 +216,45 @@
   
 
 
-<time datetime="2013-01-27T16:29:00+08:00" pubdate data-updated="true">2013-01-27</time>
+<time datetime="2013-03-07T22:13:00+08:00" pubdate data-updated="true">2013-03-07</time>
         
-         | <a href="/blog/2013/01/27/blog-migrate-to-github/#disqus_thread">Comments</a>
-        
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/lua/'>lua</a>, <a class='category' href='/blog/categories/opensource/'>opensource</a>, <a class='category' href='/blog/categories/笔记/'>笔记</a>
+  
+</span>
+
+
       </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>关于博客迁移</h3>
-
-<blockquote><p>满打满算，折腾了大半天终于把博客迁移的事情搞定了。接下去可以使用markdown来写blog了。mac下面有个不错的工具<a href="http://mouapp.com/">Mou</a>，可以即时查看写的成果。blog是托管在<a href="https://github.com">github</a>上面的，其实就是使用<a href="http://jekyllrb.com/">jekyll</a>来生成静态的html。博客模版用得是<a href="http://octopress.org/">octopress</a>。关于如何操作，以及怎么折腾域名指向可以参考<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">这里</a>。</p></blockquote>
-
-<h3>关于工作</h3>
-
-<blockquote><p>元旦后又回了杭州，加入了一家创业公司<a href="http://www.qeemo.me">Qeemo</a>。2013年希望有好的开始吧。</p></blockquote>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/10/14/redis2/">Redis源码学习记录(二)</a></h1>
-    
-    
+        <div class="sharing">
+  <br/>
+  
+  
+  
+</div>
+
+      
       <p class="meta">
         
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-14T07:23:59+08:00" pubdate data-updated="true">2012-10-14</time>
+          <a class="basic-alignment pull-left" href="/blog/2013/01/27/blog-migrate-to-github/" title="Previous Post: 博客迁移">&laquo; 博客迁移</a>
         
-         | <a href="/blog/2012/10/14/redis2/#disqus_thread">Comments</a>
         
       </p>
+    </footer>
     
-  </header>
-
-
-  <div class="entry-content"><p>续前面那篇<a href="/blog/2012/09/19/redis1/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
-
-<p>当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、acceptUnixHandler、acceptCommonHandler。一旦接收到一个tcp链接，acceptCommonHandler就会创建一个redisClient，并且把它加入到event的readable列表中，等待event loop执行readQueryFromClient函数。</p>
-
-<p>接着event loop时执行readQueryFromClient，获取客户端请求，然后执行请求，调用redis.c中processCommand &#8211;> call函数。</p>
-
-<p>在执行循环的时候会有个beforeSleep的void指针，指向redis.c中的beforeSleep函数，这个函数会遍历所有的server.io_ready_clients，重新热入到event loop列表，并执行客户端请求(这是由于redis可以开启virtual memory，有些命令操作可能会被swapped从而被block掉)。配置在redis.conf中vm-enable选项。redis默认不开启vm。</p>
+    
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/09/19/redis1/">Redis源码学习记录</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-19T00:14:47+08:00" pubdate data-updated="true">2012-09-19</time>
-        
-         | <a href="/blog/2012/09/19/redis1/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近一直在学习redis的源代码，大致上搞清楚了它是如何启动，载入参数，开始轮询接收tcp请求，以及具体执行tcp请求的方式。参照<a href="http://pauladamsmith.com/articles/redis-under-the-hood.html">《Redis:under the hood》</a> 此文，再对照源码。目前的stable版本，和此文上有些出入，但是大致逻辑上基本一致。</p>
-
-<p>redis按照单线程轮询(epoll、kqueue、select)tcp请求，服务端使用非阻塞IO，具体轮询代码实现，包含在ae.h、ae.c、ae_epoll.c、ae_kqueue.c、ae_select.c。tcp server实现在anet.h、anet.c。</p>
-
-<p>主入口redis.c中的main函数（参照<a href="http://pauladamsmith.com/articles/redis-under-the-hood.html">《Redis:under the hood》</a> 此文），redis.c中的beforeSleep函数会创建所有客户端（server.io_ready_clients）中的event句柄，以及触发event时的调用的函数readQueryFromClient。</p>
-
-<p>java的nio中selector也可以干类似的事情，不过，selector底层实现机制虽然是基于epoll、kqueue、select，但是会有自己链接自己的现象出现。具体参看<a href="http://http://blog.csdn.net/haoel/article/details/2224055">这里</a>。</p>
-
-<p>使用redis需要注意<a href="http://redis.io/topics/latency">latency</a>，一旦某个操作很耗时的话，会导致后续操作也延时。</p>
-
-<p>这方面，<a href="http://www.erlang.org">erlang</a>就好多了。</p>
-
-<p>ps:我用vim+winmanager+ctags+bufferexplorer，具体配置看<a href="http://blog.csdn.net/wooin/article/details/1858917">这里</a>。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/12/15/centos-yum-error/">Centos中yum无法使用问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-15T14:47:34+08:00" pubdate data-updated="true">2011-12-15</time>
-        
-         | <a href="/blog/2011/12/15/centos-yum-error/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
-显示错误如下：</p>
-
-<pre>Loaded plugins: fastestmirror
-Determining fastest mirrors
-YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
-/Eg. 
-removing mirrorlist with no valid mirrors: /var/cache/yum/addons/mirrorlist.txt
-Error: Cannot find a valid baseurl for repo: addons</pre>
-
-
-<p>不知道什么时候把mirrors.txt文件给去掉了。
-后来查了一下有这么一串。</p>
-
-<pre>1./var/cache/yum/base/mirrorlist.txt
-url:
-http://mirrors.163.com/centos/5.7/os/x86_64/
-http://centos.ustc.edu.cn/centos/5.7/os/x86_64/
-http://mirror.neu.edu.cn/centos/5.7/os/x86_64/
-http://mirrors.ta139.com/centos/5.7/os/x86_64/
-http://ftp.nsysu.edu.tw/CentOS/5.7/os/x86_64/
-http://ftp.tc.edu.tw/Linux/CentOS/5.7/os/x86_64/
-http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/os/x86_64/
-http://ftp.stu.edu.tw/Linux/CentOS/5.7/os/x86_64/
-http://ftp.twaren.net/Linux/CentOS/5.7/os/x86_64/
-http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/os/x86_64/
-http://mirror01.idc.hinet.net/CentOS/5.7/os/x86_64/
-http://centos.mirror.cdnetworks.com/5.7/os/x86_64/
-http://centos.tt.co.kr/5.7/os/x86_64/
-http://data.nicehosting.co.kr/os/CentOS/5.7/os/x86_64/
-http://mirror.khlug.org/centos/5.7/os/x86_64/
-http://mirror.yongbok.net/centos/5.7/os/x86_64/
-http://ftp.daum.net/centos/5.7/os/x86_64/
-http://mirror.nus.edu.sg/centos/5.7/os/x86_64/
-http://mirror.averse.net/centos/5.7/os/x86_64/
-http://mirrors.sin1.sg.voxel.net/centos/5.7/os/x86_64/
-
-2./var/cache/yum/updates/mirrorlist.txt
-url:
-http://mirror.neu.edu.cn/centos/5.7/updates/x86_64/
-http://mirrors.ta139.com/centos/5.7/updates/x86_64/
-http://mirrors.stuhome.net/centos/5.7/updates/x86_64/
-http://centos.ustc.edu.cn/centos/5.7/updates/x86_64/
-http://ftp.stu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
-http://mirror01.idc.hinet.net/CentOS/5.7/updates/x86_64/
-http://ftp.tc.edu.tw/Linux/CentOS/5.7/updates/x86_64/
-http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/updates/x86_64/
-http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
-http://ftp.daum.net/centos/5.7/updates/x86_64/
-http://mirror.khlug.org/centos/5.7/updates/x86_64/
-http://data.nicehosting.co.kr/os/CentOS/5.7/updates/x86_64/
-http://centos.tt.co.kr/5.7/updates/x86_64/
-http://mirror.averse.net/centos/5.7/updates/x86_64/
-ftp://ftp.oss.eznetsols.org/linux/centos/5.7/updates/x86_64/
-http://mirror.nus.edu.sg/centos/5.7/updates/x86_64/
-http://mirrors.sin1.sg.voxel.net/centos/5.7/updates/x86_64/
-http://centos.vr-zone.com/5.7/updates/x86_64/
-http://rsync.atworks.co.jp/centos/5.7/updates/x86_64/
-http://ftp.nara.wide.ad.jp/pub/Linux/centos/5.7/updates/x86_64/
-
-3./var/cache/yum/addons/mirrorlist.txt
-url:
-http://mirror.centos.org/centos/5/addons/x86_64/
-
-4./var/cache/yum/extras/mirrorlist.txt
-url:
-http://centos.ustc.edu.cn/centos/5.7/extras/x86_64/
-http://mirrors.stuhome.net/centos/5.7/extras/x86_64/
-http://mirror.neu.edu.cn/centos/5.7/extras/x86_64/
-http://mirrors.ta139.com/centos/5.7/extras/x86_64/
-http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
-http://ftp.stu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
-http://ftp.tc.edu.tw/Linux/CentOS/5.7/extras/x86_64/
-http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/extras/x86_64/
-http://mirror01.idc.hinet.net/CentOS/5.7/extras/x86_64/
-http://data.nicehosting.co.kr/os/CentOS/5.7/extras/x86_64/
-http://mirror.khlug.org/centos/5.7/extras/x86_64/
-http://ftp.daum.net/centos/5.7/extras/x86_64/
-http://centos.tt.co.kr/5.7/extras/x86_64/
-http://centos.vr-zone.com/5.7/extras/x86_64/
-http://mirror.averse.net/centos/5.7/extras/x86_64/
-http://mirrors.sin1.sg.voxel.net/centos/5.7/extras/x86_64/
-ftp://ftp.oss.eznetsols.org/linux/centos/5.7/extras/x86_64/
-http://mirror.nus.edu.sg/centos/5.7/extras/x86_64/
-http://ftp.yz.yamagata-u.ac.jp/pub/linux/centos/5.7/extras/x86_64/
-http://ftp.jaist.ac.jp/pub/Linux/CentOS/5.7/extras/x86_64/</pre>
-
-
-<p>对应的把这些url拷贝到mirrorlist.txt文件中去就ok啦。
-have fun! :)</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
+      </section>
     
   </div>
-</div>
-
 
   
+    
     <div class="span sidebar">
     <div class="well">
       
@@ -519,7 +296,7 @@ have fun! :)</p>
 <section>
   <h2>GitHub Repos</h2>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/kurten">@kurten</a> on GitHub
@@ -563,8 +340,10 @@ have fun! :)</p>
 
 
 
-
+  
 </div>
+
+
       </div>
     </div>
     <footer class="footer"><p>
@@ -581,7 +360,10 @@ have fun! :)</p>
       var disqus_shortname = 'ikurten';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://ikurten.com/blog/2013/03/07/lua-learning-record/';
+        var disqus_url = 'http://ikurten.com/blog/2013/03/07/lua-learning-record/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

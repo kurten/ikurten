@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 笔记 | ikurten.com]]></title>
+  <link href="http://ikurten.com/blog/categories/笔记/atom.xml" rel="self"/>
+  <link href="http://ikurten.com/"/>
+  <updated>2013-03-07T23:16:35+08:00</updated>
+  <id>http://ikurten.com/</id>
+  <author>
+    <name><![CDATA[Kurten]]></name>
+    <email><![CDATA[chinkurten@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[lua学习笔记]]></title>
+    <link href="http://ikurten.com/blog/2013/03/07/lua-learning-record/"/>
+    <updated>2013-03-07T22:13:00+08:00</updated>
+    <id>http://ikurten.com/blog/2013/03/07/lua-learning-record</id>
+    <content type="html"><![CDATA[<blockquote><p>最近在学习<a href="http://www.lua.org">lua</a>，看的是luachina翻译的《Programming in Lua》。从总体上来说，<a href="http://www.lua.org">lua</a>是一门小巧，可扩展性、性能都相当不错的脚本语言，特别是有了<a href="http://luajit.org">luajit</a>，<a href="http://www.lua.org">lua</a>的执行性能更是成倍提高。<a href="http://www.lua.org">lua</a>的闭包感觉和javascript的闭包实现上面感觉差不多。例如：</p></blockquote>
+
+<p>``` lua lua closure example</p>
+
+<p>function Counter()</p>
+
+<pre><code>local i = 0
+return function()
+    i = i + 1
+    return i
+end
+</code></pre>
+
+<p>end</p>
+
+<p>```</p>
+
+<p>``` javascript javascript closure example</p>
+
+<p>function Counter() {</p>
+
+<pre><code>var i = 0;
+return (function(){ return i++; });
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<blockquote><p>java也可以算的一种实现方式，但是和上面的实现结果并不完全一样：</p></blockquote>
+
+<p>``` java java closure example
+interface IClosure {</p>
+
+<pre><code>int counter();
+</code></pre>
+
+<p>}</p>
+
+<p>class Test {</p>
+
+<pre><code>public static int counter() {
+    final int i = 0;
+    return (new IClosure() {
+
+        public int counter() {
+            return (i + 1);
+        }
+    }).counter();
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<blockquote><p>而且<a href="http://www.lua.org">lua</a>函数可以任意赋值，对于<a href="http://www.lua.org">lua</a>来说，函数其实是一个function类型的变量。</p>
+
+<p>前两天使用<a href="http://www.lua.org">lua</a>和<a href="http://openresty.org">openresty</a>做了个Demo API测试，用的是RESTful风格。<a href="http://nginx.org">nginx</a>配合<a href="http://www.lua.org">lua</a>以及其他的第三方模块，用来开发api确实是再适合不过的了。简单的几个配置，一段脚本就可以实现一个api功能。特别对于现在的iOS和Android app的api开发上面，敏捷迭代，监控以及部署，非常适合用<a href="http://openresty.org">openresty</a>来开发。后续如果有机会，考虑直接用他来写一些功能了，:)。</p></blockquote>
+]]></content>
+  </entry>
+  
+</feed>
