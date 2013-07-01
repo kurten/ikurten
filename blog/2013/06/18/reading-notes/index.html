@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>mysql主从配置 - ikurten.com</title>
+  <title>nosql reading list阅读笔记 - ikurten.com</title>
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="Mysql主从配置 2011-08-02 | Comments <!-- google_ad_client = "ca-pub-7721655128098525"; /* Blog Main */ google_ad_slot = "7466725066"; google_ad_width = &hellip;">
+  <meta name="description" content="论文阅读 最近一直在读这里的论文。学到了很多东西。目前已经读完了第一部分，深入理解了Gossip Protocol、Vector Clock，并对Cassandra、BigTable、Google File System、MapReduce实现做了初步的理解。 Gossip Protocol &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ikurten.com/blog/2011/08/02/53">
+  <link rel="canonical" href="http://ikurten.com/blog/2013/06/18/reading-notes">
   <link href="/favicon.ico" rel="icon">
   
   <link href="/assets/bootstrap/css/spacelab.min.css" rel="stylesheet" type="text/css">
@@ -95,7 +95,7 @@
     
   <header>
     
-      <h1 class="entry-title">Mysql主从配置</h1>
+      <h1 class="entry-title">Nosql Reading List阅读笔记</h1>
     
     
       <p class="meta">
@@ -111,7 +111,7 @@
   
 
 
-<time datetime="2011-08-02T00:37:49+08:00" pubdate data-updated="true">2011-08-02</time>
+<time datetime="2013-06-18T08:05:00+08:00" pubdate data-updated="true">2013-06-18</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -121,114 +121,28 @@
 
 
   
-    <div style="float: right; padding-left: 15px; padding-botom: 15px; ">
-      <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-7721655128098525";
-      /* Blog Main */
-      google_ad_slot = "7466725066";
-      google_ad_width = 336;
-      google_ad_height = 280;
-      //-->
-      </script>
-      <script type="text/javascript"
-      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-      </script>
-    </div>
   
-  
-  <div class="entry-content"><p>mysql由于其cluster没有很好得解决方案，所以没有被广泛的使用。使用最广的还是mysql的主从备份，从而读写分离。mysql 5.5版本的主从replication性能还是相当不错的，下面是配置方法（昨天刚在两台测试服务器中尝试，记录一下）。参考<a href="http://dev.mysql.com/doc/refman/5.0/en/replication-howto.html">官方手册</a>。</p>
+  <div class="entry-content"><h3>论文阅读</h3>
 
-<p>1、安装mysql（此处省略N字。。。）</p>
+<p>最近一直在读<a href="http://www.empiricalreality.com/2010/09/22/2010-nosql-summer-reading-list/">这里</a>的论文。学到了很多东西。目前已经读完了第一部分，深入理解了<a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>、<a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，并对<a href="http://cassandra.apache.org">Cassandra</a>、<a href="https://zh.wikipedia.org/zh-cn/BigTable">BigTable</a>、<a href="https://zh.wikipedia.org/wiki/Google%E6%AA%94%E6%A1%88%E7%B3%BB%E7%B5%B1">Google File System</a>、<a href="https://zh.wikipedia.org/wiki/MapReduce">MapReduce</a>实现做了初步的理解。</p>
 
-<p>2、因为我配的是服务器，所以我使用了mysql-large.cnf文件作为/etc/my.cnf。</p>
+<h4>Gossip Protocol</h4>
 
-<p>3、在my.cnf中([mysqld] 下面)</p>
+<p><a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>其实是一种传播方式，在一个集群中，A随机的取一台机器B，把A自己手中所知道的所有机器状态、机器IP等一些信息，发送给B，B收到这些信息后，和自身的内容做个比较、合并。这样就完成了一次传播。开源的实现<a href="http://code.google.com/p/java-gossip/">java-gossip</a>、<a href="http://code.google.com/p/gossip-protocol-java/">gossip-protocol-java</a>。</p>
 
-<pre>[mysqld]
-log-bin=mysql-bin
-server-id=1</pre>
+<h4>Vector Clock</h4>
 
+<p><a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，用来合并集群中有冲突的数据，但是还是要应用曾去取舍最终的数据。具体的解释我觉着<a href="http://www.kongch.com/2011/08/vector-clock-understanding/">这篇文章</a>解释的很详细了。</p>
 
-<p>当然如果你要使用innodb事务支持，那就的加上这两个参数配置 innodb_flush_log_at_trx_commit=1 和 sync_binlog=1。同时确保skip-networking没有启用，否则所有slave都无法连接master<code>。</code></p>
+<h3>关于读书</h3>
 
-<p>重启mysql。</p>
+<p>六月初，在<a href="http://www.amazon.cn">amazon.cn</a>上买了好几本书，断断续续的看完了几本<a href="http://www.amazon.cn/%E6%89%93%E9%80%A0Facebook-%E4%BA%B2%E5%8E%86Facebook%E7%88%86%E5%8F%91%E7%9A%845%E5%B9%B4-%E7%8E%8B%E6%B7%AE/dp/B00ANI5YXW/ref=sr_1_1?ie=UTF8&amp;qid=1372637078&amp;sr=8-1&amp;keywords=%E6%89%93%E9%80%A0facebook">《打造facebook》</a>、<a href="http://www.amazon.cn/%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6-%E5%A8%81%E8%B0%A6%E6%96%AF/dp/B001MV7CXY/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1372637095&amp;sr=1-1&amp;keywords=%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6">《写给大家看的设计书》</a>。前一本算是作者一些facebook的亲身经历分享，后一本主要讲平面设计。从我这两年的创业经验来说，前一本，拿来当故事看看还可以，毕竟国内整个环境是这样子。</p>
 
-<p>4、配置slave，重复 2。</p>
+<h3>最近</h3>
 
-<p>5、在my.cnf中([mysqld] 下面)</p>
-
-<pre>[mysqld]
-server-id=2  #如果有多台slave，那么每台得id都必须唯一</pre>
-
-
-<p>重启mysql。</p>
-
-<p>6、在master中新建用于replication的用户</p>
-
-<pre>mysql> CREATE USER 'repl'@'%.mydomain.com' IDENTIFIED BY 'slavepass';
-mysql> GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%.mydomain.com';</pre>
-
-
-<p>7、在slave中执行</p>
-
-<pre>mysql> CHANGE MASTER TO
-    ->     MASTER_HOST='master_host_name',
-    ->     MASTER_USER='replication_user_name',
-    ->     MASTER_PASSWORD='replication_password',
-    ->     MASTER_LOG_FILE='recorded_log_file_name',
-    ->     MASTER_LOG_POS=recorded_log_position;</pre>
-
-
-<pre>change master to master_host='192.168.1.194', master_user='admin',
-master_password='000000', master_log_file='mysql-bin.000001',
-master_log_pos=268;</pre>
-
-
-<p>再执行 start slave;
-查看一下slave的状态：show slave status\G;
-如果Slave_IO_Running 和 Slave_SQL_Running 两列的值都为 &ldquo;Yes&rdquo;，之后，你在master中新建数据库神马的操作，就会自动同步至slave中了。</p>
-
-<p>mysql修改密码，如果采用sql方式更新user表，需要使用 flush privileges; 命令启用新密码。</p>
-
-<p>创建用户</p>
-
-<pre>create user 'username'@'localhost' IDENTIFIED BY 'password';</pre>
-
-
-<p>设置用户权限</p>
-
-<pre>GRANT ALL PRIVILEGES ON *.* TO kkk@"%" IDENTIFIED BY '000000' WITH
-GRANT OPTION;</pre>
-
-
-<p>移除权限</p>
-
-<pre>revoke all on openfire.* from username@'localhost';</pre>
-
-
-<p>添加字段</p>
-
-<pre>alter table test add column ttt varchar(12);</pre>
-
-
-<p>修改字段名称</p>
-
-<pre>alter table test change ttt newttt varchar(12);</pre>
-
+<p>最近刚刚结束了技术团队的招聘工作，两位同事也已经到岗，接下去的项目也已经开始进行。越来越没啥耐心写博客了，前几个月的空白，没法补上了，接下去争取一个月一篇吧。等待着宝宝的降临。当父亲了啊。</p>
 </div>
 
-  
-    <script type="text/javascript"><!--
-    google_ad_client = "ca-pub-7721655128098525";
-    /* Blog Bottom */
-    google_ad_slot = "4562123819";
-    google_ad_width = 728;
-    google_ad_height = 90;
-    //-->
-    </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
   
 
 
@@ -251,12 +165,12 @@ GRANT OPTION;</pre>
   
 
 
-<time datetime="2011-08-02T00:37:49+08:00" pubdate data-updated="true">2011-08-02</time>
+<time datetime="2013-06-18T08:05:00+08:00" pubdate data-updated="true">2013-06-18</time>
         
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mysql技术/'>mysql技术</a>
+    <a class='category' href='/blog/categories/nosql/'>nosql</a>, <a class='category' href='/blog/categories/notes/'>notes</a>, <a class='category' href='/blog/categories/thinking/'>thinking</a>
   
 </span>
 
@@ -273,10 +187,8 @@ GRANT OPTION;</pre>
       
       <p class="meta">
         
-          <a class="basic-alignment pull-left" href="/blog/2011/07/29/51/" title="Previous Post: 关于癌症">&laquo; 关于癌症</a>
+          <a class="basic-alignment pull-left" href="/blog/2013/03/07/lua-learning-record/" title="Previous Post: lua学习笔记">&laquo; lua学习笔记</a>
         
-        
-          <a class="basic-alignment pull-right" href="/blog/2011/08/03/test-ifttt/" title="Next Post: 测试ifttt">测试ifttt &raquo;</a>
         
       </p>
     </footer>
@@ -398,8 +310,8 @@ GRANT OPTION;</pre>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://ikurten.com/blog/2011/08/02/53/';
-        var disqus_url = 'http://ikurten.com/blog/2011/08/02/53/';
+        var disqus_identifier = 'http://ikurten.com/blog/2013/06/18/reading-notes/';
+        var disqus_url = 'http://ikurten.com/blog/2013/06/18/reading-notes/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -4,7 +4,7 @@
   <title><![CDATA[ikurten.com]]></title>
   <link href="http://ikurten.com/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-03-07T23:16:35+08:00</updated>
+  <updated>2013-07-01T08:15:10+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
     <name><![CDATA[Kurten]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[nosql reading list阅读笔记]]></title>
+    <link href="http://ikurten.com/blog/2013/06/18/reading-notes/"/>
+    <updated>2013-06-18T08:05:00+08:00</updated>
+    <id>http://ikurten.com/blog/2013/06/18/reading-notes</id>
+    <content type="html"><![CDATA[<h3>论文阅读</h3>
+
+<p>最近一直在读<a href="http://www.empiricalreality.com/2010/09/22/2010-nosql-summer-reading-list/">这里</a>的论文。学到了很多东西。目前已经读完了第一部分，深入理解了<a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>、<a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，并对<a href="http://cassandra.apache.org">Cassandra</a>、<a href="https://zh.wikipedia.org/zh-cn/BigTable">BigTable</a>、<a href="https://zh.wikipedia.org/wiki/Google%E6%AA%94%E6%A1%88%E7%B3%BB%E7%B5%B1">Google File System</a>、<a href="https://zh.wikipedia.org/wiki/MapReduce">MapReduce</a>实现做了初步的理解。</p>
+
+<h4>Gossip Protocol</h4>
+
+<p><a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>其实是一种传播方式，在一个集群中，A随机的取一台机器B，把A自己手中所知道的所有机器状态、机器IP等一些信息，发送给B，B收到这些信息后，和自身的内容做个比较、合并。这样就完成了一次传播。开源的实现<a href="http://code.google.com/p/java-gossip/">java-gossip</a>、<a href="http://code.google.com/p/gossip-protocol-java/">gossip-protocol-java</a>。</p>
+
+<h4>Vector Clock</h4>
+
+<p><a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，用来合并集群中有冲突的数据，但是还是要应用曾去取舍最终的数据。具体的解释我觉着<a href="http://www.kongch.com/2011/08/vector-clock-understanding/">这篇文章</a>解释的很详细了。</p>
+
+<h3>关于读书</h3>
+
+<p>六月初，在<a href="http://www.amazon.cn">amazon.cn</a>上买了好几本书，断断续续的看完了几本<a href="http://www.amazon.cn/%E6%89%93%E9%80%A0Facebook-%E4%BA%B2%E5%8E%86Facebook%E7%88%86%E5%8F%91%E7%9A%845%E5%B9%B4-%E7%8E%8B%E6%B7%AE/dp/B00ANI5YXW/ref=sr_1_1?ie=UTF8&amp;qid=1372637078&amp;sr=8-1&amp;keywords=%E6%89%93%E9%80%A0facebook">《打造facebook》</a>、<a href="http://www.amazon.cn/%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6-%E5%A8%81%E8%B0%A6%E6%96%AF/dp/B001MV7CXY/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1372637095&amp;sr=1-1&amp;keywords=%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6">《写给大家看的设计书》</a>。前一本算是作者一些facebook的亲身经历分享，后一本主要讲平面设计。从我这两年的创业经验来说，前一本，拿来当故事看看还可以，毕竟国内整个环境是这样子。</p>
+
+<h3>最近</h3>
+
+<p>最近刚刚结束了技术团队的招聘工作，两位同事也已经到岗，接下去的项目也已经开始进行。越来越没啥耐心写博客了，前几个月的空白，没法补上了，接下去争取一个月一篇吧。等待着宝宝的降临。当父亲了啊。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[lua学习笔记]]></title>
@@ -1590,33 +1617,6 @@ GRANT OPTION;</pre>
 <p>貌似有很多应用需要依赖这个包，<a href="http://www.qq.com/" target="_blank">qq</a>、<a href="http://www.macww.org/" target="_blank">aliwangwang</a>、以及<a href="http://www.popcap.com/" target="_blank">popcap</a>开发的几个游戏。估计是调用了显示movie动画的接口。如果谁像我一样手痒，但是还没删除这些相关的东西，那么我建议你还是别动他，不然很多依赖程序就无法使用了。当然，删除了不是没办法挽救。可以使用<a href="http://www.macupdate.com/app/mac/6812/pacifist" target="_blank">pacifist</a>这个工具软件，打开你的系统安装光盘，然后从对应的文件夹路径下面去找这些东西，直接安装到默认路径就可以了。当然，如果嫌弃quicktime x，可以使用<a href="http://mplayerx.org/" target="_blank">mplayerx</a>这个播放器还是相当不错的。当然，在此基础上进行修改的，<a href="https://bitbucket.org/Tomasen/splayerx/wiki/Home" target="_blank">splayerx</a>也是不错的，省去了你去匹配字母的事情。射手网上字幕资源还是相当多的。</p>
 
 <p>其他的就看你慢慢发觉了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[关于面试的记录]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/31/"/>
-    <updated>2011-07-29T03:47:20+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/31</id>
-    <content type="html"><![CDATA[<p>这算是我第一次写关于面试后的记录。呵呵，刚去了<a href="http://www.mogujie.com/" target="_blank">蘑菇街</a>这个公司面试，在<a href="http://ditu.google.cn/maps?ie=UTF8&amp;q=%E6%9D%AD%E5%B7%9E%E5%B1%B1%E6%B0%B4%E4%BA%BA%E5%AE%B6&amp;fb=1&amp;hq=%E5%B1%B1%E6%B0%B4%E4%BA%BA%E5%AE%B6&amp;hnear=%E4%B8%AD%E5%9B%BD%E6%B5%99%E6%B1%9F%E7%9C%81%E6%9D%AD%E5%B7%9E&amp;cid=0,0,12302633174348231143&amp;ll=30.271873,120.110564&amp;spn=0.011471,0.023904&amp;z=16&amp;iwloc=A&amp;brcurrent=3,0x344b62bcdd3a234d:0x325d39b9ca1e5a93,0,0x344b641bf7eabb35:0x6eaa153514876e2f%3B5,0,0" target="_blank">山水人家</a>。我算是比较幸运啦，能够在他们搬家之前见一下他们第一个办公场地。之后他们要搬去别的地方了。</p>
-
-<p>办公场地其实就是一个套房，你懂得，基本上都在客厅办公。我去应聘web研发的，因为本身对于服务器端的技术比较感兴趣。跟搞技术的聊天，还是比较好的，思想比较单纯，只聊聊技术。虽然，我没有web开发的经验，特别是对于php的实践经验，但是php这门语言，还是很容易上手的。因为本身没有繁杂的内容，特别是有编码经验的人来说。只是函数以及一些特定的用法比较多，真正熟悉还是需要时日。</p>
-
-<p>面试的时候，让产品经理去面试技术人员，于是，我这个技术人员表示鸭梨好大。特别是这个产品经理还挂着总负责的头衔，也就是CEO。于是，接下去的内容就惨不忍睹了。不过，这样也好，本身每个人的思维方式不同。</p>
-
-<p>需要记录一些注意的问题：</p>
-
-<p>1、需要有准备的应对所有问题。</p>
-
-<p>2、要多多了解未知的东西，所以，需要学会提问。（这里特别提一下<a href="http://iamsujie.com/8000/8018/" target="_blank">这篇文章</a>）</p>
-
-<p>总结了一下，如果从技术角度来讲，还是有希望的。但是，不知道结果的事情，还是不乱猜的好。</p>
-
-<p>以下是人家给我的回信，记录下来算是自勉吧：</p>
-
-<p>&ldquo;我们主要考虑你之前的经验和我们匹配程度不高，另外一点很重要的事情是我们还不能很明确你在技术方面的兴趣程度，从谈话过程中，我们发现你不喜欢谈技术细节和一些深入的东西，你对技术的兴趣、以及以后你在技术方面的成长我们有一定的担心。</p>
-
-<p>找到自己喜欢做的事情非常重要，只有做自己喜欢的事情才能做好、做成。如果你现在还不明确你的兴趣是什么，要抓紧时间想想清楚，如果你已经知道了自己的兴趣，那花些时间验证一下。&rdquo;</p>
 ]]></content>
   </entry>
   

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: nosql | ikurten.com]]></title>
+  <link href="http://ikurten.com/blog/categories/nosql/atom.xml" rel="self"/>
+  <link href="http://ikurten.com/"/>
+  <updated>2013-07-01T08:15:10+08:00</updated>
+  <id>http://ikurten.com/</id>
+  <author>
+    <name><![CDATA[Kurten]]></name>
+    <email><![CDATA[chinkurten@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[nosql reading list阅读笔记]]></title>
+    <link href="http://ikurten.com/blog/2013/06/18/reading-notes/"/>
+    <updated>2013-06-18T08:05:00+08:00</updated>
+    <id>http://ikurten.com/blog/2013/06/18/reading-notes</id>
+    <content type="html"><![CDATA[<h3>论文阅读</h3>
+
+<p>最近一直在读<a href="http://www.empiricalreality.com/2010/09/22/2010-nosql-summer-reading-list/">这里</a>的论文。学到了很多东西。目前已经读完了第一部分，深入理解了<a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>、<a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，并对<a href="http://cassandra.apache.org">Cassandra</a>、<a href="https://zh.wikipedia.org/zh-cn/BigTable">BigTable</a>、<a href="https://zh.wikipedia.org/wiki/Google%E6%AA%94%E6%A1%88%E7%B3%BB%E7%B5%B1">Google File System</a>、<a href="https://zh.wikipedia.org/wiki/MapReduce">MapReduce</a>实现做了初步的理解。</p>
+
+<h4>Gossip Protocol</h4>
+
+<p><a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>其实是一种传播方式，在一个集群中，A随机的取一台机器B，把A自己手中所知道的所有机器状态、机器IP等一些信息，发送给B，B收到这些信息后，和自身的内容做个比较、合并。这样就完成了一次传播。开源的实现<a href="http://code.google.com/p/java-gossip/">java-gossip</a>、<a href="http://code.google.com/p/gossip-protocol-java/">gossip-protocol-java</a>。</p>
+
+<h4>Vector Clock</h4>
+
+<p><a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，用来合并集群中有冲突的数据，但是还是要应用曾去取舍最终的数据。具体的解释我觉着<a href="http://www.kongch.com/2011/08/vector-clock-understanding/">这篇文章</a>解释的很详细了。</p>
+
+<h3>关于读书</h3>
+
+<p>六月初，在<a href="http://www.amazon.cn">amazon.cn</a>上买了好几本书，断断续续的看完了几本<a href="http://www.amazon.cn/%E6%89%93%E9%80%A0Facebook-%E4%BA%B2%E5%8E%86Facebook%E7%88%86%E5%8F%91%E7%9A%845%E5%B9%B4-%E7%8E%8B%E6%B7%AE/dp/B00ANI5YXW/ref=sr_1_1?ie=UTF8&amp;qid=1372637078&amp;sr=8-1&amp;keywords=%E6%89%93%E9%80%A0facebook">《打造facebook》</a>、<a href="http://www.amazon.cn/%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6-%E5%A8%81%E8%B0%A6%E6%96%AF/dp/B001MV7CXY/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1372637095&amp;sr=1-1&amp;keywords=%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6">《写给大家看的设计书》</a>。前一本算是作者一些facebook的亲身经历分享，后一本主要讲平面设计。从我这两年的创业经验来说，前一本，拿来当故事看看还可以，毕竟国内整个环境是这样子。</p>
+
+<h3>最近</h3>
+
+<p>最近刚刚结束了技术团队的招聘工作，两位同事也已经到岗，接下去的项目也已经开始进行。越来越没啥耐心写博客了，前几个月的空白，没法补上了，接下去争取一个月一篇吧。等待着宝宝的降临。当父亲了啊。</p>
+]]></content>
+  </entry>
+  
+</feed>
