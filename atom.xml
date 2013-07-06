@@ -4,7 +4,7 @@
   <title><![CDATA[ikurten.com]]></title>
   <link href="http://ikurten.com/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-07-01T08:15:10+08:00</updated>
+  <updated>2013-07-06T10:40:33+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
     <name><![CDATA[Kurten]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[通过源代码安装ruby-2.0.0-p247]]></title>
+    <link href="http://ikurten.com/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/"/>
+    <updated>2013-07-06T10:22:00+08:00</updated>
+    <id>http://ikurten.com/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source</id>
+    <content type="html"><![CDATA[<p>前两天心血来潮，想升级一下本机的<a href="http://www.ruby-lang.org">ruby</a>版本，于是下载了最新版本的<a href="http://www.ruby-lang.org">ruby</a>代码，然后</p>
+
+<pre><code>
+./configure 
+make 
+sudo make install
+</code></pre>
+
+
+<p>但是碰到一个问题，openssl can&#8217;t load。找了很多方法都搞不定，怀疑是本机openssl版本低于0.9.6b，于是重新下载了openssl的代码(1.0.1e版本)编译安装。然后再重新安装<a href="http://www.ruby-lang.org">ruby</a>，然后出来一个</p>
+
+<pre><code>
+In file included from openssl_missing.c:22:
+openssl_missing.h:71: error: conflicting types for ‘HMAC_CTX_copy’
+/usr/include/openssl/hmac.h:102: error: previous declaration of ‘HMAC_CTX_copy’ was here
+openssl_missing.h:95: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
+/usr/include/openssl/evp.h:502: error: previous declaration of ‘EVP_CIPHER_CTX_copy’ was here
+openssl_missing.c:27: error: conflicting types for ‘HMAC_CTX_copy’
+/usr/include/openssl/hmac.h:102: error: previous declaration of ‘HMAC_CTX_copy’ was here
+openssl_missing.c:122: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
+/usr/include/openssl/evp.h:502: error: previous declaration of ‘EVP_CIPHER_CTX_copy’ was here
+</code></pre>
+
+
+<p>以上错误我估计是extconf.rb配置编译header的时候，哪里出错，没有判断完全方法定义函数，导致函数重复定义了。因为对于autoconf的机制以及openssl不熟悉，所以暂时无法深究这个问题，于是简单的对openssl_missing.h打了个补丁，重新编译，问题即可解决。如果make的时候报出以上错误，直接在openssl_missing.h加入</p>
+
+<pre><code>
+#define HAVE_HMAC_CTX_COPY 1
+#define HAVE_EVP_CIPHER_CTX_COPY 1
+</code></pre>
+
+
+<p>两行，然后<code>make &amp;&amp; sudo make install</code>即可。</p>
+
+<p>have fun :).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[nosql reading list阅读笔记]]></title>
@@ -1602,21 +1645,6 @@ GRANT OPTION;</pre>
 <p>从整体上来说蘑菇街网站UI设计上比较舒服，让人感觉很清新（以绿色为主的缘故吧）。初步使用来看就可以了解，蘑菇街这个网站就是提供给买家、卖家分享购物商品的一个社交平台。从功能点进入相应的页面，信息呈现上面还是比较有层次感的。信息呈现交互上面个人相对比较喜欢画报这种方式，以图片展示为主，对于感兴趣的，点击进入可以进行评论等操作。</p>
 
 <p>昨天做的功课，发布出来。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[关于mac os x 10.6的quicktime x]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/33/"/>
-    <updated>2011-07-29T03:50:05+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/33</id>
-    <content type="html"><![CDATA[<p>昨天因为看到有个lion dp3补丁，于是手痒，下来安装一下试试。mac os x10.7开发者预览版，尝试一下。没想到，无法更新，而且出错。于是，痛苦的过程开始了，重启进步了系统了。只能用系统盘修复了（ps：系统盘中的是10.6.4的版本）。这个只能怪我自己手痒了。</p>
-
-<p>然后下载更新，因为我原先系统是10.6.7版本，10.6.4的系统<a href="http://developer.apple.com/xcode/" target="_blank">xcode4.1</a>，<a href="http://www.apple.com/mac/facetime/" target="_blank">facetime 1.0</a>都没法用。更新完成，然后安装xcode完忽然出现一个dyld share cache问题，需要（sudo update_dyld_shared_cache -force）这个命令。之后，就是quicktime.framework这个问题了。其中一件灵异事件是，我把这个文件夹移除了，执行命令就没有问题，不移除就出现无法执行share cache这个问题。貌似是一个bug？没深入研究过。</p>
-
-<p>貌似有很多应用需要依赖这个包，<a href="http://www.qq.com/" target="_blank">qq</a>、<a href="http://www.macww.org/" target="_blank">aliwangwang</a>、以及<a href="http://www.popcap.com/" target="_blank">popcap</a>开发的几个游戏。估计是调用了显示movie动画的接口。如果谁像我一样手痒，但是还没删除这些相关的东西，那么我建议你还是别动他，不然很多依赖程序就无法使用了。当然，删除了不是没办法挽救。可以使用<a href="http://www.macupdate.com/app/mac/6812/pacifist" target="_blank">pacifist</a>这个工具软件，打开你的系统安装光盘，然后从对应的文件夹路径下面去找这些东西，直接安装到默认路径就可以了。当然，如果嫌弃quicktime x，可以使用<a href="http://mplayerx.org/" target="_blank">mplayerx</a>这个播放器还是相当不错的。当然，在此基础上进行修改的，<a href="https://bitbucket.org/Tomasen/splayerx/wiki/Home" target="_blank">splayerx</a>也是不错的，省去了你去匹配字母的事情。射手网上字幕资源还是相当多的。</p>
-
-<p>其他的就看你慢慢发觉了。</p>
 ]]></content>
   </entry>
   

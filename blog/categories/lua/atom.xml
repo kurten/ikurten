@@ -4,7 +4,7 @@
   <title><![CDATA[Category: lua | ikurten.com]]></title>
   <link href="http://ikurten.com/blog/categories/lua/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-07-01T08:15:10+08:00</updated>
+  <updated>2013-07-06T10:40:33+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
     <name><![CDATA[Kurten]]></name>
@@ -22,48 +22,36 @@
 
 <p>``` lua lua closure example</p>
 
-<p>function Counter()</p>
+<p>function Counter()
+    local i = 0
+    return function()
+        i = i + 1
+        return i
+    end
+end</p>
 
-<pre><code>local i = 0
-return function()
-    i = i + 1
-    return i
-end
+<pre><code>
+``` javascript javascript closure example
+
+function Counter() {
+    var i = 0;
+    return (function(){ return i++; });
+}
 </code></pre>
-
-<p>end</p>
-
-<p>```</p>
-
-<p>``` javascript javascript closure example</p>
-
-<p>function Counter() {</p>
-
-<pre><code>var i = 0;
-return (function(){ return i++; });
-</code></pre>
-
-<p>}</p>
-
-<p>```</p>
 
 <blockquote><p>java也可以算的一种实现方式，但是和上面的实现结果并不完全一样：</p></blockquote>
 
 <p>``` java java closure example
-interface IClosure {</p>
+interface IClosure {
+    int counter();
+}</p>
 
-<pre><code>int counter();
-</code></pre>
+<p>class Test {
+    public static int counter() {
+        final int i = 0;
+        return (new IClosure() {</p>
 
-<p>}</p>
-
-<p>class Test {</p>
-
-<pre><code>public static int counter() {
-    final int i = 0;
-    return (new IClosure() {
-
-        public int counter() {
+<pre><code>        public int counter() {
             return (i + 1);
         }
     }).counter();

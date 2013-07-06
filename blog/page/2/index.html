@@ -9,10 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
-显示错误如下： Loaded plugins: fastestmirror
-Determining fastest mirrors
-YumRepo &hellip;">
+  <meta name="description" content="最近一直在学习redis的源代码，大致上搞清楚了它是如何启动，载入参数，开始轮询接收tcp请求，以及具体执行tcp请求的方式。参照《Redis:under the hood》 此文，再对照源码。目前的stable版本，和此文上有些出入，但是大致逻辑上基本一致。 redis按照单线程轮询(epoll &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,6 +94,56 @@ YumRepo &hellip;">
 
 <div class="blog-index span8">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/19/redis1/">Redis源码学习记录</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-19T00:14:47+08:00" pubdate data-updated="true">2012-09-19</time>
+        
+         | <a href="/blog/2012/09/19/redis1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近一直在学习redis的源代码，大致上搞清楚了它是如何启动，载入参数，开始轮询接收tcp请求，以及具体执行tcp请求的方式。参照<a href="http://pauladamsmith.com/articles/redis-under-the-hood.html">《Redis:under the hood》</a> 此文，再对照源码。目前的stable版本，和此文上有些出入，但是大致逻辑上基本一致。</p>
+
+<p>redis按照单线程轮询(epoll、kqueue、select)tcp请求，服务端使用非阻塞IO，具体轮询代码实现，包含在ae.h、ae.c、ae_epoll.c、ae_kqueue.c、ae_select.c。tcp server实现在anet.h、anet.c。</p>
+
+<p>主入口redis.c中的main函数（参照<a href="http://pauladamsmith.com/articles/redis-under-the-hood.html">《Redis:under the hood》</a> 此文），redis.c中的beforeSleep函数会创建所有客户端（server.io_ready_clients）中的event句柄，以及触发event时的调用的函数readQueryFromClient。</p>
+
+<p>java的nio中selector也可以干类似的事情，不过，selector底层实现机制虽然是基于epoll、kqueue、select，但是会有自己链接自己的现象出现。具体参看<a href="http://http://blog.csdn.net/haoel/article/details/2224055">这里</a>。</p>
+
+<p>使用redis需要注意<a href="http://redis.io/topics/latency">latency</a>，一旦某个操作很耗时的话，会导致后续操作也延时。</p>
+
+<p>这方面，<a href="http://www.erlang.org">erlang</a>就好多了。</p>
+
+<p>ps:我用vim+winmanager+ctags+bufferexplorer，具体配置看<a href="http://blog.csdn.net/wooin/article/details/1858917">这里</a>。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1294,44 +1341,6 @@ have fun! :)</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/03/test-ifttt/">测试ifttt</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-03T03:09:18+08:00" pubdate data-updated="true">2011-08-03</time>
-        
-         | <a href="/blog/2011/08/03/test-ifttt/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>测试ifttt，你懂的。。。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1353,6 +1362,10 @@ have fun! :)</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/">通过源代码安装ruby-2.0.0-p247</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/18/reading-notes/">nosql reading list阅读笔记</a>
       </li>
     
@@ -1366,10 +1379,6 @@ have fun! :)</p>
     
       <li class="post">
         <a href="/blog/2012/10/14/redis2/">redis源码学习记录(二)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/09/19/redis1/">redis源码学习记录</a>
       </li>
     
   </ul>
