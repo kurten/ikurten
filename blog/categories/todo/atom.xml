@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: TODO | ikurten.com]]></title>
+  <link href="http://ikurten.com/blog/categories/todo/atom.xml" rel="self"/>
+  <link href="http://ikurten.com/"/>
+  <updated>2014-02-15T00:13:49+08:00</updated>
+  <id>http://ikurten.com/</id>
+  <author>
+    <name><![CDATA[Kurten]]></name>
+    <email><![CDATA[chinkurten@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[2014]]></title>
+    <link href="http://ikurten.com/blog/2014/02/14/2014/"/>
+    <updated>2014-02-14T23:47:08+08:00</updated>
+    <id>http://ikurten.com/blog/2014/02/14/2014</id>
+    <content type="html"><![CDATA[<p>由于jekyll以及我不熟悉ruby的缘故，导致blog久未更新，当然，一部分原因也可能是我比较懒的缘故。现在终于是摸清了门道，接下去，好好看看ruby这门语言，一直想看的，没有时间和精力去学习，那么接下去就好好看看，还有CoffeeScript。</p>
+
+<p>列个TODO列表，年中的时候回来看看完成了几个：</p>
+
+<ul>
+<li>学习一下C++，争取把The C++ Programming Language 看完</li>
+<li>把lua源码看完(断断续续看了一部分，没有完全看完)</li>
+<li>把Advanced Programming in the UNIX Environment看完(争取用libuv和lua做个东西玩玩)</li>
+<li>学习ruby和CoffeeScript，争取用ruby写个项目，把CoffeeScript用到项目中</li>
+<li>读完Computer Systems - A Programmer's Perspective</li>
+<li>读完Professional Linux Kernel Architecture</li>
+<li>读完Distributed Systems - Concepts and Design，Operation Systems Design and Implementation</li>
+<li>把余下的nosql reading list中的论文读完</li>
+<li>读完Programming Erlang，多看点架构设计的以及关于并发和并行的资料</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,7 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="在新浪微博上看到虾米网CEO发的微博，说招产品经理。向往已久的职位，同时觉得自己也很合适干这个。本身就非常喜欢互联网，同时也喜欢音乐。可以从事音乐网站的产品设计开发工作，当然是非常赞的。于是，我也就发了简历。个人觉得，搞技术的转干产品设计还是有一定的优势的。特别是对于互联网产品， &hellip;">
+  <meta name="description" content="昨天，因为django，于是又查看了一下mysqldb无法使用的问题，原来啊，是不支持mysql5.5。今天，换了5.1。对于mac下root啥的密码设置，我原先走了些弯路，其实mysql官方文档有很详细的说明的。（关于我如何在mac上卸载mysql，请看这里）试了一下，果然可以了。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,56 @@
 
 <div class="blog-index span8">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/29/25/">修补bug，继续search</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-29T03:45:49+08:00" pubdate data-updated="true">2011-07-29</time>
+        
+         | <a href="/blog/2011/07/29/25/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>昨天，因为<a href="http://www.djangoproject.com/" target="_blank">django</a>，于是又查看了一下<a href="http://sourceforge.net/projects/mysql-python/" target="_blank">mysqldb</a>无法使用的问题，原来啊，是不支持mysql5.5。今天，换了5.1。对于mac下root啥的密码设置，我原先走了些弯路，其实mysql官方文档有很详细的<a href="http://dev.mysql.com/doc/refman/5.1/zh/installing.html" target="_blank">说明的</a>。（关于我如何在mac上卸载mysql，请看<a href="http://blog.merlyle.com/?p=34" target="_blank">这里</a>）试了一下，果然可以了。人生就是有那么些杯催事，<a href="http://nginx.org/" target="_blank">nginx</a>与php-cgi配置也是如此，换成了从源代码安装，然后配置一下就可以玩了（配置方式见<a href="http://blog.s135.com/post/297/" target="_blank">这里</a>）。</p>
+
+<p>说起<a href="http://nginx.org/" target="_blank">nginx</a>还是相当不错的一个<a href="http://en.wikipedia.org/wiki/Web_server" target="_blank">web server</a>。只不过，对于python，部署起来还是比较麻烦。虽然有uwsgi，但是总体上还是比<a href="http://www.php.net/" target="_blank">php</a>发布部署麻烦许多，只是，对于其他部署方式会好许多吧。不知道google对于<a href="http://www.python.org/" target="_blank">python</a>的app部署，有什么好的方法。</p>
+
+<p>发觉个事，我租的justhost的主机貌似不支持<a href="http://www.python.org/" target="_blank">python</a>，不过用了优惠50％的，还是很赞了的。以后每年续费都是42美刀，还算划算。</p>
+
+<p>近来<a href="http://www.w3.org/html/logo/" target="_blank">html5</a>越来越火热了，各大浏览器都开始支持<a href="http://www.w3.org/html/logo/" target="_blank">html5</a>，总体上，silverlight与flash还是很杯具的。在我看来，ms花在开发silverlight的时间上，还不如多花点时间把IE折腾好。富客户端神马的，都是浮云。浏览器引擎才是王道啊。</p>
+
+<p>现在么，都是平台互相PK，其实啊，app才是王道。</p>
+
+<p>搞了一年多GIS二次开发，厌烦了。前几天去创维面试，也是搞二次开发的，那总工说，二次开发神马的，就是调调别人的接口，没什么的。也对啊，二次开发么，专注于业务了，技术神马的，除非大项目，否则么，就这么过去了。</p>
+
+<p>喜欢的么，web方向的，产品经理啥的，没人要啊。杯催。搞服务器端的开发也行啊。给点时间，哥就可以上手的么。待遇神马的都是浮云啊，男人么，干自己喜欢的事情，最重要！</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -305,80 +355,6 @@ con.close()</pre>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/29/15/">使用oledbdataadapter的疑问</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-29T03:40:54+08:00" pubdate data-updated="true">2011-07-29</time>
-        
-         | <a href="/blog/2011/07/29/15/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近一个项目，在使用oledbdataadapter获取access数据库中的表数据时，无缘无故会丢失一个字段的数据(使用jet引擎)。同样的代码，调试的时候居然没有问题，但是直接运行，不进行断点调试没有问题。想不通到底是.net的问题，还是access的问题。找相关的资料居然没有。不过，总会是那个有问题的(呵呵，好像是废话)。</p>
-
-<p>很类似的，以前在获取excel的数据时(也是使用jet引擎)，会丢失一些数据，那是因为这一列中既有数字和文本，jet无法识别，将单元格格式设置为文本就可以了。</p>
-
-<p>不过，access数据库至少不会出现这样的问题。而且，明明都是文本数据，居然获取出来是空的，很伤脑筋。不过，还是另外找了种方法解决这个问题，呵呵。</p>
-
-<p>PS：前几天看一个小学奥数题，大意是如果两个正整数的积可以整除他们的和，比如70和30，那么这一对数就称为好数，那么1到16之间有多少对好数？</p>
-
-<p>我用python写了一个很简略的程序，算了一下：</p>
-
-<pre>#coding=gbk
-'''
-Created on 2011-2-18
-求好数
-@author: KURTEN
-'''
-
-i = 1
-max = 16
-xx=[]
-while i &amp;lt; max:
-         xx.append(i)
-         i = i + 1
-
-yy = xx
-for x in xx:
-    for y in yy:
-        if x &amp;lt; y:
-            if ((x * y) % (x + y) == 0):
-                print "好数[%d,%d]" %(x,y)</pre>
-
-
-<p>由此可以计算出4对好数，程序是简单的，不过，如果离开计算机，让我去手算，估计我得弄半天吧。想想小朋友们还是真可怜，不过，我小时候也是，被奥数残害，其实啊，没多大意义。</p>
-
-<p>能够简化复杂得工作，代码，确实是个好东西。码农得日子，也就这么单调得乐趣了。昨天元宵，吃了自己煮得芝麻馅的汤圆，总比不过在家的日子惬意。人，总要随着自己喜欢的道路走的，也要选择自己喜欢做的事情。就算离乡背井也无妨嘛。</p>
-
-<p>20110512：这里查明原来不同的引擎同时访问access库，有可能得到的数据不一定一致。估计是因为内部缓存的问题，或者就是访问引擎内部bug，有或者是其他灵异事件。这个我也就不得而知了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -400,6 +376,10 @@ for x in xx:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/14/2014/">2014</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/">通过源代码安装ruby-2.0.0-p247</a>
       </li>
     
@@ -413,10 +393,6 @@ for x in xx:
     
       <li class="post">
         <a href="/blog/2013/01/27/blog-migrate-to-github/">博客迁移</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/14/redis2/">redis源码学习记录(二)</a>
       </li>
     
   </ul>
@@ -482,7 +458,7 @@ for x in xx:
       </div>
     </div>
     <footer class="footer"><p>
-  Copyright &copy; 2013 - Kurten -
+  Copyright &copy; 2014 - Kurten -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> -
   <span class="credit">Theme by <a href="https://github.com/barmstrong/octopress-bootstrap">Brian Armstrong</a></span> -
   <span class="credit">Edited by <a href="http://ikurten.com">Kurten</a></span>

@@ -9,7 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="最近一直在学习redis的源代码，大致上搞清楚了它是如何启动，载入参数，开始轮询接收tcp请求，以及具体执行tcp请求的方式。参照《Redis:under the hood》 此文，再对照源码。目前的stable版本，和此文上有些出入，但是大致逻辑上基本一致。 redis按照单线程轮询(epoll &hellip;">
+  <meta name="description" content="续前面那篇文章。（源码版本为之前的stable版本2.4.8） 当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,50 @@
 
 <div class="blog-index span8">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/14/redis2/">Redis源码学习记录(二)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-14T07:23:59+08:00" pubdate data-updated="true">2012-10-14</time>
+        
+         | <a href="/blog/2012/10/14/redis2/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>续前面那篇<a href="/blog/2012/09/19/redis1/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
+
+<p>当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、acceptUnixHandler、acceptCommonHandler。一旦接收到一个tcp链接，acceptCommonHandler就会创建一个redisClient，并且把它加入到event的readable列表中，等待event loop执行readQueryFromClient函数。</p>
+
+<p>接着event loop时执行readQueryFromClient，获取客户端请求，然后执行请求，调用redis.c中processCommand &#8211;> call函数。</p>
+
+<p>在执行循环的时候会有个beforeSleep的void指针，指向redis.c中的beforeSleep函数，这个函数会遍历所有的server.io_ready_clients，重新热入到event loop列表，并执行客户端请求(这是由于redis可以开启virtual memory，有些命令操作可能会被swapped从而被block掉)。配置在redis.conf中vm-enable选项。redis默认不开启vm。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1297,50 +1341,6 @@ have fun! :)</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/11/911/">911絮叨</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-11T02:35:51+08:00" pubdate data-updated="true">2011-09-11</time>
-        
-         | <a href="/blog/2011/09/11/911/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>忽然发觉啊，年纪大了，总增添了点懒惰。人，也经常性得感觉到疲乏。搞技术的，似乎大多都这样吧。有时候，想做的事情，会不了了之。当然，也慢慢习惯了，一休息就宅着。于是，又增加了惰性。到现在，总觉着有点亏欠这点时光了啊。不过有时候，也会翻翻老黄历，怀念怀念过去的那点时光。人生在世的，总是走走停停，停停走走。</p>
-
-<p>从毕业到现在，手头是增加了很多数码产品，我么，也逐渐成为果粉。不过，话又说回来，苹果的产品确实做得不错！记得11年前，刚上初中那会，表姐把她那台用剩下得电脑给了我，于是，就有了第一台电脑。当时也没怎么细想，就觉着，那电脑太烂了。也没怎么用，就开了三次机，之后就再也没去搭理它了。等到很长一段时间之后，才明白，当时如果多折腾折腾，现在应该会好很多。</p>
-
-<p>上初中那会，听说老美双子大楼被炸了，还是有点不太相信的，死了很多人啊。死人这种事情总是不太愿意听到或者看到的。</p>
-
-<p>回想刚上初中那会，每天骑车30分钟上下学，都不知道我是怎么坚持下来的。现在为了生计，还是这样，其实10年对我来说都一样，只不过，年纪大了，看过了很多，了解了很多，同时也学到了很多。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1362,6 +1362,10 @@ have fun! :)</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/14/2014/">2014</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/">通过源代码安装ruby-2.0.0-p247</a>
       </li>
     
@@ -1375,10 +1379,6 @@ have fun! :)</p>
     
       <li class="post">
         <a href="/blog/2013/01/27/blog-migrate-to-github/">博客迁移</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/14/redis2/">redis源码学习记录(二)</a>
       </li>
     
   </ul>
@@ -1444,7 +1444,7 @@ have fun! :)</p>
       </div>
     </div>
     <footer class="footer"><p>
-  Copyright &copy; 2013 - Kurten -
+  Copyright &copy; 2014 - Kurten -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> -
   <span class="credit">Theme by <a href="https://github.com/barmstrong/octopress-bootstrap">Brian Armstrong</a></span> -
   <span class="credit">Edited by <a href="http://ikurten.com">Kurten</a></span>
