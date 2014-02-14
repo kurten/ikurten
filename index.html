@@ -9,7 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="前两天心血来潮，想升级一下本机的ruby版本，于是下载了最新版本的ruby代码，然后 ./configure make sudo make install 但是碰到一个问题，openssl can&#8217;t load。找了很多方法都搞不定，怀疑是本机openssl版本低于0.9.6b， &hellip;">
+  <meta name="description" content="由于jekyll以及我不熟悉ruby的缘故，导致blog久未更新，当然，一部分原因也可能是我比较懒的缘故。现在终于是摸清了门道，接下去，好好看看ruby这门语言，一直想看的，没有时间和精力去学习，那么接下去就好好看看，还有CoffeeScript。 列个TODO列表，年中的时候回来看看完成了几个 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,59 @@
 
 <div class="blog-index span8">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/14/2014/">2014</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-14T23:47:08+08:00" pubdate data-updated="true">2014-02-14</time>
+        
+         | <a href="/blog/2014/02/14/2014/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>由于jekyll以及我不熟悉ruby的缘故，导致blog久未更新，当然，一部分原因也可能是我比较懒的缘故。现在终于是摸清了门道，接下去，好好看看ruby这门语言，一直想看的，没有时间和精力去学习，那么接下去就好好看看，还有CoffeeScript。</p>
+
+<p>列个TODO列表，年中的时候回来看看完成了几个：</p>
+
+<ul>
+<li>学习一下C++，争取把The C++ Programming Language 看完</li>
+<li>把lua源码看完(断断续续看了一部分，没有完全看完)</li>
+<li>把Advanced Programming in the UNIX Environment看完(争取用libuv和lua做个东西玩玩)</li>
+<li>学习ruby和CoffeeScript，争取用ruby写个项目，把CoffeeScript用到项目中</li>
+<li>读完Computer Systems - A Programmer&#8217;s Perspective</li>
+<li>读完Professional Linux Kernel Architecture</li>
+<li>读完Distributed Systems - Concepts and Design，Operation Systems Design and Implementation</li>
+<li>把余下的nosql reading list中的论文读完</li>
+<li>读完Programming Erlang，多看点架构设计的以及关于并发和并行的资料</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -374,50 +427,6 @@ openssl_missing.c:122: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/10/14/redis2/">Redis源码学习记录(二)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-14T07:23:59+08:00" pubdate data-updated="true">2012-10-14</time>
-        
-         | <a href="/blog/2012/10/14/redis2/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>续前面那篇<a href="/blog/2012/09/19/redis1/">文章</a>。（<a href="http://redis.io/download">源码版本为之前的stable版本2.4.8</a>）</p>
-
-<p>当redis服务启动的时候，会执行aeMain方法，该方法是event loop，他其实就是一个while循环会一直执行。处理tcp链接操作的函数在networking.c中实现,acceptTcpHandler、acceptUnixHandler、acceptCommonHandler。一旦接收到一个tcp链接，acceptCommonHandler就会创建一个redisClient，并且把它加入到event的readable列表中，等待event loop执行readQueryFromClient函数。</p>
-
-<p>接着event loop时执行readQueryFromClient，获取客户端请求，然后执行请求，调用redis.c中processCommand &#8211;> call函数。</p>
-
-<p>在执行循环的时候会有个beforeSleep的void指针，指向redis.c中的beforeSleep函数，这个函数会遍历所有的server.io_ready_clients，重新热入到event loop列表，并执行客户端请求(这是由于redis可以开启virtual memory，有些命令操作可能会被swapped从而被block掉)。配置在redis.conf中vm-enable选项。redis默认不开启vm。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -437,6 +446,10 @@ openssl_missing.c:122: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/14/2014/">2014</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/">通过源代码安装ruby-2.0.0-p247</a>
       </li>
     
@@ -450,10 +463,6 @@ openssl_missing.c:122: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
     
       <li class="post">
         <a href="/blog/2013/01/27/blog-migrate-to-github/">博客迁移</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/14/redis2/">redis源码学习记录(二)</a>
       </li>
     
   </ul>
@@ -519,7 +528,7 @@ openssl_missing.c:122: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
       </div>
     </div>
     <footer class="footer"><p>
-  Copyright &copy; 2013 - Kurten -
+  Copyright &copy; 2014 - Kurten -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> -
   <span class="credit">Theme by <a href="https://github.com/barmstrong/octopress-bootstrap">Brian Armstrong</a></span> -
   <span class="credit">Edited by <a href="http://ikurten.com">Kurten</a></span>
