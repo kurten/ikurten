@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 开发日志 | ikurten.com]]></title>
+  <link href="http://ikurten.com/blog/categories/kai-fa-ri-zhi/atom.xml" rel="self"/>
+  <link href="http://ikurten.com/"/>
+  <updated>2014-03-02T00:33:54+08:00</updated>
+  <id>http://ikurten.com/</id>
+  <author>
+    <name><![CDATA[Kurten]]></name>
+    <email><![CDATA[chinkurten@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[开发日志(with node.js)]]></title>
+    <link href="http://ikurten.com/blog/2014/03/01/kai-fa-ri-zhi/"/>
+    <updated>2014-03-01T23:33:16+08:00</updated>
+    <id>http://ikurten.com/blog/2014/03/01/kai-fa-ri-zhi</id>
+    <content type="html"><![CDATA[<h3>node.js开发</h3>
+
+<p>最近的项目一直在用<a href="http://nodejs.org">node.js</a>开发，包括web端、移动端的api实现，以及后台消息系统都是用<a href="http://nodejs.org">node.js</a>。web端和api实现都是基于<a href="http://expressjs.com">express</a>这个框架基础上去做包装实现的，逐渐构建了一个类似于<a href="http://rubyonrails.org">rails</a>的框架。开发人员只要注重实现controller和view以及前台页面交互就可以了，不需要考虑其他模块载入，封装什么的内容。controller实现只要遵照一种约定即可。</p>
+
+<p>目标需求大致罗列如下：</p>
+
+<ul>
+<li>模块自动载入(controller、middleware、config等)</li>
+<li>response.render页面时公共输出内容加载输出</li>
+<li>web app的安全配置(copy了<a href="https://github.com/paypal/lusca">lusca</a>)</li>
+<li>前端模板引擎要求可以使用cdn加速</li>
+<li>自动化编译发布</li>
+<li>部署方便，快速</li>
+</ul>
+
+
+<p>于是采用的技术选型为:</p>
+
+<ul>
+<li><a href="https://github.com/remy/nodemon%E2%80%8E">nodemon</a>(开发环境使用)</li>
+<li><a href="http://bower.io">bower</a>(前端依赖安装)</li>
+<li><a href="http://gruntjs.com/">grunt</a>(自动化打包编译发布)</li>
+<li><a href="https://github.com/Unitech/pm2%E2%80%8E">pm2</a>(正式环境使用)</li>
+<li><a href="https://github.com/caolan/async%E2%80%8E">async</a>(用来解决回掉函数太多的问题，比如sql查询的回掉)</li>
+<li><a href="https://github.com/linkedin/dustjs%E2%80%8E">dustjs-linkedin</a>(可以编译为js，用于cdn加速)</li>
+<li>自己实现了模块载入工具对象以及模板渲染输出时的hook</li>
+<li>前端基础样式UI库用bootstrap和compass，方便编写</li>
+</ul>
+
+
+<h4>controller实现的约定</h4>
+
+<pre><code>
+/**
+ * 遍历文件夹，获取并且绑定controller中导出的方法
+ * 仅支持多级目录
+ * controller导出的模式为
+ * module.exports = {
+ *     hello:{method:'get', path:'/hello', fun:function (req, res) { res.send('hello world'); }}
+ * }
+ * -------- or --------
+ * exports.method = 'get';
+ * exports.path = '/hello';
+ * exports.fun = function (req, res) {
+ *     res.send('hello world');  
+ * }
+ */
+</code></pre>
+
+
+<h4>middleware实现的约定</h4>
+
+<pre><code>
+/**
+ * 载入自定义中间件 例如 auth等
+ * 导出模式(支持单个中间件中多个导出函数以及多级目录)
+ * exports.path = "/hello";   //可选选项没有默认为'*'
+ * exports.auth = function(req, res, next) {
+ *     next();  
+ * }
+ */
+</code></pre>
+
+
+<h4>render hooks实现的约定</h4>
+
+<pre><code>
+/**
+ * 载入自定义hooks 例如 hookForAll.js等
+ * 导出模式(支持多级目录)
+ * exports.path = '*';
+ * exports.fun = function (options, req, res, cb) {
+ *     cb && cb(options);
+ * };
+ */
+</code></pre>
+
+
+<p>目前已经放于github，暂时还未整理完全，接下去有几个TODO：</p>
+
+<ol>
+<li>修正bug</li>
+<li>添加example</li>
+<li>优化boot</li>
+</ol>
+
+
+<p>具体请看代码<a href="https://github.com/kurten/kricy">kricy</a>。</p>
+
+<h3>Sublime插件开发</h3>
+
+<p>今天心血来潮同时写了个<a href="www.sublimetext.com/%E2%80%8E">Sublime Text 2</a>的插件：<a href="https://github.com/kurten/sublime-template">sublime-template</a>，用来新建文件的时候直接从已有的模板文件创建新文件。</p>
+
+<p><a href="www.sublimetext.com/%E2%80%8E">Sublime Text 2</a>写个插件还是很方便的，连代调试，差不多几个小时就能搞定，确实很赞。就是API还是不够丰富，要是API再丰富一点就更好了，比如创建文件前后事件之类的API都有的话那就完美了。</p>
+
+<p>这个插件写着玩玩，后续看看还可以写点别的什么。</p>
+]]></content>
+  </entry>
+  
+</feed>

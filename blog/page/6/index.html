@@ -9,7 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="昨天，因为django，于是又查看了一下mysqldb无法使用的问题，原来啊，是不支持mysql5.5。今天，换了5.1。对于mac下root啥的密码设置，我原先走了些弯路，其实mysql官方文档有很详细的说明的。（关于我如何在mac上卸载mysql，请看这里）试了一下，果然可以了。 &hellip;">
+  <meta name="description" content="前天是个值得纪念的日子，我犯了一个很严重的错误，导致mac上以前的所有资料全部丢失。安装ubuntu的时候，我居然选择了安装mac os的磁盘作为swap space，于是，接下去的事情就不用多说了。人生最痛苦的事情莫过于此。昨天折腾了一整天，换回了mac系统，于是，之后就不想在装ubuntu了。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,50 @@
 
 <div class="blog-index span8">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/29/27/">教训</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-29T03:46:13+08:00" pubdate data-updated="true">2011-07-29</time>
+        
+         | <a href="/blog/2011/07/29/27/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前天是个值得纪念的日子，我犯了一个很严重的错误，导致<a href="http://kurchan.com/www.apple.com" target="_blank">mac</a>上以前的所有资料全部丢失。安装<a href="http://www.ubuntu.com/" target="_blank">ubuntu</a>的时候，我居然选择了安装mac os的磁盘作为swap space，于是，接下去的事情就不用多说了。人生最痛苦的事情莫过于此。昨天折腾了一整天，换回了mac系统，于是，之后就不想在装<a href="http://www.ubuntu.com/" target="_blank">ubuntu</a>了。幸好我有<a href="http://www.amazon.com/" target="_blank">kindle</a>，我有个习惯，电子资料神马的，要看的都塞到里面去。于是，不用一样样去找。幸好我用<a href="http://www.google.com/chrome/" target="_blank">chrome</a>，幸好我平时的阅读习惯神马的<a href="http://www.google.com/chrome/" target="_blank">chrome</a>会保留。I love cloud。</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Cloud_computing" target="_blank">云</a>真是个好东西，如果与操作系统挂钩，直接同步数据，那么，就不需要担心你自己的使用习惯，安装软件神马的。他会帮你搞定。只是，带宽啊！还有就是该死的<a href="http://zh.wikipedia.org/zh-cn/GFW" target="_blank">gfw</a>了。确实啊，<a href="http://www.dropbox.com/" target="_blank">dropbox</a>是个好东西。当然，<a href="http://zh.wikipedia.org/zh-cn/GFW" target="_blank">gfw</a>也不是一无是处，在互联网行业中，copy国外的模式神马的，也好。团购神马的，围脖神马的，lbs神马的。facebook神马的。未来肯定是数字时代。</p>
+
+<p>当然，也有创新，有了团购，特别是团购多了之后，你就可以把这些资源进行整合。围脖神马的多了之后你也可以整合做app，吸引流量。淘宝神马的，用户这么多，让流量变现的app肯定是大赞的。<a href="http://www.alipay.com/" target="_blank">支付宝</a>就不用说了。<a href="http://www.vancl.com/" target="_blank">凡客</a>，<a href="http://www.moonbasa.com/" target="_blank">梦芭莎</a>，<a href="http://www.360buy.com/" target="_blank">京东</a>等等。混战啊。关键啊，还是用户为本。个性化的内容提供，还是很有前途的。</p>
+
+<p>木有用<a href="http://www.python.org/" target="_blank">python</a>系的做，<a href="http://www.php.net/" target="_blank">php</a>系，那么好吧，只能学么。管理后台神马的，木有经验就木有人要。哎，被催啊。记得曾经看到过一篇文章，fastcgi神马的，最好是会被wsgi神马的代替的么。那么，拭目以待吧。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -281,80 +325,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/29/17/">关于mysqldb的一些记录</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-29T03:42:04+08:00" pubdate data-updated="true">2011-07-29</time>
-        
-         | <a href="/blog/2011/07/29/17/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>我在mac下面使用<a href="http://sourceforge.net/projects/mysql-python/" target="_blank">mysqldb</a>的时候，居然老是说importerror，说调用dlopen打开编译之后的_mysql.so时，无法载入这个libmysqlclient.16.dylib，mysql的依赖库。</p>
-
-<p>把libmysqlclient.16.dylib设置为共享库，又添加了DYLD_LIBRARY_PATH，在控制台的python环境下面，可以使用，但是在netbeans或者easyeclipse下面居然不行，很诧异的问题。</p>
-
-<p>问题如下：</p>
-
-<pre>/Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/_mysql.py:3: UserWarning: Module _mysql was already imported from /Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/_mysql.pyc, but /Library/Python/2.6/site-packages/MySQL_python_embedded-1.2.3-py2.6-macosx-10.6-universal.egg is being added to sys.path
-
-/Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/_mysql.py:3: UserWarning: Module MySQLdb was already imported from /Library/Python/2.6/site-packages/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg/MySQLdb/__init__.pyc, but /Library/Python/2.6/site-packages/MySQL_python_embedded-1.2.3-py2.6-macosx-10.6-universal.egg is being added to sys.path
-Traceback (most recent call last):
-File "/Users/KURTEN/workspace/tt/src/test.py", line 7, in &amp;lt;module&amp;gt;
-import MySQLdb
-File "build/bdist.macosx-10.6-universal/egg/MySQLdb/__init__.py", line 19, in &amp;lt;module&amp;gt;
-File "build/bdist.macosx-10.6-universal/egg/_mysql.py", line 7, in &amp;lt;module&amp;gt;
-File "build/bdist.macosx-10.6-universal/egg/_mysql.py", line 6, in __bootstrap__
-ImportError: dlopen(/Users/KURTEN/.python-eggs/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg-tmp/_mysql.so, 2): Library not loaded: libmysqlclient.16.dylib
-Referenced from: /Users/KURTEN/.python-eggs/MySQL_python-1.2.3-py2.6-macosx-10.6-universal.egg-tmp/_mysql.so
-Reason: image not found</pre>
-
-
-<p>代码如下：</p>
-
-<pre>import MySQLdb
-con=MySQLdb.connect("localhost","root","chfkurten")
-con.select_db("cake")
-cur=con.cursor()
-cur.execute("select * from wp_links")
-for c in cur:
-    print c
-con.close()</pre>
-
-
-<p>为这个事情，折腾了好几天，今天无意之中在mysql的官方网站找到一个纯python实现的<a href="https://launchpad.net/myconnpy" target="_blank">mysql connector</a>，具体性能没与mysqldb比较过，估计要比mysqldb直接使用mysql的api差，算是mysqldb的代替品吧。</p>
-
-<p>纠结与这个原因，于是我转向了php，总归是有了ide，提高效率么。特别是智能提示，呵呵，太过依赖了。</p>
-
-<p>20110512加：这个问题其实是因为mysql的版本问题。写这篇日志的时候mysqldb的api只支持5.1所以，换回来就好了。（这里出问题的mysql版本是5.5。）</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -376,6 +346,10 @@ con.close()</pre>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/01/kai-fa-ri-zhi/">开发日志(with node.js)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/14/2014/">2014</a>
       </li>
     
@@ -389,10 +363,6 @@ con.close()</pre>
     
       <li class="post">
         <a href="/blog/2013/03/07/lua-learning-record/">lua学习笔记</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/27/blog-migrate-to-github/">博客迁移</a>
       </li>
     
   </ul>

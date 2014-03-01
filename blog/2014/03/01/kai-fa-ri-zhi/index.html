@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>nosql reading list阅读笔记 - ikurten.com</title>
+  <title>开发日志(with node.js) - ikurten.com</title>
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="论文阅读 最近一直在读这里的论文。学到了很多东西。目前已经读完了第一部分，深入理解了Gossip Protocol、Vector Clock，并对Cassandra、BigTable、Google File System、MapReduce实现做了初步的理解。 Gossip Protocol &hellip;">
+  <meta name="description" content="node.js开发 最近的项目一直在用node.js开发，包括web端、移动端的api实现，以及后台消息系统都是用node.js。web端和api实现都是基于express这个框架基础上去做包装实现的，逐渐构建了一个类似于rails的框架。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ikurten.com/blog/2013/06/18/reading-notes">
+  <link rel="canonical" href="http://ikurten.com/blog/2014/03/01/kai-fa-ri-zhi">
   <link href="/favicon.ico" rel="icon">
   
   <link href="/assets/bootstrap/css/spacelab.min.css" rel="stylesheet" type="text/css">
@@ -95,7 +95,7 @@
     
   <header>
     
-      <h1 class="entry-title">Nosql Reading List阅读笔记</h1>
+      <h1 class="entry-title">开发日志(with node.js)</h1>
     
     
       <p class="meta">
@@ -111,7 +111,7 @@
   
 
 
-<time datetime="2013-06-18T08:05:00+08:00" pubdate data-updated="true">2013-06-18</time>
+<time datetime="2014-03-01T23:33:16+08:00" pubdate data-updated="true">2014-03-01</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -122,25 +122,102 @@
 
   
   
-  <div class="entry-content"><h3>论文阅读</h3>
+  <div class="entry-content"><h3>node.js开发</h3>
 
-<p>最近一直在读<a href="http://www.empiricalreality.com/2010/09/22/2010-nosql-summer-reading-list/">这里</a>的论文。学到了很多东西。目前已经读完了第一部分，深入理解了<a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>、<a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，并对<a href="http://cassandra.apache.org">Cassandra</a>、<a href="https://zh.wikipedia.org/zh-cn/BigTable">BigTable</a>、<a href="https://zh.wikipedia.org/wiki/Google%E6%AA%94%E6%A1%88%E7%B3%BB%E7%B5%B1">Google File System</a>、<a href="https://zh.wikipedia.org/wiki/MapReduce">MapReduce</a>实现做了初步的理解。</p>
+<p>最近的项目一直在用<a href="http://nodejs.org">node.js</a>开发，包括web端、移动端的api实现，以及后台消息系统都是用<a href="http://nodejs.org">node.js</a>。web端和api实现都是基于<a href="http://expressjs.com">express</a>这个框架基础上去做包装实现的，逐渐构建了一个类似于<a href="http://rubyonrails.org">rails</a>的框架。开发人员只要注重实现controller和view以及前台页面交互就可以了，不需要考虑其他模块载入，封装什么的内容。controller实现只要遵照一种约定即可。</p>
 
-<h4>Gossip Protocol</h4>
+<p>目标需求大致罗列如下：</p>
 
-<p><a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>其实是一种传播方式，在一个集群中，A随机的取一台机器B，把A自己手中所知道的所有机器状态、机器IP等一些信息，发送给B，B收到这些信息后，和自身的内容做个比较、合并。这样就完成了一次传播。开源的实现<a href="http://code.google.com/p/java-gossip/">java-gossip</a>、<a href="http://code.google.com/p/gossip-protocol-java/">gossip-protocol-java</a>。</p>
+<ul>
+<li>模块自动载入(controller、middleware、config等)</li>
+<li>response.render页面时公共输出内容加载输出</li>
+<li>web app的安全配置(copy了<a href="https://github.com/paypal/lusca">lusca</a>)</li>
+<li>前端模板引擎要求可以使用cdn加速</li>
+<li>自动化编译发布</li>
+<li>部署方便，快速</li>
+</ul>
 
-<h4>Vector Clock</h4>
 
-<p><a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，用来合并集群中有冲突的数据，但是还是要应用曾去取舍最终的数据。具体的解释我觉着<a href="http://www.kongch.com/2011/08/vector-clock-understanding/">这篇文章</a>解释的很详细了。</p>
+<p>于是采用的技术选型为:</p>
 
-<h3>关于读书</h3>
+<ul>
+<li><a href="https://github.com/remy/nodemon%E2%80%8E">nodemon</a>(开发环境使用)</li>
+<li><a href="http://bower.io">bower</a>(前端依赖安装)</li>
+<li><a href="http://gruntjs.com/">grunt</a>(自动化打包编译发布)</li>
+<li><a href="https://github.com/Unitech/pm2%E2%80%8E">pm2</a>(正式环境使用)</li>
+<li><a href="https://github.com/caolan/async%E2%80%8E">async</a>(用来解决回掉函数太多的问题，比如sql查询的回掉)</li>
+<li><a href="https://github.com/linkedin/dustjs%E2%80%8E">dustjs-linkedin</a>(可以编译为js，用于cdn加速)</li>
+<li>自己实现了模块载入工具对象以及模板渲染输出时的hook</li>
+<li>前端基础样式UI库用bootstrap和compass，方便编写</li>
+</ul>
 
-<p>六月初，在<a href="http://www.amazon.cn">amazon.cn</a>上买了好几本书，断断续续的看完了几本<a href="http://www.amazon.cn/%E6%89%93%E9%80%A0Facebook-%E4%BA%B2%E5%8E%86Facebook%E7%88%86%E5%8F%91%E7%9A%845%E5%B9%B4-%E7%8E%8B%E6%B7%AE/dp/B00ANI5YXW/ref=sr_1_1?ie=UTF8&amp;qid=1372637078&amp;sr=8-1&amp;keywords=%E6%89%93%E9%80%A0facebook">《打造facebook》</a>、<a href="http://www.amazon.cn/%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6-%E5%A8%81%E8%B0%A6%E6%96%AF/dp/B001MV7CXY/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1372637095&amp;sr=1-1&amp;keywords=%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6">《写给大家看的设计书》</a>。前一本算是作者一些facebook的亲身经历分享，后一本主要讲平面设计。从我这两年的创业经验来说，前一本，拿来当故事看看还可以，毕竟国内整个环境是这样子。</p>
 
-<h3>最近</h3>
+<h4>controller实现的约定</h4>
 
-<p>最近刚刚结束了技术团队的招聘工作，两位同事也已经到岗，接下去的项目也已经开始进行。越来越没啥耐心写博客了，前几个月的空白，没法补上了，接下去争取一个月一篇吧。等待着宝宝的降临。当父亲了啊。</p>
+<pre><code>
+/**
+ * 遍历文件夹，获取并且绑定controller中导出的方法
+ * 仅支持多级目录
+ * controller导出的模式为
+ * module.exports = {
+ *     hello:{method:'get', path:'/hello', fun:function (req, res) { res.send('hello world'); }}
+ * }
+ * -------- or --------
+ * exports.method = 'get';
+ * exports.path = '/hello';
+ * exports.fun = function (req, res) {
+ *     res.send('hello world');  
+ * }
+ */
+</code></pre>
+
+
+<h4>middleware实现的约定</h4>
+
+<pre><code>
+/**
+ * 载入自定义中间件 例如 auth等
+ * 导出模式(支持单个中间件中多个导出函数以及多级目录)
+ * exports.path = "/hello";   //可选选项没有默认为'*'
+ * exports.auth = function(req, res, next) {
+ *     next();  
+ * }
+ */
+</code></pre>
+
+
+<h4>render hooks实现的约定</h4>
+
+<pre><code>
+/**
+ * 载入自定义hooks 例如 hookForAll.js等
+ * 导出模式(支持多级目录)
+ * exports.path = '*';
+ * exports.fun = function (options, req, res, cb) {
+ *     cb && cb(options);
+ * };
+ */
+</code></pre>
+
+
+<p>目前已经放于github，暂时还未整理完全，接下去有几个TODO：</p>
+
+<ol>
+<li>修正bug</li>
+<li>添加example</li>
+<li>优化boot</li>
+</ol>
+
+
+<p>具体请看代码<a href="https://github.com/kurten/kricy">kricy</a>。</p>
+
+<h3>Sublime插件开发</h3>
+
+<p>今天心血来潮同时写了个<a href="www.sublimetext.com/%E2%80%8E">Sublime Text 2</a>的插件：<a href="https://github.com/kurten/sublime-template">sublime-template</a>，用来新建文件的时候直接从已有的模板文件创建新文件。</p>
+
+<p><a href="www.sublimetext.com/%E2%80%8E">Sublime Text 2</a>写个插件还是很方便的，连代调试，差不多几个小时就能搞定，确实很赞。就是API还是不够丰富，要是API再丰富一点就更好了，比如创建文件前后事件之类的API都有的话那就完美了。</p>
+
+<p>这个插件写着玩玩，后续看看还可以写点别的什么。</p>
 </div>
 
   
@@ -165,12 +242,12 @@
   
 
 
-<time datetime="2013-06-18T08:05:00+08:00" pubdate data-updated="true">2013-06-18</time>
+<time datetime="2014-03-01T23:33:16+08:00" pubdate data-updated="true">2014-03-01</time>
         
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/nosql/'>nosql</a>, <a class='category' href='/blog/categories/notes/'>notes</a>, <a class='category' href='/blog/categories/thinking/'>thinking</a>
+    <a class='category' href='/blog/categories/kai-fa-ri-zhi/'>开发日志</a>
   
 </span>
 
@@ -187,10 +264,8 @@
       
       <p class="meta">
         
-          <a class="basic-alignment pull-left" href="/blog/2013/03/07/lua-learning-record/" title="Previous Post: lua学习笔记">&laquo; lua学习笔记</a>
+          <a class="basic-alignment pull-left" href="/blog/2014/02/14/2014/" title="Previous Post: 2014">&laquo; 2014</a>
         
-        
-          <a class="basic-alignment pull-right" href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/" title="Next Post: 通过源代码安装ruby-2.0.0-p247">通过源代码安装ruby-2.0.0-p247 &raquo;</a>
         
       </p>
     </footer>
@@ -312,8 +387,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://ikurten.com/blog/2013/06/18/reading-notes/';
-        var disqus_url = 'http://ikurten.com/blog/2013/06/18/reading-notes/';
+        var disqus_identifier = 'http://ikurten.com/blog/2014/03/01/kai-fa-ri-zhi/';
+        var disqus_url = 'http://ikurten.com/blog/2014/03/01/kai-fa-ri-zhi/';
         var disqus_script = 'embed.js';
       
     (function () {

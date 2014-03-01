@@ -9,7 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="安装apache，mysql，mysql需要libmysqld-dev sudo apt-get install libxml2-dev sudo apt-get install libmysqld-dev sudo apt-get install libbz2-dev sudo apt-get &hellip;">
+  <meta name="description" content="上个星期，因为项目需要，学习了一下memcacheq（一个持久化的消息队列），同时，写了一个定制性质的client（当然，协议还是用memcached的）。由于自身业务上面的需要，把这个client折腾成了可以根据配置进行扩展的方式。主要是针对业务处理消息的方法。 单纯的memcacheq、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,50 @@
 
 <div class="blog-index span8">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/29/48/">关于memcacheq的记录</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-29T04:03:25+08:00" pubdate data-updated="true">2011-07-29</time>
+        
+         | <a href="/blog/2011/07/29/48/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>上个星期，因为项目需要，学习了一下<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>（一个持久化的消息队列），同时，写了一个定制性质的client（当然，协议还是用<a href="http://memcached.org/" target="_blank">memcached</a>的）。由于自身业务上面的需要，把这个client折腾成了可以根据配置进行扩展的方式。主要是针对业务处理消息的方法。</p>
+
+<p>单纯的<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>、<a href="http://memcachedb.org/" target="_blank">memcachedb</a>、<a href="http://memcached.org/" target="_blank">memcached</a>其实都没有集群的能力，只是用于单机的。如果没有客户端，那么也算不得一个完整的东西。原先的client采用连接池的方式，用来继承扩展还是太过麻烦，于是就自己写了一个socket连接。连接协议摆在那，自己写一个还是相对轻松很多的。各个业务以及一个queue连接，采用线程的处理方式。这样的话，就需要对线程进行定时检查，防止线程处理过程中索死或者interrupted，这主要还是为了容错。</p>
+
+<p>这次的后台架构，主要还是为了替换掉原先的基于xmpp的消息通信方式，消息丢失么，这是最讨厌的。虽然，我们的业务对于并发没有很高的要求，但是丢失这个问题，还是比较严重的，xmpp没有消息回执，所以时常会导致消息丢失。同时，它的clustering插件也太过于恶心，后续还是会被弃用的。</p>
+
+<p>这星期么，去测试一下<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>多队列单机的性能，同时，深入学习一下<a href="http://memcachedb.org/memcacheq/" target="_blank">memcacheq</a>的源代码。阅读源代码确实可以学习到很多东西。特别是别人的逻辑，思路。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -313,88 +357,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/29/38/">美丽说功能点以及个人评估</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-29T03:56:44+08:00" pubdate data-updated="true">2011-07-29</time>
-        
-         | <a href="/blog/2011/07/29/38/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>美丽说功能点</p>
-
-<p>一、我的首页</p>
-
-<p>1）发表文字信息、图片、宝贝链接（可以同步至新浪、人人）。</p>
-
-<p>2）查看关注的人发表、转发的内容（宝贝、照片等）。</p>
-
-<p>3）看看大家&ndash;>未关注用户的发表、转发的内容（提供时时推送）。</p>
-
-<p>还有一个就是&ldquo;去我的美丽说&rdquo;，进入后可以查看我发布的文字以及图片信息，以及我喜欢的分享。</p>
-
-<p>对于发布信息这个模块来说，可以直接将功能集成，成为一个单纯的聊聊，其余冗余。&nbsp;这里，我感觉层次设计有问题，可能是导航菜单太少的缘故。&ldquo;我的首页&rdquo;或者可以修改成我的美丽说，这样既可以查看我已经发布的信息，进行修改，或者直接发布新的。</p>
-
-<p>二、扮美达人</p>
-
-<p>类似人气用户推荐，以及相应的人气用户列表查看。</p>
-
-<p>选择人气用户后进入美丽说海报浏览模式，以照片为主。进入分享内容后显示照片、评论、转发功能，是否喜欢。</p>
-
-<p>三、挑衣服</p>
-
-<p>用户分享的照片列表（列表中居然会出现灯具等东西，真汗啊）。</p>
-
-<p>同二描述。</p>
-
-<p>四、当红好店</p>
-
-<p>用户推荐的淘宝店铺（不知道他是如何折腾出这个用户推荐的淘宝店铺的，感觉这个流量转换率很低啊，没啥用啊）。</p>
-
-<p>五、美丽Q&amp;A</p>
-
-<p>简单的问答型BBS（分最新以及最受欢迎两个区）。</p>
-
-<p>既然提供了支持功能，推送至最受欢迎区，那你就再做点好事，折腾个不支持功能呗。不然，我都支持一下，不是全放到最受欢迎那边去了？</p>
-
-<p>六、团购</p>
-
-<p>提供给淘宝卖家的团购平台，卖家可以自主提交团购产品。</p>
-
-<p>评估</p>
-
-<p>导航菜单该具备的居然省略了，页面层次组织不够明显，点击进入查看宝贝具体内容时找不着地方。不知道自己在浏览神马东西了。对比蘑菇街，这个设计体验明显是不同档次。还有就是对于字体，美丽说的字体与蘑菇街的字体（评论、以及描述的字体），对比一下，很明显的。优化空间很大啊。</p>
-
-<p>这是今天的功课，明天继续。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -416,6 +378,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/01/kai-fa-ri-zhi/">开发日志(with node.js)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/14/2014/">2014</a>
       </li>
     
@@ -429,10 +395,6 @@
     
       <li class="post">
         <a href="/blog/2013/03/07/lua-learning-record/">lua学习笔记</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/27/blog-migrate-to-github/">博客迁移</a>
       </li>
     
   </ul>

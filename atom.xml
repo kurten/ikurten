@@ -4,7 +4,7 @@
   <title><![CDATA[ikurten.com]]></title>
   <link href="http://ikurten.com/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2013-07-10T20:44:03+08:00</updated>
+  <updated>2014-03-02T00:33:54+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
     <name><![CDATA[Kurten]]></name>
@@ -12,6 +12,134 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[开发日志(with node.js)]]></title>
+    <link href="http://ikurten.com/blog/2014/03/01/kai-fa-ri-zhi/"/>
+    <updated>2014-03-01T23:33:16+08:00</updated>
+    <id>http://ikurten.com/blog/2014/03/01/kai-fa-ri-zhi</id>
+    <content type="html"><![CDATA[<h3>node.js开发</h3>
+
+<p>最近的项目一直在用<a href="http://nodejs.org">node.js</a>开发，包括web端、移动端的api实现，以及后台消息系统都是用<a href="http://nodejs.org">node.js</a>。web端和api实现都是基于<a href="http://expressjs.com">express</a>这个框架基础上去做包装实现的，逐渐构建了一个类似于<a href="http://rubyonrails.org">rails</a>的框架。开发人员只要注重实现controller和view以及前台页面交互就可以了，不需要考虑其他模块载入，封装什么的内容。controller实现只要遵照一种约定即可。</p>
+
+<p>目标需求大致罗列如下：</p>
+
+<ul>
+<li>模块自动载入(controller、middleware、config等)</li>
+<li>response.render页面时公共输出内容加载输出</li>
+<li>web app的安全配置(copy了<a href="https://github.com/paypal/lusca">lusca</a>)</li>
+<li>前端模板引擎要求可以使用cdn加速</li>
+<li>自动化编译发布</li>
+<li>部署方便，快速</li>
+</ul>
+
+
+<p>于是采用的技术选型为:</p>
+
+<ul>
+<li><a href="https://github.com/remy/nodemon%E2%80%8E">nodemon</a>(开发环境使用)</li>
+<li><a href="http://bower.io">bower</a>(前端依赖安装)</li>
+<li><a href="http://gruntjs.com/">grunt</a>(自动化打包编译发布)</li>
+<li><a href="https://github.com/Unitech/pm2%E2%80%8E">pm2</a>(正式环境使用)</li>
+<li><a href="https://github.com/caolan/async%E2%80%8E">async</a>(用来解决回掉函数太多的问题，比如sql查询的回掉)</li>
+<li><a href="https://github.com/linkedin/dustjs%E2%80%8E">dustjs-linkedin</a>(可以编译为js，用于cdn加速)</li>
+<li>自己实现了模块载入工具对象以及模板渲染输出时的hook</li>
+<li>前端基础样式UI库用bootstrap和compass，方便编写</li>
+</ul>
+
+
+<h4>controller实现的约定</h4>
+
+<pre><code>
+/**
+ * 遍历文件夹，获取并且绑定controller中导出的方法
+ * 仅支持多级目录
+ * controller导出的模式为
+ * module.exports = {
+ *     hello:{method:'get', path:'/hello', fun:function (req, res) { res.send('hello world'); }}
+ * }
+ * -------- or --------
+ * exports.method = 'get';
+ * exports.path = '/hello';
+ * exports.fun = function (req, res) {
+ *     res.send('hello world');  
+ * }
+ */
+</code></pre>
+
+
+<h4>middleware实现的约定</h4>
+
+<pre><code>
+/**
+ * 载入自定义中间件 例如 auth等
+ * 导出模式(支持单个中间件中多个导出函数以及多级目录)
+ * exports.path = "/hello";   //可选选项没有默认为'*'
+ * exports.auth = function(req, res, next) {
+ *     next();  
+ * }
+ */
+</code></pre>
+
+
+<h4>render hooks实现的约定</h4>
+
+<pre><code>
+/**
+ * 载入自定义hooks 例如 hookForAll.js等
+ * 导出模式(支持多级目录)
+ * exports.path = '*';
+ * exports.fun = function (options, req, res, cb) {
+ *     cb && cb(options);
+ * };
+ */
+</code></pre>
+
+
+<p>目前已经放于github，暂时还未整理完全，接下去有几个TODO：</p>
+
+<ol>
+<li>修正bug</li>
+<li>添加example</li>
+<li>优化boot</li>
+</ol>
+
+
+<p>具体请看代码<a href="https://github.com/kurten/kricy">kricy</a>。</p>
+
+<h3>Sublime插件开发</h3>
+
+<p>今天心血来潮同时写了个<a href="www.sublimetext.com/%E2%80%8E">Sublime Text 2</a>的插件：<a href="https://github.com/kurten/sublime-template">sublime-template</a>，用来新建文件的时候直接从已有的模板文件创建新文件。</p>
+
+<p><a href="www.sublimetext.com/%E2%80%8E">Sublime Text 2</a>写个插件还是很方便的，连代调试，差不多几个小时就能搞定，确实很赞。就是API还是不够丰富，要是API再丰富一点就更好了，比如创建文件前后事件之类的API都有的话那就完美了。</p>
+
+<p>这个插件写着玩玩，后续看看还可以写点别的什么。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[2014]]></title>
+    <link href="http://ikurten.com/blog/2014/02/14/2014/"/>
+    <updated>2014-02-14T23:47:08+08:00</updated>
+    <id>http://ikurten.com/blog/2014/02/14/2014</id>
+    <content type="html"><![CDATA[<p>由于jekyll以及我不熟悉ruby的缘故，导致blog久未更新，当然，一部分原因也可能是我比较懒的缘故。现在终于是摸清了门道，接下去，好好看看ruby这门语言，一直想看的，没有时间和精力去学习，那么接下去就好好看看，还有CoffeeScript。</p>
+
+<p>列个TODO列表，年中的时候回来看看完成了几个：</p>
+
+<ul>
+<li>学习一下C++，争取把The C++ Programming Language 看完</li>
+<li>把lua源码看完(断断续续看了一部分，没有完全看完)</li>
+<li>把Advanced Programming in the UNIX Environment看完(争取用libuv和lua做个东西玩玩)</li>
+<li>学习ruby和CoffeeScript，争取用ruby写个项目，把CoffeeScript用到项目中</li>
+<li>读完Computer Systems - A Programmer&#8217;s Perspective</li>
+<li>读完Professional Linux Kernel Architecture</li>
+<li>读完Distributed Systems - Concepts and Design，Operation Systems Design and Implementation</li>
+<li>把余下的nosql reading list中的论文读完</li>
+<li>读完Programming Erlang，多看点架构设计的以及关于并发和并行的资料</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[通过源代码安装ruby-2.0.0-p247]]></title>
@@ -1515,136 +1643,6 @@ GRANT OPTION;</pre>
 <p>对于<a href="http://www.lianpu.com/" target="_blank">脸谱换换</a>产品的服务器端技术架构，等我弄熟了那些东西在做记录吧。现在写了也只是copy，没神马意思滴。主要用到的技术么，<a href="http://www.mysql.com/" target="_blank">mysql</a>、<a href="http://www.igniterealtime.org/projects/openfire/" target="_blank">openfire</a>（<a href="http://xmpp.org/" target="_blank">xmpp</a>的一个server实现）、基于java的<a href="http://www.springsource.org/" target="_blank">spring</a>、<a href="http://struts.apache.org/" target="_blank">struts</a>等等这些框架。</p>
 
 <p>产品要做专，功能神马的，浮云啊，关键是需求点转化成功能的概率啊有多大！嗯，特别佩服毕加索，优秀的艺术家复制，伟大的艺术家偷。我么，继续stay hungry，stay foolish！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[美丽说功能点以及个人评估]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/38/"/>
-    <updated>2011-07-29T03:56:44+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/38</id>
-    <content type="html"><![CDATA[<p>美丽说功能点</p>
-
-<p>一、我的首页</p>
-
-<p>1）发表文字信息、图片、宝贝链接（可以同步至新浪、人人）。</p>
-
-<p>2）查看关注的人发表、转发的内容（宝贝、照片等）。</p>
-
-<p>3）看看大家&ndash;>未关注用户的发表、转发的内容（提供时时推送）。</p>
-
-<p>还有一个就是&ldquo;去我的美丽说&rdquo;，进入后可以查看我发布的文字以及图片信息，以及我喜欢的分享。</p>
-
-<p>对于发布信息这个模块来说，可以直接将功能集成，成为一个单纯的聊聊，其余冗余。&nbsp;这里，我感觉层次设计有问题，可能是导航菜单太少的缘故。&ldquo;我的首页&rdquo;或者可以修改成我的美丽说，这样既可以查看我已经发布的信息，进行修改，或者直接发布新的。</p>
-
-<p>二、扮美达人</p>
-
-<p>类似人气用户推荐，以及相应的人气用户列表查看。</p>
-
-<p>选择人气用户后进入美丽说海报浏览模式，以照片为主。进入分享内容后显示照片、评论、转发功能，是否喜欢。</p>
-
-<p>三、挑衣服</p>
-
-<p>用户分享的照片列表（列表中居然会出现灯具等东西，真汗啊）。</p>
-
-<p>同二描述。</p>
-
-<p>四、当红好店</p>
-
-<p>用户推荐的淘宝店铺（不知道他是如何折腾出这个用户推荐的淘宝店铺的，感觉这个流量转换率很低啊，没啥用啊）。</p>
-
-<p>五、美丽Q&amp;A</p>
-
-<p>简单的问答型BBS（分最新以及最受欢迎两个区）。</p>
-
-<p>既然提供了支持功能，推送至最受欢迎区，那你就再做点好事，折腾个不支持功能呗。不然，我都支持一下，不是全放到最受欢迎那边去了？</p>
-
-<p>六、团购</p>
-
-<p>提供给淘宝卖家的团购平台，卖家可以自主提交团购产品。</p>
-
-<p>评估</p>
-
-<p>导航菜单该具备的居然省略了，页面层次组织不够明显，点击进入查看宝贝具体内容时找不着地方。不知道自己在浏览神马东西了。对比蘑菇街，这个设计体验明显是不同档次。还有就是对于字体，美丽说的字体与蘑菇街的字体（评论、以及描述的字体），对比一下，很明显的。优化空间很大啊。</p>
-
-<p>这是今天的功课，明天继续。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[蘑菇街功能点以及个人评估]]></title>
-    <link href="http://ikurten.com/blog/2011/07/29/35/"/>
-    <updated>2011-07-29T03:50:31+08:00</updated>
-    <id>http://ikurten.com/blog/2011/07/29/35</id>
-    <content type="html"><![CDATA[<p>蘑菇街功能点</p>
-
-<p>一、个人空间</p>
-
-<p>1）&ldquo;我家首页&rdquo;：</p>
-
-<p>1、商品实拍照片为主（可以多张照片），以及相应的商品描述，可以添加购买链接。</p>
-
-<p>2、可以对该商品进行评价、转发。</p>
-
-<p>3、可以加入自己喜欢的列表、同时分享。</p>
-
-<p>4、列表显示分享者的其他分享内容。</p>
-
-<p>5、二手闲置&mdash;-交易平台（接入第三方，支付宝），类似围脖的话题模式。</p>
-
-<p>6、显示关注的用户所转发的、喜欢的、分享的内容。</p>
-
-<p>7、用户账户设置等辅助功能。</p>
-
-<p>我感觉 &ldquo;我家首页&rdquo;中功能点重复很多，&ldquo;随便聊聊&rdquo;可以直接发送商品、店铺链接或者直接上传图片，没必要再将其细分出来。</p>
-
-<p>2）&ldquo;主题&rdquo;：</p>
-
-<p>&ldquo;主题吧&rdquo;&mdash;-创建主题（BBS模式）后生成的内容。</p>
-
-<p>3）&ldquo;相册&rdquo;：</p>
-
-<p>上传、分享的自拍照片等图片。</p>
-
-<p>4）&ldquo;宝贝&rdquo;：</p>
-
-<p>上传、分享的商品照片。</p>
-
-<p>5）&ldquo;喜欢&rdquo;：</p>
-
-<p>点击喜欢按钮后存储的内容（用户分享的商品、或者自拍照等）。</p>
-
-<p>二、购物分享</p>
-
-<p>1）采用画报模式（以图片为主，显示描述，如果有评论，最多只显示2条）。</p>
-
-<p>2）点击图片，显示分享主要内容，购买链接、图片、喜欢、评论、其他分享等。</p>
-
-<p>评论按钮多余。</p>
-
-<p>三、看实拍</p>
-
-<p>1）商品购买后实际拍摄照片分享（用户搭配、描述等）。</p>
-
-<p>2）以看画报模式为主（图片为主）。</p>
-
-<p>四、找达人</p>
-
-<p>显示粉丝多的、分享多的、人气旺的用户，比如评论多的等等。</p>
-
-<p>五、淘闲置</p>
-
-<p>如&ldquo;我家首页&rdquo;中二手闲置，接入支付宝担保交易平台。</p>
-
-<p>六、主题吧</p>
-
-<p>类似BBS模式，首先分不同主题：购物实拍、蘑菇自拍等等。再进行区分子主题：网购、实体等等。用户可以创建主题帖子。</p>
-
-<p>评估</p>
-
-<p>从整体上来说蘑菇街网站UI设计上比较舒服，让人感觉很清新（以绿色为主的缘故吧）。初步使用来看就可以了解，蘑菇街这个网站就是提供给买家、卖家分享购物商品的一个社交平台。从功能点进入相应的页面，信息呈现上面还是比较有层次感的。信息呈现交互上面个人相对比较喜欢画报这种方式，以图片展示为主，对于感兴趣的，点击进入可以进行评论等操作。</p>
-
-<p>昨天做的功课，发布出来。</p>
 ]]></content>
   </entry>
   
