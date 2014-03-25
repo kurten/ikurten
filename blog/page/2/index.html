@@ -9,7 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="关于博客迁移 满打满算，折腾了大半天终于把博客迁移的事情搞定了。接下去可以使用markdown来写blog了。mac下面有个不错的工具Mou，可以即时查看写的成果。blog是托管在github上面的，其实就是使用jekyll来生成静态的html。博客模版用得是octopress。关于如何操作， &hellip;">
+  <meta name="description" content="最近在学习lua，看的是luachina翻译的《Programming in Lua》。从总体上来说，lua是一门小巧，可扩展性、性能都相当不错的脚本语言，特别是有了luajit，lua的执行性能更是成倍提高。lua的闭包感觉和javascript的闭包实现上面感觉差不多。例如： lua &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,113 @@
 
 <div class="blog-index span8">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/07/lua-learning-record/">Lua学习笔记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-07T22:13:00+08:00" pubdate data-updated="true">2013-03-07</time>
+        
+         | <a href="/blog/2013/03/07/lua-learning-record/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>最近在学习<a href="http://www.lua.org">lua</a>，看的是luachina翻译的《Programming in Lua》。从总体上来说，<a href="http://www.lua.org">lua</a>是一门小巧，可扩展性、性能都相当不错的脚本语言，特别是有了<a href="http://luajit.org">luajit</a>，<a href="http://www.lua.org">lua</a>的执行性能更是成倍提高。<a href="http://www.lua.org">lua</a>的闭包感觉和javascript的闭包实现上面感觉差不多。例如：</p></blockquote>
+
+<figure class='code'><figcaption><span>lua closure example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="k">function</span> <span class="nf">Counter</span><span class="p">()</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="k">return</span> <span class="k">function</span><span class="p">()</span>
+</span><span class='line'>      <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">i</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>javascript closure example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">Counter</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="nx">i</span><span class="o">++</span><span class="p">;</span> <span class="p">});</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>java也可以算的一种实现方式，但是和上面的实现结果并不完全一样：</p></blockquote>
+
+<figure class='code'><figcaption><span>java closure example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">interface</span> <span class="nc">IClosure</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="nf">counter</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">counter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kd">final</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">(</span><span class="k">new</span> <span class="n">IClosure</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>          
+</span><span class='line'>          <span class="kd">public</span> <span class="kt">int</span> <span class="nf">counter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>              <span class="k">return</span> <span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>      <span class="o">}).</span><span class="na">counter</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>而且<a href="http://www.lua.org">lua</a>函数可以任意赋值，对于<a href="http://www.lua.org">lua</a>来说，函数其实是一个function类型的变量。</p>
+
+<p>前两天使用<a href="http://www.lua.org">lua</a>和<a href="http://openresty.org">openresty</a>做了个Demo API测试，用的是RESTful风格。<a href="http://nginx.org">nginx</a>配合<a href="http://www.lua.org">lua</a>以及其他的第三方模块，用来开发api确实是再适合不过的了。简单的几个配置，一段脚本就可以实现一个api功能。特别对于现在的iOS和Android app的api开发上面，敏捷迭代，监控以及部署，非常适合用<a href="http://openresty.org">openresty</a>来开发。后续如果有机会，考虑直接用他来写一些功能了，:)。</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -360,54 +467,6 @@ have fun! :)</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/12/04/memcacheq/">阅读memcacheq源码记录</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-04T12:07:34+08:00" pubdate data-updated="true">2011-12-04</time>
-        
-         | <a href="/blog/2011/12/04/memcacheq/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>越来越觉着大学里学的谭浩强的《C语言程序设计》太狗血了，哎，悔不当初啊。</p>
-
-<p>今天下午闲着看了一下<a href="http://memcachedb.org/memcacheq/">memcacheq</a>这个消息队列的源代码，存储引擎用得<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>，<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>支持队列方式的数据存储，只不过一个record必须fixed-length，具体能存多大的长度，我没再官方的doc中找到，不过，<a href="http://memcachedb.org/memcacheq/">memcacheq</a>作者说最大消息长度不能超过64K，而且，如果你超过了64K，消息队列就挂了，嗯，这个我碰到过了，超过64K，存入消息队列之后，整个消息队列就得重启。所以，如果你不确定以后业务变更会增加消息体的大小，那么我不建议你使用<a href="http://memcachedb.org/memcacheq/">memcacheq</a> :) 。</p>
-
-<p><a href="http://memcachedb.org/memcacheq/">memcacheq</a>在内存里维护一个队列的hash，memcacheq.c文件实现了memcached协议，bdb.c文件实现了对于bdb的读写，发觉消息队列持久化用bdb实现实在是很轻量、很简洁，item.c对协议层的封装，操作结构体item。</p>
-
-<p>用<a href="http://libevent.org/">libevent</a>对收到的通信包做callback，包括对bdb做增、删、存操作。bdb也用<a href="http://libevent.org/">libevent</a>，对<a href="http://libevent.org/">libevent</a>没有研究，略过N字 :)。</p>
-
-<p>ps&nbsp;<a href="http://memcachedb.org/memcacheq/">memcacheq</a>测试使用的是python写的memcache.py。</p>
-
-<p>简单，有效的持久化消息队列，性能过得去，抽空我得好好看看C语言，学习一下 :) 复习一下数据结构，以前的早忘记了，而且也没怎么好好学。老外写的<a href="http://book.douban.com/subject/1139336/">《C语言程序设计》</a>这本，不错的。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -429,6 +488,10 @@ have fun! :)</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/25/imkai-fa-ri-zhi/">IM开发日志</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/01/kai-fa-ri-zhi/">开发日志(with node.js)</a>
       </li>
     
@@ -442,10 +505,6 @@ have fun! :)</p>
     
       <li class="post">
         <a href="/blog/2013/06/18/reading-notes/">nosql reading list阅读笔记</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/03/07/lua-learning-record/">lua学习笔记</a>
       </li>
     
   </ul>

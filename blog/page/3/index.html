@@ -9,7 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="Protocol Clients of memcached communicate with server through TCP connections. (A UDP interface is also available; details are below under &#8220;UDP &hellip;">
+  <meta name="description" content="越来越觉着大学里学的谭浩强的《C语言程序设计》太狗血了，哎，悔不当初啊。 今天下午闲着看了一下memcacheq这个消息队列的源代码，存储引擎用得bdb，bdb支持队列方式的数据存储，只不过一个record必须fixed-length，具体能存多大的长度，我没再官方的doc中找到，不过， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,54 @@
 
 <div class="blog-index span8">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/12/04/memcacheq/">阅读memcacheq源码记录</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-04T12:07:34+08:00" pubdate data-updated="true">2011-12-04</time>
+        
+         | <a href="/blog/2011/12/04/memcacheq/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>越来越觉着大学里学的谭浩强的《C语言程序设计》太狗血了，哎，悔不当初啊。</p>
+
+<p>今天下午闲着看了一下<a href="http://memcachedb.org/memcacheq/">memcacheq</a>这个消息队列的源代码，存储引擎用得<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>，<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>支持队列方式的数据存储，只不过一个record必须fixed-length，具体能存多大的长度，我没再官方的doc中找到，不过，<a href="http://memcachedb.org/memcacheq/">memcacheq</a>作者说最大消息长度不能超过64K，而且，如果你超过了64K，消息队列就挂了，嗯，这个我碰到过了，超过64K，存入消息队列之后，整个消息队列就得重启。所以，如果你不确定以后业务变更会增加消息体的大小，那么我不建议你使用<a href="http://memcachedb.org/memcacheq/">memcacheq</a> :) 。</p>
+
+<p><a href="http://memcachedb.org/memcacheq/">memcacheq</a>在内存里维护一个队列的hash，memcacheq.c文件实现了memcached协议，bdb.c文件实现了对于bdb的读写，发觉消息队列持久化用bdb实现实在是很轻量、很简洁，item.c对协议层的封装，操作结构体item。</p>
+
+<p>用<a href="http://libevent.org/">libevent</a>对收到的通信包做callback，包括对bdb做增、删、存操作。bdb也用<a href="http://libevent.org/">libevent</a>，对<a href="http://libevent.org/">libevent</a>没有研究，略过N字 :)。</p>
+
+<p>ps&nbsp;<a href="http://memcachedb.org/memcacheq/">memcacheq</a>测试使用的是python写的memcache.py。</p>
+
+<p>简单，有效的持久化消息队列，性能过得去，抽空我得好好看看C语言，学习一下 :) 复习一下数据结构，以前的早忘记了，而且也没怎么好好学。老外写的<a href="http://book.douban.com/subject/1139336/">《C语言程序设计》</a>这本，不错的。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1270,48 +1318,6 @@ GRANT OPTION;</pre>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/29/51/">关于癌症</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-29T10:13:53+08:00" pubdate data-updated="true">2011-07-29</time>
-        
-         | <a href="/blog/2011/07/29/51/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div id="_mcePaste"><span style="line-height: 24px;">昨晚接到一个朋友电话，让我整晚都睡不着。他说他父亲换了肺癌，而且还是晚期。于是，就瞒着父亲。接下去，就是回家，然后好好照料他父亲了。生老病死的，不过突然听到亲人换了绝症，还是难以置信的事情。于是，什么都做不了，除了在最后的一段时间里好好照顾他，还能做什么呢？</span></div>
-
-
-<div><span style="line-height: 24px;">记录一下，以后多给父母打电话，多回回家。</span></div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -1333,6 +1339,10 @@ GRANT OPTION;</pre>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/25/imkai-fa-ri-zhi/">IM开发日志</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/01/kai-fa-ri-zhi/">开发日志(with node.js)</a>
       </li>
     
@@ -1346,10 +1356,6 @@ GRANT OPTION;</pre>
     
       <li class="post">
         <a href="/blog/2013/06/18/reading-notes/">nosql reading list阅读笔记</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/03/07/lua-learning-record/">lua学习笔记</a>
       </li>
     
   </ul>

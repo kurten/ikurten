@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 开发日志 | ikurten.com]]></title>
   <link href="http://ikurten.com/blog/categories/kai-fa-ri-zhi/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2014-03-02T00:33:54+08:00</updated>
+  <updated>2014-03-25T20:56:27+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
     <name><![CDATA[Kurten]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[IM开发日志]]></title>
+    <link href="http://ikurten.com/blog/2014/03/25/imkai-fa-ri-zhi/"/>
+    <updated>2014-03-25T20:03:45+08:00</updated>
+    <id>http://ikurten.com/blog/2014/03/25/imkai-fa-ri-zhi</id>
+    <content type="html"><![CDATA[<p>最近忙着业务上面来回修改问题以及对应的bug，还有就是我们自有协议的即时通讯系统的重构，事情一多，就犯懒，懒得写东西。这两天，业务上的东西暂告一段落，专注重构通讯系统，于是就写篇文章作为记录。</p>
+
+<hr />
+
+<h3>Version 1.0</h3>
+
+<p>第一版架构非常简单，设计有3中服务类型，session管理服务，router服务，以及monitor服务。其中session管理服务主要管理web登录的session和mobile客户端tcp方式登录的session。基于web的session管理服务还需要实现支持消息推送的接口，这些接口给web产品的服务端做业务的消息推送使用。router服务统一作为消息路由（消息存储、消息转发、消息群发）。monitor服务主要负责监控集群的状态以及相应的集群管理功能（重启、停止等）。</p>
+
+<p>当然，还有许多问题没有考虑，比如消息延迟、集群增多后消息分发顺序、用户在线离线状态是否共享等等。</p>
+
+<p>由于业务上面变更太多，web产品上面原先的需求和现在的需求变更太大，导致原有版本无法更好的进行水平扩展，所以我进行了重构。</p>
+
+<h3>Version 2.0</h3>
+
+<p>这一版session管理服务不变，引入消息队列服务作为消息中转服务，保证消息的分发顺序，同时增强水平扩展能力，同样有router服务监听消息分发队列做消息分发。还可以根据业务变更增加相应的消息路由规则。即增加消息队列以及对应的消息处理映射至router服务。消息处理完成之后再放入分发队列由router服务处理分发。这样，不管后续业务如何变更，只要增加消息处理的服务和映射关系就可以了。</p>
+
+<p>当然，额外要做的就是集群机器扩展的通知（可以自己定义一个规则，通过队列通知各个服务更新配置信息即可）。</p>
+
+<p>集群的监控也需要重新实现。虽然中间环节变多，但是增强水平扩展能力，不导致业务变更而再去变更通讯系统的实现逻辑，这也是一种取舍。</p>
+
+<hr />
+
+<p>该系统目前使用<a href="http://nodejs.org">node.js</a>实现，所以对于一个服务其实就是一个process，在<a href="http://en.wikipedia.org/wiki/Linux%E2%80%8E">linux</a>下使用<a href="https://github.com/Unitech/pm2%E2%80%8E">pm2</a>管理，消息队列采用<a href="http://memcachedb.org/memcacheq/%E2%80%8E">memcacheq</a>，因为以前用过，也比较熟悉所以使用它作为队列服务。<a href="http://memcachedb.org/memcacheq/%E2%80%8E">memcacheq</a>是pull模式的，考虑后续重新实现一个push模式的消息队列服务（基于<a href="http://memcached.org/%E2%80%8E">memcached</a>协议），这样的话，对于异步的程序逻辑，更合适一点，同时剥离掉<a href="http://memcachedb.org/memcacheq/%E2%80%8E">memcacheq</a>的<a href="http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html">bdb</a>队列依赖，自己实现一个队列存储的模式然后使用<a href="https://github.com/joyent/libuv%E2%80%8E">libuv</a>作为网络库。这些当然后续有时间去做了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[开发日志(with node.js)]]></title>
