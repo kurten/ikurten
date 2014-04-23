@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 开发日志 | ikurten.com]]></title>
   <link href="http://ikurten.com/blog/categories/kai-fa-ri-zhi/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2014-03-25T20:56:27+08:00</updated>
+  <updated>2014-04-23T23:54:29+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
     <name><![CDATA[Kurten]]></name>
@@ -14,7 +14,34 @@
 
   
   <entry>
-    <title type="html"><![CDATA[IM开发日志]]></title>
+    <title type="html"><![CDATA[IM开发日志(2)]]></title>
+    <link href="http://ikurten.com/blog/2014/04/23/imkai-fa-ri-zhi/"/>
+    <updated>2014-04-23T23:10:39+08:00</updated>
+    <id>http://ikurten.com/blog/2014/04/23/imkai-fa-ri-zhi</id>
+    <content type="html"><![CDATA[<h2>bug</h2>
+
+<p>今天碰到了一个比较诡异的问题，我开发的IM协议的android sdk突然出现了<a href="http://en.wikipedia.org/wiki/Out_of_memory%E2%80%8E">OOM</a>，导致整个程序进程崩溃，无法重新启动。通过异常日志定位，排查下来，主要问题是出在接收解析包头的时候，解析出来的后续数据长度超过了可分配的当前内存大小，导致整个程序<a href="http://en.wikipedia.org/wiki/Out_of_memory%E2%80%8E">OOM</a>崩溃了。</p>
+
+<p>最初设计通讯协议的时候，没有考虑到TCP通讯在网络切换等状况下，会导致通讯包的不完整（即粘包、丢包）的问题，没有设计包的结束符，所以处理这个问题还是有些麻烦的。之前大致考虑了一下，给了一个零时的修补方案，取到的包头，计算后续包长度如果超过一个临界值，则直接丢弃这个包头，继续尝试获取包头。现在想想，可以尝试获取指定长度的一串包，直接判断包内容，如果内容中出现特定的关键key，则从头尾进行搜索尝试读取其中完整的包，否则丢弃。</p>
+
+<p>当然，如果设计了通讯包的开头符号和结束符号，那么完全不用这么麻烦，直接尝试读取开头符号和结尾符号去判断是否是完整包就可以了，如果不完整，缓存下来，等待下一个包拼接解析就可以了。</p>
+
+<hr />
+
+<h2>关于web登录</h2>
+
+<p>现阶段，IM的web这块采用<a href="http://socket.io">socket.io</a>来实现的，有个问题原先没有考虑，就是一个用户如果在一个浏览器中开多个tab页面，如果保证用户在线状态。现在的实现是一个用户，只能开一个tab页面，否则就会被强制退出。然后我想，可以用一个cookie去标识用户登录的浏览器是否是同一个，如果是同一个就不强制退出，否则就强制退出前面登录的。原先以为<a href="http://socket.io">socket.io</a>和<a href="http://expressjs.com">express</a>结合应该可以实现cookie访问，但是尝试了一下，有查看了一下<a href="http://socket.io">socket.io</a>的源码，发觉返回的headers中没有Set-Cookie这个头，于是只好自己在原先的用户登录体系中加入了cookie标识，在IM登录时把这个cookie标识传送过来做比对。这样应该就可以实现同个浏览器多tab登录了。</p>
+
+<h2>关于IM新的设计思路</h2>
+
+<p>目前，主要细分了session服务、router服务、store服务以及offline服务，每个服务都是一个nodejs进程在跑，各个服务直接通过message queue做rpc，所以每个服务只要管理对应的inbox队列就可以了，队列可以多实例容错，各个服务也可以多实例。现在有个单点服务就是所有用户在线状态是存储于router服务中的，session服务只存储连接在自己上的用户。</p>
+
+<p>为了保证消息能够一接收就持久化下来，采用了<a href="http://memcachedb.org/memcacheq/%E2%80%8E">memcacheq</a>，基于memcached协议的消息队列，简单、轻量，但是不支持推送。当然，所有服务rpc都是经过该队列服务，这就导致了一个rpc消息有两次磁盘io的开销，而且中间还有get循环的间隙，接下去打算用redis的pub/sub来替换。同时，有了redis可以把用户在线状态存储在redis里，这就去掉了所有用户在线状态只有router服务知晓的这个单点，对于后续水平扩容更方便了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[IM开发日志(1)]]></title>
     <link href="http://ikurten.com/blog/2014/03/25/imkai-fa-ri-zhi/"/>
     <updated>2014-03-25T20:03:45+08:00</updated>
     <id>http://ikurten.com/blog/2014/03/25/imkai-fa-ri-zhi</id>

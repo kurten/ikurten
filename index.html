@@ -9,7 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="最近忙着业务上面来回修改问题以及对应的bug，还有就是我们自有协议的即时通讯系统的重构，事情一多，就犯懒，懒得写东西。这两天，业务上的东西暂告一段落，专注重构通讯系统，于是就写篇文章作为记录。 Version 1.0 第一版架构非常简单，设计有3中服务类型，session管理服务，router服务 &hellip;">
+  <meta name="description" content="bug 今天碰到了一个比较诡异的问题，我开发的IM协议的android sdk突然出现了OOM，导致整个程序进程崩溃，无法重新启动。通过异常日志定位，排查下来，主要问题是出在接收解析包头的时候，解析出来的后续数据长度超过了可分配的当前内存大小，导致整个程序OOM崩溃了。 最初设计通讯协议的时候， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,7 +100,63 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/03/25/imkai-fa-ri-zhi/">IM开发日志</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/04/23/imkai-fa-ri-zhi/">IM开发日志(2)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-23T23:10:39+08:00" pubdate data-updated="true">2014-04-23</time>
+        
+         | <a href="/blog/2014/04/23/imkai-fa-ri-zhi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>bug</h2>
+
+<p>今天碰到了一个比较诡异的问题，我开发的IM协议的android sdk突然出现了<a href="http://en.wikipedia.org/wiki/Out_of_memory%E2%80%8E">OOM</a>，导致整个程序进程崩溃，无法重新启动。通过异常日志定位，排查下来，主要问题是出在接收解析包头的时候，解析出来的后续数据长度超过了可分配的当前内存大小，导致整个程序<a href="http://en.wikipedia.org/wiki/Out_of_memory%E2%80%8E">OOM</a>崩溃了。</p>
+
+<p>最初设计通讯协议的时候，没有考虑到TCP通讯在网络切换等状况下，会导致通讯包的不完整（即粘包、丢包）的问题，没有设计包的结束符，所以处理这个问题还是有些麻烦的。之前大致考虑了一下，给了一个零时的修补方案，取到的包头，计算后续包长度如果超过一个临界值，则直接丢弃这个包头，继续尝试获取包头。现在想想，可以尝试获取指定长度的一串包，直接判断包内容，如果内容中出现特定的关键key，则从头尾进行搜索尝试读取其中完整的包，否则丢弃。</p>
+
+<p>当然，如果设计了通讯包的开头符号和结束符号，那么完全不用这么麻烦，直接尝试读取开头符号和结尾符号去判断是否是完整包就可以了，如果不完整，缓存下来，等待下一个包拼接解析就可以了。</p>
+
+<hr />
+
+<h2>关于web登录</h2>
+
+<p>现阶段，IM的web这块采用<a href="http://socket.io">socket.io</a>来实现的，有个问题原先没有考虑，就是一个用户如果在一个浏览器中开多个tab页面，如果保证用户在线状态。现在的实现是一个用户，只能开一个tab页面，否则就会被强制退出。然后我想，可以用一个cookie去标识用户登录的浏览器是否是同一个，如果是同一个就不强制退出，否则就强制退出前面登录的。原先以为<a href="http://socket.io">socket.io</a>和<a href="http://expressjs.com">express</a>结合应该可以实现cookie访问，但是尝试了一下，有查看了一下<a href="http://socket.io">socket.io</a>的源码，发觉返回的headers中没有Set-Cookie这个头，于是只好自己在原先的用户登录体系中加入了cookie标识，在IM登录时把这个cookie标识传送过来做比对。这样应该就可以实现同个浏览器多tab登录了。</p>
+
+<h2>关于IM新的设计思路</h2>
+
+<p>目前，主要细分了session服务、router服务、store服务以及offline服务，每个服务都是一个nodejs进程在跑，各个服务直接通过message queue做rpc，所以每个服务只要管理对应的inbox队列就可以了，队列可以多实例容错，各个服务也可以多实例。现在有个单点服务就是所有用户在线状态是存储于router服务中的，session服务只存储连接在自己上的用户。</p>
+
+<p>为了保证消息能够一接收就持久化下来，采用了<a href="http://memcachedb.org/memcacheq/%E2%80%8E">memcacheq</a>，基于memcached协议的消息队列，简单、轻量，但是不支持推送。当然，所有服务rpc都是经过该队列服务，这就导致了一个rpc消息有两次磁盘io的开销，而且中间还有get循环的间隙，接下去打算用redis的pub/sub来替换。同时，有了redis可以把用户在线状态存储在redis里，这就去掉了所有用户在线状态只有router服务知晓的这个单点，对于后续水平扩容更方便了。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/25/imkai-fa-ri-zhi/">IM开发日志(1)</a></h1>
     
     
       <p class="meta">
@@ -413,62 +469,6 @@ openssl_missing.c:122: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/18/reading-notes/">Nosql Reading List阅读笔记</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-18T08:05:00+08:00" pubdate data-updated="true">2013-06-18</time>
-        
-         | <a href="/blog/2013/06/18/reading-notes/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>论文阅读</h3>
-
-<p>最近一直在读<a href="http://www.empiricalreality.com/2010/09/22/2010-nosql-summer-reading-list/">这里</a>的论文。学到了很多东西。目前已经读完了第一部分，深入理解了<a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>、<a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，并对<a href="http://cassandra.apache.org">Cassandra</a>、<a href="https://zh.wikipedia.org/zh-cn/BigTable">BigTable</a>、<a href="https://zh.wikipedia.org/wiki/Google%E6%AA%94%E6%A1%88%E7%B3%BB%E7%B5%B1">Google File System</a>、<a href="https://zh.wikipedia.org/wiki/MapReduce">MapReduce</a>实现做了初步的理解。</p>
-
-<h4>Gossip Protocol</h4>
-
-<p><a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>其实是一种传播方式，在一个集群中，A随机的取一台机器B，把A自己手中所知道的所有机器状态、机器IP等一些信息，发送给B，B收到这些信息后，和自身的内容做个比较、合并。这样就完成了一次传播。开源的实现<a href="http://code.google.com/p/java-gossip/">java-gossip</a>、<a href="http://code.google.com/p/gossip-protocol-java/">gossip-protocol-java</a>。</p>
-
-<h4>Vector Clock</h4>
-
-<p><a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，用来合并集群中有冲突的数据，但是还是要应用曾去取舍最终的数据。具体的解释我觉着<a href="http://www.kongch.com/2011/08/vector-clock-understanding/">这篇文章</a>解释的很详细了。</p>
-
-<h3>关于读书</h3>
-
-<p>六月初，在<a href="http://www.amazon.cn">amazon.cn</a>上买了好几本书，断断续续的看完了几本<a href="http://www.amazon.cn/%E6%89%93%E9%80%A0Facebook-%E4%BA%B2%E5%8E%86Facebook%E7%88%86%E5%8F%91%E7%9A%845%E5%B9%B4-%E7%8E%8B%E6%B7%AE/dp/B00ANI5YXW/ref=sr_1_1?ie=UTF8&amp;qid=1372637078&amp;sr=8-1&amp;keywords=%E6%89%93%E9%80%A0facebook">《打造facebook》</a>、<a href="http://www.amazon.cn/%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6-%E5%A8%81%E8%B0%A6%E6%96%AF/dp/B001MV7CXY/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1372637095&amp;sr=1-1&amp;keywords=%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6">《写给大家看的设计书》</a>。前一本算是作者一些facebook的亲身经历分享，后一本主要讲平面设计。从我这两年的创业经验来说，前一本，拿来当故事看看还可以，毕竟国内整个环境是这样子。</p>
-
-<h3>最近</h3>
-
-<p>最近刚刚结束了技术团队的招聘工作，两位同事也已经到岗，接下去的项目也已经开始进行。越来越没啥耐心写博客了，前几个月的空白，没法补上了，接下去争取一个月一篇吧。等待着宝宝的降临。当父亲了啊。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -488,7 +488,11 @@ openssl_missing.c:122: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/03/25/imkai-fa-ri-zhi/">IM开发日志</a>
+        <a href="/blog/2014/04/23/imkai-fa-ri-zhi/">IM开发日志(2)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/25/imkai-fa-ri-zhi/">IM开发日志(1)</a>
       </li>
     
       <li class="post">
@@ -501,10 +505,6 @@ openssl_missing.c:122: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
     
       <li class="post">
         <a href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/">通过源代码安装ruby-2.0.0-p247</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/18/reading-notes/">nosql reading list阅读笔记</a>
       </li>
     
   </ul>

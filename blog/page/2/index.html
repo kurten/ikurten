@@ -9,7 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="最近在学习lua，看的是luachina翻译的《Programming in Lua》。从总体上来说，lua是一门小巧，可扩展性、性能都相当不错的脚本语言，特别是有了luajit，lua的执行性能更是成倍提高。lua的闭包感觉和javascript的闭包实现上面感觉差不多。例如： lua &hellip;">
+  <meta name="description" content="论文阅读 最近一直在读这里的论文。学到了很多东西。目前已经读完了第一部分，深入理解了Gossip Protocol、Vector Clock，并对Cassandra、BigTable、Google File System、MapReduce实现做了初步的理解。 Gossip Protocol &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,62 @@
 
 <div class="blog-index span8">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/18/reading-notes/">Nosql Reading List阅读笔记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-18T08:05:00+08:00" pubdate data-updated="true">2013-06-18</time>
+        
+         | <a href="/blog/2013/06/18/reading-notes/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>论文阅读</h3>
+
+<p>最近一直在读<a href="http://www.empiricalreality.com/2010/09/22/2010-nosql-summer-reading-list/">这里</a>的论文。学到了很多东西。目前已经读完了第一部分，深入理解了<a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>、<a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，并对<a href="http://cassandra.apache.org">Cassandra</a>、<a href="https://zh.wikipedia.org/zh-cn/BigTable">BigTable</a>、<a href="https://zh.wikipedia.org/wiki/Google%E6%AA%94%E6%A1%88%E7%B3%BB%E7%B5%B1">Google File System</a>、<a href="https://zh.wikipedia.org/wiki/MapReduce">MapReduce</a>实现做了初步的理解。</p>
+
+<h4>Gossip Protocol</h4>
+
+<p><a href="http://en.wikipedia.org/wiki/Gossip_protocol">Gossip Protocol</a>其实是一种传播方式，在一个集群中，A随机的取一台机器B，把A自己手中所知道的所有机器状态、机器IP等一些信息，发送给B，B收到这些信息后，和自身的内容做个比较、合并。这样就完成了一次传播。开源的实现<a href="http://code.google.com/p/java-gossip/">java-gossip</a>、<a href="http://code.google.com/p/gossip-protocol-java/">gossip-protocol-java</a>。</p>
+
+<h4>Vector Clock</h4>
+
+<p><a href="http://en.wikipedia.org/wiki/Vector_clock">Vector Clock</a>，用来合并集群中有冲突的数据，但是还是要应用曾去取舍最终的数据。具体的解释我觉着<a href="http://www.kongch.com/2011/08/vector-clock-understanding/">这篇文章</a>解释的很详细了。</p>
+
+<h3>关于读书</h3>
+
+<p>六月初，在<a href="http://www.amazon.cn">amazon.cn</a>上买了好几本书，断断续续的看完了几本<a href="http://www.amazon.cn/%E6%89%93%E9%80%A0Facebook-%E4%BA%B2%E5%8E%86Facebook%E7%88%86%E5%8F%91%E7%9A%845%E5%B9%B4-%E7%8E%8B%E6%B7%AE/dp/B00ANI5YXW/ref=sr_1_1?ie=UTF8&amp;qid=1372637078&amp;sr=8-1&amp;keywords=%E6%89%93%E9%80%A0facebook">《打造facebook》</a>、<a href="http://www.amazon.cn/%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6-%E5%A8%81%E8%B0%A6%E6%96%AF/dp/B001MV7CXY/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1372637095&amp;sr=1-1&amp;keywords=%E5%86%99%E7%BB%99%E5%A4%A7%E5%AE%B6%E7%9C%8B%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B9%A6">《写给大家看的设计书》</a>。前一本算是作者一些facebook的亲身经历分享，后一本主要讲平面设计。从我这两年的创业经验来说，前一本，拿来当故事看看还可以，毕竟国内整个环境是这样子。</p>
+
+<h3>最近</h3>
+
+<p>最近刚刚结束了技术团队的招聘工作，两位同事也已经到岗，接下去的项目也已经开始进行。越来越没啥耐心写博客了，前几个月的空白，没法补上了，接下去争取一个月一篇吧。等待着宝宝的降临。当父亲了啊。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -340,133 +396,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/12/15/centos-yum-error/">Centos中yum无法使用问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-15T14:47:34+08:00" pubdate data-updated="true">2011-12-15</time>
-        
-         | <a href="/blog/2011/12/15/centos-yum-error/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天碰到一台服务器无法使用yum install命令，是centos 5.5的系统，自己瞎折腾了一下，居然被我解决了，神奇啊，解决方法贴一下。
-显示错误如下：</p>
-
-<pre>Loaded plugins: fastestmirror
-Determining fastest mirrors
-YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
-/Eg. 
-removing mirrorlist with no valid mirrors: /var/cache/yum/addons/mirrorlist.txt
-Error: Cannot find a valid baseurl for repo: addons</pre>
-
-
-<p>不知道什么时候把mirrors.txt文件给去掉了。
-后来查了一下有这么一串。</p>
-
-<pre>1./var/cache/yum/base/mirrorlist.txt
-url:
-http://mirrors.163.com/centos/5.7/os/x86_64/
-http://centos.ustc.edu.cn/centos/5.7/os/x86_64/
-http://mirror.neu.edu.cn/centos/5.7/os/x86_64/
-http://mirrors.ta139.com/centos/5.7/os/x86_64/
-http://ftp.nsysu.edu.tw/CentOS/5.7/os/x86_64/
-http://ftp.tc.edu.tw/Linux/CentOS/5.7/os/x86_64/
-http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/os/x86_64/
-http://ftp.stu.edu.tw/Linux/CentOS/5.7/os/x86_64/
-http://ftp.twaren.net/Linux/CentOS/5.7/os/x86_64/
-http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/os/x86_64/
-http://mirror01.idc.hinet.net/CentOS/5.7/os/x86_64/
-http://centos.mirror.cdnetworks.com/5.7/os/x86_64/
-http://centos.tt.co.kr/5.7/os/x86_64/
-http://data.nicehosting.co.kr/os/CentOS/5.7/os/x86_64/
-http://mirror.khlug.org/centos/5.7/os/x86_64/
-http://mirror.yongbok.net/centos/5.7/os/x86_64/
-http://ftp.daum.net/centos/5.7/os/x86_64/
-http://mirror.nus.edu.sg/centos/5.7/os/x86_64/
-http://mirror.averse.net/centos/5.7/os/x86_64/
-http://mirrors.sin1.sg.voxel.net/centos/5.7/os/x86_64/
-
-2./var/cache/yum/updates/mirrorlist.txt
-url:
-http://mirror.neu.edu.cn/centos/5.7/updates/x86_64/
-http://mirrors.ta139.com/centos/5.7/updates/x86_64/
-http://mirrors.stuhome.net/centos/5.7/updates/x86_64/
-http://centos.ustc.edu.cn/centos/5.7/updates/x86_64/
-http://ftp.stu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
-http://mirror01.idc.hinet.net/CentOS/5.7/updates/x86_64/
-http://ftp.tc.edu.tw/Linux/CentOS/5.7/updates/x86_64/
-http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/updates/x86_64/
-http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/updates/x86_64/
-http://ftp.daum.net/centos/5.7/updates/x86_64/
-http://mirror.khlug.org/centos/5.7/updates/x86_64/
-http://data.nicehosting.co.kr/os/CentOS/5.7/updates/x86_64/
-http://centos.tt.co.kr/5.7/updates/x86_64/
-http://mirror.averse.net/centos/5.7/updates/x86_64/
-ftp://ftp.oss.eznetsols.org/linux/centos/5.7/updates/x86_64/
-http://mirror.nus.edu.sg/centos/5.7/updates/x86_64/
-http://mirrors.sin1.sg.voxel.net/centos/5.7/updates/x86_64/
-http://centos.vr-zone.com/5.7/updates/x86_64/
-http://rsync.atworks.co.jp/centos/5.7/updates/x86_64/
-http://ftp.nara.wide.ad.jp/pub/Linux/centos/5.7/updates/x86_64/
-
-3./var/cache/yum/addons/mirrorlist.txt
-url:
-http://mirror.centos.org/centos/5/addons/x86_64/
-
-4./var/cache/yum/extras/mirrorlist.txt
-url:
-http://centos.ustc.edu.cn/centos/5.7/extras/x86_64/
-http://mirrors.stuhome.net/centos/5.7/extras/x86_64/
-http://mirror.neu.edu.cn/centos/5.7/extras/x86_64/
-http://mirrors.ta139.com/centos/5.7/extras/x86_64/
-http://ftp.cs.pu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
-http://ftp.stu.edu.tw/Linux/CentOS/5.7/extras/x86_64/
-http://ftp.tc.edu.tw/Linux/CentOS/5.7/extras/x86_64/
-http://ftp.isu.edu.tw/pub/Linux/CentOS/5.7/extras/x86_64/
-http://mirror01.idc.hinet.net/CentOS/5.7/extras/x86_64/
-http://data.nicehosting.co.kr/os/CentOS/5.7/extras/x86_64/
-http://mirror.khlug.org/centos/5.7/extras/x86_64/
-http://ftp.daum.net/centos/5.7/extras/x86_64/
-http://centos.tt.co.kr/5.7/extras/x86_64/
-http://centos.vr-zone.com/5.7/extras/x86_64/
-http://mirror.averse.net/centos/5.7/extras/x86_64/
-http://mirrors.sin1.sg.voxel.net/centos/5.7/extras/x86_64/
-ftp://ftp.oss.eznetsols.org/linux/centos/5.7/extras/x86_64/
-http://mirror.nus.edu.sg/centos/5.7/extras/x86_64/
-http://ftp.yz.yamagata-u.ac.jp/pub/linux/centos/5.7/extras/x86_64/
-http://ftp.jaist.ac.jp/pub/Linux/CentOS/5.7/extras/x86_64/</pre>
-
-
-<p>对应的把这些url拷贝到mirrorlist.txt文件中去就ok啦。
-have fun! :)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -488,7 +417,11 @@ have fun! :)</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/03/25/imkai-fa-ri-zhi/">IM开发日志</a>
+        <a href="/blog/2014/04/23/imkai-fa-ri-zhi/">IM开发日志(2)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/25/imkai-fa-ri-zhi/">IM开发日志(1)</a>
       </li>
     
       <li class="post">
@@ -501,10 +434,6 @@ have fun! :)</p>
     
       <li class="post">
         <a href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/">通过源代码安装ruby-2.0.0-p247</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/18/reading-notes/">nosql reading list阅读笔记</a>
       </li>
     
   </ul>

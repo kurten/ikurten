@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>博客迁移 - ikurten.com</title>
+  <title>IM开发日志(2) - ikurten.com</title>
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="关于博客迁移 满打满算，折腾了大半天终于把博客迁移的事情搞定了。接下去可以使用markdown来写blog了。mac下面有个不错的工具Mou，可以即时查看写的成果。blog是托管在github上面的，其实就是使用jekyll来生成静态的html。博客模版用得是octopress。关于如何操作， &hellip;">
+  <meta name="description" content="bug 今天碰到了一个比较诡异的问题，我开发的IM协议的android sdk突然出现了OOM，导致整个程序进程崩溃，无法重新启动。通过异常日志定位，排查下来，主要问题是出在接收解析包头的时候，解析出来的后续数据长度超过了可分配的当前内存大小，导致整个程序OOM崩溃了。 最初设计通讯协议的时候， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ikurten.com/blog/2013/01/27/blog-migrate-to-github">
+  <link rel="canonical" href="http://ikurten.com/blog/2014/04/23/imkai-fa-ri-zhi">
   <link href="/favicon.ico" rel="icon">
   
   <link href="/assets/bootstrap/css/spacelab.min.css" rel="stylesheet" type="text/css">
@@ -95,7 +95,7 @@
     
   <header>
     
-      <h1 class="entry-title">博客迁移</h1>
+      <h1 class="entry-title">IM开发日志(2)</h1>
     
     
       <p class="meta">
@@ -111,7 +111,7 @@
   
 
 
-<time datetime="2013-01-27T16:29:00+08:00" pubdate data-updated="true">2013-01-27</time>
+<time datetime="2014-04-23T23:10:39+08:00" pubdate data-updated="true">2014-04-23</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -122,13 +122,25 @@
 
   
   
-  <div class="entry-content"><h3>关于博客迁移</h3>
+  <div class="entry-content"><h2>bug</h2>
 
-<blockquote><p>满打满算，折腾了大半天终于把博客迁移的事情搞定了。接下去可以使用markdown来写blog了。mac下面有个不错的工具<a href="http://mouapp.com/">Mou</a>，可以即时查看写的成果。blog是托管在<a href="https://github.com">github</a>上面的，其实就是使用<a href="http://jekyllrb.com/">jekyll</a>来生成静态的html。博客模版用得是<a href="http://octopress.org/">octopress</a>。关于如何操作，以及怎么折腾域名指向可以参考<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">这里</a>。</p></blockquote>
+<p>今天碰到了一个比较诡异的问题，我开发的IM协议的android sdk突然出现了<a href="http://en.wikipedia.org/wiki/Out_of_memory%E2%80%8E">OOM</a>，导致整个程序进程崩溃，无法重新启动。通过异常日志定位，排查下来，主要问题是出在接收解析包头的时候，解析出来的后续数据长度超过了可分配的当前内存大小，导致整个程序<a href="http://en.wikipedia.org/wiki/Out_of_memory%E2%80%8E">OOM</a>崩溃了。</p>
 
-<h3>关于工作</h3>
+<p>最初设计通讯协议的时候，没有考虑到TCP通讯在网络切换等状况下，会导致通讯包的不完整（即粘包、丢包）的问题，没有设计包的结束符，所以处理这个问题还是有些麻烦的。之前大致考虑了一下，给了一个零时的修补方案，取到的包头，计算后续包长度如果超过一个临界值，则直接丢弃这个包头，继续尝试获取包头。现在想想，可以尝试获取指定长度的一串包，直接判断包内容，如果内容中出现特定的关键key，则从头尾进行搜索尝试读取其中完整的包，否则丢弃。</p>
 
-<blockquote><p>元旦后又回了杭州，加入了一家创业公司<a href="http://www.qeemo.me">Qeemo</a>。2013年希望有好的开始吧。</p></blockquote>
+<p>当然，如果设计了通讯包的开头符号和结束符号，那么完全不用这么麻烦，直接尝试读取开头符号和结尾符号去判断是否是完整包就可以了，如果不完整，缓存下来，等待下一个包拼接解析就可以了。</p>
+
+<hr />
+
+<h2>关于web登录</h2>
+
+<p>现阶段，IM的web这块采用<a href="http://socket.io">socket.io</a>来实现的，有个问题原先没有考虑，就是一个用户如果在一个浏览器中开多个tab页面，如果保证用户在线状态。现在的实现是一个用户，只能开一个tab页面，否则就会被强制退出。然后我想，可以用一个cookie去标识用户登录的浏览器是否是同一个，如果是同一个就不强制退出，否则就强制退出前面登录的。原先以为<a href="http://socket.io">socket.io</a>和<a href="http://expressjs.com">express</a>结合应该可以实现cookie访问，但是尝试了一下，有查看了一下<a href="http://socket.io">socket.io</a>的源码，发觉返回的headers中没有Set-Cookie这个头，于是只好自己在原先的用户登录体系中加入了cookie标识，在IM登录时把这个cookie标识传送过来做比对。这样应该就可以实现同个浏览器多tab登录了。</p>
+
+<h2>关于IM新的设计思路</h2>
+
+<p>目前，主要细分了session服务、router服务、store服务以及offline服务，每个服务都是一个nodejs进程在跑，各个服务直接通过message queue做rpc，所以每个服务只要管理对应的inbox队列就可以了，队列可以多实例容错，各个服务也可以多实例。现在有个单点服务就是所有用户在线状态是存储于router服务中的，session服务只存储连接在自己上的用户。</p>
+
+<p>为了保证消息能够一接收就持久化下来，采用了<a href="http://memcachedb.org/memcacheq/%E2%80%8E">memcacheq</a>，基于memcached协议的消息队列，简单、轻量，但是不支持推送。当然，所有服务rpc都是经过该队列服务，这就导致了一个rpc消息有两次磁盘io的开销，而且中间还有get循环的间隙，接下去打算用redis的pub/sub来替换。同时，有了redis可以把用户在线状态存储在redis里，这就去掉了所有用户在线状态只有router服务知晓的这个单点，对于后续水平扩容更方便了。</p>
 </div>
 
   
@@ -153,8 +165,14 @@
   
 
 
-<time datetime="2013-01-27T16:29:00+08:00" pubdate data-updated="true">2013-01-27</time>
+<time datetime="2014-04-23T23:10:39+08:00" pubdate data-updated="true">2014-04-23</time>
         
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/kai-fa-ri-zhi/'>开发日志</a>
+  
+</span>
 
 
       </p>
@@ -169,10 +187,8 @@
       
       <p class="meta">
         
-          <a class="basic-alignment pull-left" href="/blog/2012/10/14/redis2/" title="Previous Post: redis源码学习记录(二)">&laquo; redis源码学习记录(二)</a>
+          <a class="basic-alignment pull-left" href="/blog/2014/03/25/imkai-fa-ri-zhi/" title="Previous Post: IM开发日志(1)">&laquo; IM开发日志(1)</a>
         
-        
-          <a class="basic-alignment pull-right" href="/blog/2013/03/07/lua-learning-record/" title="Next Post: lua学习笔记">lua学习笔记 &raquo;</a>
         
       </p>
     </footer>
@@ -294,8 +310,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://ikurten.com/blog/2013/01/27/blog-migrate-to-github/';
-        var disqus_url = 'http://ikurten.com/blog/2013/01/27/blog-migrate-to-github/';
+        var disqus_identifier = 'http://ikurten.com/blog/2014/04/23/imkai-fa-ri-zhi/';
+        var disqus_url = 'http://ikurten.com/blog/2014/04/23/imkai-fa-ri-zhi/';
         var disqus_script = 'embed.js';
       
     (function () {
