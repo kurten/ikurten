@@ -4,7 +4,7 @@
   <title><![CDATA[Category: redis | ikurten.com]]></title>
   <link href="http://ikurten.com/blog/categories/redis/atom.xml" rel="self"/>
   <link href="http://ikurten.com/"/>
-  <updated>2014-04-23T23:54:29+08:00</updated>
+  <updated>2014-07-28T21:32:44+08:00</updated>
   <id>http://ikurten.com/</id>
   <author>
     <name><![CDATA[Kurten]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[redis网络模块记录]]></title>
+    <link href="http://ikurten.com/blog/2014/07/25/rediswang-luo-mo-kuai-ji-lu/"/>
+    <updated>2014-07-25T22:03:06+08:00</updated>
+    <id>http://ikurten.com/blog/2014/07/25/rediswang-luo-mo-kuai-ji-lu</id>
+    <content type="html"><![CDATA[<p>   <a href="http://redis.io">redis</a>实现了一个非常小巧的网络IO库，外部调用接口主要由ae.h头文件定义，以及ae.c做实现。ae.c内部调用的对应平台的不同实现采用编译时宏定义include的方式加载。主要有ae_epoll.c(<a href="http://zh.wikipedia.org/zh/Epoll">linux epoll</a>)、ae_evport.c(<a href="http://docs.oracle.com/cd/E23824_01/html/821-1465/port-create-3c.html">Solaris</a>)、ae_kqueue.c(<a href="http://en.wikipedia.org/wiki/Kqueue">Kqueue</a>)、ae_select.c(<a href="http://man7.org/linux/man-pages/man2/select.2.html">select</a>)。</p>
+
+<p>   初始化网络监听文件句柄并且添加至eventloop(redis.c/initServer-第1540行调用了anet.c/anetTcpServer函数生成tcp文件句柄,第1550行是基于unix socket文件的句柄。redis.c第1624行以及第1626行分别是创建aeFileEvent并添加对应文件句柄至eventloop的操作，其中分别把networking.c/acceptTcpHandler和networking.c/acceptUnixHandler添加作为rfileProc的处理函数)。在main函数中，先设置eventloop结构的beforeSleep函数在aeProcessEvents函数执行前执行，aeProcessEvents执行会计算租塞获取events的时间，取到对应的event然后执行相应的rfileProc或者wfileProc。下面以tcp为例子做说明。</p>
+
+<p>   当服务端收到连接请求时，前面anetTcpServer生成的事件监听会被触发，acceptTcpHandler被调用然后执行acceptCommonHandler同时生成一个终端redisClient对象，并被加入只服务端的终端列表中，具体操作在networking.c/createClient函数中，同时将对应的文件句柄注册到eventloop中，对应的回掉函数为networking.c/readQueryFromClient。</p>
+
+<p>   当该终端接收到客户端发送的数据时，aeProcessEvents中会触发该终端对应文件句柄的注册事件的回掉函数readQueryFromClient，第一次读取最大16k的数据缓存至querybuf，然后执行processInputBuffer，在processInputBuffer函数中根据reqtype情况判断是否为REDIS_REQ_MULTIBULK(默认为REDIS_REQ_INLINE)。判断依据为querybuf中首字节为'*'(具体请查看<a href="http://redis.io/topics/protocol">redis protocol</a>)。REDIS_REQ_INLINE对应处理函数processInlineBuffer，REDIS_REQ_MULTIBULK对应处理函数processMultibulkBuffer。</p>
+
+<p>   对于processInlineBuffer，如果处理querybuf时未找到'\r\n'符号，则出错，退出processInputBuffer的while循环，并且调用resetClient重置终端的相应参数。processMultibulkBuffer稍稍复杂，先判断'\r'然后再判断'\n'，出错则返回。这里两个函数其实是具体的协议解析，结合<a href="http://redis.io/topics/protocol">redis protocol</a>查看就事半功倍。解析完协议串，然后会存储至clientObject中的argc(数组长度)和argv(redisObject类型为REDIS_STRING数组指针)。</p>
+
+<p>   然后再redis.c/processCommand中处理具体的命令操作。处理完成后调用resetClient重置终端的相应参数。如果，处理命令出错或者命令处理完成之后需要发送处理的结果，则调用'networking.c/addReply*'系列函数，该系列函数首先都会执行networking.c/prepareClientToWrite，该函数会注册写的事件监听至eventloop，对应的回掉函数即wfileProc指向sendReplyToClient函数。</p>
+
+<p>   最近由于在看<a href="http://book.douban.com/subject/25900403/">《UNIX环境高级编程》</a>，于是想起来<a href="http://redis.io">redis</a>的源码以前没怎么深入，然后就结合着<a href="http://origin.redisbook.com/en/latest/">Redis 设计与实现（第一版）</a>看看<a href="https://github.com/huangz1990/annotated_redis_source">redis-2.6</a>的源码，发觉缺少了对于网络通信模块的叙述，于是便有了此文。简单介绍网络相关的收发逻辑以及对应处理函数，未深入介绍内部逻辑，后续有空在做深入介绍吧。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[redis源码学习记录(二)]]></title>

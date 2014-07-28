@@ -9,7 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="bug 今天碰到了一个比较诡异的问题，我开发的IM协议的android sdk突然出现了OOM，导致整个程序进程崩溃，无法重新启动。通过异常日志定位，排查下来，主要问题是出在接收解析包头的时候，解析出来的后续数据长度超过了可分配的当前内存大小，导致整个程序OOM崩溃了。 最初设计通讯协议的时候， &hellip;">
+  <meta name="description" content="redis实现了一个非常小巧的网络IO库，外部调用接口主要由ae.h头文件定义，以及ae.c做实现。ae.c内部调用的对应平台的不同实现采用编译时宏定义include的方式加载。主要有ae_epoll.c(linux epoll)、ae_evport.c(Solaris)、ae_kqueue.c &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,56 @@
 
 <div class="blog-index span8">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/25/rediswang-luo-mo-kuai-ji-lu/">Redis网络模块记录</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-25T22:03:06+08:00" pubdate data-updated="true">2014-07-25</time>
+        
+         | <a href="/blog/2014/07/25/rediswang-luo-mo-kuai-ji-lu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>   <a href="http://redis.io">redis</a>实现了一个非常小巧的网络IO库，外部调用接口主要由ae.h头文件定义，以及ae.c做实现。ae.c内部调用的对应平台的不同实现采用编译时宏定义include的方式加载。主要有ae_epoll.c(<a href="http://zh.wikipedia.org/zh/Epoll">linux epoll</a>)、ae_evport.c(<a href="http://docs.oracle.com/cd/E23824_01/html/821-1465/port-create-3c.html">Solaris</a>)、ae_kqueue.c(<a href="http://en.wikipedia.org/wiki/Kqueue">Kqueue</a>)、ae_select.c(<a href="http://man7.org/linux/man-pages/man2/select.2.html">select</a>)。</p>
+
+<p>   初始化网络监听文件句柄并且添加至eventloop(redis.c/initServer-第1540行调用了anet.c/anetTcpServer函数生成tcp文件句柄,第1550行是基于unix socket文件的句柄。redis.c第1624行以及第1626行分别是创建aeFileEvent并添加对应文件句柄至eventloop的操作，其中分别把networking.c/acceptTcpHandler和networking.c/acceptUnixHandler添加作为rfileProc的处理函数)。在main函数中，先设置eventloop结构的beforeSleep函数在aeProcessEvents函数执行前执行，aeProcessEvents执行会计算租塞获取events的时间，取到对应的event然后执行相应的rfileProc或者wfileProc。下面以tcp为例子做说明。</p>
+
+<p>   当服务端收到连接请求时，前面anetTcpServer生成的事件监听会被触发，acceptTcpHandler被调用然后执行acceptCommonHandler同时生成一个终端redisClient对象，并被加入只服务端的终端列表中，具体操作在networking.c/createClient函数中，同时将对应的文件句柄注册到eventloop中，对应的回掉函数为networking.c/readQueryFromClient。</p>
+
+<p>   当该终端接收到客户端发送的数据时，aeProcessEvents中会触发该终端对应文件句柄的注册事件的回掉函数readQueryFromClient，第一次读取最大16k的数据缓存至querybuf，然后执行processInputBuffer，在processInputBuffer函数中根据reqtype情况判断是否为REDIS_REQ_MULTIBULK(默认为REDIS_REQ_INLINE)。判断依据为querybuf中首字节为&#8217;*&#8217;(具体请查看<a href="http://redis.io/topics/protocol">redis protocol</a>)。REDIS_REQ_INLINE对应处理函数processInlineBuffer，REDIS_REQ_MULTIBULK对应处理函数processMultibulkBuffer。</p>
+
+<p>   对于processInlineBuffer，如果处理querybuf时未找到&#8217;\r\n&#8217;符号，则出错，退出processInputBuffer的while循环，并且调用resetClient重置终端的相应参数。processMultibulkBuffer稍稍复杂，先判断&#8217;\r&#8217;然后再判断&#8217;\n&#8217;，出错则返回。这里两个函数其实是具体的协议解析，结合<a href="http://redis.io/topics/protocol">redis protocol</a>查看就事半功倍。解析完协议串，然后会存储至clientObject中的argc(数组长度)和argv(redisObject类型为REDIS_STRING数组指针)。</p>
+
+<p>   然后再redis.c/processCommand中处理具体的命令操作。处理完成后调用resetClient重置终端的相应参数。如果，处理命令出错或者命令处理完成之后需要发送处理的结果，则调用&#8217;networking.c/addReply*&#8217;系列函数，该系列函数首先都会执行networking.c/prepareClientToWrite，该函数会注册写的事件监听至eventloop，对应的回掉函数即wfileProc指向sendReplyToClient函数。</p>
+
+<p>   最近由于在看<a href="http://book.douban.com/subject/25900403/">《UNIX环境高级编程》</a>，于是想起来<a href="http://redis.io">redis</a>的源码以前没怎么深入，然后就结合着<a href="http://origin.redisbook.com/en/latest/">Redis 设计与实现（第一版）</a>看看<a href="https://github.com/huangz1990/annotated_redis_source">redis-2.6</a>的源码，发觉缺少了对于网络通信模块的叙述，于是便有了此文。简单介绍网络相关的收发逻辑以及对应处理函数，未深入介绍内部逻辑，后续有空在做深入介绍吧。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -397,78 +447,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/">通过源代码安装ruby-2.0.0-p247</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-06T10:22:00+08:00" pubdate data-updated="true">2013-07-06</time>
-        
-         | <a href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>前两天心血来潮，想升级一下本机的<a href="http://www.ruby-lang.org">ruby</a>版本，于是下载了最新版本的<a href="http://www.ruby-lang.org">ruby</a>代码，然后</p>
-
-<pre><code>
-./configure 
-make 
-sudo make install
-</code></pre>
-
-
-<p>但是碰到一个问题，openssl can&#8217;t load。找了很多方法都搞不定，怀疑是本机openssl版本低于0.9.6b，于是重新下载了openssl的代码(1.0.1e版本)编译安装。然后再重新安装<a href="http://www.ruby-lang.org">ruby</a>，然后出来一个</p>
-
-<pre><code>
-In file included from openssl_missing.c:22:
-openssl_missing.h:71: error: conflicting types for ‘HMAC_CTX_copy’
-/usr/include/openssl/hmac.h:102: error: previous declaration of ‘HMAC_CTX_copy’ was here
-openssl_missing.h:95: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
-/usr/include/openssl/evp.h:502: error: previous declaration of ‘EVP_CIPHER_CTX_copy’ was here
-openssl_missing.c:27: error: conflicting types for ‘HMAC_CTX_copy’
-/usr/include/openssl/hmac.h:102: error: previous declaration of ‘HMAC_CTX_copy’ was here
-openssl_missing.c:122: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
-/usr/include/openssl/evp.h:502: error: previous declaration of ‘EVP_CIPHER_CTX_copy’ was here
-</code></pre>
-
-
-<p>以上错误我估计是extconf.rb配置编译header的时候，哪里出错，没有判断完全方法定义函数，导致函数重复定义了。因为对于autoconf的机制以及openssl不熟悉，所以暂时无法深究这个问题，于是简单的对openssl_missing.h打了个补丁，重新编译，问题即可解决。如果make的时候报出以上错误，直接在openssl_missing.h加入</p>
-
-<pre><code>
-#define HAVE_HMAC_CTX_COPY 1
-#define HAVE_EVP_CIPHER_CTX_COPY 1
-</code></pre>
-
-
-<p>两行，然后<code>make &amp;&amp; sudo make install</code>即可。</p>
-
-<p>have fun :).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -488,6 +466,10 @@ openssl_missing.c:122: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/25/rediswang-luo-mo-kuai-ji-lu/">redis网络模块记录</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/23/imkai-fa-ri-zhi/">IM开发日志(2)</a>
       </li>
     
@@ -501,10 +483,6 @@ openssl_missing.c:122: error: conflicting types for ‘EVP_CIPHER_CTX_copy’
     
       <li class="post">
         <a href="/blog/2014/02/14/2014/">2014</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/">通过源代码安装ruby-2.0.0-p247</a>
       </li>
     
   </ul>

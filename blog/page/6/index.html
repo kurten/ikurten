@@ -9,7 +9,7 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="这算是我第一次写关于面试后的记录。呵呵，刚去了蘑菇街这个公司面试，在山水人家。我算是比较幸运啦，能够在他们搬家之前见一下他们第一个办公场地。之后他们要搬去别的地方了。 办公场地其实就是一个套房，你懂得，基本上都在客厅办公。我去应聘web研发的，因为本身对于服务器端的技术比较感兴趣。跟搞技术的聊天， &hellip;">
+  <meta name="description" content="昨天因为看到有个lion dp3补丁，于是手痒，下来安装一下试试。mac os x10.7开发者预览版，尝试一下。没想到，无法更新，而且出错。于是，痛苦的过程开始了，重启进步了系统了。只能用系统盘修复了（ps：系统盘中的是10.6.4的版本）。这个只能怪我自己手痒了。 然后下载更新， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,50 @@
 
 <div class="blog-index span8">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/29/33/">关于mac Os X 10.6的quicktime X</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-29T03:50:05+08:00" pubdate data-updated="true">2011-07-29</time>
+        
+         | <a href="/blog/2011/07/29/33/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>昨天因为看到有个lion dp3补丁，于是手痒，下来安装一下试试。mac os x10.7开发者预览版，尝试一下。没想到，无法更新，而且出错。于是，痛苦的过程开始了，重启进步了系统了。只能用系统盘修复了（ps：系统盘中的是10.6.4的版本）。这个只能怪我自己手痒了。</p>
+
+<p>然后下载更新，因为我原先系统是10.6.7版本，10.6.4的系统<a href="http://developer.apple.com/xcode/" target="_blank">xcode4.1</a>，<a href="http://www.apple.com/mac/facetime/" target="_blank">facetime 1.0</a>都没法用。更新完成，然后安装xcode完忽然出现一个dyld share cache问题，需要（sudo update_dyld_shared_cache -force）这个命令。之后，就是quicktime.framework这个问题了。其中一件灵异事件是，我把这个文件夹移除了，执行命令就没有问题，不移除就出现无法执行share cache这个问题。貌似是一个bug？没深入研究过。</p>
+
+<p>貌似有很多应用需要依赖这个包，<a href="http://www.qq.com/" target="_blank">qq</a>、<a href="http://www.macww.org/" target="_blank">aliwangwang</a>、以及<a href="http://www.popcap.com/" target="_blank">popcap</a>开发的几个游戏。估计是调用了显示movie动画的接口。如果谁像我一样手痒，但是还没删除这些相关的东西，那么我建议你还是别动他，不然很多依赖程序就无法使用了。当然，删除了不是没办法挽救。可以使用<a href="http://www.macupdate.com/app/mac/6812/pacifist" target="_blank">pacifist</a>这个工具软件，打开你的系统安装光盘，然后从对应的文件夹路径下面去找这些东西，直接安装到默认路径就可以了。当然，如果嫌弃quicktime x，可以使用<a href="http://mplayerx.org/" target="_blank">mplayerx</a>这个播放器还是相当不错的。当然，在此基础上进行修改的，<a href="https://bitbucket.org/Tomasen/splayerx/wiki/Home" target="_blank">splayerx</a>也是不错的，省去了你去匹配字母的事情。射手网上字幕资源还是相当多的。</p>
+
+<p>其他的就看你慢慢发觉了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -289,50 +333,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/29/23/">关于产品经理的思考</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-29T03:45:32+08:00" pubdate data-updated="true">2011-07-29</time>
-        
-         | <a href="/blog/2011/07/29/23/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在新浪微博上看到<a href="http://www.xiami.com/" target="_blank">虾米网</a>CEO发的微博，说<a href="http://t.sina.com.cn/1654145491/wr4kmWhKnT" target="_blank">招产品经理</a>。向往已久的职位，同时觉得自己也很合适干这个。本身就非常喜欢互联网，同时也喜欢音乐。可以从事音乐网站的产品设计开发工作，当然是非常赞的。于是，我也就发了简历。个人觉得，搞技术的转干产品设计还是有一定的优势的。特别是对于互联网产品，国外很多都是技术兼产品设计与一体的。当然，我只是个门外汉，相对于那些通才来讲，我相差的不止一点半点。</p>
-
-<p>本身，产品设计来讲，首先提出想法，再由技术提出实现方案，大局由产品经理掌控，即产品经理需要了解这个产品的业务流程、用户对象、提出运营方案、调动资源协调产品进度。看起来其实就是个产品的CEO，对于CEO来讲，产品需要可持续发展。但是，话虽这么讲，要做到这些谈何容易呢？不过，产品经理首先必须某些互联网产品的深度用户。</p>
-
-<p>看到一个问题，觉得满有意思的，这个问题是这样的:<strong>如果有选择，一家公司为什么不选择一名有经验的产品人员，而选择你?</strong> （这个问题来自<a href="http://iamsujie.com/0000/0015/" target="_blank">这里</a>）</p>
-
-<p>我么，慢慢有了自己的答案，那么你呢？</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -354,6 +354,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/25/rediswang-luo-mo-kuai-ji-lu/">redis网络模块记录</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/23/imkai-fa-ri-zhi/">IM开发日志(2)</a>
       </li>
     
@@ -367,10 +371,6 @@
     
       <li class="post">
         <a href="/blog/2014/02/14/2014/">2014</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/">通过源代码安装ruby-2.0.0-p247</a>
       </li>
     
   </ul>

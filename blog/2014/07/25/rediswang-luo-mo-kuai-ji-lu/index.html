@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>阅读memcacheq源码记录 - ikurten.com</title>
+  <title>redis网络模块记录 - ikurten.com</title>
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="阅读memcacheq源码记录 2011-12-04 | Comments <!-- google_ad_client = "ca-pub-7721655128098525"; /* Blog Main */ google_ad_slot = "7466725066"; &hellip;">
+  <meta name="description" content="redis实现了一个非常小巧的网络IO库，外部调用接口主要由ae.h头文件定义，以及ae.c做实现。ae.c内部调用的对应平台的不同实现采用编译时宏定义include的方式加载。主要有ae_epoll.c(linux epoll)、ae_evport.c(Solaris)、ae_kqueue.c &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://ikurten.com/blog/2011/12/04/memcacheq">
+  <link rel="canonical" href="http://ikurten.com/blog/2014/07/25/rediswang-luo-mo-kuai-ji-lu">
   <link href="/favicon.ico" rel="icon">
   
   <link href="/assets/bootstrap/css/spacelab.min.css" rel="stylesheet" type="text/css">
@@ -95,7 +95,7 @@
     
   <header>
     
-      <h1 class="entry-title">阅读memcacheq源码记录</h1>
+      <h1 class="entry-title">Redis网络模块记录</h1>
     
     
       <p class="meta">
@@ -111,7 +111,7 @@
   
 
 
-<time datetime="2011-12-04T12:07:34+08:00" pubdate data-updated="true">2011-12-04</time>
+<time datetime="2014-07-25T22:03:06+08:00" pubdate data-updated="true">2014-07-25</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -121,46 +121,22 @@
 
 
   
-    <div style="float: right; padding-left: 15px; padding-botom: 15px; ">
-      <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-7721655128098525";
-      /* Blog Main */
-      google_ad_slot = "7466725066";
-      google_ad_width = 336;
-      google_ad_height = 280;
-      //-->
-      </script>
-      <script type="text/javascript"
-      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-      </script>
-    </div>
   
-  
-  <div class="entry-content"><p>越来越觉着大学里学的谭浩强的《C语言程序设计》太狗血了，哎，悔不当初啊。</p>
+  <div class="entry-content"><p>   <a href="http://redis.io">redis</a>实现了一个非常小巧的网络IO库，外部调用接口主要由ae.h头文件定义，以及ae.c做实现。ae.c内部调用的对应平台的不同实现采用编译时宏定义include的方式加载。主要有ae_epoll.c(<a href="http://zh.wikipedia.org/zh/Epoll">linux epoll</a>)、ae_evport.c(<a href="http://docs.oracle.com/cd/E23824_01/html/821-1465/port-create-3c.html">Solaris</a>)、ae_kqueue.c(<a href="http://en.wikipedia.org/wiki/Kqueue">Kqueue</a>)、ae_select.c(<a href="http://man7.org/linux/man-pages/man2/select.2.html">select</a>)。</p>
 
-<p>今天下午闲着看了一下<a href="http://memcachedb.org/memcacheq/">memcacheq</a>这个消息队列的源代码，存储引擎用得<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>，<a href="http://www.oracle.com/technetwork/database/berkeleydb/overview/index.html">bdb</a>支持队列方式的数据存储，只不过一个record必须fixed-length，具体能存多大的长度，我没再官方的doc中找到，不过，<a href="http://memcachedb.org/memcacheq/">memcacheq</a>作者说最大消息长度不能超过64K，而且，如果你超过了64K，消息队列就挂了，嗯，这个我碰到过了，超过64K，存入消息队列之后，整个消息队列就得重启。所以，如果你不确定以后业务变更会增加消息体的大小，那么我不建议你使用<a href="http://memcachedb.org/memcacheq/">memcacheq</a> :) 。</p>
+<p>   初始化网络监听文件句柄并且添加至eventloop(redis.c/initServer-第1540行调用了anet.c/anetTcpServer函数生成tcp文件句柄,第1550行是基于unix socket文件的句柄。redis.c第1624行以及第1626行分别是创建aeFileEvent并添加对应文件句柄至eventloop的操作，其中分别把networking.c/acceptTcpHandler和networking.c/acceptUnixHandler添加作为rfileProc的处理函数)。在main函数中，先设置eventloop结构的beforeSleep函数在aeProcessEvents函数执行前执行，aeProcessEvents执行会计算租塞获取events的时间，取到对应的event然后执行相应的rfileProc或者wfileProc。下面以tcp为例子做说明。</p>
 
-<p><a href="http://memcachedb.org/memcacheq/">memcacheq</a>在内存里维护一个队列的hash，memcacheq.c文件实现了memcached协议，bdb.c文件实现了对于bdb的读写，发觉消息队列持久化用bdb实现实在是很轻量、很简洁，item.c对协议层的封装，操作结构体item。</p>
+<p>   当服务端收到连接请求时，前面anetTcpServer生成的事件监听会被触发，acceptTcpHandler被调用然后执行acceptCommonHandler同时生成一个终端redisClient对象，并被加入只服务端的终端列表中，具体操作在networking.c/createClient函数中，同时将对应的文件句柄注册到eventloop中，对应的回掉函数为networking.c/readQueryFromClient。</p>
 
-<p>用<a href="http://libevent.org/">libevent</a>对收到的通信包做callback，包括对bdb做增、删、存操作。bdb也用<a href="http://libevent.org/">libevent</a>，对<a href="http://libevent.org/">libevent</a>没有研究，略过N字 :)。</p>
+<p>   当该终端接收到客户端发送的数据时，aeProcessEvents中会触发该终端对应文件句柄的注册事件的回掉函数readQueryFromClient，第一次读取最大16k的数据缓存至querybuf，然后执行processInputBuffer，在processInputBuffer函数中根据reqtype情况判断是否为REDIS_REQ_MULTIBULK(默认为REDIS_REQ_INLINE)。判断依据为querybuf中首字节为&#8217;*&#8217;(具体请查看<a href="http://redis.io/topics/protocol">redis protocol</a>)。REDIS_REQ_INLINE对应处理函数processInlineBuffer，REDIS_REQ_MULTIBULK对应处理函数processMultibulkBuffer。</p>
 
-<p>ps&nbsp;<a href="http://memcachedb.org/memcacheq/">memcacheq</a>测试使用的是python写的memcache.py。</p>
+<p>   对于processInlineBuffer，如果处理querybuf时未找到&#8217;\r\n&#8217;符号，则出错，退出processInputBuffer的while循环，并且调用resetClient重置终端的相应参数。processMultibulkBuffer稍稍复杂，先判断&#8217;\r&#8217;然后再判断&#8217;\n&#8217;，出错则返回。这里两个函数其实是具体的协议解析，结合<a href="http://redis.io/topics/protocol">redis protocol</a>查看就事半功倍。解析完协议串，然后会存储至clientObject中的argc(数组长度)和argv(redisObject类型为REDIS_STRING数组指针)。</p>
 
-<p>简单，有效的持久化消息队列，性能过得去，抽空我得好好看看C语言，学习一下 :) 复习一下数据结构，以前的早忘记了，而且也没怎么好好学。老外写的<a href="http://book.douban.com/subject/1139336/">《C语言程序设计》</a>这本，不错的。</p>
+<p>   然后再redis.c/processCommand中处理具体的命令操作。处理完成后调用resetClient重置终端的相应参数。如果，处理命令出错或者命令处理完成之后需要发送处理的结果，则调用&#8217;networking.c/addReply*&#8217;系列函数，该系列函数首先都会执行networking.c/prepareClientToWrite，该函数会注册写的事件监听至eventloop，对应的回掉函数即wfileProc指向sendReplyToClient函数。</p>
+
+<p>   最近由于在看<a href="http://book.douban.com/subject/25900403/">《UNIX环境高级编程》</a>，于是想起来<a href="http://redis.io">redis</a>的源码以前没怎么深入，然后就结合着<a href="http://origin.redisbook.com/en/latest/">Redis 设计与实现（第一版）</a>看看<a href="https://github.com/huangz1990/annotated_redis_source">redis-2.6</a>的源码，发觉缺少了对于网络通信模块的叙述，于是便有了此文。简单介绍网络相关的收发逻辑以及对应处理函数，未深入介绍内部逻辑，后续有空在做深入介绍吧。</p>
 </div>
 
-  
-    <script type="text/javascript"><!--
-    google_ad_client = "ca-pub-7721655128098525";
-    /* Blog Bottom */
-    google_ad_slot = "4562123819";
-    google_ad_width = 728;
-    google_ad_height = 90;
-    //-->
-    </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
   
 
 
@@ -183,12 +159,12 @@
   
 
 
-<time datetime="2011-12-04T12:07:34+08:00" pubdate data-updated="true">2011-12-04</time>
+<time datetime="2014-07-25T22:03:06+08:00" pubdate data-updated="true">2014-07-25</time>
         
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/memcached/'>memcached</a>
+    <a class='category' href='/blog/categories/redis/'>redis</a>
   
 </span>
 
@@ -205,10 +181,8 @@
       
       <p class="meta">
         
-          <a class="basic-alignment pull-left" href="/blog/2011/11/27/memcached-protocol/" title="Previous Post: memcached protocol">&laquo; memcached protocol</a>
+          <a class="basic-alignment pull-left" href="/blog/2014/04/23/imkai-fa-ri-zhi/" title="Previous Post: IM开发日志(2)">&laquo; IM开发日志(2)</a>
         
-        
-          <a class="basic-alignment pull-right" href="/blog/2011/12/15/centos-yum-error/" title="Next Post: centos中yum无法使用问题">centos中yum无法使用问题 &raquo;</a>
         
       </p>
     </footer>
@@ -330,8 +304,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://ikurten.com/blog/2011/12/04/memcacheq/';
-        var disqus_url = 'http://ikurten.com/blog/2011/12/04/memcacheq/';
+        var disqus_identifier = 'http://ikurten.com/blog/2014/07/25/rediswang-luo-mo-kuai-ji-lu/';
+        var disqus_url = 'http://ikurten.com/blog/2014/07/25/rediswang-luo-mo-kuai-ji-lu/';
         var disqus_script = 'embed.js';
       
     (function () {

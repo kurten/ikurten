@@ -9,7 +9,10 @@
   <meta name="author" content="Kurten">
 
   
-  <meta name="description" content="终于有了自己的blog，花了42美刀购买了justhost一年的webhost附带一个免费域名，对于目前还没有什么bt级别的特别需求，所以也就这么用用吧。 使用paypal付款买的，用招行的visa信用卡，付款方便，比支付宝方便许多。支付体验确实不错。这方面就下回细说啦。 在北山主机评论看了很久， &hellip;">
+  <meta name="description" content="本来想用文档存储的，现在就记录在这吧。 一、下载软件安装
+1、apache http server ：http://httpd.apache.org/download.cgi
+2、subversion：http://sourceforge.net/projects/win32svn/
+3、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +103,60 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2011/07/29/13/">Windows下svn搭建</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-29T03:39:33+08:00" pubdate data-updated="true">2011-07-29</time>
+        
+         | <a href="/blog/2011/07/29/13/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本来想用文档存储的，现在就记录在这吧。</p>
+
+<p>一、下载软件安装
+1、apache http server ：<a href="http://httpd.apache.org/download.cgi" target="_blank">http://httpd.apache.org/download.cgi</a>
+2、subversion：<a href="http://sourceforge.net/projects/win32svn/" target="_blank">http://sourceforge.net/projects/win32svn/</a>
+3、TortoiseSVN：<a href="http://tortoisesvn.net/downloads.html" target="_blank">http://tortoisesvn.net/downloads.html</a></p>
+
+<p>二、用svnadmin create命令创建版本库
+svnadmin create c:\svn</p>
+
+<p>三、配置用户与密码
+1、修改conf文件夹下svnserve.conf文件，去掉&ldquo;# password-db = passwd&rdquo;前&ldquo;#&rdquo;。
+2、修改passwd文件，在[user]下添加用户名与密码，例如：admin = 123。
+3、权限管理在authz中设置，对应用户名什么权限。</p>
+
+<p>四、启动版本库服务
+在cmd中输入svnserve -d -r c:\svn，不要关闭cmd。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2011/07/29/11/">纪念篇</a></h1>
     
     
@@ -162,6 +219,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/25/rediswang-luo-mo-kuai-ji-lu/">redis网络模块记录</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/23/imkai-fa-ri-zhi/">IM开发日志(2)</a>
       </li>
     
@@ -175,10 +236,6 @@
     
       <li class="post">
         <a href="/blog/2014/02/14/2014/">2014</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/06/install-ruby-2-dot-0-0-p247-from-source/">通过源代码安装ruby-2.0.0-p247</a>
       </li>
     
   </ul>
